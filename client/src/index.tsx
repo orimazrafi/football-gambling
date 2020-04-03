@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import Auth from "./auth";
+import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const auth = new Auth();
+declare global {
+  interface Window {
+    setState: (changes: { name: string; auth: any }) => void;
+  }
+}
+let state = {};
+window.setState = changes => {
+  state = Object.assign({}, state, changes);
+  ReactDOM.render(<App {...state} />, document.getElementById("root"));
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+/* eslint no-restricted-globals: 0*/
+let username = auth.getProfile().given_name || "new user";
+let picture = auth.getProfile().picture;
+
+let initialState = {
+  name: username,
+  auth,
+  picture
+};
+
+window.setState(initialState);
