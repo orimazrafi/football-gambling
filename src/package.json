@@ -5,19 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon server.ts",
-    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "client": "cd ../client && yarn start",
     "dev": "concurrently -n 'client,server' -c 'blue,green' \"yarn run client \" \"yarn run server \" "
   },
   "devDependencies": {
-    "@types/node": "^13.11.0",
     "concurrently": "^5.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-import": "^2.20.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.2",
-    "ts-node": "^8.8.1",
-    "typescript": "^3.8.3"
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
     "express": "^4.17.1"

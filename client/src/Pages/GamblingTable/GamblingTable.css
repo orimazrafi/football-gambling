@@ -1,0 +1,51 @@
+.team__column {
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: initial;
+}
+.team__away {
+  margin-left: 5px;
+}
+.flag__column {
+  width: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.result__input {
+  width: 20px;
+  margin: 0 3px;
+}
+@media screen and (max-width: 470px) {
+  .team__column {
+    width: 50px;
+  }
+  .start__date,
+  .end__date {
+    display: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  .team__column {
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: initial;
+  }
+  .team__away {
+    margin-left: 15px;
+  }
+  .flag__column {
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .result__input {
+    width: 40px;
+    margin: 0 5px;
+  }
+}
