@@ -1,52 +1,98 @@
 const db = require("../db");
-var ObjectId = require("mongodb").ObjectID;
+let ObjectId = require("mongodb").ObjectID;
 const log = console.log;
 
 const resolvers = {
   Query: {
     groups: async () => {
-      console.log("d");
       const groups = db.get().collection("groups");
-      const res = await groups.find({}).toArray();
-      return res;
+      return await groups.find({}).toArray();
     },
-    group: async (_, { groupId }) => {
-      console.log("d", _, groupId);
-      const groups = db.get().collection("groups");
-      const res = await groups.findOne({ _id: ObjectId(groupId) });
-      return res;
-    },
-    users: async (parent, args) => {
-      const users = db.get().collection("users");
-      const res = await users.find({}).toArray();
 
-      return res;
+    users: async () => {
+      const users = db.get().collection("users");
+      return await users.find({}).toArray();
     },
-    user: async (_, { groupId }) => {
-      console.log("_s");
+    group: async (_, { groupId, userId }) => {
+      const groups = db.get().collection("groups");
       const users = db.get().collection("users");
 
-      const res = await users.findOne({ _id: ObjectId(groupId) });
-      console.log(res);
+      if (groupId) return await groups.findOne({ _id: ObjectId(groupId) });
+      let user = await users.findOne({ _id: ObjectId(userId) });
+      if (user.groups.length > 0) {
+        return await groups.findOne({ _id: ObjectId(user.groups[0]._id) });
+      }
+      return {
+        message:
+          "User Didn't choose any group to view neither he has group of it's own. ",
+      };
+    },
+    league: async (_, { leagueId }) => {
+      const leagueDB = db.get().collection("league");
+      let res = await leagueDB.findOne({
+        _id: ObjectId(leagueId),
+      });
+      return res;
+    },
+
+    getUser: async (_, { userId }) => {
+      const users = db.get().collection("users");
+      let res = await users.findOne({ _id: ObjectId(userId) });
       return res;
     },
   },
+  Group: {
+    async users(parent) {
+      const users = db.get().collection("users");
+      return await parent.users.map(async (user) => {
+        return await users.findOne({ _id: ObjectId(user._id) });
+      });
+    },
+  },
+  User: {
+    async groups(parent) {
+      const groups = db.get().collection("groups");
+      return await parent.groups.map(async (group) => {
+        return await groups.findOne({ _id: ObjectId(group._id) });
+      });
+    },
+  },
   Mutation: {
-    createGroup: async (_, { group }) => {
-      const { name, maxParticipante, image, password, admin } = group;
+    getUserId: async (_, { user }) => {
+      const { name, image, email } = user;
+      const users = db.get().collection("users");
+      let userRe = await users.findOne({ email: user.email });
+      if (!userRe) {
+        const res = await users.insertOne({ name, email, image, groups: [] });
+        return res.ops[0];
+      } else {
+        return userRe;
+      }
+    },
 
+    createGroup: async (_, { group }) => {
+      const {
+        name,
+        limitParticipate,
+        maxParticipate,
+        image,
+        password,
+        admin,
+      } = group;
       const groups = db.get().collection("groups");
       const users = db.get().collection("users");
-
-      const groupRes = await groups.findOne({ name });
-      if (groupRes) return { message: "Group Name Is Taken!" };
+      const groupWithSameName = await groups.findOne({ name });
+      if (groupWithSameName)
+        throw new Error("Group Name Is Taken! try another one.");
       const res = await groups.insertOne({
         name,
         image,
-        maxParticipante,
+        limitParticipate,
+        maxParticipate,
         password,
         admin,
         users: [{ _id: admin }],
+        league_id: "5e90c4e0428c420ad58f7b04",
       });
       await users.updateOne(
         { _id: ObjectId(res.ops[0].admin) },
@@ -54,32 +100,97 @@ const resolvers = {
       );
       return res.ops[0];
     },
-    addUserToGroup: async (_, { userId, groupId }) => {
+    addUserToGroup: async (_, { userToGroup }) => {
+      const { userId, groupId, groupPassword } = userToGroup;
       const groups = db.get().collection("groups");
       const users = db.get().collection("users");
-      let userRes = await groups.findOne({
-        _id: ObjectId(groupId),
+      const leagueDB = db.get().collection("league");
+
+      let user = await groups.findOne({
+        _id: groupId,
         "users._id": userId,
       });
-      if (userRes) return;
+
+      if (user)
+        throw new Error("There is already user with that id in this group!");
+
+      let res = await groups.findOne({ _id: ObjectId(groupId) });
+      if (res.password) {
+        if (res.password !== groupPassword)
+          throw new Error("you need to provide a valid password!");
+      }
       await groups.updateOne(
         { _id: ObjectId(groupId) },
         { $push: { users: { _id: userId } } }
       );
+      let league = await leagueDB.findOne({ _id: ObjectId(res.league) });
       await users.updateOne(
         { _id: ObjectId(userId) },
-        { $push: { groups: { _id: groupId } } }
+        { $push: { groups: { _id: groupId } }, $set: { results: league } }
       );
-      const res = await users.findOne({ _id: ObjectId(userId) });
+      return await users.findOne({ _id: ObjectId(userId) });
+    },
+    leaveGroup: async (_, { userId, groupId }) => {
+      const groups = db.get().collection("groups");
+      const users = db.get().collection("users");
+
+      await groups.updateOne(
+        { _id: ObjectId(groupId) },
+        {
+          $pull: {
+            users: { _id: userId },
+          },
+        }
+      );
+
+      await users.updateOne(
+        { _id: ObjectId(userId) },
+        {
+          $pull: {
+            groups: { _id: groupId },
+          },
+        }
+      );
+      let res = await users.findOne({ _id: ObjectId(userId) });
       return res;
     },
-    createUser: async (_, { user }) => {
-      const users = db.get().collection("users");
-      const { name, image } = user;
-
-      const res = await users.insertOne({ name, image, groups: [] });
-      console.log(res.ops[0]);
+    createLeague: async (_, { league }) => {
+      const { name, image, numberOfMathces } = league;
+      const leagueDB = db.get().collection("league");
+      const res = await leagueDB.insertOne({
+        name,
+        image,
+        numberOfMathces,
+        games: [],
+      });
       return res.ops[0];
+    },
+    addGameToLeague: async (_, { game }) => {
+      const { eventDate, homeTeam, awayTeam } = game;
+      const leagueDB = db.get().collection("league");
+      await leagueDB.updateOne(
+        { _id: ObjectId("5e9b0436ad4872327d1d4f51") },
+        { $push: { games: { eventDate, homeTeam, awayTeam } } }
+      );
+      let res = await leagueDB.findOne({
+        _id: ObjectId("5e9b0436ad4872327d1d4f51"),
+      });
+      return res;
+    },
+    addGamble: async (_, { gamble }) => {
+      const { userId, leagueId, results } = gamble;
+      const users = db.get().collection("users");
+      await users.updateOne(
+        {
+          $and: [
+            { _id: ObjectId(userId) },
+            { "results._id": ObjectId(leagueId) },
+          ],
+        },
+        { $set: { "results.games": results } }
+      );
+      let res = await users.findOne({ _id: ObjectId(userId) });
+      return res;
     },
   },
 };

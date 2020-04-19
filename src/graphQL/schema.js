@@ -2,69 +2,105 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type Query {
     groups: [Group]!
-    group: Group
-    groupById(groupId: ID!): Group
+    group(groupId: ID, userId: ID): Group
     users: [User]!
-    user: User
+    league(leagueId: ID!): League
+    getUser(userId: ID!): User
   }
   type Group {
     _id: ID!
     admin: ID!
     name: String!
-    maxParticipante: Int
+    limitParticipate: String!
+    maxParticipate: Int
     image: String!
     password: String
     users: [User!]!
-    league: [Leauge]
+    league: League
   }
   type User {
     _id: ID!
     name: String!
+    email: String!
     image: String!
     groups: [Group]
+    results: League
   }
-  type Leauge {
-    id: ID!
-    league: String!
-    dates: String!
+  type League {
+    _id: ID!
+    name: String!
+    image: String!
     numberOfMathces: Int!
-    results: [Result]
+    games: [Game]
   }
-  type Result {
-    userId: ID!
-    homeTeam: Int
-    awayTeam: Int
+
+  type Game {
+    eventDate: String!
+    homeTeam: Team!
+    awayTeam: Team!
+  }
+  type Team {
+    name: String!
+    score: String
+    logo: String!
   }
   type Mutation {
-    createGroup(group: GroupInput): Group
-    createUser(user: UserInput): User!
-    addUserToGroup(userId: ID!, groupId: ID!): User!
-    addGamble(
-      userId: ID!
-      leagueId: ID!
-      results: [ResultInput]
-    ): GambleUpdateResponse
+    getUserId(user: UserInput): User!
+    group(groupId: ID!): Group!
+    createGroup(group: GroupInput): Group!
+    addUserToGroup(userToGroup: UserToGroupInput): User!
+    leaveGroup(userId: ID!, groupId: ID!): User!
+    createLeague(league: LeagueInput): League!
+    addGameToLeague(game: GameInput): Game!
+    addGamble(gamble: GambleInput): User!
   }
+
+  input GambleInput {
+    userId: ID!
+    leagueId: ID!
+    results: [GameInput]
+  }
+
+  input LeagueInput {
+    name: String!
+    image: String!
+    numberOfMathces: Int!
+    games: [GameInput]
+  }
+  input GameInput {
+    eventDate: String
+    homeTeam: TeamInput
+    awayTeam: TeamInput
+  }
+  input TeamInput {
+    name: String!
+    logo: String!
+    score: String
+  }
+
   input GroupInput {
     name: String!
-    maxParticipante: Int
+    limitParticipate: String!
+    maxParticipate: Int
     image: String!
     password: String
     admin: ID!
   }
+  input UserToGroupInput {
+    userId: ID!
+    groupId: ID!
+    groupPassword: String
+  }
   input UserInput {
     name: String!
+    email: String!
     image: String!
-  }
-  input ResultInput {
-    homeTeam: Int
-    awayTeam: Int
   }
 
   type GambleUpdateResponse {
     success: Boolean!
     message: String!
-    leagues: [Leauge]!
+    leagues: [League]!
   }
 `;
 module.exports = typeDefs;
