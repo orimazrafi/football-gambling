@@ -7,23 +7,25 @@ import "./index.css";
 const auth = new Auth();
 declare global {
   interface Window {
-    setState: (changes: { name: string; auth: any }) => void;
+    setState: (changes: { email: string; name: string; auth: any }) => void;
   }
 }
 let state = {};
-window.setState = changes => {
+window.setState = (changes) => {
   state = Object.assign({}, state, changes);
   ReactDOM.render(<App {...state} />, document.getElementById("root"));
 };
 
 /* eslint no-restricted-globals: 0*/
-let username = auth.getProfile().given_name || "new user";
+let name = auth.getProfile().name;
 let picture = auth.getProfile().picture;
+let email = auth.getProfile().email;
 
 let initialState = {
-  name: username,
+  email,
+  name,
   auth,
-  picture
+  picture,
 };
 
 window.setState(initialState);

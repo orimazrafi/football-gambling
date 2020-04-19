@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { HomePage } from "./Pages/HomePage/HomePage";
 import { Secret } from "./Pages/Secret/Secret";
 import { NotFound } from "./Pages/NotFound/NotFound";
@@ -11,55 +10,78 @@ import { GamblingTable } from "./Pages/GamblingTable/GamblingTable";
 import { ScoreTable } from "./Pages/ScoreTable/ScoreTable";
 import { Rules } from "./Pages/Rules/Rules";
 import { Opponents } from "./Pages/Opponents/Opponents";
+
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+
+import { ApolloProvider } from "react-apollo";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_BACKEND_PORT,
+  cache: new InMemoryCache({
+    addTypename: false,
+  }),
+});
+
 // eslint-disable-next-line
 const log = console.log;
 const App = ({
+  email,
   name,
   auth,
   picture,
 }: { name: string; auth: any; picture: string } | any) => {
   return (
-    <Router>
-      <Global>
-        <div>
-          {auth.isAuthenticated() && (
-            <Navbar name={name} auth={auth} picture={picture} />
-          )}
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={() => <HomePage name={name} auth={auth} />}
-            />
+    <ApolloProvider client={client}>
+      <Router>
+        <Global>
+          <div>
             {auth.isAuthenticated() && (
-              <Route path="/gamble" component={GamblingTable} />
+              <Navbar name={name} auth={auth} picture={picture} />
             )}
-            {auth.isAuthenticated() && (
-              <Route path="/score" component={ScoreTable} />
-            )}
-            {auth.isAuthenticated() && (
-              <Route path="/rules" component={Rules} />
-            )}
-            {auth.isAuthenticated() && (
-              <Route path="/opponents" component={Opponents} />
-            )}
+            <ToastContainer />
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={() => <HomePage name={name} auth={auth} />}
+              />
+              {auth.isAuthenticated() && (
+                <Route path="/gamble" component={GamblingTable} />
+              )}
+              {auth.isAuthenticated() && (
+                <Route path="/score" component={ScoreTable} />
+              )}
+              {auth.isAuthenticated() && (
+                <Route path="/rules" component={Rules} />
+              )}
+              {auth.isAuthenticated() && (
+                <Route path="/opponents" component={Opponents} />
+              )}
 
-            <Route path="/callback" component={Callback} />
-            <Route
-              path="/secret"
-              render={() =>
-                auth.isAuthenticated() ? (
-                  <Secret auth={auth} name={name} picture={picture} />
-                ) : (
-                  <NotFound />
-                )
-              }
-            />
-            <Route path="/" component={NotFound} />
-          </Switch>
-        </div>
-      </Global>
-    </Router>
+              <Route path="/callback" component={Callback} />
+              <Route
+                path="/secret"
+                render={() =>
+                  auth.isAuthenticated() ? (
+                    <Secret
+                      email={email}
+                      name={name}
+                      auth={auth}
+                      picture={picture}
+                    />
+                  ) : (
+                    <NotFound />
+                  )
+                }
+              />
+              <Route path="/" component={NotFound} />
+            </Switch>
+          </div>
+        </Global>
+      </Router>
+    </ApolloProvider>
   );
 };
 

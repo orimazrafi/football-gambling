@@ -8,12 +8,15 @@
 .item {
   position: relative;
   display: flex;
-  width: 300px;
-  /* flex: 1 1 0px; */
-  background-color: #c0c0c9;
-
+  width: 85%;
+  padding: 10px;
+  background-color: rgb(255, 140, 0);
   margin: auto;
   transition: transform 500ms;
+}
+.item > div {
+  margin: auto;
+  font-size: 0.5em;
 }
 .first__index {
   border-radius: 10px 10px 0 0;
@@ -34,10 +37,10 @@
 
 .container .item:focus,
 .container .item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   z-index: 1;
   border-radius: 10px;
-  background-color: #a9a9a9;
+  background-color: rgb(255, 127, 80);
 }
 
 body {
@@ -48,8 +51,11 @@ body {
   display: block;
   max-width: 100%;
 }
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 550px) {
   .item {
-    width: 400px;
+    width: 75%;
+  }
+  .item > div {
+    font-size: 1em;
   }
 }

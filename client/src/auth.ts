@@ -10,7 +10,7 @@ export default class Auth {
     redirectUri: "http://localhost:3000/callback",
     audience: "https://orimazrafi.auth0.com/userinfo",
     responseType: "token id_token",
-    scope: "openid profile email"
+    scope: "openid profile email",
   });
 
   constructor() {
@@ -47,6 +47,7 @@ export default class Auth {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
+    localStorage.removeItem("user_id");
     location.pathname = LOGIN_FAILURE_PAGE;
   }
   getProfile(): any {

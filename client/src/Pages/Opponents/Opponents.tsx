@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { H4 } from "../../elements/H4";
 export const Opponents = () => {
   const history: any = useHistory();
-  //   console.log(location.state);
   return (
     <div>
       Opponents

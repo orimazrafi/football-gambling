@@ -1,130 +1,184 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import { Image } from "../../elements/Image";
+import { toast } from "react-toastify";
+
 import "./GamblingTable.css";
+import moment from "moment";
+
 const log = console.log;
 export const GamblingTable = () => {
-  const [matches, setMatches] = useState<any>([]);
-  const [matchesResults, setMatchesResults] = useState<any>([]);
+  const [league, setLeague] = useState<any>([]);
+  const { data, loading: loadingLeague } = useQuery<any, Record<string, any>>(
+    FETCH_USER,
+    {
+      variables: { userId: localStorage.getItem("user_id") },
+    }
+  );
   useEffect(() => {
-    const onLoad: any = async () => {
-      const { data } = await axios.get("http://localhost:3000/matches.json");
-      // console.log(data.matches.competition.area.ensignUrl);
-      setMatches(() => data.matches);
-      setM(data.matches.length);
-    };
-    onLoad();
-  }, []);
-  const setM = (numberOfMatches: number) => {
-    let arrayOfResults = [];
-    for (let i = 0; i < numberOfMatches; i++)
-      arrayOfResults.push({ homeTeam: undefined, awayTeam: undefined });
-    setMatchesResults(arrayOfResults);
-  };
+    if (!loadingLeague) {
+      setLeague(() => data.getUser.results);
+    }
+  }, [loadingLeague]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const { name, value } = e.target;
-    let matchesResult = matchesResults;
-    matchesResult[index][name] = parseInt(value);
-    log(matchesResult);
-    setMatchesResults(matchesResult);
+    let matchesResult = league;
+    if (parseInt(value) > 0 || parseInt(value) < 10) {
+      matchesResult.games[index][name].score = value;
+      setLeague(() => ({ ...matchesResult }));
+    }
+  };
+
+  const [addGamble, { loading: loadingForGamble }] = useMutation(ADD_GAMBLE, {
+    update(proxy, { data }) {
+      log("proxy", proxy);
+      setLeague(() => data.addGamble.results);
+      toast.success("you added a gamble");
+    },
+    onError(err) {
+      // setErrors(err.message);
+    },
+    //  let id = localStorage.getItem("user_id");
+
+    variables: {
+      userId: localStorage.getItem("user_id"),
+      leagueId: league._id,
+      results: league.games,
+    },
+  });
+
+  const handleSave = () => {
+    addGamble();
   };
 
   return (
-    <div>
-      GamblingTable
-      <div>
-        <hr />
-        <br />
-
-        <div style={{ textAlign: "center" }}>
-          {matches.length > 0 && (
-            <>
-              {matches[0].competition.name} league,
-              {" " + matches[0].competition.area.name}
-              {
-                <Image
-                  src={matches[0].competition.area.ensignUrl}
-                  alt={matches[0].competition.area.name}
-                />
-              }
-              <div>
-                <span className="start__date">Start Date:</span>
-                {matches[0].season.startDate} --{" "}
-                <span className="end__date">End Date:</span>
-                {matches[0].season.endDate}
-              </div>
-            </>
-          )}
-        </div>
-        <br />
-
-        {matchesResults.length > 0 && (
-          <div
-            style={
-              {
-                // display: "flex",
-                // flexWrap: "wrap",
-                // justifyContent: "center",
-              }
-            }
-          >
-            {matches.map((match: any, index: number) => (
-              <div
-                key={match.id}
-                style={{
-                  display: "flex",
-
-                  justifyContent: "center",
-                }}
-              >
-                <div className="team__column">{match.homeTeam.name + " "}</div>
-                <div className="flag__column">
-                  <Image src={match.competition.area.ensignUrl} />
-                </div>
-                <div className="reasults__colummn">
-                  <input
-                    type="number"
-                    min={0}
-                    max={10}
-                    className="result__input"
-                    name="homeTeam"
-                    value={matchesResults[index].homeTeam}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange(e, index)
-                    }
-                  />
-                  --
-                  <input
-                    type="number"
-                    name="awayTeam"
-                    min={0}
-                    max={10}
-                    className="result__input"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange(e, index)
-                    }
-                    value={matchesResults[index].awayTeam}
-                  />
-                </div>
-                <div className="team__column team__away">
-                  {" " + match.awayTeam.name}{" "}
-                </div>
-                <div className="flag__column">
-                  <Image src={match.competition.area.ensignUrl} />
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="gambling__table__wrapper">
+      <div className="gambling__header__league" style={{ textAlign: "center" }}>
+        {league?.numberOfMathces > 0 && (
+          <>
+            <span className="league__name">{league.name} league</span>
+            {<Image src={league.image} alt={league.name} verticalAign />}
+          </>
         )}
       </div>
-      {/* {matches.length > 0 && (
-        <pre>
-          {JSON.stringify(matches[0].competition.area.ensignUrl, null, 2)}
-        </pre>
-      )} */}
+      <br />
+
+      {loadingLeague ? (
+        <h2>loadingLeague...</h2>
+      ) : (
+        league?.games?.length > 0 && (
+          <div className="gamble__matches__wrapper">
+            {loadingForGamble ? (
+              <h2>Updating you'r Gamble...</h2>
+            ) : (
+              league.games.map((match: any, index: number) => (
+                <div
+                  key={Math.random()}
+                  className="gamble__single__match__wrapper"
+                >
+                  <div className="gamble__match__date">
+                    {moment(match.eventDate).format("lll")}
+                  </div>
+                  <div className="team__column">{match.homeTeam.name}</div>
+                  <Image src={match.homeTeam.logo} className="flag__column" />
+
+                  <div className="results__colummn">
+                    <input
+                      type="text"
+                      name="homeTeam"
+                      style={{ width: "2vmax" }}
+                      value={match.homeTeam.score}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleChange(e, index)
+                      }
+                    />
+                    --
+                    <input
+                      type="text"
+                      name="awayTeam"
+                      style={{ width: "2vmax" }}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleChange(e, index)
+                      }
+                      value={match.awayTeam.score}
+                    />
+                  </div>
+                  <Image src={match.awayTeam.logo} className="flag__column" />
+                  <div className="team__column">
+                    {" " + match.awayTeam.name}{" "}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )
+      )}
+      <div style={{ margin: "1em" }}>
+        <button
+          className="pure-button pure-button-primary"
+          onClick={handleSave}
+        >
+          Save
+        </button>
+      </div>
     </div>
   );
 };
+
+const FETCH_USER = gql`
+  query getUser($userId: ID!) {
+    getUser(userId: $userId) {
+      results {
+        _id
+        name
+        image
+        numberOfMathces
+        games {
+          eventDate
+          homeTeam {
+            name
+            score
+            logo
+          }
+          awayTeam {
+            name
+            score
+            logo
+          }
+        }
+      }
+    }
+  }
+`;
+
+const ADD_GAMBLE = gql`
+  mutation addGamble($userId: ID!, $leagueId: ID!, $results: [GameInput]) {
+    addGamble(
+      gamble: { userId: $userId, leagueId: $leagueId, results: $results }
+    ) {
+      results {
+        name
+        image
+        numberOfMathces
+        games {
+          eventDate
+          homeTeam {
+            name
+            score
+            logo
+          }
+          awayTeam {
+            name
+            score
+            logo
+          }
+        }
+      }
+    }
+  }
+`;

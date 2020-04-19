@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
 import { H2 } from "../../elements/H2";
 import { Input } from "../../elements/Input";
@@ -8,10 +8,19 @@ import { DropzoneImage } from "../DropzoneImage/DropzoneImage";
 import { UseFormData } from "../../Hooks/UseFormData";
 import { UseCloudinaryUpload } from "../../Hooks/UseCloudinaryUpload";
 import { Formik, Field, Form } from "formik";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import * as yup from "yup";
-import { Group, GroupBlur } from "../../interfaces";
+import { GroupBlur } from "../../interfaces";
 import { defualtGroupImage } from "../../helpers";
+import { css } from "@emotion/core";
+import { ClipLoader } from "react-spinners";
 import "./CreateGroup.css";
+
+const override = css`
+  display: block;
+  justify-content: flex-end;
+`;
 Modal.setAppElement("#root");
 // eslint-disable-next-line
 
@@ -31,11 +40,49 @@ const validateSchema = yup.object({
 });
 
 export const CreateGroup = () => {
+  useEffect(() => {
+    setUserId(localStorage.getItem("user_id") as string);
+  }, []);
+  const [userId, setUserId] = useState("");
+  const [errors, setErrors] = useState("");
   const [image, setImage] = useState(defualtGroupImage);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [group, setGroup] = useState({
+    name: "",
+    password: "",
+    limitParticipate: "no",
+    maxParticipate: 256,
+    admin: "",
+    image: defualtGroupImage,
+  });
   const [blur, setBlur] = useState<GroupBlur>({
     name: false,
     passwordConfirm: false,
+  });
+  const handleSubmit = (data: any, image: string) => {
+    log(data, image);
+    setGroup(() => ({
+      name: data.name,
+      password: data.password,
+      limitParticipate: data.limitParticipate,
+      maxParticipate: data.maxParticipate,
+      admin: userId,
+      image,
+    }));
+    createGroup();
+  };
+  const [createGroup, { loading }] = useMutation(CREATE_GROUP, {
+    update(proxy, result) {
+      setErrors("");
+      console.log(result.data.createGroup._id);
+      if (result.data.createGroup._id) {
+        setModalIsOpen(false);
+      }
+    },
+    onError(err) {
+      setErrors(err.message);
+    },
+    variables: { ...group },
   });
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
@@ -50,9 +97,14 @@ export const CreateGroup = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+
   return (
-    <div>
-      <button onClick={openModal}>create new Group</button>
+    <>
+      <button className="button-secondary" onClick={openModal}>
+        {" "}
+        Add Group
+      </button>
+
       <Modal
         isOpen={modalIsOpen}
         shouldCloseOnOverlayClick={false}
@@ -70,6 +122,11 @@ export const CreateGroup = () => {
           X
         </button>
         <H2>Create new Group</H2>
+        {errors && (
+          <div style={{ textAlign: "center", color: "red" }}>
+            {errors.slice(14)}
+          </div>
+        )}
         <Formik
           validateOnChange={true}
           initialValues={{
@@ -80,9 +137,8 @@ export const CreateGroup = () => {
             maxParticipate: 256,
           }}
           validationSchema={validateSchema}
-          onSubmit={(data: Group) => {
-            log({ ...data, image });
-            setModalIsOpen(false);
+          onSubmit={(data: any) => {
+            handleSubmit(data, image);
           }}
         >
           {({ values, errors }) => (
@@ -182,13 +238,47 @@ export const CreateGroup = () => {
                 </label>
               </div>
               <DropzoneImage onDrop={onDrop} image={image} />
-              <Button type="submit" small>
-                save
-              </Button>
+              {loading ? (
+                <div style={{ float: "right" }}>
+                  <ClipLoader
+                    css={override}
+                    size={50}
+                    color={"#123abc"}
+                    loading={loading}
+                  />
+                </div>
+              ) : (
+                <Button type="submit" small floatRight>
+                  save
+                </Button>
+              )}
             </Form>
           )}
         </Formik>
       </Modal>
-    </div>
+    </>
   );
 };
+const CREATE_GROUP = gql`
+  mutation createGroup(
+    $name: String!
+    $password: String
+    $limitParticipate: String!
+    $maxParticipate: Int!
+    $admin: ID!
+    $image: String!
+  ) {
+    createGroup(
+      group: {
+        name: $name
+        password: $password
+        limitParticipate: $limitParticipate
+        maxParticipate: $maxParticipate
+        admin: $admin
+        image: $image
+      }
+    ) {
+      _id
+    }
+  }
+`;

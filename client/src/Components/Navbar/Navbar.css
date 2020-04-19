@@ -1,4 +1,33 @@
-@media screen and (max-width: 370px) {
+.pure-menu {
+  display: flex !important;
+  background-color: aliceblue;
+  height: 50px;
+}
+.pure-menu-list {
+  width: 100%;
+  display: flex !important;
+}
+.pure-menu-link {
+  margin: 10px 0;
+}
+
+.navbar__image__Link {
+  margin: 10px 0 10px auto;
+}
+
+.logout__link__item:hover {
+  cursor: pointer;
+}
+.header__watch {
+  color: #ccc;
+  margin: 7px;
+}
+.header > h1 {
+  margin: 0.17em 0 !important;
+  font-size: 3em;
+}
+
+@media screen and (max-width: 420px) {
   .rules__item {
     display: none;
   }
