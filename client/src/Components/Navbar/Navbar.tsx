@@ -12,20 +12,20 @@ const theme = {
 export const Navbar = ({
   name,
   auth,
-  picture,
+  image,
 }:
   | {
       name: string;
       location: string;
       auth: any;
-      picture: string;
+      image: string;
     }
   | any) => {
   // eslint-disable-next-line
   const log = console.log;
   const { pathname } = useLocation();
   let pageLoaction = pathname.slice(1) ? pathname.slice(1) : "Home";
-  let m: any = moment();
+  let m: moment.Moment = moment();
 
   const handleLogout = () => {
     auth.logout();
@@ -55,9 +55,9 @@ export const Navbar = ({
           </li>
 
           <li className="pure-menu-item navbar__image__Link">
-            {picture ? (
+            {image ? (
               <Link to="/gamble">
-                <Image src={picture} />
+                <Image src={image} />
               </Link>
             ) : (
               <Link to="/gamble">{name}</Link>

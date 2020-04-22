@@ -4,6 +4,7 @@ const typeDefs = gql`
     groups: [Group]!
     group(groupId: ID, userId: ID): Group
     users: [User]!
+    leagues: [League]
     league(leagueId: ID!): League
     getUser(userId: ID!): User
   }
@@ -47,8 +48,8 @@ const typeDefs = gql`
   type Mutation {
     getUserId(user: UserInput): User!
     group(groupId: ID!): Group!
-    createGroup(group: GroupInput): Group!
-    addUserToGroup(userToGroup: UserToGroupInput): User!
+    createGroup(group: GroupInput): [Group]
+    addUserToGroup(userToGroup: UserToGroupInput): [Group!]!
     leaveGroup(userId: ID!, groupId: ID!): User!
     createLeague(league: LeagueInput): League!
     addGameToLeague(game: GameInput): Game!
@@ -85,6 +86,7 @@ const typeDefs = gql`
     image: String!
     password: String
     admin: ID!
+    league: ID!
   }
   input UserToGroupInput {
     userId: ID!

@@ -3,8 +3,7 @@ import Auth from "../../auth";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 export const Callback = () => {
   useEffect(() => {
-    const auth = new Auth();
-    auth.handleAuthentication();
+    new Auth().handleAuthentication();
   }, []);
-  return <LoadingGif loading={true} />;
+  return <LoadingGif loading={true} size={150} />;
 };

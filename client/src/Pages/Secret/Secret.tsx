@@ -1,55 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import { H4 } from "../../elements/H4";
-import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
+import { useDispatch } from "react-redux";
+
+import { request } from "graphql-request";
+import { reduxSetUser } from "../../Features/User/UserSlice";
+import { useHistory } from "react-router-dom";
+
 const theme = {
   primary: "red",
   secondary: "green",
   font: "sans-serif",
   hoverBackground: "#FFA500",
 };
-export const Secret = ({ email, name, picture }: any) => {
-  useEffect(() => {
-    getUser();
-    // eslint-disable-next-line
-  }, []);
+export const Secret = ({ email, name, image, auth }: any) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const variables = {
+    name,
+    email,
+    image,
+  };
 
-  const [errors, setErrors] = useState("");
-  const [getUser, { loading }] = useMutation(FETCH_USER, {
-    update(proxy, result) {
-      if (!loading) localStorage.setItem("user_id", result.data.getUserId._id);
-    },
-    onError(err) {
-      setErrors(err.message);
-    },
-    variables: { name, email, image: picture },
+  request("http://localhost:8080", FETCH_USER, variables).then(async (data) => {
+    await dispatch(reduxSetUser(data.getUserId));
+    history.push("/");
   });
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ height: "400px", display: "flex" }}>
-        {errors && JSON.stringify(errors)}
-        {loading ? (
-          <LoadingGif loading={loading} />
-        ) : (
-          <H4>
-            <div>Hello {name},</div>
-            And Welcome To Football Gambling
-          </H4>
-        )}
-      </div>
+      <div style={{ height: "400px", display: "flex" }}></div>
     </ThemeProvider>
   );
 };
-const FETCH_USER = gql`
-  mutation getUserId($name: String!, $email: String!, $image: String!) {
-    getUserId(user: { name: $name, email: $email, image: $image }) {
-      name
+const FETCH_USER = `mutation getUserId($name: String!, $email: String!, $image: String!) {
+  getUserId(user: { name: $name, email: $email, image: $image }) {
+    _id
+    name
+    image
+    email
+    groups{
       _id
-      image
-      email
+    }
+    results{
+      _id
     }
   }
-`;
+}`;

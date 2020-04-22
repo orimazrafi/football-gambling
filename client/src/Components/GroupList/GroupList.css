@@ -96,6 +96,8 @@ td {
     display: -ms-flex;
     display: -o-flex; */
   /* display: flex; */
+  /* max-width: 850px; */
+  /* margin: auto; */
   justify-content: center;
   -ms-align-items: center;
   align-items: center;
@@ -103,6 +105,8 @@ td {
   animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
 }
 .ReactModal__Content {
+  max-width: 850px;
+  margin: auto;
   box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
   border: unset;
 }

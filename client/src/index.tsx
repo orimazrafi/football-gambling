@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import Auth from "./auth";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+
 import "./index.css";
 
 const auth = new Auth();
@@ -13,19 +16,24 @@ declare global {
 let state = {};
 window.setState = (changes) => {
   state = Object.assign({}, state, changes);
-  ReactDOM.render(<App {...state} />, document.getElementById("root"));
+  ReactDOM.render(
+    <Provider store={store}>
+      <App {...state} />
+    </Provider>,
+    document.getElementById("root")
+  );
 };
 
 /* eslint no-restricted-globals: 0*/
 let name = auth.getProfile().name;
-let picture = auth.getProfile().picture;
+let image = auth.getProfile().picture;
 let email = auth.getProfile().email;
 
 let initialState = {
   email,
   name,
   auth,
-  picture,
+  image,
 };
 
 window.setState(initialState);

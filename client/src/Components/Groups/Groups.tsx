@@ -1,23 +1,54 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import "./Groups.css";
+import React, { useState, useEffect } from "react";
+
 import { CreateGroup } from "../CreateGroup/CreateGroup";
 import { GroupList } from "../GroupList/GroupList";
 import { Group } from "../../interfaces";
+import { useSelector, useDispatch } from "react-redux";
+import { request } from "graphql-request";
+import { reduxGetGroups } from "../../Features/Group/GroupSlice";
+import { toast } from "react-toastify";
+import "./Groups.css";
+
 interface Data {
   groups: Group[];
 }
 // eslint-disable-next-line
 const log = console.log;
 export const Groups: React.FC<any> = ({ auth }) => {
-  const { data, loading } = useQuery<Data, Record<string, any>>(FETCH_GROUPS);
+  let { groups } = useSelector(
+    (state: { group: { groups: any } }) => state.group
+  );
+  log(groups);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    request("http://localhost:8080", FETCH_GROUPS).then(async (data) => {
+      setLoading(true);
+      console.log(data);
+      try {
+        await dispatch(reduxGetGroups(data.groups));
+        setLoading(false);
+        toast.success("Groups was fetched");
+      } catch (ex) {
+        setLoading(false);
+        toast.error(ex.message);
+      }
+    });
+  }, [dispatch]);
 
+  log(groups);
   const [name, setName] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setName(value);
   };
+
+  const filteredArray = (groups: any) => {
+    return groups.filter((group: any) =>
+      group.name.toLowerCase().trim().includes(name.toLocaleLowerCase().trim())
+    );
+  };
+  groups = filteredArray(groups);
 
   return (
     <div>
@@ -41,7 +72,7 @@ export const Groups: React.FC<any> = ({ auth }) => {
         <CreateGroup />
       </div>
       {loading && " Loading..."}
-      {data && (
+      {groups && (
         <>
           <div className="table__wrapper">
             <table className="pure-table pure-table-bordered">
@@ -56,7 +87,7 @@ export const Groups: React.FC<any> = ({ auth }) => {
                 </tr>
               </thead>
               <tbody>
-                <GroupList auth={auth} name={name} />
+                <GroupList auth={auth} groups={groups} />
               </tbody>
             </table>
           </div>
@@ -66,8 +97,8 @@ export const Groups: React.FC<any> = ({ auth }) => {
   );
 };
 
-const FETCH_GROUPS = gql`
-  query {
+const FETCH_GROUPS = `
+  {
     groups {
       _id
       image
@@ -78,6 +109,9 @@ const FETCH_GROUPS = gql`
       users {
         _id
         name
+      }
+      league{
+        _id
       }
     }
   }

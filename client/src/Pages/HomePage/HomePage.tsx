@@ -16,16 +16,7 @@ const theme = {
   hoverBackground: "blue",
 };
 
-export const HomePage = ({
-  name,
-  auth,
-}:
-  | {
-      name: string;
-      location: string;
-      auth: any;
-    }
-  | any) => {
+export const HomePage = ({ auth }: { auth: any }) => {
   return (
     <ThemeProvider theme={theme}>
       <div>

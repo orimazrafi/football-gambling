@@ -1,54 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { useSelector } from "react-redux";
+
 import { Image } from "../../elements/Image";
 import { toast } from "react-toastify";
-
-import "./GamblingTable.css";
+import { Game } from "../../interfaces";
 import moment from "moment";
+import "./GamblingTable.css";
 
 const log = console.log;
 export const GamblingTable = () => {
-  const [league, setLeague] = useState<any>([]);
+  const { user } = useSelector(
+    (state: { user: { user: { _id: string } } }) => state.user
+  );
+  log(user);
   const { data, loading: loadingLeague } = useQuery<any, Record<string, any>>(
     FETCH_USER,
     {
-      variables: { userId: localStorage.getItem("user_id") },
+      variables: {
+        userId: user._id || (localStorage.getItem("user_id") as string),
+      },
     }
   );
+
+  const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
     if (!loadingLeague) {
-      setLeague(() => data.getUser.results);
+      setGames(() => data.getUser.results.games);
     }
-  }, [loadingLeague]);
+  }, [loadingLeague, data]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const { name, value } = e.target;
-    let matchesResult = league;
+    let gamesDuplicate = data.getUser.results.games;
     if (parseInt(value) > 0 || parseInt(value) < 10) {
-      matchesResult.games[index][name].score = value;
-      setLeague(() => ({ ...matchesResult }));
+      gamesDuplicate[index][name].score = value;
+      setGames(() => [...gamesDuplicate]);
     }
   };
 
   const [addGamble, { loading: loadingForGamble }] = useMutation(ADD_GAMBLE, {
     update(proxy, { data }) {
       log("proxy", proxy);
-      setLeague(() => data.addGamble.results);
+      setGames(() => data.addGamble.results.games);
       toast.success("you added a gamble");
     },
     onError(err) {
       // setErrors(err.message);
     },
-    //  let id = localStorage.getItem("user_id");
 
     variables: {
       userId: localStorage.getItem("user_id"),
-      leagueId: league._id,
-      results: league.games,
+      leagueId: data?.getUser?.results?._id,
+      results: games,
     },
   });
 
@@ -59,10 +67,18 @@ export const GamblingTable = () => {
   return (
     <div className="gambling__table__wrapper">
       <div className="gambling__header__league" style={{ textAlign: "center" }}>
-        {league?.numberOfMathces > 0 && (
+        {data?.getUser?.results?.numberOfMathces > 0 && (
           <>
-            <span className="league__name">{league.name} league</span>
-            {<Image src={league.image} alt={league.name} verticalAign />}
+            <span className="league__name">
+              {data.getUser.results.name} league
+            </span>
+            {
+              <Image
+                src={data.getUser.results.image}
+                alt={data.getUser.results.name}
+                verticalAign
+              />
+            }
           </>
         )}
       </div>
@@ -71,12 +87,12 @@ export const GamblingTable = () => {
       {loadingLeague ? (
         <h2>loadingLeague...</h2>
       ) : (
-        league?.games?.length > 0 && (
+        games?.length > 0 && (
           <div className="gamble__matches__wrapper">
             {loadingForGamble ? (
               <h2>Updating you'r Gamble...</h2>
             ) : (
-              league.games.map((match: any, index: number) => (
+              games.map((match: Game, index: number) => (
                 <div
                   key={Math.random()}
                   className="gamble__single__match__wrapper"

@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import "./ScoreTable.css";
 import { Group } from "../../interfaces";
+import { User } from "../../interfaces";
 // eslint-disable-next-line
 const log = console.log;
 interface Data {
@@ -29,12 +30,7 @@ export const ScoreTable = () => {
   const handleClass = (index: number) => {
     let className = "item";
     if (index === 0) className += " first__index";
-    if (
-      data &&
-      data.group &&
-      data.group.users &&
-      index === data.group.users.length - 1
-    )
+    if (data?.group?.users && index === data.group.users.length - 1)
       className += " last__index";
     return className;
   };
@@ -42,12 +38,17 @@ export const ScoreTable = () => {
     <>
       <div className="container">
         <h2>{data?.group?.name}</h2>
-
+        <Image
+          src={`${process.env.REACT_APP_CLOUDINARY_IMAGE}${data?.group?.image}`}
+          alt={data?.group?.name}
+          noBoard
+          marginAuto
+        />
         {loadingTable ? (
           <h2>loading Table...</h2>
         ) : (
-          data?.group?.users?.sort((a: any, b: any) => b.score - a.score) &&
-          data.group.users.map((gambler: any, index: any) => (
+          data?.group?.users?.sort((a: User, b: User) => b.score - a.score) &&
+          data.group.users.map((gambler: User, index: number) => (
             <div key={gambler._id}>
               <div
                 className={handleClass(index)}
@@ -57,8 +58,11 @@ export const ScoreTable = () => {
                 <div className="user__table__position__number">
                   {index + 1}.
                 </div>
-                <Image maringRight src={gambler.picture} />
-                <div>{gambler.name}</div> <div> Success rate 50%</div>
+                <Image maringRight src={gambler.image} />
+                <div className="user__name__score__table">
+                  {gambler.name}
+                </div>{" "}
+                <div> Success rate 50%</div>
                 <div>Bullseye 7</div>
                 <div> {gambler.score || 11}</div>
               </div>

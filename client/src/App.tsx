@@ -30,23 +30,19 @@ const App = ({
   email,
   name,
   auth,
-  picture,
-}: { name: string; auth: any; picture: string } | any) => {
+  image,
+}: { name: string; auth: any; image: string } | any) => {
   return (
     <ApolloProvider client={client}>
       <Router>
         <Global>
           <div>
             {auth.isAuthenticated() && (
-              <Navbar name={name} auth={auth} picture={picture} />
+              <Navbar name={name} auth={auth} image={image} />
             )}
             <ToastContainer />
             <Switch>
-              <Route
-                path="/"
-                exact
-                render={() => <HomePage name={name} auth={auth} />}
-              />
+              <Route path="/" exact render={() => <HomePage auth={auth} />} />
               {auth.isAuthenticated() && (
                 <Route path="/gamble" component={GamblingTable} />
               )}
@@ -68,8 +64,8 @@ const App = ({
                     <Secret
                       email={email}
                       name={name}
+                      image={image}
                       auth={auth}
-                      picture={picture}
                     />
                   ) : (
                     <NotFound />

@@ -1,73 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { Group } from "../../interfaces";
 import { Image } from "../../elements/Image";
 import { User } from "../../interfaces";
 import { Input } from "../../elements/Input";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { request } from "graphql-request";
+import { useDispatch } from "react-redux";
+import { reduxSetGroup } from "../../Features/Group/GroupSlice";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "./GroupList.css";
 
+// eslint-disable-next-line
 const log = console.log;
-interface Data {
+
+export const GroupList: React.FC<{
+  auth: any;
   groups: Group[];
-}
-export const GroupList: React.FC<any> = ({ auth, name }) => {
-  const { data, loading: loadingGroups } = useQuery<Data, Record<string, any>>(
-    FETCH_GROUPS
-  );
-  const filteredArray = (data: any) =>
-    data.groups.filter((group: Group) =>
-      group.name.toLowerCase().trim().includes(name.toLocaleLowerCase().trim())
-    );
-
-  useEffect(() => {
-    filteredArray(data);
-  }, [name, data, filteredArray]);
-
-  let id = localStorage.getItem("user_id");
+}> = ({ auth, groups }) => {
+  log(groups);
   const history = useHistory();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [error, setError] = useState({ message: "", num: 0 });
+
   const [password, setPassword] = useState("");
-  const [modalValues, setModalValues] = useState({
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setPassword(value);
+  };
+  const [groupInput, setGroupInput] = useState({
     name: "",
+    userId: "",
     groupId: "",
     password: "",
     image: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword(value);
-  };
-  const handleJoinGroupWithPasssword = (
-    name: string,
-    groupId: string,
-    password: string,
-    image: string
-  ) => {
-    setModalValues({ name, groupId, password, image });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const handleJoinGroupWithPasssword = (groupInput: any) => {
+    setGroupInput((prev: any) => ({
+      ...prev,
+      name: groupInput.name,
+      groupId: groupInput.groupId,
+      password: groupInput.password,
+      image: groupInput.image,
+    }));
     setModalIsOpen(true);
     setPassword("");
   };
   const closeModal = () => {
     setModalIsOpen(false);
   };
-  const handleJoinGroupWithOutPasssword = (groupName: string) => {
+  const handleJoinGroupWithOutPasssword = (group: any) => {
     confirmAlert({
-      title: `Join the ${groupName}`,
+      title: `Join the ${group.name}`,
       message: "Are you sure to do this?",
 
       buttons: [
         {
           label: "Yes",
           onClick: () => {
-            joinGroup();
+            addUserToGroup(group);
           },
         },
         {
@@ -77,60 +70,55 @@ export const GroupList: React.FC<any> = ({ auth, name }) => {
       ],
     });
   };
-  const [addUserToGroup, { loading: loadingAddUserToGroup }] = useMutation(
-    ADD_USER_TO_GROUP,
-    {
-      update(proxy, result) {
-        // setErrors("");
-        // console.log(result.data.addUserToGroup);
-        if (result.data.addUserToGroup) {
+
+  const dispatch = useDispatch();
+  const [loadingAddUserToGroup, setLoadingAddUserToGroup] = useState(false);
+  const addUserToGroup = (group: any) => {
+    setLoadingAddUserToGroup(true);
+    const variables = {
+      userId: localStorage.getItem("user_id") as string,
+      groupId: group.groupId,
+      groupPassword: group.password,
+    };
+    request("http://localhost:8080", ADD_USER_TO_GROUP, variables).then(
+      async (data) => {
+        log(data);
+        try {
+          await dispatch(reduxSetGroup(data.addUserToGroup));
           setModalIsOpen(false);
+          toast.success("You were added to the group!");
+          setLoadingAddUserToGroup(false);
+        } catch (ex) {
+          toast.error(ex.message);
+          setLoadingAddUserToGroup(false);
         }
-        toast.success("You were added to the group!");
-      },
-      onError(err) {
-        log("error!!!!!");
-        log(err);
-        // setErrors(err.message);
-      },
-      variables: {
-        userId: id,
-        groupId: modalValues.groupId,
-        groupPassword: modalValues.password,
-      },
-    }
-  );
+      }
+    );
+  };
+
+  const [error, setError] = useState({ message: "", num: 0 });
+
   const handleJoinGroup = () => {
+    log(groupInput);
     if (error.num === 5) {
       auth.logout();
     }
-    if (password === modalValues.password) {
-      log("password is correct!");
-      joinGroup();
-    } else {
+    if (password === groupInput.password) addUserToGroup(groupInput);
+    else
       setError((prev) => ({
         message: "Password is incorrect",
         num: ++prev.num,
       }));
-      log("password is incorrect!");
-    }
   };
-  const joinGroup = () => {
-    addUserToGroup();
-  };
+
   return (
     <>
       {loadingAddUserToGroup ? (
         <tr>
           <td>loadingAddUserToGroup...</td>
         </tr>
-      ) : loadingGroups ? (
-        <tr>
-          <td>loading groups...</td>
-        </tr>
       ) : (
-        data &&
-        filteredArray(data).map((group: Group) => (
+        groups?.map((group: Group) => (
           <tr key={group._id} style={{ fontSize: "12px" }}>
             <td>
               <Image
@@ -148,31 +136,37 @@ export const GroupList: React.FC<any> = ({ auth, name }) => {
             <td className="">
               {group.users &&
               group.maxParticipate &&
-              group.users.findIndex((u: User) => u._id === id) === -1 &&
+              group.users.findIndex(
+                (user: User) =>
+                  user._id === (localStorage.getItem("user_id") as string)
+              ) === -1 &&
               group.users.length < group.maxParticipate ? (
                 group.password ? (
                   <button
                     className="pure-button pure-button-primary small__join__group"
-                    onClick={() =>
-                      handleJoinGroupWithPasssword(
-                        group.name,
-                        group._id,
-                        group.password,
-                        group.image
-                      )
-                    }
+                    onClick={() => {
+                      let groupInput = {
+                        name: group.name,
+                        groupId: group._id,
+                        password: group.password,
+                        image: group.image,
+                      };
+                      handleJoinGroupWithPasssword(groupInput);
+                    }}
                   >
                     Join
                   </button>
                 ) : (
                   <button
-                    className="pure-button pure-button-primary small__join__group"
+                    className="pure-button pure-butston-primary small__join__group"
                     onClick={() => {
-                      setModalValues((prev) => ({
-                        ...prev,
+                      let groupInput = {
+                        name: group.name,
                         groupId: group._id,
-                      }));
-                      handleJoinGroupWithOutPasssword(group.name);
+                        password: group.password,
+                        image: group.image,
+                      };
+                      handleJoinGroupWithOutPasssword(groupInput);
                     }}
                   >
                     Join
@@ -209,7 +203,7 @@ export const GroupList: React.FC<any> = ({ auth, name }) => {
             </button>
             <h3 style={{ color: "black", textAlign: "center" }}>
               {" "}
-              {modalValues.name}
+              {groupInput.userId}
             </h3>
           </div>
 
@@ -239,8 +233,8 @@ export const GroupList: React.FC<any> = ({ auth, name }) => {
               </div>
             )}
             <img
-              src={`${process.env.REACT_APP_CLOUDINARY_IMAGE}${modalValues.image}`}
-              alt={modalValues.name}
+              src={`${process.env.REACT_APP_CLOUDINARY_IMAGE}${groupInput.image}`}
+              alt={groupInput.name}
               className="join__modal__password__image"
             />
             <button
@@ -255,7 +249,7 @@ export const GroupList: React.FC<any> = ({ auth, name }) => {
     </>
   );
 };
-const ADD_USER_TO_GROUP = gql`
+const ADD_USER_TO_GROUP = `
   mutation addUserToGroup($userId: ID!, $groupId: ID!, $groupPassword: String) {
     addUserToGroup(
       userToGroup: {
@@ -264,19 +258,12 @@ const ADD_USER_TO_GROUP = gql`
         groupPassword: $groupPassword
       }
     ) {
-      _id
-    }
-  }
-`;
-const FETCH_GROUPS = gql`
-  query {
-    groups {
-      _id
-      image
-      name
-      password
+        _id
       admin
+      name
       maxParticipate
+      image
+      password
       users {
         _id
         name

@@ -7,12 +7,15 @@ const override = css`
   display: block;
   margin: auto;
 `;
-export const LoadingGif: React.FC<{ loading: boolean }> = ({ loading }) => {
+export const LoadingGif: React.FC<{ loading: boolean; size: number }> = ({
+  loading,
+  size,
+}) => {
   return (
     <LoadingWrapper>
       <ClipLoader
         css={override}
-        size={150}
+        size={size}
         color={"#123abc"}
         loading={loading}
       />

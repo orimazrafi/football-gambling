@@ -8,5 +8,6 @@ export const Image = image`
     border:${(props) => (props.noBoard ? "unset" : "1px solid black")};
     margin-right:${(props) => props.maringRight && "10px"};
     vertical-align:${(props) => props.verticalAign && "middle"};
+    margin:${(props) => props.marginAuto && "auto"}
   }
 `;
