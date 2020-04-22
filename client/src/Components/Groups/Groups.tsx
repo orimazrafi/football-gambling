@@ -8,6 +8,7 @@ import { request } from "graphql-request";
 import { reduxGetGroups } from "../../Features/Group/GroupSlice";
 import { toast } from "react-toastify";
 import "./Groups.css";
+import { LoadingGif } from "../LoadingGif/LoadingGif";
 
 interface Data {
   groups: Group[];
@@ -22,8 +23,8 @@ export const Groups: React.FC<any> = ({ auth }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     request("http://localhost:8080", FETCH_GROUPS).then(async (data) => {
-      setLoading(true);
       console.log(data);
       try {
         await dispatch(reduxGetGroups(data.groups));
@@ -71,27 +72,35 @@ export const Groups: React.FC<any> = ({ auth }) => {
 
         <CreateGroup />
       </div>
-      {loading && " Loading..."}
-      {groups && (
-        <>
-          <div className="table__wrapper">
-            <table className="pure-table pure-table-bordered">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Admin</th>
-                  <th>Password</th>
-                  <th>Participante</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <GroupList auth={auth} groups={groups} />
-              </tbody>
-            </table>
+      {loading ? (
+        <div style={{ height: "50vh", display: "flex" }}>
+          <div style={{ margin: "auto" }}>
+            <h1>Loading Groups...</h1>
+            <LoadingGif loading={true} size={100} />
           </div>
-        </>
+        </div>
+      ) : (
+        groups && (
+          <>
+            <div className="table__wrapper">
+              <table className="pure-table pure-table-bordered">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Admin</th>
+                    <th>Password</th>
+                    <th>Participante</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <GroupList auth={auth} groups={groups} />
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
       )}
     </div>
   );

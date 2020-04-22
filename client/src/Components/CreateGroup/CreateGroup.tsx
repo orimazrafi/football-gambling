@@ -20,6 +20,9 @@ import { LoadingGif } from "../LoadingGif/LoadingGif";
 import "./CreateGroup.css";
 import { reduxSetGroup } from "../../Features/Group/GroupSlice";
 import { useDispatch } from "react-redux";
+import { PrimaryButton } from "../../elements/PrimaryButton";
+import { RadioButton } from "../../elements/RadioButton";
+import { Radio, RadioGroup } from "@material-ui/core";
 
 Modal.setAppElement("#root");
 
@@ -117,10 +120,9 @@ export const CreateGroup = () => {
 
   return (
     <>
-      <button className="button-secondary" onClick={openModal}>
-        {" "}
+      <PrimaryButton variant="contained" color="primary" onClick={openModal}>
         Add Group
-      </button>
+      </PrimaryButton>
 
       <Modal
         isOpen={modalIsOpen}
@@ -161,73 +163,73 @@ export const CreateGroup = () => {
         >
           {({ values, errors }) => (
             <Form>
-              <div>
-                <label>
-                  Group name
-                  <Field
-                    placeholder="Group name..."
-                    name="name"
-                    type="input"
-                    as={Input}
-                    autoFocus={true}
-                    onBlur={(e: any) => {
-                      setBlur((prev: GroupBlur) => ({ ...prev, name: true }));
-                    }}
-                    displayError={blur.name && errors["name"]}
-                  />
-                </label>
-                <div style={{ color: "red", marginBottom: "8px" }}>
-                  {blur.name && errors["name"]}
-                </div>
-              </div>
-              <>
-                <div>
-                  <label>
-                    Password
-                    <div style={{ textAlign: "center" }}></div>
-                    <Field
-                      placeholder="Password..."
-                      name="password"
-                      type="input"
-                      as={Input}
-                    />
-                    <Small>
-                      if password will not supllied you'r group is going to be
-                      public and anyone could enter it...{" "}
-                    </Small>
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Password Confirmation
-                    <Field
-                      placeholder="Password Confirmation..."
-                      name="passwordConfirm"
-                      type="input"
-                      as={Input}
-                      displayError={
-                        blur.passwordConfirm &&
-                        values.password &&
-                        errors["passwordConfirm"]
-                      }
-                      onBlur={(e: any) => {
-                        setBlur((prev: GroupBlur) => ({
-                          ...prev,
-                          passwordConfirm: true,
-                        }));
-                      }}
-                    />
-                  </label>
-                </div>
-                <div style={{ color: "red", marginBottom: "8px" }}>
-                  {blur.passwordConfirm &&
-                    values.password &&
-                    errors["passwordConfirm"]}
-                </div>
-              </>
+              <Field
+                placeholder="Group name..."
+                name="name"
+                type="input"
+                fullWidth
+                helperText={blur.name && errors["name"]}
+                // helperText={blur.name && errors["name"]}
+                label="Group name"
+                autoFocus={true}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                as={Input}
+                onBlur={(e: any) => {
+                  setBlur((prev: GroupBlur) => ({ ...prev, name: true }));
+                }}
+                error={blur.name && errors["name"] ? true : false}
+              />
+              <Field
+                placeholder="Password..."
+                name="password"
+                type="input"
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                as={Input}
+                onBlur={(e: any) => {
+                  setBlur((prev: GroupBlur) => ({ ...prev, name: true }));
+                }}
+                helperText={blur.name && errors["name"]}
+              />
+              <Field
+                placeholder="Password Confirmation..."
+                name="passwordConfirm"
+                type="input"
+                fullWidth
+                label="Password Confirmation"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                variant="outlined"
+                as={Input}
+                onBlur={(e: any) => {
+                  setBlur((prev: GroupBlur) => ({
+                    ...prev,
+                    passwordConfirm: true,
+                  }));
+                }}
+                error={
+                  blur.passwordConfirm &&
+                  errors["passwordConfirm"] &&
+                  values.password
+                    ? true
+                    : false
+                }
+                helperText={
+                  blur.passwordConfirm &&
+                  values.password &&
+                  errors["passwordConfirm"] &&
+                  "Both passwords must matched!"
+                }
+              />
               <div>
                 <br />
-
                 <label>
                   Max Participate
                   <div style={{ margin: "10px 0" }}>
@@ -235,14 +237,35 @@ export const CreateGroup = () => {
                       Do you want to limit the number of participates that allow
                       in this group?
                     </Small>
-                    <label>
+                    <RadioGroup
+                      row
+                      aria-label="position"
+                      name="position"
+                      defaultValue="top"
+                    >
+                      <Field
+                        name="limitParticipate"
+                        as={RadioButton}
+                        label="yes"
+                        value="yes"
+                        control={<Radio color="primary" />}
+                      />
+                      <Field
+                        name="limitParticipate"
+                        as={RadioButton}
+                        label="no"
+                        value="no"
+                        control={<Radio color="primary" />}
+                      />
+                    </RadioGroup>
+                    {/* <label>
                       Yes
-                      <Field name="limitParticipate" type="radio" value="yes" />
+                      <Field type="radio" value="yes" />
                     </label>
                     <label>
                       No
                       <Field name="limitParticipate" type="radio" value="no" />
-                    </label>
+                    </label> */}
                   </div>
                   {values.limitParticipate === "yes" && (
                     <Field

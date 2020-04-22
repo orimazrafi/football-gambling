@@ -6,6 +6,8 @@ import { defualtGroupImage, cloudinaryFetchUrl } from "../../helpers";
 import "purecss/build/pure.css";
 
 import "./HomePage.css";
+import { SuccessButton } from "../../elements/SuccessButton";
+
 // eslint-disable-next-line
 const log = console.log;
 const theme = {
@@ -29,13 +31,17 @@ export const HomePage = ({ auth }: { auth: any }) => {
                 Please login first
               </pre>
             </div>
-            <hr />
-            <button
-              className="button-success pure-button home__page__button"
+
+            <hr className="home--page" />
+
+            <SuccessButton
+              name="true"
+              variant="contained"
+              color="primary"
               onClick={auth.login}
             >
               login
-            </button>
+            </SuccessButton>
             <img
               className="home__page__img"
               src={`${cloudinaryFetchUrl}/${defualtGroupImage}`}

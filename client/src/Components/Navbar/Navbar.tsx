@@ -69,12 +69,15 @@ export const Navbar = ({
           </li>
         </ul>
       </div>
-
-      <div className="header">
-        <h1>{pageLoaction}</h1>
-        <pre className="header__watch">{m.format("ddd, hA")}</pre>
-      </div>
-      <hr />
+      {pageLoaction !== "secret" && (
+        <>
+          <div className="header">
+            <h1>{pageLoaction}</h1>
+            <pre className="header__watch">{m.format("ddd, hA")}</pre>
+          </div>
+          <hr />
+        </>
+      )}
     </ThemeProvider>
   );
 };

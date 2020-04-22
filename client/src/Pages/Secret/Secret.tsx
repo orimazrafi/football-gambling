@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { request } from "graphql-request";
 import { reduxSetUser } from "../../Features/User/UserSlice";
 import { useHistory } from "react-router-dom";
+import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 
 const theme = {
   primary: "red",
@@ -12,7 +13,7 @@ const theme = {
   font: "sans-serif",
   hoverBackground: "#FFA500",
 };
-export const Secret = ({ email, name, image, auth }: any) => {
+export const Secret = ({ email, name, image }: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const variables = {
@@ -27,9 +28,12 @@ export const Secret = ({ email, name, image, auth }: any) => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <div style={{ height: "400px", display: "flex" }}></div>
-    </ThemeProvider>
+    <div style={{ height: "80vh", display: "flex" }}>
+      <div style={{ margin: "auto" }}>
+        <h1>Fetching user...</h1>
+        <LoadingGif loading={true} size={150} />
+      </div>
+    </div>
   );
 };
 const FETCH_USER = `mutation getUserId($name: String!, $email: String!, $image: String!) {

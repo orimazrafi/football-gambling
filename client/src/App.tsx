@@ -15,6 +15,8 @@ import ApolloClient, { InMemoryCache } from "apollo-boost";
 
 import { ApolloProvider } from "react-apollo";
 import { ToastContainer } from "react-toastify";
+import { StylesProvider } from "@material-ui/styles";
+
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 const client = new ApolloClient({
@@ -35,47 +37,44 @@ const App = ({
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Global>
-          <div>
-            {auth.isAuthenticated() && (
-              <Navbar name={name} auth={auth} image={image} />
-            )}
-            <ToastContainer />
-            <Switch>
-              <Route path="/" exact render={() => <HomePage auth={auth} />} />
+        <StylesProvider injectFirst>
+          <Global>
+            <div>
               {auth.isAuthenticated() && (
-                <Route path="/gamble" component={GamblingTable} />
+                <Navbar name={name} auth={auth} image={image} />
               )}
-              {auth.isAuthenticated() && (
-                <Route path="/score" component={ScoreTable} />
-              )}
-              {auth.isAuthenticated() && (
-                <Route path="/rules" component={Rules} />
-              )}
-              {auth.isAuthenticated() && (
-                <Route path="/opponents" component={Opponents} />
-              )}
+              <ToastContainer />
+              <Switch>
+                <Route path="/" exact render={() => <HomePage auth={auth} />} />
+                {auth.isAuthenticated() && (
+                  <Route path="/gamble" component={GamblingTable} />
+                )}
+                {auth.isAuthenticated() && (
+                  <Route path="/score" component={ScoreTable} />
+                )}
+                {auth.isAuthenticated() && (
+                  <Route path="/rules" component={Rules} />
+                )}
+                {auth.isAuthenticated() && (
+                  <Route path="/opponents" component={Opponents} />
+                )}
 
-              <Route path="/callback" component={Callback} />
-              <Route
-                path="/secret"
-                render={() =>
-                  auth.isAuthenticated() ? (
-                    <Secret
-                      email={email}
-                      name={name}
-                      image={image}
-                      auth={auth}
-                    />
-                  ) : (
-                    <NotFound />
-                  )
-                }
-              />
-              <Route path="/" component={NotFound} />
-            </Switch>
-          </div>
-        </Global>
+                <Route path="/callback" component={Callback} />
+                <Route
+                  path="/secret"
+                  render={() =>
+                    auth.isAuthenticated() ? (
+                      <Secret email={email} name={name} image={image} />
+                    ) : (
+                      <NotFound />
+                    )
+                  }
+                />
+                <Route path="/" component={NotFound} />
+              </Switch>
+            </div>
+          </Global>
+        </StylesProvider>
       </Router>
     </ApolloProvider>
   );

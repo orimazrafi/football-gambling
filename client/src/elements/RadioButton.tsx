@@ -1,16 +1,16 @@
 import styled, { StyledFunction } from "styled-components";
-import TextField from "@material-ui/core/TextField";
-
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 // const input: StyledFunction<any> = styled.input;
-interface Props {
-  error: any;
-}
-export const Input = styled(TextField)<Props>`
-  width: ${(props) => (props.error ? "8px 0 0 0" : "8px 0")}%;
-  padding: 12px 20px;
+// interface Props {
+//   error: any;
+// }
+export const RadioButton = styled(FormControlLabel)`
+  /* width: 100%; */
+  /* padding: 12px 20px;
   display: inline-block;
   border-radius: 4px;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 `;
 
 /* margin: ${(props) => (props.displayError ? "8px 0 0 0" : "8px 0")};
