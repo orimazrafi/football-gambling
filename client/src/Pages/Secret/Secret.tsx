@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
+// import { ThemeProvider } from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { request } from "graphql-request";
@@ -7,12 +7,12 @@ import { reduxSetUser } from "../../Features/User/UserSlice";
 import { useHistory } from "react-router-dom";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 
-const theme = {
-  primary: "red",
-  secondary: "green",
-  font: "sans-serif",
-  hoverBackground: "#FFA500",
-};
+// const theme = {
+//   primary: "red",
+//   secondary: "green",
+//   font: "sans-serif",
+//   hoverBackground: "#FFA500",
+// };
 export const Secret = ({ email, name, image }: any) => {
   const dispatch = useDispatch();
   const history = useHistory();

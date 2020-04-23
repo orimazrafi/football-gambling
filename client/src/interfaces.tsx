@@ -25,6 +25,7 @@ export interface GroupWithId {
 export interface GroupBlur {
   name: boolean;
   passwordConfirm: boolean;
+  league: boolean;
 }
 export interface User {
   _id?: string;

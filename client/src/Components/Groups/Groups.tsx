@@ -7,9 +7,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { request } from "graphql-request";
 import { reduxGetGroups } from "../../Features/Group/GroupSlice";
 import { toast } from "react-toastify";
-import "./Groups.css";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import { GroupCell } from "../../elements/GroupCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
 
+import "./Groups.css";
 interface Data {
   groups: Group[];
 }
@@ -80,27 +87,35 @@ export const Groups: React.FC<any> = ({ auth }) => {
           </div>
         </div>
       ) : (
-        groups && (
-          <>
-            <div className="table__wrapper">
-              <table className="pure-table pure-table-bordered">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Admin</th>
-                    <th>Password</th>
-                    <th>Participante</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <GroupList auth={auth} groups={groups} />
-                </tbody>
-              </table>
-            </div>
-          </>
-        )
+        <>
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            className="group--table"
+          >
+            <TableHead>
+              <TableRow>
+                <GroupCell fontSize="1em" fontWeight="bold"></GroupCell>
+                <GroupCell fontSize="1em" fontWeight="bold">
+                  Name
+                </GroupCell>
+                <GroupCell fontSize="1em" fontWeight="bold">
+                  Admin
+                </GroupCell>
+                <GroupCell fontSize="1em" fontWeight="bold">
+                  Password
+                </GroupCell>
+                <GroupCell fontSize="1em" fontWeight="bold">
+                  Participante
+                </GroupCell>
+                <GroupCell fontSize="1em" fontWeight="bold"></GroupCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <GroupList auth={auth} groups={groups} />
+            </TableBody>
+          </Table>
+        </>
       )}
     </div>
   );

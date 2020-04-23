@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { MainDiv } from "../../elements/Main";
 import { Groups } from "../../Components/Groups/Groups";
-import { defualtGroupImage, cloudinaryFetchUrl } from "../../helpers";
+import { defualtImage, cloudinaryFetchUrl } from "../../helpers";
 import "purecss/build/pure.css";
 
 import "./HomePage.css";
@@ -35,16 +35,17 @@ export const HomePage = ({ auth }: { auth: any }) => {
             <hr className="home--page" />
 
             <SuccessButton
-              name="true"
+              margin="auto"
               variant="contained"
               color="primary"
+              padding="0.75em 1.7em"
               onClick={auth.login}
             >
               login
             </SuccessButton>
             <img
               className="home__page__img"
-              src={`${cloudinaryFetchUrl}/${defualtGroupImage}`}
+              src={`${cloudinaryFetchUrl}/${defualtImage}`}
               alt={"logo"}
             />
           </div>

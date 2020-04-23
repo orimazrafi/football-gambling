@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import TableCell from "@material-ui/core/TableCell";
 // const input: StyledFunction<any> = styled.input;
 // interface Props {
 //   error: any;
 // }
-export const RadioButton = styled(FormControlLabel)``;
+export const GroupCell = styled(TableCell)`
+  text-align: center;
+`;

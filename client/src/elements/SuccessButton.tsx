@@ -2,12 +2,13 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 
 interface Props {
-  name: string;
+  margin: string;
+  padding: string;
 }
 export const SuccessButton = styled(Button)<Props>`
   display: block;
-  margin: auto;
-  padding: 0.75em 1.7em;
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   background: rgb(28, 184, 65);
   color: #fff;
   &:hover {

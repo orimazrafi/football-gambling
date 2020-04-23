@@ -48,8 +48,8 @@ const typeDefs = gql`
   type Mutation {
     getUserId(user: UserInput): User!
     group(groupId: ID!): Group!
-    createGroup(group: GroupInput): [Group]
-    addUserToGroup(userToGroup: UserToGroupInput): [Group!]!
+    createGroup(group: GroupInput): GroupResponse!
+    addUserToGroup(userToGroup: UserToGroupInput): GroupResponse!
     leaveGroup(userId: ID!, groupId: ID!): User!
     createLeague(league: LeagueInput): League!
     addGameToLeague(game: GameInput): Game!
@@ -97,6 +97,11 @@ const typeDefs = gql`
     name: String!
     email: String!
     image: String!
+  }
+  type GroupResponse {
+    success: Boolean
+    message: String
+    group: [Group]
   }
 
   type GambleUpdateResponse {

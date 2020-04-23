@@ -97,8 +97,13 @@ const resolvers = {
       const leagueDB = db.get().collection("league");
 
       const groupWithSameName = await groups.findOne({ name });
+      let groupArray = await groups.find({}).toArray();
       if (groupWithSameName)
-        throw new Error("Group Name Is Taken! try another one.");
+        return {
+          success: false,
+          message: "Group Name Is Taken! try another one.",
+          group: groupArray,
+        };
       const res = await groups.insertOne({
         name,
         image,
@@ -110,7 +115,6 @@ const resolvers = {
         league: { _id: league },
       });
 
-      //ToDo add results field!
       let leagueObject = await leagueDB.findOne({
         _id: ObjectId(league),
       });
@@ -121,26 +125,35 @@ const resolvers = {
           $set: { results: leagueObject },
         }
       );
-      return await groups.find({}).toArray();
+      groupArray = await groups.find({}).toArray();
+      return {
+        success: true,
+        message: "Group was created!",
+        group: groupArray,
+      };
     },
     addUserToGroup: async (_, { userToGroup }) => {
       const { userId, groupId, groupPassword } = userToGroup;
       const groups = db.get().collection("groups");
       const users = db.get().collection("users");
       const leagueDB = db.get().collection("league");
-
       let user = await groups.findOne({
-        _id: groupId,
+        _id: ObjectId(groupId),
         "users._id": userId,
       });
-
       if (user)
-        throw new Error("There is already user with that id in this group!");
+        return {
+          success: false,
+          message: "There is already user with that id in this group!",
+        };
 
       let res = await groups.findOne({ _id: ObjectId(groupId) });
       if (res.password) {
         if (res.password !== groupPassword)
-          throw new Error("you need to provide a valid password!");
+          return {
+            success: false,
+            message: "you need to provide a valid password!",
+          };
       }
       await groups.updateOne(
         { _id: ObjectId(groupId) },
@@ -164,7 +177,11 @@ const resolvers = {
         );
       }
 
-      return await groups.find({}).toArray();
+      return await {
+        success: true,
+        message: "user was added to the group.",
+        group: groups.find({}).toArray(),
+      };
     },
     leaveGroup: async (_, { userId, groupId }) => {
       const groups = db.get().collection("groups");
