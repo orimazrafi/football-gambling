@@ -1,100 +1,15 @@
-button.pure-button-disabled {
-  border-radius: 4px;
-  margin: 5px;
-}
-.small__join__group {
-  border-radius: 4px !important;
-  padding: 0.4em 1.1em !important;
-  margin: 5px;
-}
-button.small__view__group {
-  padding: 0.4em 0.8em;
-}
-td {
-  font-size: 10px;
-  padding: 3px;
-  overflow: auto !important;
-}
-.group__name__cell {
-  max-width: 30px;
-}
-.table__buttons__container {
-  display: flex;
-
-  flex-direction: column;
-}
-
-.modal__password__confirmation {
-  width: 30%;
-  margin: 3em auto;
-  border: 1px solid rgb(204, 204, 204);
-  background: rgb(255, 255, 255);
-  border-radius: 4px;
-  outline: none;
-  padding: 20px;
-  color: orange;
-  align-items: center;
-}
-.react-confirm-alert-body {
-  text-align: center;
-}
-.react-confirm-alert-button-group {
-  justify-content: center;
-}
-.join__group__modal__close__btn {
-  margin: 0 0 0 auto;
-  display: block;
-}
-.join__group__modal__content__wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.error__message__wrapper {
-  color: red;
-  font-size: 0.6em;
-  font-weight: bold;
-  text-align: center;
-  margin: 5px 0;
-}
-.join__modal__password__image {
-  height: 100px;
-  width: 100px;
-  margin: auto;
-  padding: 3em;
-}
-.btn__success__group__join {
-  background-color: #333 !important;
-  width: 30%;
-  justify-self: flex-end;
-  /* -webkit-print-color-adjust: exact; */
-  margin-left: auto;
-}
-@media screen and (min-width: 400px) {
-  .group__name__cell {
-    max-width: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: center;
-  }
-}
-
-@media screen and (min-width: 570px) {
-  .group__name__cell {
-    max-width: 70px;
-  }
-  .table__buttons__container {
-    flex-direction: row;
-  }
-}
-
 .MuiDialog-paperWidthSm {
   width: 60% !important;
-  padding: 3em;
+  padding: 1em 3em 3em 3em;
+}
+
+.dialog-password-group h1 {
+  text-align: center;
 }
 .dialog--group__image {
   display: block;
-  margin: auto;
+  margin: 2em auto;
   height: 150px;
   width: 150px;
+  border-radius: 50%;
 }

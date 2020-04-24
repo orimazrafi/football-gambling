@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Dialog } from "@material-ui/core";
 import { H2 } from "../../elements/H2";
 import { Input } from "../../elements/Input";
-import { Small } from "../../elements/SmallText";
-import { Button } from "../../elements/Button";
+import { SmallText } from "../../elements/SmallText";
+// import { Button } from "../../elements/Button";
 import { DropzoneImage } from "../DropzoneImage/DropzoneImage";
 import { UseFormData } from "../../Hooks/UseFormData";
 import { UseCloudinaryUpload } from "../../Hooks/UseCloudinaryUpload";
@@ -83,7 +83,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
       <H2>Create new Group</H2>
       {errors && (
         <div style={{ textAlign: "center", color: "red" }}>
-          {errors.slice(14)}
+          {errors.includes("name") ? errors.slice(14) : errors}
         </div>
       )}
       <Formik
@@ -174,10 +174,10 @@ export const GroupModal = (props: SimpleDialogProps) => {
             <div style={{ padding: "12px 20px" }}>
               Max Participate
               <div style={{ margin: "10px 0" }}>
-                <Small>
+                <SmallText>
                   Do you want to limit the number of participates that allow in
                   this group?
-                </Small>
+                </SmallText>
                 <RadioGroup
                   row
                   aria-label="position"

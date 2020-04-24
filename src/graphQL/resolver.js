@@ -42,7 +42,18 @@ const resolvers = {
     getUser: async (_, { userId }) => {
       const users = db.get().collection("users");
       let res = await users.findOne({ _id: ObjectId(userId) });
-      return res;
+      if (!res) {
+        return {
+          success: false,
+          message: "user was not found with that id.",
+          user: {},
+        };
+      }
+      return {
+        success: true,
+        message: "user gamble games were fetched.",
+        user: res,
+      };
     },
   },
   Group: {
@@ -61,24 +72,32 @@ const resolvers = {
       });
     },
   },
-  // League: {
-  //   async groups(parent) {
-  //     const groups = db.get().collection("groups");
-  //     return await parent.groups.map(async (group) => {
-  //       return await groups.findOne({ _id: ObjectId(group._id) });
-  //     });
-  //   },
-  // },
   Mutation: {
     getUserId: async (_, { user }) => {
-      const { name, image, email } = user;
-      const users = db.get().collection("users");
-      let userRe = await users.findOne({ email: user.email });
-      if (!userRe) {
-        const res = await users.insertOne({ name, email, image, groups: [] });
-        return res.ops[0];
-      } else {
-        return userRe;
+      try {
+        const { name, image, email } = user;
+        const users = db.get().collection("users");
+        let userRe = await users.findOne({ email: user.email });
+        if (!userRe) {
+          const res = await users.insertOne({ name, email, image, groups: [] });
+          return {
+            success: true,
+            message: "user created for first!",
+            user: res.ops[0],
+          };
+        } else {
+          return {
+            success: true,
+            message: "user was fetched!",
+            user: userRe,
+          };
+        }
+      } catch (err) {
+        return {
+          success: false,
+          message: err.message,
+          user: userRe,
+        };
       }
     },
 
@@ -104,6 +123,17 @@ const resolvers = {
           message: "Group Name Is Taken! try another one.",
           group: groupArray,
         };
+      let user = await users.findOne({ _id: ObjectId(admin) });
+
+      log(user, admin);
+      if (user.groups.length > 2) {
+        log(user.groups);
+        return {
+          success: false,
+          message: "one user can't have more then 3 groups",
+          group: groupArray,
+        };
+      }
       const res = await groups.insertOne({
         name,
         image,
@@ -114,12 +144,24 @@ const resolvers = {
         users: [{ _id: admin }],
         league: { _id: league },
       });
-
+      await groups.updateOne(
+        { _id: ObjectId(res.ops[0]._id) },
+        {
+          $push: { users: { _id: "5e9ab80b36d4382cd60e29db" } },
+        }
+      );
       let leagueObject = await leagueDB.findOne({
         _id: ObjectId(league),
       });
       await users.updateOne(
         { _id: ObjectId(res.ops[0].admin) },
+        {
+          $push: { groups: { _id: res.ops[0]._id } },
+          $set: { results: leagueObject },
+        }
+      );
+      await users.updateOne(
+        { _id: ObjectId("5e9ab80b36d4382cd60e29db") },
         {
           $push: { groups: { _id: res.ops[0]._id } },
           $set: { results: leagueObject },
@@ -243,7 +285,11 @@ const resolvers = {
         { $set: { "results.games": results } }
       );
       let res = await users.findOne({ _id: ObjectId(userId) });
-      return res;
+      return {
+        success: true,
+        message: "gamble was added",
+        user: res,
+      };
     },
   },
 };

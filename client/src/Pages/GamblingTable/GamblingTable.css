@@ -1,53 +1,14 @@
-.league__name {
-  margin-right: 5px;
+.gambling-table {
+  height: 40vh;
+  overflow: auto;
 }
-
-.gamble__matches__wrapper {
-  height: 50vh;
-  overflow-y: scroll;
-}
-.gamble__single__match__wrapper {
-  display: flex;
-  width: 90%;
-  justify-content: center;
-  font-size: 1.5vmax;
-}
-.gamble__match__date,
-.team__column,
-.results__colummn,
-.flag__column {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.gamble__match__date {
-  width: 18vmax;
-  scroll-behavior: auto;
-}
-.team__column {
-  width: 8vmax;
-}
-.results__colummn {
-  width: 12vmax;
-}
-.flag__column {
-  width: 8vmax;
-}
-@media screen and (max-width: 720px) {
-  .gamble__single__match__wrapper {
-    font-size: 2.5vmax;
-  }
-  .gamble__match__date,
-  .team__column,
-  .results__colummn,
-  .flag__column {
-    line-height: 22px;
+@media screen and (min-height: 550px) {
+  .gambling-table {
+    height: 55vh;
   }
 }
-
-@media screen and (min-height: 600px) {
-  .gamble__matches__wrapper {
-    height: 63vh;
-    overflow-y: scroll;
+@media screen and (min-height: 650px) {
+  .gambling-table {
+    height: 65vh;
   }
 }

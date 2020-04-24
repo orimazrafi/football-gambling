@@ -2,10 +2,14 @@ import React from "react";
 import { Image } from "../../elements/Image";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import "./ScoreTable.css";
 import { Group } from "../../interfaces";
 import { User } from "../../interfaces";
+import { ScoreRow } from "../../elements/ScoreRow";
+import { ScoreItem } from "../../elements/ScoreItem";
+import { LoadingText } from "../../elements/LoadingText";
+import { Container } from "@material-ui/core";
+import { FETCH_GROUP } from "../../queries";
+import "./ScoreTable.css";
 // eslint-disable-next-line
 const log = console.log;
 interface Data {
@@ -24,65 +28,66 @@ export const ScoreTable = () => {
     }
   );
 
-  const handleClick = (name: string) => {
-    history.push("/opponents", { name });
+  const handleClick = (name: string, id: string | undefined) => {
+    history.push("/opponents", { name, id });
   };
   const handleClass = (index: number) => {
-    let className = "item";
-    if (index === 0) className += " first__index";
+    let className = "0";
+    if (index === 0) className = "10px 10px 0 0";
     if (data?.group?.users && index === data.group.users.length - 1)
-      className += " last__index";
+      className = "0 0 10px 10px";
+    if (
+      index === 0 &&
+      data?.group?.users &&
+      index === data.group.users.length - 1
+    )
+      className = "10px";
     return className;
   };
   return (
     <>
-      <div className="container">
-        <h2>{data?.group?.name}</h2>
+      <h2>{data?.group?.name}</h2>
+      {data?.group?.image && (
         <Image
           src={`${process.env.REACT_APP_CLOUDINARY_IMAGE}${data?.group?.image}`}
           alt={data?.group?.name}
-          noBoard
-          marginAuto
+          noboard="unset"
+          margin="1em auto 2em auto"
+          verticalalign="middle"
+          height="100px"
+          width="100px"
         />
-        {loadingTable ? (
-          <h2>loading Table...</h2>
-        ) : (
-          data?.group?.users?.sort((a: User, b: User) => b.score - a.score) &&
-          data.group.users.map((gambler: User, index: number) => (
-            <div key={gambler._id}>
-              <div
-                className={handleClass(index)}
-                key={gambler.name}
-                onClick={() => handleClick(gambler.name)}
+      )}
+      {loadingTable ? (
+        <LoadingText>loading Table...</LoadingText>
+      ) : (
+        data?.group?.users?.sort((a: User, b: User) => b.score - a.score) && (
+          <Container className="container">
+            {data.group.users.map((gambler: User, index: number) => (
+              <ScoreRow
+                className="item"
+                borderradius={handleClass(index)}
+                key={gambler._id}
+                onClick={() => handleClick(gambler.name, gambler._id)}
               >
-                <div className="user__table__position__number">
-                  {index + 1}.
-                </div>
-                <Image maringRight src={gambler.image} />
-                <div className="user__name__score__table">
-                  {gambler.name}
-                </div>{" "}
-                <div> Success rate 50%</div>
-                <div>Bullseye 7</div>
-                <div> {gambler.score || 11}</div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+                <div>{index + 1}.</div>
+                <Image
+                  noboard="1px solid black"
+                  margin="0"
+                  verticalalign="unset"
+                  height="30px"
+                  width="30px"
+                  src={gambler.image}
+                />
+                <ScoreItem>{gambler.name}</ScoreItem>
+                <ScoreItem>success rate 50%</ScoreItem>
+                <ScoreItem>Bullseye 7</ScoreItem>
+                <ScoreItem>{gambler.score || 11}</ScoreItem>
+              </ScoreRow>
+            ))}
+          </Container>
+        )
+      )}
     </>
   );
 };
-const FETCH_GROUP = gql`
-  query group($groupId: ID, $userId: ID) {
-    group(groupId: $groupId, userId: $userId) {
-      name
-      image
-      users {
-        _id
-        name
-        image
-      }
-    }
-  }
-`;

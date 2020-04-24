@@ -2,3 +2,12 @@ export const cloudinaryFetchUrl = `https://res.cloudinary.com/dyloyoawh/image/up
 export const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dyloyoawh/image/upload`;
 export const imageIcon = `iconfinder_image_103588_ig40fo`;
 export const defualtImage = `Football-Free-Download-PNG_gvtfqq.png`;
+export const tableHeader = [
+  "",
+  "Name",
+  "Admin",
+  "Password",
+  "Participante",
+  "",
+];
+export const BACKEND_URL = "http://localhost:8080";

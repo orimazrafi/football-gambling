@@ -8,7 +8,7 @@ interface Props {
 
 export const TableButton = styled(Button)<Props>`
   font-size: 10px;
-  display: inline-block;
+  display: block;
   font-weight: 600;
   padding: 0.4em 0;
   background: ${(props) => props.background};
@@ -18,5 +18,8 @@ export const TableButton = styled(Button)<Props>`
   &:hover {
     background: ${(props) => props.backgroundhover};
     opacity: 0.5;
+  }
+  @media screen and (min-width: 700px) {
+    display: inline-block;
   }
 `;

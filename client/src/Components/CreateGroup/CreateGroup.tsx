@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { request } from "graphql-request";
 import { toast } from "react-toastify";
 import "./CreateGroup.css";
@@ -9,7 +8,9 @@ import { reduxSetGroup } from "../../Features/Group/GroupSlice";
 import { useDispatch } from "react-redux";
 import { PrimaryButton } from "../../elements/PrimaryButton";
 import { GroupModal } from "../GroupModal/GroupModal";
-import { imageIcon, defualtImage } from "../../helpers";
+import { imageIcon, defualtImage, BACKEND_URL } from "../../helpers";
+import { FETCH_LEAGUES } from "../../queries";
+import { CREATE_GROUP } from "../../mutations";
 Modal.setAppElement("#root");
 
 // eslint-disable-next-line
@@ -35,7 +36,6 @@ export const CreateGroup = () => {
   }
 
   const handleSubmit = (data: any, image: string) => {
-    log(image);
     let group = {
       name: data.name,
       password: data.password,
@@ -55,31 +55,24 @@ export const CreateGroup = () => {
   const dispatch = useDispatch();
   const createGroup = (group: any) => {
     setLoadingCreateGroup(true);
-    log(group);
     const variables = { ...group };
-    log("createGroup");
-    request("http://localhost:8080", CREATE_GROUP, variables).then(
-      async (data) => {
-        log(data);
-        try {
-          if (!data.createGroup.success) {
-            setLoadingCreateGroup(false);
-            return setErrors(data.createGroup.message);
-          }
-
-          await dispatch(reduxSetGroup(data.createGroup.group));
-          toast.success("Group was Added");
-          setOpen(false);
+    request(BACKEND_URL, CREATE_GROUP, variables).then(async (data) => {
+      try {
+        if (!data.createGroup.success) {
           setLoadingCreateGroup(false);
-        } catch (ex) {
-          log("onError");
-          log(ex);
-          setLoadingCreateGroup(false);
-          setErrors(ex.message);
-          toast.success(ex.message);
+          return setErrors(data.createGroup.message);
         }
+
+        await dispatch(reduxSetGroup(data.createGroup.group));
+        toast.success("Group was Added");
+        setOpen(false);
+        setLoadingCreateGroup(false);
+      } catch (err) {
+        setLoadingCreateGroup(false);
+        setErrors(data.createGroup.message);
+        toast.success(data.createGroup.message);
       }
-    );
+    });
   };
 
   const [open, setOpen] = React.useState(false);
@@ -113,51 +106,3 @@ export const CreateGroup = () => {
     </>
   );
 };
-
-const CREATE_GROUP = `
-mutation createGroup(
-  $name: String!
-  $password: String
-  $limitParticipate: String!
-  $maxParticipate: Int!
-  $admin: ID!
-  $image: String!
-  $league: ID!
-) {
-  createGroup(
-    group: {
-      name: $name
-      password: $password
-      limitParticipate: $limitParticipate
-      maxParticipate: $maxParticipate
-      admin: $admin
-      image: $image
-      league: $league
-    }
-  ) {
-    message
-    success
-    group {
-      _id
-      admin
-      name
-      maxParticipate
-      image
-      password
-      users {
-        _id
-        name
-      }
-    }
-  }
-}
-`;
-
-const FETCH_LEAGUES = gql`
-  query {
-    leagues {
-      _id
-      name
-    }
-  }
-`;

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Auth from "../../auth";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
+import { LoadingText } from "../../elements/LoadingText";
 export const Callback = () => {
   useEffect(() => {
     new Auth().handleAuthentication();
@@ -8,7 +9,7 @@ export const Callback = () => {
   return (
     <div style={{ height: "80vh", display: "flex" }}>
       <div style={{ margin: "auto" }}>
-        <h1>Checking Authentication...</h1>
+        <LoadingText>Checking Authentication...</LoadingText>
         <LoadingGif loading={true} size={150} />
       </div>
     </div>

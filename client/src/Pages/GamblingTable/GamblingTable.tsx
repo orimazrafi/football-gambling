@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { useSelector } from "react-redux";
-
 import { Image } from "../../elements/Image";
 import { toast } from "react-toastify";
 import { Game } from "../../interfaces";
 import moment from "moment";
+import { GambleWrapper } from "../../elements/GambleWrapper";
+import { GambleUnit } from "../../elements/GambleUnit";
+import { LoadingText } from "../../elements/LoadingText";
+import { SuccessButton } from "../../elements/SuccessButton";
 import "./GamblingTable.css";
+import { FETCH_USER_RESULT } from "../../queries";
+import { ADD_GAMBLE } from "../../mutations";
 
 const log = console.log;
 export const GamblingTable = () => {
   const { user } = useSelector(
     (state: { user: { user: { _id: string } } }) => state.user
   );
-  log(user);
   const { data, loading: loadingLeague } = useQuery<any, Record<string, any>>(
-    FETCH_USER,
+    FETCH_USER_RESULT,
     {
       variables: {
         userId: user._id || (localStorage.getItem("user_id") as string),
@@ -27,7 +30,10 @@ export const GamblingTable = () => {
   const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
     if (!loadingLeague) {
-      setGames(() => data.getUser.results.games);
+      if (data.getUser.success) {
+        setGames(() => data.getUser.user.results.games);
+        toast.success(data.getUser.message);
+      } else toast.error(data.getUser.message);
     }
   }, [loadingLeague, data]);
 
@@ -36,7 +42,7 @@ export const GamblingTable = () => {
     index: number
   ) => {
     const { name, value } = e.target;
-    let gamesDuplicate = data.getUser.results.games;
+    let gamesDuplicate = data.getUser.user.results.games;
     if (parseInt(value) > 0 || parseInt(value) < 10) {
       gamesDuplicate[index][name].score = value;
       setGames(() => [...gamesDuplicate]);
@@ -45,17 +51,16 @@ export const GamblingTable = () => {
 
   const [addGamble, { loading: loadingForGamble }] = useMutation(ADD_GAMBLE, {
     update(proxy, { data }) {
-      log("proxy", proxy);
-      setGames(() => data.addGamble.results.games);
-      toast.success("you added a gamble");
-    },
-    onError(err) {
-      // setErrors(err.message);
+      if (data.addGamble.success) {
+        setGames(() => data.addGamble.user.results.games);
+        return toast.success(data.addGamble.message);
+      }
+      return toast.error(data.addGamble.message);
     },
 
     variables: {
       userId: localStorage.getItem("user_id"),
-      leagueId: data?.getUser?.results?._id,
+      leagueId: data?.getUser?.user?.results?._id,
       results: games,
     },
   });
@@ -65,45 +70,48 @@ export const GamblingTable = () => {
   };
 
   return (
-    <div className="gambling__table__wrapper">
-      <div className="gambling__header__league" style={{ textAlign: "center" }}>
-        {data?.getUser?.results?.numberOfMathces > 0 && (
-          <>
-            <span className="league__name">
-              {data.getUser.results.name} league
-            </span>
-            {
-              <Image
-                src={data.getUser.results.image}
-                alt={data.getUser.results.name}
-                verticalAign
-              />
-            }
-          </>
-        )}
-      </div>
-      <br />
+    <>
+      {data?.getUser?.results?.numberOfMathces > 0 && (
+        <>
+          <span>{data.getUser.results.name} League</span>
+          {
+            <Image
+              src={data.getUser.results.image}
+              alt={data.getUser.results.name}
+              noboard="unset"
+              margin="1em auto 2em auto"
+              verticalalign="middle"
+              height="60px"
+              width="60px"
+            />
+          }
+        </>
+      )}
 
       {loadingLeague ? (
-        <h2>loadingLeague...</h2>
+        <LoadingText>Loading League...</LoadingText>
       ) : (
         games?.length > 0 && (
-          <div className="gamble__matches__wrapper">
+          <div className="gambling-table">
             {loadingForGamble ? (
-              <h2>Updating you'r Gamble...</h2>
+              <LoadingText>Updating you'r Gamble...</LoadingText>
             ) : (
               games.map((match: Game, index: number) => (
-                <div
-                  key={Math.random()}
-                  className="gamble__single__match__wrapper"
-                >
-                  <div className="gamble__match__date">
+                <GambleWrapper key={Math.random()}>
+                  <GambleUnit width="25%">
                     {moment(match.eventDate).format("lll")}
-                  </div>
-                  <div className="team__column">{match.homeTeam.name}</div>
-                  <Image src={match.homeTeam.logo} className="flag__column" />
+                  </GambleUnit>
+                  <GambleUnit width="15%">{match.homeTeam.name}</GambleUnit>
+                  <Image
+                    noboard="unset"
+                    margin="0 0 10px"
+                    verticalalign="middle"
+                    height="30px"
+                    width="30px"
+                    src={match.homeTeam.logo}
+                  />
 
-                  <div className="results__colummn">
+                  <GambleUnit width="10%">
                     <input
                       type="text"
                       name="homeTeam"
@@ -123,78 +131,29 @@ export const GamblingTable = () => {
                       }
                       value={match.awayTeam.score}
                     />
-                  </div>
-                  <Image src={match.awayTeam.logo} className="flag__column" />
-                  <div className="team__column">
+                  </GambleUnit>
+                  <Image
+                    noboard="unset"
+                    margin="0 0 10px"
+                    verticalalign="middle"
+                    height="30px"
+                    width="30px"
+                    src={match.awayTeam.logo}
+                  />
+                  <GambleUnit width="15%">
                     {" " + match.awayTeam.name}{" "}
-                  </div>
-                </div>
+                  </GambleUnit>
+                </GambleWrapper>
               ))
             )}
           </div>
         )
       )}
-      <div style={{ margin: "1em" }}>
-        <button
-          className="pure-button pure-button-primary"
-          onClick={handleSave}
-        >
+      {!loadingLeague && (
+        <SuccessButton margin="1em auto" padding="0.5em" onClick={handleSave}>
           Save
-        </button>
-      </div>
-    </div>
+        </SuccessButton>
+      )}
+    </>
   );
 };
-
-const FETCH_USER = gql`
-  query getUser($userId: ID!) {
-    getUser(userId: $userId) {
-      results {
-        _id
-        name
-        image
-        numberOfMathces
-        games {
-          eventDate
-          homeTeam {
-            name
-            score
-            logo
-          }
-          awayTeam {
-            name
-            score
-            logo
-          }
-        }
-      }
-    }
-  }
-`;
-
-const ADD_GAMBLE = gql`
-  mutation addGamble($userId: ID!, $leagueId: ID!, $results: [GameInput]) {
-    addGamble(
-      gamble: { userId: $userId, leagueId: $leagueId, results: $results }
-    ) {
-      results {
-        name
-        image
-        numberOfMathces
-        games {
-          eventDate
-          homeTeam {
-            name
-            score
-            logo
-          }
-          awayTeam {
-            name
-            score
-            logo
-          }
-        }
-      }
-    }
-  }
-`;

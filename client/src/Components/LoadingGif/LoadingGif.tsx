@@ -12,7 +12,7 @@ export const LoadingGif: React.FC<{ loading: boolean; size: number }> = ({
   size,
 }) => {
   return (
-    <LoadingWrapper>
+    <LoadingWrapper height="5vm">
       <ClipLoader
         css={override}
         size={size}

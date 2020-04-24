@@ -6,7 +6,7 @@ const typeDefs = gql`
     users: [User]!
     leagues: [League]
     league(leagueId: ID!): League
-    getUser(userId: ID!): User
+    getUser(userId: ID!): UserResponse!
   }
   type Group {
     _id: ID!
@@ -46,14 +46,14 @@ const typeDefs = gql`
     logo: String!
   }
   type Mutation {
-    getUserId(user: UserInput): User!
+    getUserId(user: UserInput): UserResponse!
     group(groupId: ID!): Group!
     createGroup(group: GroupInput): GroupResponse!
     addUserToGroup(userToGroup: UserToGroupInput): GroupResponse!
     leaveGroup(userId: ID!, groupId: ID!): User!
     createLeague(league: LeagueInput): League!
     addGameToLeague(game: GameInput): Game!
-    addGamble(gamble: GambleInput): User!
+    addGamble(gamble: GambleInput): UserResponse!
   }
 
   input GambleInput {
@@ -102,6 +102,11 @@ const typeDefs = gql`
     success: Boolean
     message: String
     group: [Group]
+  }
+  type UserResponse {
+    success: Boolean
+    message: String
+    user: User
   }
 
   type GambleUpdateResponse {

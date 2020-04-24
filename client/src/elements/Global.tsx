@@ -1,9 +1,9 @@
 import styled from "styled-components";
+
 export const Global = styled.div`
   font-family: "url(https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand+SC)";
   font-weight: 400;
-  /* font-size: 1.5rem; */
-  /* padding: 10px; */
+
   text-align: center;
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 2s; /* Firefox < 16 */

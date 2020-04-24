@@ -6,6 +6,9 @@ import { request } from "graphql-request";
 import { reduxSetUser } from "../../Features/User/UserSlice";
 import { useHistory } from "react-router-dom";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
+import { FETCH_USER } from "../../mutations";
+import { toast } from "react-toastify";
+import { BACKEND_URL } from "../../helpers";
 
 // const theme = {
 //   primary: "red",
@@ -22,9 +25,12 @@ export const Secret = ({ email, name, image }: any) => {
     image,
   };
 
-  request("http://localhost:8080", FETCH_USER, variables).then(async (data) => {
-    await dispatch(reduxSetUser(data.getUserId));
-    history.push("/");
+  request(BACKEND_URL, FETCH_USER, variables).then(async (data) => {
+    if (data.getUserId.success) {
+      toast.success(data.getUserId.message);
+      await dispatch(reduxSetUser(data.getUserId.user));
+      history.push("/");
+    } else toast.error(data.getUserId.message);
   });
 
   return (
@@ -36,17 +42,3 @@ export const Secret = ({ email, name, image }: any) => {
     </div>
   );
 };
-const FETCH_USER = `mutation getUserId($name: String!, $email: String!, $image: String!) {
-  getUserId(user: { name: $name, email: $email, image: $image }) {
-    _id
-    name
-    image
-    email
-    groups{
-      _id
-    }
-    results{
-      _id
-    }
-  }
-}`;

@@ -17,10 +17,11 @@ import { ApolloProvider } from "react-apollo";
 import { ToastContainer } from "react-toastify";
 import { StylesProvider } from "@material-ui/styles";
 
+import { BACKEND_URL } from "./helpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_BACKEND_PORT,
+  uri: BACKEND_URL,
   cache: new InMemoryCache({
     addTypename: false,
   }),

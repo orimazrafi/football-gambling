@@ -1,6 +1,5 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { MainDiv } from "../../elements/Main";
 import { Groups } from "../../Components/Groups/Groups";
 import { defualtImage, cloudinaryFetchUrl } from "../../helpers";
 import "purecss/build/pure.css";
@@ -50,9 +49,7 @@ export const HomePage = ({ auth }: { auth: any }) => {
             />
           </div>
         ) : (
-          <MainDiv>
-            <Groups auth={auth} />
-          </MainDiv>
+          <Groups auth={auth} />
         )}
       </div>
     </ThemeProvider>
