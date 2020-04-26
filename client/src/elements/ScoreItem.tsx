@@ -1,7 +1,7 @@
 import styled from "styled-components";
 const div = styled.div;
 export const ScoreItem = div`
-    max-width: 20%;
+    max-width: 10%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

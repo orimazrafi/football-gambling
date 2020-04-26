@@ -1,5 +1,6 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require("apollo-server");
 const typeDefs = gql`
+  ##
   type Query {
     groups: [Group]!
     group(groupId: ID, userId: ID): Group
@@ -8,6 +9,7 @@ const typeDefs = gql`
     league(leagueId: ID!): League
     getUser(userId: ID!): UserResponse!
   }
+  ##
   type Group {
     _id: ID!
     admin: ID!
@@ -19,6 +21,7 @@ const typeDefs = gql`
     users: [User!]!
     league: League
   }
+  ##
   type User {
     _id: ID!
     name: String!
@@ -27,6 +30,7 @@ const typeDefs = gql`
     groups: [Group]
     results: League
   }
+  ##
   type League {
     _id: ID!
     name: String!
@@ -34,51 +38,55 @@ const typeDefs = gql`
     numberOfMathces: Int!
     games: [Game]
   }
-
+  ##
   type Game {
     eventDate: String!
     homeTeam: Team!
     awayTeam: Team!
   }
+  ##
   type Team {
     name: String!
     score: String
     logo: String!
   }
+  ##
   type Mutation {
     getUserId(user: UserInput): UserResponse!
     group(groupId: ID!): Group!
-    createGroup(group: GroupInput): GroupResponse!
+    createGwroup(group: GroupInput): GroupResponse!
     addUserToGroup(userToGroup: UserToGroupInput): GroupResponse!
     leaveGroup(userId: ID!, groupId: ID!): User!
     createLeague(league: LeagueInput): League!
     addGameToLeague(game: GameInput): Game!
     addGamble(gamble: GambleInput): UserResponse!
   }
-
+  ##
   input GambleInput {
     userId: ID!
     leagueId: ID!
     results: [GameInput]
   }
-
+  ##
   input LeagueInput {
     name: String!
     image: String!
     numberOfMathces: Int!
     games: [GameInput]
   }
+  ##
   input GameInput {
     eventDate: String
     homeTeam: TeamInput
     awayTeam: TeamInput
   }
+  ##
   input TeamInput {
     name: String!
     logo: String!
     score: String
   }
-
+  ##
   input GroupInput {
     name: String!
     limitParticipate: String!
@@ -88,16 +96,19 @@ const typeDefs = gql`
     admin: ID!
     league: ID!
   }
+  ##
   input UserToGroupInput {
     userId: ID!
     groupId: ID!
     groupPassword: String
   }
+  ##
   input UserInput {
     name: String!
     email: String!
     image: String!
   }
+  ##
   type GroupResponse {
     success: Boolean
     message: String

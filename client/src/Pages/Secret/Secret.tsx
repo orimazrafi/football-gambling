@@ -6,10 +6,10 @@ import { request } from "graphql-request";
 import { reduxSetUser } from "../../Features/User/UserSlice";
 import { useHistory } from "react-router-dom";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
-import { FETCH_USER } from "../../mutations";
+import { FETCH_USER, SEARCH_USER } from "../../queries";
 import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../helpers";
-
+import { CREATE_USER } from "../../mutations";
 // const theme = {
 //   primary: "red",
 //   secondary: "green",
@@ -25,13 +25,28 @@ export const Secret = ({ email, name, image }: any) => {
     image,
   };
 
-  request(BACKEND_URL, FETCH_USER, variables).then(async (data) => {
-    if (data.getUserId.success) {
-      toast.success(data.getUserId.message);
-      await dispatch(reduxSetUser(data.getUserId.user));
-      history.push("/");
-    } else toast.error(data.getUserId.message);
+  request(BACKEND_URL, SEARCH_USER, { email: email }).then(async (data) => {
+    if (data.search.success) fetchUser();
+    createUser();
   });
+  const fetchUser = () => {
+    request(BACKEND_URL, FETCH_USER, variables).then(async (data) => {
+      if (data.getUserId.success) {
+        toast.success(data.getUserId.message);
+        await dispatch(reduxSetUser(data.getUserId.user));
+        return history.push("/");
+      }
+    });
+  };
+  const createUser = () => {
+    request(BACKEND_URL, CREATE_USER, variables).then(async (data) => {
+      if (data.createUser.success) {
+        toast.success(data.createUser.message);
+        await dispatch(reduxSetUser(data.createUser.user));
+        return history.push("/");
+      } else toast.error(data.createUser.message);
+    });
+  };
 
   return (
     <div style={{ height: "80vh", display: "flex" }}>

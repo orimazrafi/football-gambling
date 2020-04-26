@@ -71,13 +71,13 @@ export const GamblingTable = () => {
 
   return (
     <>
-      {data?.getUser?.results?.numberOfMathces > 0 && (
+      {data?.getUser?.user.results?.numberOfMathces > 0 && (
         <>
-          <span>{data.getUser.results.name} League</span>
+          <span>{data.getUser.user.results.name} League</span>
           {
             <Image
-              src={data.getUser.results.image}
-              alt={data.getUser.results.name}
+              src={data.getUser.user.results.image}
+              alt={data.getUser.user.results.name}
               noboard="unset"
               margin="1em auto 2em auto"
               verticalalign="middle"

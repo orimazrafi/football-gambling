@@ -29,6 +29,33 @@ export const FETCH_USER_RESULT = gql`
     }
   }
 `;
+export const FETCH_LEAGUE_RESULT = gql`
+  query league($leagueId: ID!) {
+    league(leagueId: $leagueId) {
+      success
+      message
+      league {
+        _id
+        name
+        image
+        numberOfMathces
+        games {
+          eventDate
+          homeTeam {
+            name
+            score
+            logo
+          }
+          awayTeam {
+            name
+            score
+            logo
+          }
+        }
+      }
+    }
+  }
+`;
 export const FETCH_LEAGUES = gql`
   query {
     leagues {
@@ -47,6 +74,34 @@ export const FETCH_GROUP = gql`
         name
         image
       }
+      league {
+        _id
+      }
     }
   }
 `;
+export const SEARCH_USER = `query search( $email: String!) {
+  search( email: $email ) {
+      success
+
+  }
+}`;
+export const FETCH_USER = `query getUserId($name: String!, $email: String!, $image: String!) {
+  getUserId(user: { name: $name, email: $email, image: $image }) {
+      success
+      message
+      user{
+          _id
+          name
+          image
+          email
+          groups{
+              _id
+          }
+          results{
+              _id
+          }
+           }
+
+  }
+}`;

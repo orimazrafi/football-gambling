@@ -27,9 +27,14 @@ export const ScoreTable = () => {
       },
     }
   );
+  log(data);
 
-  const handleClick = (name: string, id: string | undefined) => {
-    history.push("/opponents", { name, id });
+  const handleClick = (
+    name: string,
+    userId: string | undefined,
+    leagueId: string
+  ) => {
+    history.push("/opponents", { name, userId, leagueId });
   };
   const handleClass = (index: number) => {
     let className = "0";
@@ -68,8 +73,11 @@ export const ScoreTable = () => {
                 className="item"
                 borderradius={handleClass(index)}
                 key={gambler._id}
-                onClick={() => handleClick(gambler.name, gambler._id)}
+                onClick={() =>
+                  handleClick(gambler.name, gambler._id, data.group.league._id)
+                }
               >
+                {log(data.group.league._id)}
                 <div>{index + 1}.</div>
                 <Image
                   noboard="1px solid black"

@@ -67,22 +67,22 @@ mutation createGroup(
   }
 }
 `;
-export const FETCH_USER = `mutation getUserId($name: String!, $email: String!, $image: String!) {
-    getUserId(user: { name: $name, email: $email, image: $image }) {
-        success
-        message
-        user {
-            _id
-            name
-            image
-            email
-            groups{
-                _id
-            }
-            results{
-                _id
-            }
-             }
+export const CREATE_USER = `mutation createUser($name: String!, $email: String!, $image: String!) {
+  createUser(user: { name: $name, email: $email, image: $image }) {
+      success
+      message
+      user {
+          _id
+          name
+          image
+          email
+          groups{
+              _id
+          }
+          results{
+              _id
+          }
+           }
 
-    }
-  }`;
+  }
+}`;
