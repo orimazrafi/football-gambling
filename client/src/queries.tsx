@@ -74,8 +74,49 @@ export const FETCH_GROUP = gql`
         name
         image
       }
-      league {
+    }
+  }
+`;
+
+export const FETCH_USER_GROUP_LEAGUE_RESULTS = gql`
+  query group($groupId: ID, $userId: ID) {
+    group(groupId: $groupId, userId: $userId) {
+      name
+      image
+      users {
         _id
+        name
+        image
+        results {
+          games {
+            eventDate
+            homeTeam {
+              name
+              score
+              logo
+            }
+            awayTeam {
+              name
+              score
+              logo
+            }
+          }
+        }
+      }
+      league {
+        name
+        image
+        games {
+          eventDate
+          homeTeam {
+            name
+            score
+          }
+          awayTeam {
+            name
+            score
+          }
+        }
       }
     }
   }

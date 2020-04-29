@@ -12,7 +12,7 @@ interface Props {
   onJoinGroupWithPasssword: (groupInput: any) => void;
   onJoinGroupWithOutPasssword: (groupInput: any) => void;
 }
-export const GroupTableBody = (props: Props) => {
+export const GroupsTableRow = (props: Props) => {
   const history = useHistory();
 
   const {
@@ -22,9 +22,9 @@ export const GroupTableBody = (props: Props) => {
   } = props;
   return (
     <TableRow key={group._id}>
-      <GroupCell fontSize="12px" fontWeight="normal">
+      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         <Image
-          src={`${process.env.REACT_APP_CLOUDINARY_IMAGE}${group.image}`}
+          src={`${process?.env.REACT_APP_CLOUDINARY_IMAGE}${group.image}`}
           alt={group.name}
           noboard="unset"
           margin="auto"
@@ -33,21 +33,21 @@ export const GroupTableBody = (props: Props) => {
           width="30px"
         />
       </GroupCell>
-      <GroupCell fontSize="12px" fontWeight="normal">
+      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         {" "}
         {group.name}
       </GroupCell>
-      <GroupCell fontSize="12px" fontWeight="normal">
+      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         {group.users && group.users[0].name}
       </GroupCell>
-      <GroupCell fontSize="12px" fontWeight="normal">
+      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         {" "}
         {group.password ? "******" : "None"}
       </GroupCell>
-      <GroupCell fontSize="12px" fontWeight="normal">
+      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         {group.users && ` ${group.users.length}/${group.maxParticipate}`}
       </GroupCell>
-      <GroupCell fontSize="12px" fontWeight="normal">
+      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         {group.users &&
         group.maxParticipate &&
         group.users.findIndex(

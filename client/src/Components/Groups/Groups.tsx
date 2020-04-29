@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 import { CreateGroup } from "../CreateGroup/CreateGroup";
-import { GroupList } from "../GroupList/GroupList";
 import { useSelector, useDispatch } from "react-redux";
 import { request } from "graphql-request";
 import { reduxGetGroups } from "../../Features/Group/GroupSlice";
 import { toast } from "react-toastify";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
-import Table from "@material-ui/core/Table";
-import { GroupCell } from "../../elements/GroupCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 
-import { TableWrapper } from "../../elements/TableWrapper";
 import { LoadingText } from "../../elements/LoadingText";
 import { InputAndButtonWrapper } from "../../elements/InputAndButtonWrapper";
+import { columns, BACKEND_URL } from "../../helpers";
 import "./Groups.css";
-import { tableHeader, BACKEND_URL } from "../../helpers";
+import { GroupsTable } from "../GroupsTable/GroupsTable";
 
 // eslint-disable-next-line
-
 const log = console.log;
 export const Groups: React.FC<any> = ({ auth }) => {
   let { groups } = useSelector(
@@ -76,28 +70,7 @@ export const Groups: React.FC<any> = ({ auth }) => {
           <LoadingGif loading={true} size={100} />
         </>
       ) : (
-        <TableWrapper>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            className="group--table"
-          >
-            <TableHead>
-              <TableRow>
-                {tableHeader.map((head: string) => (
-                  <GroupCell
-                    key={Math.random()}
-                    fontSize="1em"
-                    fontWeight="bold"
-                  >
-                    {head}
-                  </GroupCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <GroupList auth={auth} groups={groups} />
-          </Table>
-        </TableWrapper>
+        <GroupsTable columns={columns} auth={auth} groups={groups} />
       )}
     </>
   );

@@ -91,6 +91,7 @@ export const CreateGroup = () => {
         variant="contained"
         color="primary"
         onClick={handleClickOpen}
+        margin="0"
       >
         Add Group
       </PrimaryButton>

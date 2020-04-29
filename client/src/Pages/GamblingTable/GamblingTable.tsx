@@ -13,6 +13,7 @@ import "./GamblingTable.css";
 import { FETCH_USER_RESULT } from "../../queries";
 import { ADD_GAMBLE } from "../../mutations";
 
+// eslint-disable-next-line
 const log = console.log;
 export const GamblingTable = () => {
   const { user } = useSelector(

@@ -14,6 +14,7 @@ const addGambleResolver = require("../resolvers/league/addGamble");
 const userSearchResolver = require("../resolvers/user/search");
 const createUserResolver = require("../resolvers/user/create");
 const Store = require("../store/index");
+const log = console.log;
 const resolvers = {
   Query: {
     groups: groupsResolver,
@@ -40,9 +41,7 @@ const resolvers = {
         return await Store.findOne("users", user._id);
       });
     },
-  },
-  User: {
-    groups: async (parent) => {},
+    league: async (parent) => await Store.findOne("league", parent.league._id),
   },
 };
 module.exports = resolvers;

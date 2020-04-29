@@ -8,16 +8,16 @@ import { reduxSetGroup } from "../../Features/Group/GroupSlice";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
 import { PasswordModal } from "../PasswordModal.tsx/PasswordModal";
-import { GroupTableBody } from "../GroupTableBody/GroupTableBody";
+import { GroupsTableRow } from "../GroupsTableRow/GroupsTableRow";
+import { BACKEND_URL } from "../../helpers";
 import { TableBody } from "@material-ui/core";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import "./GroupList.css";
-import { BACKEND_URL } from "../../helpers";
+import "./GroupsBody.css";
 
 // eslint-disable-next-line
 const log = console.log;
 
-export const GroupList: React.FC<{
+export const GroupsBody: React.FC<{
   auth: any;
   groups: Group[];
 }> = ({ auth, groups }) => {
@@ -95,13 +95,13 @@ export const GroupList: React.FC<{
     <TableBody>
       {loadingAddUserToGroup ? (
         <TableRow>
-          <GroupCell fontSize="1em" fontWeight="bold">
+          <GroupCell fontSize="1em" fontWeight="bold" textoverflow="unset">
             loading Add User To Group...
           </GroupCell>
         </TableRow>
       ) : (
         groups?.map((group: Group) => (
-          <GroupTableBody
+          <GroupsTableRow
             key={Math.random()}
             group={group}
             onJoinGroupWithPasssword={handleJoinGroupWithPasssword}
