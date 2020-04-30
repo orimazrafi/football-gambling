@@ -1,20 +1,11 @@
-const Store = require("../../store");
+const UserStore = require("../../store/user");
 const getUserIdResolver = async (obj, args, req) => {
   try {
-    const { name, image, email } = args.user;
+    const { email } = args.user;
 
-    let userResponse = await Store.findByEmail("users", email);
-    console.log(userResponse);
+    let userResponse = await UserStore.findByEmail(email);
     if (!userResponse) {
-      //   const firstLoggedUser = await Store.initialUser(name, email, image);
-      //   return Store.userResponse(
-      //     true,
-      //     "user created for first!",
-      //     firstLoggedUser.ops[0]
-      //   );
-      console.log("userResponse");
-
-      return await Store.userResponse(
+      return await UserStore.response(
         false,
         "there is no user with that email",
         {
@@ -27,11 +18,9 @@ const getUserIdResolver = async (obj, args, req) => {
       );
     }
 
-    // else {
-    return await Store.userResponse(true, "user was fetched!", userResponse);
-    // }
+    return await UserStore.response(true, "user was fetched!", userResponse);
   } catch (err) {
-    return Store.userResponse(false, err.message, userResponse);
+    return UserStore.response(false, err.message, userResponse);
   }
 };
 

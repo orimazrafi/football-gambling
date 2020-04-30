@@ -1,8 +1,7 @@
 const Store = require("../../store/index");
-/**
- * if args.id - return author by id as list
- * else - return sll authors as list
- */
+const GroupStore = require("../../store/group");
+const UserStore = require("../../store/user");
+
 const createGroupResolver = async (obj, args, req) => {
   const {
     name,
@@ -14,25 +13,25 @@ const createGroupResolver = async (obj, args, req) => {
     league,
   } = args.group;
 
-  const groupWithSameName = await Store.findByName("groups", name);
-  let groupArray = await Store.getAllDocuments("groups");
+  const groupWithSameName = await GroupStore.findByName(name);
+  let groupArray = await await GroupStore.getAllGroups();
   if (groupWithSameName) return;
-  Store.groupResponse(
+  GroupStore.response(
     false,
     "Group Name Is Taken! try another one.",
     groupArray
   );
 
-  let user = await Store.findOne("users", admin);
+  let user = await UserStore.findById(admin);
 
   if (user.groups.length > 3) {
-    return Store.groupResponse(
+    return GroupStore.response(
       false,
       "one user can't have more then 3 groups",
       groupArray
     );
   }
-  const res = await Store.addGroup(
+  const res = await GroupStore.add(
     name,
     image,
     limitParticipate,
@@ -42,19 +41,19 @@ const createGroupResolver = async (obj, args, req) => {
     league
   );
 
-  await Store.updateGroup(res.ops[0]._id, "5e9ab80b36d4382cd60e29db");
+  await GroupStore.update(res.ops[0]._id, "5e9ab80b36d4382cd60e29db");
 
-  let leagueObject = await Store.findOne("league", league);
+  let leagueObject = await Store.findById("league", league);
 
-  await Store.updateUser(res.ops[0].admin, res.ops[0]._id, leagueObject);
+  await UserStore.update(res.ops[0].admin, res.ops[0]._id, leagueObject);
   //monkey
-  await Store.updateUser(
+  await UserStore.update(
     "5e9ab80b36d4382cd60e29db",
     res.ops[0]._id,
     leagueObject
   );
 
-  groupArray = await Store.getAllDocuments("groups");
-  return Store.groupResponse(true, "Group was created!", groupArray);
+  groupArray = await GroupStore.getAllGroups();
+  return GroupStore.response(true, "Group was created!", groupArray);
 };
 module.exports = createGroupResolver;

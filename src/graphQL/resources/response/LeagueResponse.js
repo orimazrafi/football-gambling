@@ -4,7 +4,7 @@ const LeagueResponse = gql`
   type LeagueResponse {
     success: Boolean!
     message: String!
-    league: League!
+    league: League
   }
 `;
 module.exports = LeagueResponse;

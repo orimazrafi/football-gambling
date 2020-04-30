@@ -1,3 +1,3 @@
-const Store = require("../../store");
-const leaguesResolver = async () => await Store.getAllDocuments("league");
+const LeagueStore = require("../../store/league");
+const leaguesResolver = async () => await LeagueStore.getAlleagues();
 module.exports = leaguesResolver;

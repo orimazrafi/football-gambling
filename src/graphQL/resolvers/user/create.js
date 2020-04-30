@@ -1,24 +1,24 @@
-const Store = require("../../store");
+const UserStore = require("../../store/user");
 const createUserResolver = async (obj, args, req) => {
   try {
     const { name, image, email } = args.user;
 
-    let user = await Store.findByEmail("users", email);
+    let user = await UserStore.findByEmail(email);
     if (user)
-      return await Store.userResponse(
+      return await UserStore.response(
         true,
         "there is already user with that email",
         user
       );
     else {
-      user = await Store.createUser(name, email, image);
-      return Store.userResponse(true, "user created!", user.ops[0]);
+      user = await UserStore.create(name, email, image);
+      return UserStore.response(true, "user created!", user.ops[0]);
     }
 
     {
     }
   } catch (err) {
-    return Store.userResponse(false, err.message, user);
+    return UserStore.response(false, err.message, user);
   }
 };
 

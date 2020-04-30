@@ -1,7 +1,6 @@
 const { gql } = require("apollo-server");
 
 const Queries = gql`
-  # This type specifies the entry points into our API.s
   type Query {
     groups: [Group]!
     getUserId(user: UserInput): UserResponse!

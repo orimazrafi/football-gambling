@@ -1,14 +1,9 @@
-const Store = require("../../store");
+const UserStore = require("../../store/user");
+const LeagueStore = require("../../store/league");
 const addGambleResolver = async (obj, args, req) => {
   const { userId, leagueId, results } = args.gamble;
-  await Store.addGamble(userId, leagueId, results);
-  // );
-  let res = await Store.findOne("users", userId);
-  // await users.findOne({ _id: ObjectId(userId) });
-  return {
-    success: true,
-    message: "gamble was added",
-    user: res,
-  };
+  await LeagueStore.addGamble(userId, leagueId, results);
+  let res = await UserStore.findById(userId);
+  return UserStore.response(true, "gamble was added", res);
 };
 module.exports = addGambleResolver;

@@ -6,15 +6,15 @@ const leagueResolver = require("../resolvers/league/league");
 const getUserResolver = require("../resolvers/user/getUser");
 const getUserIdResolver = require("../resolvers/user/getUserId");
 const createGroupResolver = require("../resolvers/group/create");
-const addUserToGroupResolver = require("../resolvers/group/addUser");
-const leaveGroupResolver = require("../resolvers/group/leave");
+const addUserToGroupResolver = require("./user/addUserToGroup");
+const deleteUserFromGroupResolver = require("./group/deleteUserFromGroup");
 const createLeagueResolver = require("../resolvers/league/create");
 const addGameToLeagueResolver = require("../resolvers/league/addGame");
 const addGambleResolver = require("../resolvers/league/addGamble");
 const userSearchResolver = require("../resolvers/user/search");
 const createUserResolver = require("../resolvers/user/create");
-const Store = require("../store/index");
-const log = console.log;
+const UserStore = require("../store/user");
+const LeagueStore = require("../store/league");
 const resolvers = {
   Query: {
     groups: groupsResolver,
@@ -29,7 +29,7 @@ const resolvers = {
   Mutation: {
     createGroup: createGroupResolver,
     addUserToGroup: addUserToGroupResolver,
-    leaveGroup: leaveGroupResolver,
+    deleteUserFromGroup: deleteUserFromGroupResolver,
     createUser: createUserResolver,
     createLeague: createLeagueResolver,
     addGameToLeague: addGameToLeagueResolver,
@@ -38,10 +38,10 @@ const resolvers = {
   Group: {
     users: async (parent) => {
       return await parent.users.map(async (user) => {
-        return await Store.findOne("users", user._id);
+        return await UserStore.findById(user._id);
       });
     },
-    league: async (parent) => await Store.findOne("league", parent.league._id),
+    league: async (parent) => await LeagueStore.findById(parent.league._id),
   },
 };
 module.exports = resolvers;

@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
 import { TableButton } from "../../elements/TableButton";
-
 interface Props {
   group: Group;
   onJoinGroupWithPasssword: (groupInput: any) => void;

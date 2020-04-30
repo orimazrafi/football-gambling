@@ -1,4 +1,4 @@
-const Store = require("../../store");
-const groupsResolver = async (obj, args, req) =>
-  await Store.getAllDocuments("groups");
+const GroupStore = require("../../store/group");
+
+const groupsResolver = async () => await GroupStore.getAllGroups();
 module.exports = groupsResolver;
