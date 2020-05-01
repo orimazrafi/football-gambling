@@ -3,7 +3,7 @@ const { gql } = require("apollo-server");
 const TeamInput = gql`
   input TeamInput {
     name: String!
-    logo: String!
+    image: String!
     score: String
   }
 `;

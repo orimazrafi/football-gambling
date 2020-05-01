@@ -7,6 +7,8 @@ const League = gql`
     image: String!
     numberOfMathces: Int!
     games: [Game]
+    teams: [Team!]!
+    players: [Player!]!
   }
 `;
 module.exports = League;

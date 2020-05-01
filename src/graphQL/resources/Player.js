@@ -1,10 +1,10 @@
 const { gql } = require("apollo-server");
 
-const Team = gql`
-  type Team {
+const Player = gql`
+  type Player {
     name: String!
-    score: String
     image: String!
+    team: String!
   }
 `;
-module.exports = Team;
+module.exports = Player;

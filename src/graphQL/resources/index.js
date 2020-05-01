@@ -3,6 +3,7 @@ const Group = require("../resources/Group");
 const League = require("../resources/League");
 const Team = require("../resources/Team");
 const User = require("../resources/User");
+const Player = require("../resources/Player");
 const Mutations = require("../resources/Mutations");
 const Queries = require("../resources/Queries");
 const GambleInput = require("../resources/Input/GambleInput");
@@ -25,6 +26,7 @@ const typeDefs = gql`
     ${League},
     ${Team},
     ${User},
+    ${Player},
     ${Queries},
     ${Mutations},
     ${GambleInput},
