@@ -45,7 +45,7 @@ export const HomePage = ({ auth }: { auth: any }) => {
             <img
               className="home__page__img"
               src={`${cloudinaryFetchUrl}/${defualtImage}`}
-              alt={"logo"}
+              alt={"home_page"}
             />
           </div>
         ) : (

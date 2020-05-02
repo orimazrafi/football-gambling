@@ -4,12 +4,12 @@
     "homeTeam": {
       "score": "",
       "name": "Russia",
-      "logo": "https://media.api-sports.io/teams/4.png"
+      "image": "https://media.api-sports.io/teams/4.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Saudi Arabia",
-      "logo": "https://media.api-sports.io/teams/23.png"
+      "image": "https://media.api-sports.io/teams/23.png"
     }
   },
   {
@@ -17,12 +17,12 @@
     "homeTeam": {
       "score": "",
       "name": "Egypt",
-      "logo": "https://media.api-sports.io/teams/32.png"
+      "image": "https://media.api-sports.io/teams/32.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Uruguay",
-      "logo": "https://media.api-sports.io/teams/7.png"
+      "image": "https://media.api-sports.io/teams/7.png"
     }
   },
   {
@@ -30,12 +30,12 @@
     "homeTeam": {
       "score": "",
       "name": "Morocco",
-      "logo": "https://media.api-sports.io/teams/31.png"
+      "image": "https://media.api-sports.io/teams/31.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Iran",
-      "logo": "https://media.api-sports.io/teams/22.png"
+      "image": "https://media.api-sports.io/teams/22.png"
     }
   },
   {
@@ -43,12 +43,12 @@
     "homeTeam": {
       "score": "",
       "name": "Portugal",
-      "logo": "https://media.api-sports.io/teams/27.png"
+      "image": "https://media.api-sports.io/teams/27.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Spain",
-      "logo": "https://media.api-sports.io/teams/9.png"
+      "image": "https://media.api-sports.io/teams/9.png"
     }
   },
   {
@@ -57,12 +57,12 @@
     "homeTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Australia",
-      "logo": "https://media.api-sports.io/teams/20.png"
+      "image": "https://media.api-sports.io/teams/20.png"
     }
   },
   {
@@ -71,12 +71,12 @@
     "homeTeam": {
       "score": "",
       "name": "Argentina",
-      "logo": "https://media.api-sports.io/teams/26.png"
+      "image": "https://media.api-sports.io/teams/26.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Iceland",
-      "logo": "https://media.api-sports.io/teams/18.png"
+      "image": "https://media.api-sports.io/teams/18.png"
     }
   },
   {
@@ -85,12 +85,12 @@
     "homeTeam": {
       "score": "",
       "name": "Peru",
-      "logo": "https://media.api-sports.io/teams/30.png"
+      "image": "https://media.api-sports.io/teams/30.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Denmark",
-      "logo": "https://media.api-sports.io/teams/21.png"
+      "image": "https://media.api-sports.io/teams/21.png"
     }
   },
   {
@@ -99,12 +99,12 @@
     "homeTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Nigeria",
-      "logo": "https://media.api-sports.io/teams/19.png"
+      "image": "https://media.api-sports.io/teams/19.png"
     }
   },
   {
@@ -113,12 +113,12 @@
     "homeTeam": {
       "score": "",
       "name": "Costa Rica",
-      "logo": "https://media.api-sports.io/teams/29.png"
+      "image": "https://media.api-sports.io/teams/29.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Serbia",
-      "logo": "https://media.api-sports.io/teams/14.png"
+      "image": "https://media.api-sports.io/teams/14.png"
     }
   },
   {
@@ -127,12 +127,12 @@
     "homeTeam": {
       "score": "",
       "name": "Germany",
-      "logo": "https://media.api-sports.io/teams/25.png"
+      "image": "https://media.api-sports.io/teams/25.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Mexico",
-      "logo": "https://media.api-sports.io/teams/16.png"
+      "image": "https://media.api-sports.io/teams/16.png"
     }
   },
   {
@@ -141,12 +141,12 @@
     "homeTeam": {
       "score": "",
       "name": "Brazil",
-      "logo": "https://media.api-sports.io/teams/6.png"
+      "image": "https://media.api-sports.io/teams/6.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Switzerland",
-      "logo": "https://media.api-sports.io/teams/15.png"
+      "image": "https://media.api-sports.io/teams/15.png"
     }
   },
   {
@@ -155,12 +155,12 @@
     "homeTeam": {
       "score": "",
       "name": "Sweden",
-      "logo": "https://media.api-sports.io/teams/5.png"
+      "image": "https://media.api-sports.io/teams/5.png"
     },
     "awayTeam": {
       "score": "",
       "name": "South Korea",
-      "logo": "https://media.api-sports.io/teams/17.png"
+      "image": "https://media.api-sports.io/teams/17.png"
     }
   },
   {
@@ -169,12 +169,12 @@
     "homeTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Panama",
-      "logo": "https://media.api-sports.io/teams/11.png"
+      "image": "https://media.api-sports.io/teams/11.png"
     }
   },
   {
@@ -183,12 +183,12 @@
     "homeTeam": {
       "score": "",
       "name": "Tunisia",
-      "logo": "https://media.api-sports.io/teams/28.png"
+      "image": "https://media.api-sports.io/teams/28.png"
     },
     "awayTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     }
   },
   {
@@ -197,12 +197,12 @@
     "homeTeam": {
       "score": "",
       "name": "Colombia",
-      "logo": "https://media.api-sports.io/teams/8.png"
+      "image": "https://media.api-sports.io/teams/8.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Japan",
-      "logo": "https://media.api-sports.io/teams/12.png"
+      "image": "https://media.api-sports.io/teams/12.png"
     }
   },
   {
@@ -211,12 +211,12 @@
     "homeTeam": {
       "score": "",
       "name": "Poland",
-      "logo": "https://media.api-sports.io/teams/24.png"
+      "image": "https://media.api-sports.io/teams/24.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Senegal",
-      "logo": "https://media.api-sports.io/teams/13.png"
+      "image": "https://media.api-sports.io/teams/13.png"
     }
   },
   {
@@ -225,12 +225,12 @@
     "homeTeam": {
       "score": "",
       "name": "Russia",
-      "logo": "https://media.api-sports.io/teams/4.png"
+      "image": "https://media.api-sports.io/teams/4.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Egypt",
-      "logo": "https://media.api-sports.io/teams/32.png"
+      "image": "https://media.api-sports.io/teams/32.png"
     }
   },
   {
@@ -239,12 +239,12 @@
     "homeTeam": {
       "score": "",
       "name": "Portugal",
-      "logo": "https://media.api-sports.io/teams/27.png"
+      "image": "https://media.api-sports.io/teams/27.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Morocco",
-      "logo": "https://media.api-sports.io/teams/31.png"
+      "image": "https://media.api-sports.io/teams/31.png"
     }
   },
   {
@@ -253,12 +253,12 @@
     "homeTeam": {
       "score": "",
       "name": "Uruguay",
-      "logo": "https://media.api-sports.io/teams/7.png"
+      "image": "https://media.api-sports.io/teams/7.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Saudi Arabia",
-      "logo": "https://media.api-sports.io/teams/23.png"
+      "image": "https://media.api-sports.io/teams/23.png"
     }
   },
   {
@@ -267,12 +267,12 @@
     "homeTeam": {
       "score": "",
       "name": "Iran",
-      "logo": "https://media.api-sports.io/teams/22.png"
+      "image": "https://media.api-sports.io/teams/22.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Spain",
-      "logo": "https://media.api-sports.io/teams/9.png"
+      "image": "https://media.api-sports.io/teams/9.png"
     }
   },
   {
@@ -281,12 +281,12 @@
     "homeTeam": {
       "score": "",
       "name": "Denmark",
-      "logo": "https://media.api-sports.io/teams/21.png"
+      "image": "https://media.api-sports.io/teams/21.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Australia",
-      "logo": "https://media.api-sports.io/teams/20.png"
+      "image": "https://media.api-sports.io/teams/20.png"
     }
   },
   {
@@ -295,12 +295,12 @@
     "homeTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Peru",
-      "logo": "https://media.api-sports.io/teams/30.png"
+      "image": "https://media.api-sports.io/teams/30.png"
     }
   },
   {
@@ -309,12 +309,12 @@
     "homeTeam": {
       "score": "",
       "name": "Argentina",
-      "logo": "https://media.api-sports.io/teams/26.png"
+      "image": "https://media.api-sports.io/teams/26.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     }
   },
   {
@@ -323,12 +323,12 @@
     "homeTeam": {
       "score": "",
       "name": "Brazil",
-      "logo": "https://media.api-sports.io/teams/6.png"
+      "image": "https://media.api-sports.io/teams/6.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Costa Rica",
-      "logo": "https://media.api-sports.io/teams/29.png"
+      "image": "https://media.api-sports.io/teams/29.png"
     }
   },
   {
@@ -337,12 +337,12 @@
     "homeTeam": {
       "score": "",
       "name": "Nigeria",
-      "logo": "https://media.api-sports.io/teams/19.png"
+      "image": "https://media.api-sports.io/teams/19.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Iceland",
-      "logo": "https://media.api-sports.io/teams/18.png"
+      "image": "https://media.api-sports.io/teams/18.png"
     }
   },
   {
@@ -351,12 +351,12 @@
     "homeTeam": {
       "score": "",
       "name": "Serbia",
-      "logo": "https://media.api-sports.io/teams/14.png"
+      "image": "https://media.api-sports.io/teams/14.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Switzerland",
-      "logo": "https://media.api-sports.io/teams/15.png"
+      "image": "https://media.api-sports.io/teams/15.png"
     }
   },
   {
@@ -365,12 +365,12 @@
     "homeTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Tunisia",
-      "logo": "https://media.api-sports.io/teams/28.png"
+      "image": "https://media.api-sports.io/teams/28.png"
     }
   },
   {
@@ -379,12 +379,12 @@
     "homeTeam": {
       "score": "",
       "name": "South Korea",
-      "logo": "https://media.api-sports.io/teams/17.png"
+      "image": "https://media.api-sports.io/teams/17.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Mexico",
-      "logo": "https://media.api-sports.io/teams/16.png"
+      "image": "https://media.api-sports.io/teams/16.png"
     }
   },
   {
@@ -393,12 +393,12 @@
     "homeTeam": {
       "score": "",
       "name": "Germany",
-      "logo": "https://media.api-sports.io/teams/25.png"
+      "image": "https://media.api-sports.io/teams/25.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Sweden",
-      "logo": "https://media.api-sports.io/teams/5.png"
+      "image": "https://media.api-sports.io/teams/5.png"
     }
   },
   {
@@ -407,12 +407,12 @@
     "homeTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Panama",
-      "logo": "https://media.api-sports.io/teams/11.png"
+      "image": "https://media.api-sports.io/teams/11.png"
     }
   },
   {
@@ -421,12 +421,12 @@
     "homeTeam": {
       "score": "",
       "name": "Japan",
-      "logo": "https://media.api-sports.io/teams/12.png"
+      "image": "https://media.api-sports.io/teams/12.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Senegal",
-      "logo": "https://media.api-sports.io/teams/13.png"
+      "image": "https://media.api-sports.io/teams/13.png"
     }
   },
   {
@@ -435,12 +435,12 @@
     "homeTeam": {
       "score": "",
       "name": "Poland",
-      "logo": "https://media.api-sports.io/teams/24.png"
+      "image": "https://media.api-sports.io/teams/24.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Colombia",
-      "logo": "https://media.api-sports.io/teams/8.png"
+      "image": "https://media.api-sports.io/teams/8.png"
     }
   },
   {
@@ -449,12 +449,12 @@
     "homeTeam": {
       "score": "",
       "name": "Uruguay",
-      "logo": "https://media.api-sports.io/teams/7.png"
+      "image": "https://media.api-sports.io/teams/7.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Russia",
-      "logo": "https://media.api-sports.io/teams/4.png"
+      "image": "https://media.api-sports.io/teams/4.png"
     }
   },
   {
@@ -463,12 +463,12 @@
     "homeTeam": {
       "score": "",
       "name": "Saudi Arabia",
-      "logo": "https://media.api-sports.io/teams/23.png"
+      "image": "https://media.api-sports.io/teams/23.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Egypt",
-      "logo": "https://media.api-sports.io/teams/32.png"
+      "image": "https://media.api-sports.io/teams/32.png"
     }
   },
   {
@@ -477,12 +477,12 @@
     "homeTeam": {
       "score": "",
       "name": "Iran",
-      "logo": "https://media.api-sports.io/teams/22.png"
+      "image": "https://media.api-sports.io/teams/22.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Portugal",
-      "logo": "https://media.api-sports.io/teams/27.png"
+      "image": "https://media.api-sports.io/teams/27.png"
     }
   },
   {
@@ -491,12 +491,12 @@
     "homeTeam": {
       "score": "",
       "name": "Spain",
-      "logo": "https://media.api-sports.io/teams/9.png"
+      "image": "https://media.api-sports.io/teams/9.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Morocco",
-      "logo": "https://media.api-sports.io/teams/31.png"
+      "image": "https://media.api-sports.io/teams/31.png"
     }
   },
   {
@@ -505,12 +505,12 @@
     "homeTeam": {
       "score": "",
       "name": "Denmark",
-      "logo": "https://media.api-sports.io/teams/21.png"
+      "image": "https://media.api-sports.io/teams/21.png"
     },
     "awayTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     }
   },
   {
@@ -519,12 +519,12 @@
     "homeTeam": {
       "score": "",
       "name": "Australia",
-      "logo": "https://media.api-sports.io/teams/20.png"
+      "image": "https://media.api-sports.io/teams/20.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Peru",
-      "logo": "https://media.api-sports.io/teams/30.png"
+      "image": "https://media.api-sports.io/teams/30.png"
     }
   },
   {
@@ -533,12 +533,12 @@
     "homeTeam": {
       "score": "",
       "name": "Nigeria",
-      "logo": "https://media.api-sports.io/teams/19.png"
+      "image": "https://media.api-sports.io/teams/19.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Argentina",
-      "logo": "https://media.api-sports.io/teams/26.png"
+      "image": "https://media.api-sports.io/teams/26.png"
     }
   },
   {
@@ -547,12 +547,12 @@
     "homeTeam": {
       "score": "",
       "name": "Iceland",
-      "logo": "https://media.api-sports.io/teams/18.png"
+      "image": "https://media.api-sports.io/teams/18.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     }
   },
   {
@@ -561,12 +561,12 @@
     "homeTeam": {
       "score": "",
       "name": "South Korea",
-      "logo": "https://media.api-sports.io/teams/17.png"
+      "image": "https://media.api-sports.io/teams/17.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Germany",
-      "logo": "https://media.api-sports.io/teams/25.png"
+      "image": "https://media.api-sports.io/teams/25.png"
     }
   },
   {
@@ -575,12 +575,12 @@
     "homeTeam": {
       "score": "",
       "name": "Mexico",
-      "logo": "https://media.api-sports.io/teams/16.png"
+      "image": "https://media.api-sports.io/teams/16.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Sweden",
-      "logo": "https://media.api-sports.io/teams/5.png"
+      "image": "https://media.api-sports.io/teams/5.png"
     }
   },
   {
@@ -589,12 +589,12 @@
     "homeTeam": {
       "score": "",
       "name": "Serbia",
-      "logo": "https://media.api-sports.io/teams/14.png"
+      "image": "https://media.api-sports.io/teams/14.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Brazil",
-      "logo": "https://media.api-sports.io/teams/6.png"
+      "image": "https://media.api-sports.io/teams/6.png"
     }
   },
   {
@@ -603,12 +603,12 @@
     "homeTeam": {
       "score": "",
       "name": "Switzerland",
-      "logo": "https://media.api-sports.io/teams/15.png"
+      "image": "https://media.api-sports.io/teams/15.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Costa Rica",
-      "logo": "https://media.api-sports.io/teams/29.png"
+      "image": "https://media.api-sports.io/teams/29.png"
     }
   },
   {
@@ -617,12 +617,12 @@
     "homeTeam": {
       "score": "",
       "name": "Japan",
-      "logo": "https://media.api-sports.io/teams/12.png"
+      "image": "https://media.api-sports.io/teams/12.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Poland",
-      "logo": "https://media.api-sports.io/teams/24.png"
+      "image": "https://media.api-sports.io/teams/24.png"
     }
   },
   {
@@ -631,12 +631,12 @@
     "homeTeam": {
       "score": "",
       "name": "Senegal",
-      "logo": "https://media.api-sports.io/teams/13.png"
+      "image": "https://media.api-sports.io/teams/13.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Colombia",
-      "logo": "https://media.api-sports.io/teams/8.png"
+      "image": "https://media.api-sports.io/teams/8.png"
     }
   },
   {
@@ -645,12 +645,12 @@
     "homeTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     }
   },
   {
@@ -659,12 +659,12 @@
     "homeTeam": {
       "score": "",
       "name": "Panama",
-      "logo": "https://media.api-sports.io/teams/11.png"
+      "image": "https://media.api-sports.io/teams/11.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Tunisia",
-      "logo": "https://media.api-sports.io/teams/28.png"
+      "image": "https://media.api-sports.io/teams/28.png"
     }
   },
   {
@@ -673,12 +673,12 @@
     "homeTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Argentina",
-      "logo": "https://media.api-sports.io/teams/26.png"
+      "image": "https://media.api-sports.io/teams/26.png"
     }
   },
   {
@@ -687,12 +687,12 @@
     "homeTeam": {
       "score": "",
       "name": "Uruguay",
-      "logo": "https://media.api-sports.io/teams/7.png"
+      "image": "https://media.api-sports.io/teams/7.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Portugal",
-      "logo": "https://media.api-sports.io/teams/27.png"
+      "image": "https://media.api-sports.io/teams/27.png"
     }
   },
   {
@@ -701,12 +701,12 @@
     "homeTeam": {
       "score": "",
       "name": "Spain",
-      "logo": "https://media.api-sports.io/teams/9.png"
+      "image": "https://media.api-sports.io/teams/9.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Russia",
-      "logo": "https://media.api-sports.io/teams/4.png"
+      "image": "https://media.api-sports.io/teams/4.png"
     }
   },
   {
@@ -715,12 +715,12 @@
     "homeTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Denmark",
-      "logo": "https://media.api-sports.io/teams/21.png"
+      "image": "https://media.api-sports.io/teams/21.png"
     }
   },
   {
@@ -729,12 +729,12 @@
     "homeTeam": {
       "score": "",
       "name": "Brazil",
-      "logo": "https://media.api-sports.io/teams/6.png"
+      "image": "https://media.api-sports.io/teams/6.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Mexico",
-      "logo": "https://media.api-sports.io/teams/16.png"
+      "image": "https://media.api-sports.io/teams/16.png"
     }
   },
   {
@@ -743,12 +743,12 @@
     "homeTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Japan",
-      "logo": "https://media.api-sports.io/teams/12.png"
+      "image": "https://media.api-sports.io/teams/12.png"
     }
   },
   {
@@ -757,12 +757,12 @@
     "homeTeam": {
       "score": "",
       "name": "Sweden",
-      "logo": "https://media.api-sports.io/teams/5.png"
+      "image": "https://media.api-sports.io/teams/5.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Switzerland",
-      "logo": "https://media.api-sports.io/teams/15.png"
+      "image": "https://media.api-sports.io/teams/15.png"
     }
   },
   {
@@ -771,12 +771,12 @@
     "homeTeam": {
       "score": "",
       "name": "Colombia",
-      "logo": "https://media.api-sports.io/teams/8.png"
+      "image": "https://media.api-sports.io/teams/8.png"
     },
     "awayTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     }
   },
   {
@@ -785,12 +785,12 @@
     "homeTeam": {
       "score": "",
       "name": "Uruguay",
-      "logo": "https://media.api-sports.io/teams/7.png"
+      "image": "https://media.api-sports.io/teams/7.png"
     },
     "awayTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     }
   },
   {
@@ -799,12 +799,12 @@
     "homeTeam": {
       "score": "",
       "name": "Brazil",
-      "logo": "https://media.api-sports.io/teams/6.png"
+      "image": "https://media.api-sports.io/teams/6.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     }
   },
   {
@@ -813,12 +813,12 @@
     "homeTeam": {
       "score": "",
       "name": "Sweden",
-      "logo": "https://media.api-sports.io/teams/5.png"
+      "image": "https://media.api-sports.io/teams/5.png"
     },
     "awayTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     }
   },
   {
@@ -827,12 +827,12 @@
     "homeTeam": {
       "score": "",
       "name": "Russia",
-      "logo": "https://media.api-sports.io/teams/4.png"
+      "image": "https://media.api-sports.io/teams/4.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     }
   },
   {
@@ -841,12 +841,12 @@
     "homeTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     }
   },
   {
@@ -854,12 +854,12 @@
     "homeTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     },
     "awayTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     }
   },
   {
@@ -868,12 +868,12 @@
     "homeTeam": {
       "score": "",
       "name": "Belgium",
-      "logo": "https://media.api-sports.io/teams/1.png"
+      "image": "https://media.api-sports.io/teams/1.png"
     },
     "awayTeam": {
       "score": "",
       "name": "England",
-      "logo": "https://media.api-sports.io/teams/10.png"
+      "image": "https://media.api-sports.io/teams/10.png"
     }
   },
   {
@@ -881,12 +881,12 @@
     "homeTeam": {
       "score": "",
       "name": "France",
-      "logo": "https://media.api-sports.io/teams/2.png"
+      "image": "https://media.api-sports.io/teams/2.png"
     },
     "awayTeam": {
       "score": "",
       "name": "Croatia",
-      "logo": "https://media.api-sports.io/teams/3.png"
+      "image": "https://media.api-sports.io/teams/3.png"
     }
   }
 ]

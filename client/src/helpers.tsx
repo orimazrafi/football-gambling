@@ -4,3 +4,5 @@ export const imageIcon = `iconfinder_image_103588_ig40fo`;
 export const defualtImage = `Football-Free-Download-PNG_gvtfqq.png`;
 export const columns = ["", "Name", "Admin", "Password", "Participante", ""];
 export const BACKEND_URL = "http://localhost:8080";
+export const cloudinaryImageUrl =
+  "https://res.cloudinary.com/dyloyoawh/image/upload/v1585922209/";

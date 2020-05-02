@@ -17,9 +17,11 @@ import { ApolloProvider } from "react-apollo";
 import { ToastContainer } from "react-toastify";
 import { StylesProvider } from "@material-ui/styles";
 
+import { BestScorer } from "./Pages/BestScorer/BestScorer";
 import { BACKEND_URL } from "./helpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { WinningTeam } from "./Pages/WinningTeam/WinningTeam";
 const client = new ApolloClient({
   uri: BACKEND_URL,
   cache: new InMemoryCache({
@@ -49,6 +51,12 @@ const App = ({
                 <Route path="/" exact render={() => <HomePage auth={auth} />} />
                 {auth.isAuthenticated() && (
                   <Route path="/gamble" component={GamblingTable} />
+                )}
+                {auth.isAuthenticated() && (
+                  <Route path="/best-scorer" component={BestScorer} />
+                )}
+                {auth.isAuthenticated() && (
+                  <Route path="/winning-team" component={WinningTeam} />
                 )}
                 {auth.isAuthenticated() && (
                   <Route path="/score" component={ScoreTable} />

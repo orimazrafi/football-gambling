@@ -45,7 +45,7 @@ export const PasswordModal = (props: Props) => {
 
   const handleJoinGroup = () => {
     if (error.num === 5) {
-      auth.logout();
+      auth.imageut();
     }
     if (password === groupInput.password) onaddUser(groupInput);
     else

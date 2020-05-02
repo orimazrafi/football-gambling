@@ -12,3 +12,6 @@
     height: 65vh;
   }
 }
+.MuiTabs-flexContainer {
+  justify-content: space-around;
+}

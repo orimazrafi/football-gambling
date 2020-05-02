@@ -18,12 +18,18 @@ const add = async (name, image, numberOfMathces) =>
     games: [],
   });
 
-const addGamble = async (userId, leagueId, results) =>
+const addGamble = async (userId, leagueId, results, winningTeam, bestScorer) =>
   await Store.users().updateOne(
     {
       $and: [{ _id: ObjectId(userId) }, { "results._id": ObjectId(leagueId) }],
     },
-    { $set: { "results.games": results } }
+    {
+      $set: {
+        "results.games": results,
+        winningTeam,
+        bestScorer,
+      },
+    }
   );
 
 const updateGame = async (leagueId, eventDate, homeTeam, awayTeam) =>

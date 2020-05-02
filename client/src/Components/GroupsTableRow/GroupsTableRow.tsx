@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
 import { TableButton } from "../../elements/TableButton";
+import { cloudinaryImageUrl } from "../../helpers";
+
 interface Props {
   group: Group;
   onJoinGroupWithPasssword: (groupInput: any) => void;
@@ -23,7 +25,7 @@ export const GroupsTableRow = (props: Props) => {
     <TableRow key={group._id}>
       <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         <Image
-          src={`${process?.env.REACT_APP_CLOUDINARY_IMAGE}${group.image}`}
+          src={`${cloudinaryImageUrl}${group.image}`}
           alt={group.name}
           noboard="unset"
           margin="auto"

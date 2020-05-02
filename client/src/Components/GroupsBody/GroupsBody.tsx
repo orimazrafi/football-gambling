@@ -11,6 +11,7 @@ import { PasswordModal } from "../PasswordModal.tsx/PasswordModal";
 import { GroupsTableRow } from "../GroupsTableRow/GroupsTableRow";
 import { BACKEND_URL } from "../../helpers";
 import { TableBody } from "@material-ui/core";
+import { ADD_USER_TO_GROUP } from "../../mutations";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./GroupsBody.css";
 
@@ -122,29 +123,3 @@ export const GroupsBody: React.FC<{
     </TableBody>
   );
 };
-const ADD_USER_TO_GROUP = `
-  mutation addUserToGroup($userId: ID!, $groupId: ID!, $groupPassword: String) {
-    addUserToGroup(
-      userToGroup: {
-        userId: $userId
-        groupId: $groupId
-        groupPassword: $groupPassword
-      }
-    ) {
-      success
-      message
-      group{
-        _id
-      admin
-      name
-      maxParticipate
-      image
-      password
-      users {
-        _id
-        name
-      }
-    }
-    }
-  }
-`;

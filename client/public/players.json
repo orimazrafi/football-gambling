@@ -1,77 +1,77 @@
 [
   {
-    "fullname": "Jamie Vardy",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/30/1182.png",
+    "name": "Jamie Vardy",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/30/1182.png",
     "team": "Leicester City"
   },
   {
-    "fullname": "Pierre-Emerick Aubameyang",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/27/31739.png",
+    "name": "Pierre-Emerick Aubameyang",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/27/31739.png",
     "team": "Arsenal"
   },
   {
-    "fullname": "Daniel William John Ings",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/10/1450.png",
+    "name": "Daniel William John Ings",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/10/1450.png",
     "team": "Southampton"
   },
   {
-    "fullname": "Marcus Rashford",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/15/1359.png",
+    "name": "Marcus Rashford",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/15/1359.png",
     "team": "Manchester United"
   },
   {
-    "fullname": "Kevin Oghenetega Tamaraebi Bakumo-Abraham",
-    "image_path": "https://cdn.sportmonks.com/images//soccer/players/3/3139.png",
+    "name": "Kevin Oghenetega Tamaraebi Bakumo-Abraham",
+    "image": "https://cdn.sportmonks.com/images//soccer/players/3/3139.png",
     "team": "Chelsea"
   },
   {
-    "fullname": "Harry Kane",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/5/997.png",
+    "name": "Harry Kane",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/5/997.png",
     "team": "Tottenham Hotspur"
   },
   {
-    "fullname": "Sadio Mané",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/13/1389.png",
+    "name": "Sadio Mané",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/13/1389.png",
     "team": "Liverpool"
   },
   {
-    "fullname": "Raheem Shaquille Sterling",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/2/802.png",
+    "name": "Raheem Shaquille Sterling",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/2/802.png",
     "team": "Manchester City"
   },
   {
-    "fullname": "Mohamed Salah Ghaly",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/29/4125.png",
+    "name": "Mohamed Salah Ghaly",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/29/4125.png",
     "team": "Liverpool"
   },
   {
-    "fullname": "Gabriel Fernando de Jesus",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/17/5329.png",
+    "name": "Gabriel Fernando de Jesus",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/17/5329.png",
     "team": "Manchester City"
   },
   {
-    "fullname": "Teemu Pukki",
-    "image_path": "https://cdn.sportmonks.com/images//soccer/players/21/5141.png",
+    "name": "Teemu Pukki",
+    "image": "https://cdn.sportmonks.com/images//soccer/players/21/5141.png",
     "team": "Everton"
   },
   {
-    "fullname": "Southampton",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/30/1182.png",
+    "name": "Southampton",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/30/1182.png",
     "team": "Southampton"
   },
   {
-    "fullname": "Richarlison de Andrade",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/25/160217.png",
+    "name": "Richarlison de Andrade",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/25/160217.png",
     "team": "Wolverhampton Wanderers"
   },
   {
-    "fullname": "Anthony Martial",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/5/1829.png",
+    "name": "Anthony Martial",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/5/1829.png",
     "team": "Manchester United"
   },
   {
-    "fullname": "Chris Wood",
-    "image_path": "https://cdn.sportmonks.com/images/soccer/players/18/914.png",
+    "name": "Chris Wood",
+    "image": "https://cdn.sportmonks.com/images/soccer/players/18/914.png",
     "team": "Burnley"
   }
 ]

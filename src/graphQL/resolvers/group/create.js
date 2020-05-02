@@ -40,13 +40,12 @@ const createGroupResolver = async (obj, args, req) => {
     admin,
     league
   );
-
+  //push the monkey boot
   await GroupStore.update(res.ops[0]._id, "5e9ab80b36d4382cd60e29db");
 
   let leagueObject = await Store.findById("league", league);
 
   await UserStore.update(res.ops[0].admin, res.ops[0]._id, leagueObject);
-  //monkey
   await UserStore.update(
     "5e9ab80b36d4382cd60e29db",
     res.ops[0]._id,

@@ -5,6 +5,8 @@ const GambleInput = gql`
     userId: ID!
     leagueId: ID!
     results: [GameInput]
+    winningTeam: String
+    bestScorer: String
   }
 `;
 module.exports = GambleInput;

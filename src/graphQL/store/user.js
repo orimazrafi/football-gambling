@@ -14,7 +14,7 @@ const response = (success, message, response) => ({
 const create = async (name, email, image) =>
   await Store.users().insertOne({ name, email, image, groups: [] });
 
-const update = async (userId, groupId, leagueObject) =>
+const update = async (userId, groupId, leagueObject) => {
   await Store.users().updateOne(
     { _id: ObjectId(userId) },
     {
@@ -22,7 +22,15 @@ const update = async (userId, groupId, leagueObject) =>
       $set: { results: leagueObject },
     }
   );
+};
 const updateUserWithOutResult = async (userId, groupId) =>
+  await Store.users().updateOne(
+    { _id: ObjectId(userId) },
+    {
+      $push: { groups: { _id: groupId } },
+    }
+  );
+const updateUser = async (userId, groupId, league) =>
   await Store.users().updateOne(
     { _id: ObjectId(userId) },
     {
@@ -40,6 +48,7 @@ const pullFromUser = async (userId, groupId) =>
   );
 module.exports = {
   getAllUsers,
+  updateUser,
   create,
   findById,
   response,

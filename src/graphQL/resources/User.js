@@ -8,6 +8,8 @@ const User = gql`
     image: String!
     groups: [Group]
     results: League
+    winningTeam: String
+    bestScorer: String
   }
 `;
 module.exports = User;

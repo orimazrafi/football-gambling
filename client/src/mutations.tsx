@@ -1,8 +1,20 @@
 import gql from "graphql-tag";
 export const ADD_GAMBLE = gql`
-  mutation addGamble($userId: ID!, $leagueId: ID!, $results: [GameInput]) {
+  mutation addGamble(
+    $userId: ID!
+    $leagueId: ID!
+    $results: [GameInput]
+    $winningTeam: String
+    $bestScorer: String
+  ) {
     addGamble(
-      gamble: { userId: $userId, leagueId: $leagueId, results: $results }
+      gamble: {
+        userId: $userId
+        leagueId: $leagueId
+        results: $results
+        winningTeam: $winningTeam
+        bestScorer: $bestScorer
+      }
     ) {
       success
       message
@@ -16,15 +28,17 @@ export const ADD_GAMBLE = gql`
             homeTeam {
               name
               score
-              logo
+              image
             }
             awayTeam {
               name
               score
-              logo
+              image
             }
           }
         }
+        winningTeam
+        bestScorer
       }
     }
   }
@@ -86,3 +100,29 @@ export const CREATE_USER = `mutation createUser($name: String!, $email: String!,
 
   }
 }`;
+export const ADD_USER_TO_GROUP = `
+  mutation addUserToGroup($userId: ID!, $groupId: ID!, $groupPassword: String) {
+    addUserToGroup(
+      userToGroup: {
+        userId: $userId
+        groupId: $groupId
+        groupPassword: $groupPassword
+      }
+    ) {
+      success
+      message
+      group{
+        _id
+      admin
+      name
+      maxParticipate
+      image
+      password
+      users {
+        _id
+        name
+      }
+    }
+    }
+  }
+`;

@@ -27,6 +27,7 @@ export const ScoreTable = () => {
       },
     }
   );
+
   const [userScore, setUserScore] = useState<any>([]);
   const [score, setScore] = useState<any>();
   const checkForGamble = useCallback(
@@ -46,16 +47,16 @@ export const ScoreTable = () => {
         if (leagueHome > leagueAway) userScore.push(homeTeamWins(results));
         if (leagueAway > leagueHome) userScore.push(awayTeamWins(results));
       });
-
+      log(userScore);
       setUserScore((pre: any) => [...pre, ...userScore]);
     },
 
     [data]
   );
-
+  const [order, setOrder] = useState<any>([]);
   useEffect(() => {
     let userScoreDuplicate = userScore;
-    let b = userScoreDuplicate.reduce((acc: any, cur: any) => {
+    let data = userScoreDuplicate.reduce((acc: any, cur: any) => {
       const key = cur.id;
       if (acc[key]) {
         acc[key].score += cur.score;
@@ -72,7 +73,18 @@ export const ScoreTable = () => {
       }
       return acc;
     }, {});
-    setScore(b);
+    log("b", data);
+
+    var mappedHash = Object.keys(data)
+      .map((sortedKey) => {
+        return { id: sortedKey, ...data[sortedKey] };
+      })
+      .sort((a, b) => b.score - a.score);
+    let dataSort = [...mappedHash];
+    dataSort.sort((a: any, b: any) => b.score - a.score);
+    log("scores", dataSort);
+    setOrder(dataSort);
+    setScore(data);
     setLoadingScore(false);
   }, [userScore]);
   const handleTieGame = (results: any) => {
@@ -85,9 +97,10 @@ export const ScoreTable = () => {
     }
   };
   const homeTeamWins = (results: any) => {
+    log(results);
     if (results.userHome > results.userAway) {
       return results.leagueHome === results.userHome &&
-        results.leagueAway === results.leagueHome
+        results.leagueAway === results.userAway
         ? { id: results.id, score: 3, name: "bullseye" }
         : { id: results.id, score: 1, name: "direction" };
     } else {
@@ -146,6 +159,7 @@ export const ScoreTable = () => {
 
   return (
     <>
+      {console.log(data?.group?.users)}
       <h2>{data?.group?.name}</h2>
       {data?.group?.image && (
         <Image
@@ -161,45 +175,49 @@ export const ScoreTable = () => {
       {loadingTable ? (
         <LoadingText>loading Table...</LoadingText>
       ) : (
-        !loadingScore &&
-        data?.group?.users?.sort((a: any, b: any) => b.score - a.score) && (
+        !loadingScore && (
           <Container className="container">
-            {data.group.users.map((gambler: any, index: number) => (
-              <ScoreRow
-                className="item"
-                borderradius={handleClass(index)}
-                key={gambler._id}
-                onClick={() => {
-                  handleClick(
-                    gambler,
-                    data.group,
-                    score[gambler._id]?.score,
-                    score[gambler._id]?.bullseye
-                  );
-                }}
-              >
-                <div>{index + 1}.</div>
-                <Image
-                  noboard="1px solid black"
-                  margin="0"
-                  verticalalign="unset"
-                  height="30px"
-                  width="30px"
-                  src={gambler.image}
-                />
-                <ScoreItem>{gambler.name}</ScoreItem>
-                <ScoreItem>
-                  {" "}
-                  {Number(
-                    score[gambler._id]?.score /
-                      (gambler?.results?.games?.slice(0, 3).length * 3)
-                  ).toFixed(2)}
-                  %
-                </ScoreItem>
-                <ScoreItem>Bullseye {score[gambler._id]?.bullseye}</ScoreItem>
-                <ScoreItem>{score[gambler._id]?.score}</ScoreItem>
-              </ScoreRow>
-            ))}
+            {order.sort((a: any, b: any) => b.score - a.score) &&
+              data?.group?.users.map((gambler: any, index: number) => {
+                return (
+                  <ScoreRow
+                    className="item"
+                    borderradius={handleClass(index)}
+                    key={gambler._id}
+                    onClick={() => {
+                      handleClick(
+                        gambler,
+                        data.group,
+                        score[gambler._id]?.score,
+                        score[gambler._id]?.bullseye
+                      );
+                    }}
+                  >
+                    <div>{index + 1}.</div>
+                    <Image
+                      noboard="1px solid black"
+                      margin="0"
+                      verticalalign="unset"
+                      height="30px"
+                      width="30px"
+                      src={gambler.image}
+                    />
+                    <ScoreItem>{gambler.name}</ScoreItem>
+                    <ScoreItem>
+                      {" "}
+                      {Number(
+                        score[gambler._id]?.score /
+                          (gambler?.results?.games?.slice(0, 3).length * 3)
+                      ).toFixed(2)}
+                      %
+                    </ScoreItem>
+                    <ScoreItem>
+                      Bullseye {score[gambler._id]?.bullseye}
+                    </ScoreItem>
+                    <ScoreItem>{score[gambler._id]?.score}</ScoreItem>
+                  </ScoreRow>
+                );
+              })}
           </Container>
         )
       )}

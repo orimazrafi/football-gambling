@@ -6,7 +6,7 @@ import { request } from "graphql-request";
 import { reduxGetGroups } from "../../Features/Group/GroupSlice";
 import { toast } from "react-toastify";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
-
+import { FETCH_GROUPS } from "../../queries";
 import { LoadingText } from "../../elements/LoadingText";
 import { InputAndButtonWrapper } from "../../elements/InputAndButtonWrapper";
 import { columns, BACKEND_URL } from "../../helpers";
@@ -75,23 +75,3 @@ export const Groups: React.FC<any> = ({ auth }) => {
     </>
   );
 };
-
-const FETCH_GROUPS = `
-  {
-    groups {
-      _id
-      image
-      name
-      password
-      admin
-      maxParticipate
-      users {
-        _id
-        name
-      }
-      league{
-        _id
-      }
-    }
-  }
-`;

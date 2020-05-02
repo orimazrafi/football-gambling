@@ -6,22 +6,34 @@ export const FETCH_USER_RESULT = gql`
       success
       message
       user {
+        _id
+        winningTeam
+        bestScorer
         results {
           _id
           name
           image
           numberOfMathces
+          teams {
+            name
+            image
+          }
+          players {
+            name
+            image
+            team
+          }
           games {
             eventDate
             homeTeam {
               name
               score
-              logo
+              image
             }
             awayTeam {
               name
               score
-              logo
+              image
             }
           }
         }
@@ -44,12 +56,12 @@ export const FETCH_LEAGUE_RESULT = gql`
           homeTeam {
             name
             score
-            logo
+            image
           }
           awayTeam {
             name
             score
-            logo
+            image
           }
         }
       }
@@ -64,6 +76,7 @@ export const FETCH_LEAGUES = gql`
     }
   }
 `;
+
 export const FETCH_GROUP = gql`
   query group($groupId: ID, $userId: ID) {
     group(groupId: $groupId, userId: $userId) {
@@ -78,7 +91,28 @@ export const FETCH_GROUP = gql`
   }
 `;
 
-export const FETCH_USER_GROUP_LEAGUE_RESULTS = gql`
+export const FETCH_LEAGUE_TEAMS_AND_PLAYERS = gql`
+  query league($leagueId: ID) {
+    league(leagueId: $leagueId) {
+      success
+      message
+      league {
+        name
+        teams {
+          name
+          score
+          image
+        }
+        optionalScorers {
+          name
+          image
+          team
+        }
+      }
+    }
+  }
+`;
+export const FETCH_USER_GROUP_LEAGUE_RESULTS: any = gql`
   query group($groupId: ID, $userId: ID) {
     group(groupId: $groupId, userId: $userId) {
       name
@@ -93,12 +127,12 @@ export const FETCH_USER_GROUP_LEAGUE_RESULTS = gql`
             homeTeam {
               name
               score
-              logo
+              image
             }
             awayTeam {
               name
               score
-              logo
+              image
             }
           }
         }
@@ -146,3 +180,23 @@ export const FETCH_USER = `query getUserId($name: String!, $email: String!, $ima
 
   }
 }`;
+
+export const FETCH_GROUPS = `
+  {
+    groups {
+      _id
+      image
+      name
+      password
+      admin
+      maxParticipate
+      users {
+        _id
+        name
+      }
+      league{
+        _id
+      }
+    }
+  }
+`;

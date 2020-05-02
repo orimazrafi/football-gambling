@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { Image } from "../../elements/Image";
 import moment from "moment";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 
 const theme = {
   marginRight: "auto",
@@ -21,6 +22,13 @@ export const Navbar = ({
       image: string;
     }
   | any) => {
+  const { user } = useSelector(
+    (state: {
+      user: {
+        user: { _id: string; results: { name: ""; image: "" } };
+      };
+    }) => state.user
+  );
   // eslint-disable-next-line
   const log = console.log;
   const { pathname } = useLocation();
@@ -79,7 +87,53 @@ export const Navbar = ({
       {pageLoaction !== "secret" && (
         <>
           <div className="header">
-            <h1>{pageLoaction}</h1>
+            {pageLoaction === "gamble" ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "2em auto",
+                }}
+              >
+                <div>
+                  <img
+                    src={user.results.image}
+                    alt={user.results.name}
+                    height="100"
+                    width="100"
+                  />
+                </div>
+                <div>
+                  <h1 style={{ fontSize: "2.5em" }}>{pageLoaction}</h1>
+                </div>
+                <div>
+                  <img
+                    src={user.results.image}
+                    alt={user.results.name}
+                    height="100"
+                    width="100"
+                  />
+                </div>
+              </div>
+            ) : (
+              <h1>{pageLoaction}</h1>
+            )}{" "}
+            {/* {pageLoaction === "gamble" && (
+              <>
+                <span>{user.results.name} League</span>
+                {
+                  <Image
+                    src={user.results.image}
+                    alt={user.results.name}
+                    noboard="unset"
+                    margin="1em auto 2em auto"
+                    verticalalign="middle"
+                    height="60px"
+                    width="60px"
+                  />
+                }
+              </>
+            )} */}
             <pre className="header__watch">{m.format("ddd, hA")}</pre>
           </div>
           <hr />

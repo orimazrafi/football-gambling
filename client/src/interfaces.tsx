@@ -47,5 +47,5 @@ export interface Game {
 export interface Team {
   name: string;
   score: string;
-  logo: string;
+  image: string;
 }

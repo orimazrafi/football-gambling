@@ -1,8 +1,15 @@
 const UserStore = require("../../store/user");
 const LeagueStore = require("../../store/league");
 const addGambleResolver = async (obj, args, req) => {
-  const { userId, leagueId, results } = args.gamble;
-  await LeagueStore.addGamble(userId, leagueId, results);
+  const { userId, leagueId, results, winningTeam, bestScorer } = args.gamble;
+  console.log(leagueId, results);
+  await LeagueStore.addGamble(
+    userId,
+    leagueId,
+    results,
+    winningTeam,
+    bestScorer
+  );
   let res = await UserStore.findById(userId);
   return UserStore.response(true, "gamble was added", res);
 };

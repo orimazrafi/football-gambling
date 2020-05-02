@@ -20,7 +20,7 @@ const handleTieGame = (results: any) => {
 const homeTeamWins = (results: any) => {
   if (results.userHome > results.userAway) {
     return results.leagueHome === results.userHome &&
-      results.leagueAway === results.leagueHome
+      results.leagueAway === results.leagueAway
       ? 3
       : 1;
   } else {
@@ -30,7 +30,7 @@ const homeTeamWins = (results: any) => {
 const awayTeamWins = (results: any) => {
   if (results.userAway > results.userHome) {
     return results.leagueHome === results.userHome &&
-      results.leagueAway === results.leagueHome
+      results.leagueAway === results.leagueAway
       ? 3
       : 1;
   } else {
@@ -58,7 +58,7 @@ export const OpponentsBody = (props: Props) => {
   const { gambler, group } = props;
   return (
     <TableBody>
-      {gambler.results.games.slice(0, 1).map((match: Game, index: number) => {
+      {gambler.results.games.slice(0, 5).map((match: Game, index: number) => {
         return (
           <TableRow hover key={Math.random()}>
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
@@ -66,7 +66,7 @@ export const OpponentsBody = (props: Props) => {
             </GroupCell>
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
               <SmallImage
-                src={match.homeTeam.logo}
+                src={match.homeTeam.image}
                 alt={match.homeTeam.name}
               ></SmallImage>
               <p style={{ display: "inline-block" }}>{match.homeTeam.name}</p>
@@ -74,7 +74,7 @@ export const OpponentsBody = (props: Props) => {
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
               {match.awayTeam.name}
               <SmallImage
-                src={match.awayTeam.logo}
+                src={match.awayTeam.image}
                 alt={match.awayTeam.name}
               ></SmallImage>
             </GroupCell>
@@ -82,24 +82,24 @@ export const OpponentsBody = (props: Props) => {
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
               {" "}
               <SmallImage
-                src={match.homeTeam.logo}
+                src={match.homeTeam.image}
                 alt={match.homeTeam.name}
               ></SmallImage>
               {" " + group.league.games[index].homeTeam.score} -
               {" " + group.league.games[index].awayTeam.score}
               <SmallImage
-                src={match.awayTeam.logo}
+                src={match.awayTeam.image}
                 alt={match.awayTeam.name}
               ></SmallImage>
             </GroupCell>
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
               <SmallImage
-                src={match.homeTeam.logo}
+                src={match.homeTeam.image}
                 alt={match.homeTeam.name}
               ></SmallImage>
               {match.homeTeam.score}- {match.awayTeam.score}
               <SmallImage
-                src={match.awayTeam.logo}
+                src={match.awayTeam.image}
                 alt={match.awayTeam.name}
               ></SmallImage>
             </GroupCell>
