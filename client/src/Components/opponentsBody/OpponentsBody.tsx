@@ -20,7 +20,7 @@ const handleTieGame = (results: any) => {
 const homeTeamWins = (results: any) => {
   if (results.userHome > results.userAway) {
     return results.leagueHome === results.userHome &&
-      results.leagueAway === results.leagueAway
+      results.leagueAway === results.userAway
       ? 3
       : 1;
   } else {
@@ -30,7 +30,7 @@ const homeTeamWins = (results: any) => {
 const awayTeamWins = (results: any) => {
   if (results.userAway > results.userHome) {
     return results.leagueHome === results.userHome &&
-      results.leagueAway === results.leagueAway
+      results.leagueAway === results.userAway
       ? 3
       : 1;
   } else {

@@ -10,6 +10,7 @@ import { LoadingText } from "../../elements/LoadingText";
 import { Container } from "@material-ui/core";
 import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
 import "./ScoreTable.css";
+import * as R from "ramda";
 // eslint-disable-next-line
 const log = console.log;
 // interface Data {
@@ -47,7 +48,6 @@ export const ScoreTable = () => {
         if (leagueHome > leagueAway) userScore.push(homeTeamWins(results));
         if (leagueAway > leagueHome) userScore.push(awayTeamWins(results));
       });
-      log(userScore);
       setUserScore((pre: any) => [...pre, ...userScore]);
     },
 
@@ -56,35 +56,46 @@ export const ScoreTable = () => {
   const [order, setOrder] = useState<any>([]);
   useEffect(() => {
     let userScoreDuplicate = userScore;
-    let data = userScoreDuplicate.reduce((acc: any, cur: any) => {
-      const key = cur.id;
-      if (acc[key]) {
-        acc[key].score += cur.score;
-        if (cur.name === "bullseye") {
-          acc[key].bullseye
-            ? (acc[key].bullseye += 1)
-            : (acc[key].bullseye = 1);
+    let reduceUserScoreById = userScoreDuplicate.reduce(
+      (acc: any, cur: any) => {
+        const key = cur.id;
+        if (acc[key]) {
+          acc[key].score += cur.score;
+          if (cur.name === "bullseye") {
+            acc[key].bullseye
+              ? (acc[key].bullseye += 1)
+              : (acc[key].bullseye = 1);
+          }
+        } else {
+          acc[key] = { score: cur.score, bullseye: 0 };
+          if (cur.name === "bullseye") {
+            acc[key].bullseye = 1;
+          }
         }
-      } else {
-        acc[key] = { score: cur.score, bullseye: 0 };
-        if (cur.name === "bullseye") {
-          acc[key].bullseye = 1;
-        }
+        return acc;
+      },
+      {}
+    );
+    const reduceScoreAndIdArray = Object.keys(reduceUserScoreById).map(
+      (sortedKey) => {
+        return { id: sortedKey, ...reduceUserScoreById[sortedKey] };
       }
-      return acc;
-    }, {});
-    log("b", data);
+    );
+    const sortedArray = [...reduceScoreAndIdArray].sort((a: any, b: any) => {
+      let af = a.score;
+      let bf = b.score;
+      let as = a.bullseye;
+      let bs = b.bullseye;
 
-    var mappedHash = Object.keys(data)
-      .map((sortedKey) => {
-        return { id: sortedKey, ...data[sortedKey] };
-      })
-      .sort((a, b) => b.score - a.score);
-    let dataSort = [...mappedHash];
-    dataSort.sort((a: any, b: any) => b.score - a.score);
-    log("scores", dataSort);
-    setOrder(dataSort);
-    setScore(data);
+      if (af === bf) {
+        return as < bs ? 1 : as > bs ? -1 : 0;
+      } else {
+        return af < bf ? 1 : -1;
+      }
+    });
+    const sortedUserId = [...sortedArray].map((a) => a.id);
+    setOrder(sortedUserId);
+    setScore(reduceUserScoreById);
     setLoadingScore(false);
   }, [userScore]);
   const handleTieGame = (results: any) => {
@@ -97,7 +108,6 @@ export const ScoreTable = () => {
     }
   };
   const homeTeamWins = (results: any) => {
-    log(results);
     if (results.userHome > results.userAway) {
       return results.leagueHome === results.userHome &&
         results.leagueAway === results.userAway
@@ -159,7 +169,6 @@ export const ScoreTable = () => {
 
   return (
     <>
-      {console.log(data?.group?.users)}
       <h2>{data?.group?.name}</h2>
       {data?.group?.image && (
         <Image
@@ -177,8 +186,10 @@ export const ScoreTable = () => {
       ) : (
         !loadingScore && (
           <Container className="container">
-            {order.sort((a: any, b: any) => b.score - a.score) &&
-              data?.group?.users.map((gambler: any, index: number) => {
+            {order.length > 0 &&
+              R.sortBy(R.pipe(R.prop("_id"), R.indexOf(R.__, order) as any))(
+                data?.group?.users
+              ).map((gambler: any, index: number) => {
                 return (
                   <ScoreRow
                     className="item"
