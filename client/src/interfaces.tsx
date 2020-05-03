@@ -22,6 +22,14 @@ export interface GroupWithId {
   image?: string;
   users?: User[];
 }
+export interface GroupInput {
+  name: string;
+  userId: string;
+  groupId: string;
+  password: string;
+  image: string;
+}
+
 export interface GroupBlur {
   name: boolean;
   passwordConfirm: boolean;
@@ -48,4 +56,36 @@ export interface Team {
   name: string;
   score: string;
   image: string;
+}
+export interface UserScore {
+  id: string;
+  score: number;
+  name: string;
+}
+export interface UserResults {
+  _id: string;
+  image: string;
+  name: string;
+  results: {
+    games: Game[];
+  };
+}
+export interface GroupUsersAndLeague {
+  image: string;
+  name: string;
+  league: {
+    image: string;
+    name: string;
+    games: Game[];
+  };
+  users: {
+    _id: string;
+    image: string;
+    name: string;
+    results: Game[];
+  };
+}
+export interface UserGames {
+  id: string;
+  games: Game[];
 }

@@ -4,10 +4,11 @@ import Table from "@material-ui/core/Table";
 import { GenericTableHead } from "../GenericTableHead/GenericTableHead";
 
 import { TableWrapper } from "../../elements/TableWrapper";
+import { Group } from "../../interfaces";
 interface Props {
-  columns: any;
+  columns: string[];
   auth: any;
-  groups: any;
+  groups: Group[];
 }
 export const GroupsTable = (props: Props) => {
   const { columns, auth, groups } = props;

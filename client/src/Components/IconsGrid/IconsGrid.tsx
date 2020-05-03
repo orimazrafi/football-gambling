@@ -8,8 +8,8 @@ interface Props {
   image: string;
   name: string;
   teamName: string;
-  value: any;
-  onChange: any;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export const IconsGrid = (props: Props) => {
   const { image, name, value, onChange, teamName } = props;

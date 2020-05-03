@@ -2,7 +2,6 @@ const UserStore = require("../../store/user");
 const LeagueStore = require("../../store/league");
 const addGambleResolver = async (obj, args, req) => {
   const { userId, leagueId, results, winningTeam, bestScorer } = args.gamble;
-  console.log(leagueId, results);
   await LeagueStore.addGamble(
     userId,
     leagueId,

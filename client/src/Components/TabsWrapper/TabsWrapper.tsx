@@ -22,7 +22,7 @@ function TabPanel(props: any) {
   );
 }
 
-function a11yProps(index: any) {
+function a11yProps(index: number) {
   return {
     id: `scrollable-auto-tab-${index}`,
     "aria-controls": `scrollable-auto-tabpanel-${index}`,
@@ -30,8 +30,8 @@ function a11yProps(index: any) {
 }
 
 interface Props {
-  value: any;
-  onTabChange: any;
+  value: number;
+  onTabChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
 }
 export const TabsWrapper = (props: Props) => {
   const {

@@ -3,6 +3,7 @@ import { ModalDialog } from "../../elements/ModalDialog";
 import { Input } from "../../elements/Input";
 import { SuccessButton } from "../../elements/SuccessButton";
 import Card from "@material-ui/core/Card";
+import { GroupInput } from "../../interfaces";
 
 // eslint-disable-next-line
 const log = console.log;
@@ -10,9 +11,9 @@ const log = console.log;
 interface Props {
   onClose: () => void;
   modalIsOpen: boolean;
-  groupInput: any;
+  groupInput: GroupInput;
   auth: any;
-  onaddUser: (group: any) => void;
+  onaddUser: (group: GroupInput) => void;
   resetModal: boolean;
 }
 export const PasswordModal = (props: Props) => {

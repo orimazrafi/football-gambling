@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { Game } from "../../interfaces";
-
 import { LoadingText } from "../../elements/LoadingText";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { FETCH_USER_RESULT } from "../../queries";
@@ -40,7 +38,6 @@ export const GamblingTable = () => {
 
   useEffect(() => {
     const setUser = async () => {
-      log(data);
       await dispatch(reduxSetUser(data.getUser.user));
       toast.success(data.getUser.message);
     };
@@ -49,12 +46,11 @@ export const GamblingTable = () => {
         setUser();
       }
     }
-  }, [loadingLeague, data]);
+  }, [loadingLeague, data, dispatch]);
 
   const [addGamble, { loading: loadingForGamble }] = useMutation(ADD_GAMBLE, {
     update(proxy, { data }) {
       if (data.addGamble.success) {
-        // setGames(() => data.addGamble.user.results.games);
         return toast.success(data.addGamble.message);
       }
       return toast.error(data.addGamble.message);
@@ -70,7 +66,6 @@ export const GamblingTable = () => {
 
   const handleSave = () => {
     addGamble();
-    log(user.results);
   };
 
   const [tab, setTab] = React.useState(0);

@@ -4,6 +4,7 @@ import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import { GenericTableHead } from "../GenericTableHead/GenericTableHead";
 import { OpponentsBody } from "../opponentsBody/OpponentsBody";
+import { UserResults } from "../../interfaces";
 const columns = [
   "status",
   "home team",
@@ -14,13 +15,12 @@ const columns = [
 ];
 
 interface Props {
-  gambler: any;
+  gambler: UserResults;
   group: any;
 }
 
 export const OpponentsTable = (props: Props) => {
   const { gambler, group } = props;
-
   return (
     <Paper>
       <TableContainer>

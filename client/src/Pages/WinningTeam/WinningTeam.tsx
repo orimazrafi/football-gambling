@@ -19,12 +19,10 @@ export const WinningTeam = (props: Props) => {
     }) => state.user
   );
 
-  // const [winningTeam, setTeam] = useState("Saudi Arabia");
   const handleTeamChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     await dispatch(reduxSetTeam(value));
   };
-  // const { teams, team: winningTeam, onTeamChange } = props;
 
   return (
     <div className="gambling-table">

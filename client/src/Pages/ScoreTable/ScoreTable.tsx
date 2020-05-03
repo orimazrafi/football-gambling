@@ -2,8 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { Image } from "../../elements/Image";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-// import { Group } from "../../interfaces";
-// import { User } from "../../interfaces";
+
 import { ScoreRow } from "../../elements/ScoreRow";
 import { ScoreItem } from "../../elements/ScoreItem";
 import { LoadingText } from "../../elements/LoadingText";
@@ -11,6 +10,10 @@ import { Container } from "@material-ui/core";
 import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
 import "./ScoreTable.css";
 import * as R from "ramda";
+
+import { UseSortAndCaculateByPoints } from "../../Hooks/UseSortAndCaculateByPoints";
+import { Group, UserScore, UserGames, UserResults } from "../../interfaces";
+import { UseCheckForGamble } from "../../Hooks/UseCheckForGamble";
 // eslint-disable-next-line
 const log = console.log;
 // interface Data {
@@ -29,125 +32,41 @@ export const ScoreTable = () => {
     }
   );
 
-  const [userScore, setUserScore] = useState<any>([]);
+  const [userScore, setUserScore] = useState<UserScore[]>([]);
   const [score, setScore] = useState<any>();
-  const checkForGamble = useCallback(
-    (user: any, id: string) => {
-      let userScore: any = [];
-      user.games.forEach((u: any, index: number) => {
-        let userHome = parseInt(u.homeTeam.score);
-        let userAway = parseInt(u.awayTeam.score);
-        let leagueHome = parseInt(
-          data.group.league.games[index].homeTeam.score
-        );
-        let leagueAway = parseInt(
-          data.group.league.games[index].awayTeam.score
-        );
-        let results = { id, userHome, userAway, leagueHome, leagueAway };
-        if (leagueHome === leagueAway) userScore.push(handleTieGame(results));
-        if (leagueHome > leagueAway) userScore.push(homeTeamWins(results));
-        if (leagueAway > leagueHome) userScore.push(awayTeamWins(results));
-      });
-      setUserScore((pre: any) => [...pre, ...userScore]);
-    },
-
-    [data]
-  );
   const [order, setOrder] = useState<any>([]);
   useEffect(() => {
-    let userScoreDuplicate = userScore;
-    let reduceUserScoreById = userScoreDuplicate.reduce(
-      (acc: any, cur: any) => {
-        const key = cur.id;
-        if (acc[key]) {
-          acc[key].score += cur.score;
-          if (cur.name === "bullseye") {
-            acc[key].bullseye
-              ? (acc[key].bullseye += 1)
-              : (acc[key].bullseye = 1);
-          }
-        } else {
-          acc[key] = { score: cur.score, bullseye: 0 };
-          if (cur.name === "bullseye") {
-            acc[key].bullseye = 1;
-          }
-        }
-        return acc;
-      },
-      {}
+    let [sortedUserId, reduceUserScoreById] = UseSortAndCaculateByPoints(
+      userScore
     );
-    const reduceScoreAndIdArray = Object.keys(reduceUserScoreById).map(
-      (sortedKey) => {
-        return { id: sortedKey, ...reduceUserScoreById[sortedKey] };
-      }
-    );
-    const sortedArray = [...reduceScoreAndIdArray].sort((a: any, b: any) => {
-      let af = a.score;
-      let bf = b.score;
-      let as = a.bullseye;
-      let bs = b.bullseye;
-
-      if (af === bf) {
-        return as < bs ? 1 : as > bs ? -1 : 0;
-      } else {
-        return af < bf ? 1 : -1;
-      }
-    });
-    const sortedUserId = [...sortedArray].map((a) => a.id);
     setOrder(sortedUserId);
     setScore(reduceUserScoreById);
     setLoadingScore(false);
   }, [userScore]);
-  const handleTieGame = (results: any) => {
-    if (results.userHome === results.userAway) {
-      return results.userHome === results.leagueHome
-        ? { id: results.id, score: 3, name: "bullseye" }
-        : { id: results.id, score: 1, name: "direction" };
-    } else {
-      return { id: results.id, score: 0, name: "none" };
-    }
-  };
-  const homeTeamWins = (results: any) => {
-    if (results.userHome > results.userAway) {
-      return results.leagueHome === results.userHome &&
-        results.leagueAway === results.userAway
-        ? { id: results.id, score: 3, name: "bullseye" }
-        : { id: results.id, score: 1, name: "direction" };
-    } else {
-      return { id: results.id, score: 0, name: "none" };
-    }
-  };
-  const awayTeamWins = (results: any) => {
-    if (results.userAway > results.userHome) {
-      return results.leagueHome === results.userHome &&
-        results.leagueAway === results.leagueHome
-        ? { id: results.id, score: 3, name: "bullseye" }
-        : { id: results.id, score: 1, name: "direction" };
-    } else {
-      return { id: results.id, score: 0, name: "none" };
-    }
-  };
+
   const mergeGamble = useCallback(
-    (users: any) => {
-      users.forEach((user: any) => {
-        checkForGamble(user, user.id);
+    (users: UserGames[]) => {
+      users.forEach((user: UserGames) => {
+        const [userScore] = UseCheckForGamble(data, user, user.id);
+        setUserScore((pre: UserScore[]) => [...pre, ...userScore]);
       });
     },
-    [checkForGamble]
+    [data]
   );
+
   const [loadingScore, setLoadingScore] = useState(true);
   useEffect(() => {
     setLoadingScore(true);
-    let users: any = [];
-    data?.group?.users.forEach((user: any) => {
+    let users: UserGames[] = [];
+    data?.group?.users.forEach((user: UserResults) => {
       users.push({ games: user.results.games.slice(0, 3), id: user._id });
     });
     mergeGamble(users);
   }, [data, mergeGamble]);
 
   const handleClick = (
-    gambler: any,
-    group: any,
+    gambler: UserResults,
+    group: Group,
     score: number,
     bullseye: number
   ) => {

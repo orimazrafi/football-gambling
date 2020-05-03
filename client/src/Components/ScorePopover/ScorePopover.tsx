@@ -2,9 +2,10 @@ import React from "react";
 import { ScoreList } from "../../Components/ScoreList/ScoreList";
 import Popover from "@material-ui/core/Popover";
 import { PrimaryButton } from "../../elements/PrimaryButton";
+import { GroupUsersAndLeague, UserResults } from "../../interfaces";
 interface Props {
-  group: any;
-  gambler: any;
+  group: GroupUsersAndLeague;
+  gambler: UserResults;
   score: number;
   bullseye: number;
 }

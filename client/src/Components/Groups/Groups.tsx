@@ -12,7 +12,7 @@ import { InputAndButtonWrapper } from "../../elements/InputAndButtonWrapper";
 import { columns, BACKEND_URL } from "../../helpers";
 import "./Groups.css";
 import { GroupsTable } from "../GroupsTable/GroupsTable";
-
+import { UseFilter } from "../../Hooks/UseFilter";
 // eslint-disable-next-line
 const log = console.log;
 export const Groups: React.FC<any> = ({ auth }) => {
@@ -41,12 +41,7 @@ export const Groups: React.FC<any> = ({ auth }) => {
     setName(value);
   };
 
-  const filteredArray = (groups: any) => {
-    return groups.filter((group: any) =>
-      group.name.toLowerCase().trim().includes(name.toLocaleLowerCase().trim())
-    );
-  };
-  groups = filteredArray(groups);
+  groups = UseFilter(groups, name);
 
   return (
     <>

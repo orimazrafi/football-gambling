@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import { Image } from "../../elements/Image";
 import { Game } from "../../interfaces";
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GambleWrapper } from "../../elements/GambleWrapper";
 import { GambleUnit } from "../../elements/GambleUnit";
 import { reduxSetUserGames } from "../../Features/User/UserSlice";
+// eslint-disable-next-line
 const log = console.log;
 export const MatchesGamble = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export const MatchesGamble = () => {
         user: {
           _id: string;
           results: {
-            games: any;
+            games: Game[];
           };
         };
       };
@@ -28,9 +29,6 @@ export const MatchesGamble = () => {
     index: number
   ) => {
     const { name, value } = e.target;
-    let gamesDuplicate = [...user.results.games];
-    log(gamesDuplicate[index][name]);
-    log(typeof value);
     if (parseInt(value) > 0 || parseInt(value) < 10) {
       await dispatch(reduxSetUserGames(index, name, value));
     }

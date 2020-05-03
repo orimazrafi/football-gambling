@@ -5,9 +5,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import "./ScoreList.css";
+import { UserResults, GroupUsersAndLeague } from "../../interfaces";
 interface Props {
-  group: any;
-  gambler: any;
+  group: GroupUsersAndLeague;
+  gambler: UserResults;
   score: number;
   bullseye: number;
 }

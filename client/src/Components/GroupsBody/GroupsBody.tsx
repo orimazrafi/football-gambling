@@ -12,6 +12,7 @@ import { GroupsTableRow } from "../GroupsTableRow/GroupsTableRow";
 import { BACKEND_URL } from "../../helpers";
 import { TableBody } from "@material-ui/core";
 import { ADD_USER_TO_GROUP } from "../../mutations";
+import { GroupInput } from "../../interfaces";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./GroupsBody.css";
 
@@ -31,8 +32,8 @@ export const GroupsBody: React.FC<{
   });
   const [resetModal, setResetModal] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const handleJoinGroupWithPasssword = (groupInput: any) => {
-    setGroupInput((prev: any) => ({
+  const handleJoinGroupWithPasssword = (groupInput: GroupInput) => {
+    setGroupInput((prev: GroupInput) => ({
       ...prev,
       name: groupInput.name,
       groupId: groupInput.groupId,
@@ -46,7 +47,7 @@ export const GroupsBody: React.FC<{
     setModalIsOpen(false);
     setResetModal(false);
   };
-  const handleJoinGroupWithOutPasssword = (group: any) => {
+  const handleJoinGroupWithOutPasssword = (group: GroupInput) => {
     confirmAlert({
       title: `Join the ${group.name}`,
       message: "Are you sure to do this?",
@@ -68,7 +69,7 @@ export const GroupsBody: React.FC<{
 
   const dispatch = useDispatch();
   const [loadingAddUserToGroup, setLoadingAddUserToGroup] = useState(false);
-  const addUserToGroup = (group: any) => {
+  const addUserToGroup = (group: GroupInput) => {
     setLoadingAddUserToGroup(true);
     const variables = {
       userId: localStorage.getItem("user_id") as string,

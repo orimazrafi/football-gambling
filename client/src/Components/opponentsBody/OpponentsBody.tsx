@@ -5,38 +5,22 @@ import { GroupCell } from "../../elements/GroupCell";
 import { Game } from "../../interfaces";
 
 import { SmallImage } from "../../elements/SmallImage";
+import { UseHomeTeamWins } from "../../Hooks/UseHomeTeamWins";
+import { UseAwayTeamWins } from "../../Hooks/UseAwayTeamWins";
+import { UseTieGame } from "../../Hooks/UseTieGame";
+// eslint-disable-next-line
+const log = console.log;
 interface Props {
   gambler: any;
   group: any;
 }
+interface Result {
+  userHome: number | string;
+  userAway: number | string;
+  leagueHome: number | string;
+  leagueAway: number | string;
+}
 
-const handleTieGame = (results: any) => {
-  if (results.userHome === results.userAway) {
-    return results.userHome === results.leagueHome ? 3 : 1;
-  } else {
-    return 0;
-  }
-};
-const homeTeamWins = (results: any) => {
-  if (results.userHome > results.userAway) {
-    return results.leagueHome === results.userHome &&
-      results.leagueAway === results.userAway
-      ? 3
-      : 1;
-  } else {
-    return 0;
-  }
-};
-const awayTeamWins = (results: any) => {
-  if (results.userAway > results.userHome) {
-    return results.leagueHome === results.userHome &&
-      results.leagueAway === results.userAway
-      ? 3
-      : 1;
-  } else {
-    return 0;
-  }
-};
 const handleClass = (c: any) => {
   let className = "";
   if (c === 1) return (className += "red");
@@ -44,15 +28,15 @@ const handleClass = (c: any) => {
   return "green";
 };
 
-const checkForGamble = (leagueResult: any, userResult: any) => {
+const checkForGamble = (leagueResult: Game, userResult: Game) => {
   let userHome = parseInt(userResult.homeTeam.score);
   let userAway = parseInt(userResult.awayTeam.score);
   let leagueHome = parseInt(leagueResult.homeTeam.score);
   let leagueAway = parseInt(leagueResult.awayTeam.score);
-  let results = { userHome, userAway, leagueHome, leagueAway };
-  if (leagueHome === leagueAway) return handleTieGame(results);
-  if (leagueHome > leagueAway) return homeTeamWins(results);
-  if (leagueAway > leagueHome) return awayTeamWins(results);
+  let result: Result = { userHome, userAway, leagueHome, leagueAway };
+  if (leagueHome === leagueAway) return UseTieGame(result);
+  if (leagueHome > leagueAway) return UseHomeTeamWins(result);
+  if (leagueAway > leagueHome) return UseAwayTeamWins(result);
 };
 export const OpponentsBody = (props: Props) => {
   const { gambler, group } = props;
