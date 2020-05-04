@@ -5,6 +5,7 @@ const Queries = gql`
     groups: [Group]!
     getUserId(user: UserInput): UserResponse!
     group(groupId: ID, userId: ID): Group
+    checkGroupNameExist(name: String!): GroupResponse!
     search(email: String!): UserSearchResponse!
     users: [User]!
     leagues: [League]

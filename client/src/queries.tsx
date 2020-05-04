@@ -68,6 +68,7 @@ export const FETCH_LEAGUE_RESULT = gql`
     }
   }
 `;
+
 export const FETCH_LEAGUES = gql`
   query {
     leagues {
@@ -87,6 +88,14 @@ export const FETCH_GROUP = gql`
         name
         image
       }
+    }
+  }
+`;
+export const CHECK_GROUP_NAME_EXIST = `
+  query checkGroupNameExist($name: String!) {
+    checkGroupNameExist(name: $name) {
+      success
+      message
     }
   }
 `;

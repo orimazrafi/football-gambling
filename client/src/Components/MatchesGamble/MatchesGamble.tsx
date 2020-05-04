@@ -90,8 +90,21 @@ export const MatchesGamble = () => {
         user.results.games.map((match: Game, index: number) => (
           <GambleWrapper key={Math.random()}>
             <GambleUnit width="25%">
-              {moment(match.eventDate).format("l")} (
-              {moment(match.eventDate).format("LT")})
+              {index < 3 ? (
+                //toDo moment how much time passed after the game was played
+                <span style={{ color: "#757575" }}>Played</span>
+              ) : (
+                <>
+                  {index === 3 ? (
+                    <span style={{ color: "red", fontWeight: "bold" }}>
+                      Today{" "}
+                    </span>
+                  ) : (
+                    <>{moment(match.eventDate).format("l")}</>
+                  )}
+                  ({moment(match.eventDate).format("LT")})
+                </>
+              )}
             </GambleUnit>
             <GambleUnit width="15%">{match.homeTeam.name}</GambleUnit>
             <Image
@@ -109,6 +122,7 @@ export const MatchesGamble = () => {
                 name="homeTeam"
                 style={{ width: "2vmax" }}
                 value={user.results.games[index].homeTeam.score}
+                disabled={index < 3}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleChange(e, index)
                 }
@@ -118,6 +132,7 @@ export const MatchesGamble = () => {
                 type="text"
                 name="awayTeam"
                 style={{ width: "2vmax" }}
+                disabled={index < 3}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleChange(e, index)
                 }
@@ -139,6 +154,7 @@ export const MatchesGamble = () => {
               color="primary"
               background="blue"
               backgroundhover="rgba(0, 0, 0, 0.12)"
+              disabled={index < 3}
               onClick={() => {
                 handleRandomGamble(index);
               }}

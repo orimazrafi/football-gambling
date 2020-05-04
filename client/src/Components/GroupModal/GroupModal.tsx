@@ -8,12 +8,14 @@ import { UseFormData } from "../../Hooks/UseFormData";
 import { UseCloudinaryUpload } from "../../Hooks/UseCloudinaryUpload";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
+import { CHECK_GROUP_NAME_EXIST } from "../../queries";
 import { GroupBlur } from "../../interfaces";
-import { imageIcon } from "../../helpers";
+import { imageIcon, BACKEND_URL } from "../../helpers";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
 import { RadioButton } from "../../elements/RadioButton";
 import { Radio, RadioGroup, MenuItem } from "@material-ui/core";
 import { SuccessButton } from "../../elements/SuccessButton";
+import request from "graphql-request";
 
 interface League {
   _id: string;
@@ -30,6 +32,7 @@ export interface SimpleDialogProps {
   data: any;
   loadingCreateGroup: any;
 }
+const log = console.log;
 export const GroupModal = (props: SimpleDialogProps) => {
   const {
     onClose,
@@ -73,6 +76,27 @@ export const GroupModal = (props: SimpleDialogProps) => {
     setImage(() => data.public_id);
     setLoadingImage(false);
   }, []);
+  const [groupName, setGroupName] = useState({
+    duplicate: false,
+    message: "",
+  });
+  useEffect(() => {
+    setGroupName({ duplicate: false, message: "" });
+  }, [open]);
+  const handleGroupName = (name: string) => {
+    setGroupName({ duplicate: false, message: "" });
+    const variables = { name };
+    request(BACKEND_URL, CHECK_GROUP_NAME_EXIST, variables).then(
+      async (groupResponse) => {
+        if (!groupResponse.checkGroupNameExist.success) {
+          setGroupName({
+            duplicate: true,
+            message: groupResponse.checkGroupNameExist.messsage,
+          });
+        }
+      }
+    );
+  };
 
   return (
     <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
@@ -107,12 +131,20 @@ export const GroupModal = (props: SimpleDialogProps) => {
               variant="outlined"
               fullWidth
               as={Input}
-              helperText={blur.name && errors["name"]}
+              helperText={
+                (blur.name && errors["name"]) ||
+                (groupName.duplicate && "Group name is already taken.")
+              }
               autoFocus={true}
               onBlur={(e: any) => {
+                handleGroupName(values["name"]);
                 setBlur((prev: GroupBlur) => ({ ...prev, name: true }));
               }}
-              error={blur.name && errors["name"] ? true : false}
+              error={
+                (blur.name && errors["name"]) || groupName.duplicate
+                  ? true
+                  : false
+              }
               InputLabelProps={{
                 shrink: true,
               }}
