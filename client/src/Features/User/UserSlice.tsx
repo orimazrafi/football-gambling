@@ -27,6 +27,9 @@ const user = createSlice({
     setPlayer: (state, action) => {
       state.user.bestScorer = action.payload;
     },
+    setRandomGame: (state, action) => {
+      state.user.results.games = action.payload;
+    },
     setGames: (state, action) => {
       let gamesDuplicate: any = state.user.results.games;
       gamesDuplicate[action.payload.index][action.payload.name].score =
@@ -36,7 +39,13 @@ const user = createSlice({
   },
 });
 
-export const { setUser, setGames, setTeam, setPlayer } = user.actions;
+export const {
+  setUser,
+  setGames,
+  setTeam,
+  setPlayer,
+  setRandomGame,
+} = user.actions;
 export default user.reducer;
 
 export const reduxSetUser = (user: any) => async (dispatch: AppDispatch) => {
@@ -52,6 +61,12 @@ export const reduxSetPlayer = (bestScorer: string) => async (
   dispatch: AppDispatch
 ) => {
   await dispatch(setPlayer(bestScorer));
+};
+
+export const ResuxSetRandomGame = (games: any) => async (
+  dispatch: AppDispatch
+) => {
+  await dispatch(setRandomGame(games));
 };
 export const reduxSetUserGames = (
   index: number,

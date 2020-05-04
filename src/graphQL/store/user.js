@@ -46,6 +46,21 @@ const pullFromUser = async (userId, groupId) =>
       },
     }
   );
+const addGamble = async (userId, leagueId, results, winningTeam, bestScorer) =>
+  await Store.users().updateOne(
+    {
+      $and: [{ _id: ObjectId(userId) }, { "results._id": ObjectId(leagueId) }],
+    },
+    {
+      $set: {
+        "results.games": results,
+        winningTeam,
+        bestScorer,
+      },
+    }
+  );
+const getRandomIndex = (arrayLeangth) =>
+  Math.floor(Math.random() * arrayLeangth);
 module.exports = {
   getAllUsers,
   updateUser,
@@ -56,4 +71,6 @@ module.exports = {
   update,
   updateUserWithOutResult,
   findByEmail,
+  getRandomIndex,
+  addGamble,
 };

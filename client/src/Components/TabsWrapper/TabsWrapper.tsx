@@ -34,11 +34,7 @@ interface Props {
   onTabChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
 }
 export const TabsWrapper = (props: Props) => {
-  const {
-    value,
-
-    onTabChange,
-  } = props;
+  const { value, onTabChange } = props;
   return (
     <div>
       <AppBar position="static" color="default">

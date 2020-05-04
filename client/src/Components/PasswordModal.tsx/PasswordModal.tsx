@@ -94,6 +94,7 @@ export const PasswordModal = (props: Props) => {
           variant="contained"
           color="primary"
           padding="0.75em 1.7em"
+          background="rgb(28, 184, 65)"
           onClick={handleJoinGroup}
         >
           Join

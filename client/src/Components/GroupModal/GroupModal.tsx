@@ -3,7 +3,6 @@ import { Dialog } from "@material-ui/core";
 import { H2 } from "../../elements/H2";
 import { Input } from "../../elements/Input";
 import { SmallText } from "../../elements/SmallText";
-// import { Button } from "../../elements/Button";
 import { DropzoneImage } from "../DropzoneImage/DropzoneImage";
 import { UseFormData } from "../../Hooks/UseFormData";
 import { UseCloudinaryUpload } from "../../Hooks/UseCloudinaryUpload";
@@ -16,9 +15,6 @@ import { RadioButton } from "../../elements/RadioButton";
 import { Radio, RadioGroup, MenuItem } from "@material-ui/core";
 import { SuccessButton } from "../../elements/SuccessButton";
 
-interface Data {
-  leagues: League[];
-}
 interface League {
   _id: string;
   name: string;
@@ -272,6 +268,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
                   color="primary"
                   type="submit"
                   padding="0.5em 1em"
+                  background="rgb(28, 184, 65)"
                 >
                   Save
                 </SuccessButton>

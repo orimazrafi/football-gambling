@@ -18,6 +18,7 @@ const GroupResponse = require("../resources/response/GroupResponse");
 const UserResponse = require("../resources/response/UserResponse");
 const UserSearchResponse = require("../resources/response/UserSearchResponse");
 const LeagueResponse = require("../resources/response/LeagueResponse");
+const RandomGambleInput = require("../resources/Input/RandomGambleInput");
 const { gql } = require("apollo-server");
 
 const typeDefs = gql`
@@ -35,6 +36,7 @@ const typeDefs = gql`
     ${LeagueInput},
     ${TeamInput},
     ${UserInput},
+    ${RandomGambleInput},
     ${UserToGroupInput},
     ${GambleUpdateResponse},
     ${GroupResponse},

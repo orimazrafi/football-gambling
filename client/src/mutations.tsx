@@ -43,6 +43,50 @@ export const ADD_GAMBLE = gql`
     }
   }
 `;
+export const ADD_RANDOM_GAMBLE = `
+  mutation addRandomGamble(
+    $userId: ID!
+    $leagueId: ID!
+    $gameIndex: Int!
+    $winningTeam: String
+    $bestScorer: String
+  ) {
+    addRandomGamble(
+      randomGamble: {
+        userId: $userId
+        leagueId: $leagueId
+        gameIndex: $gameIndex
+        winningTeam: $winningTeam
+        bestScorer: $bestScorer
+      }
+    ) {
+      success
+      message
+      user {
+        results {
+          name
+          image
+          numberOfMathces
+          games {
+            eventDate
+            homeTeam {
+              name
+              score
+              image
+            }
+            awayTeam {
+              name
+              score
+              image
+            }
+          }
+        }
+        winningTeam
+        bestScorer
+      }
+    }
+  }
+`;
 export const CREATE_GROUP = `
 mutation createGroup(
   $name: String!

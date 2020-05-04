@@ -10,6 +10,7 @@ const Mutations = gql`
     createLeague(league: LeagueInput): LeagueResponse!
     addGameToLeague(game: GameInput): Game!
     addGamble(gamble: GambleInput): UserResponse!
+    addRandomGamble(randomGamble: RandomGambleInput): UserResponse!
   }
 `;
 

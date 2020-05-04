@@ -10,9 +10,10 @@ const addUserToGroupResolver = require("./user/addUserToGroup");
 const deleteUserFromGroupResolver = require("./group/deleteUserFromGroup");
 const createLeagueResolver = require("../resolvers/league/create");
 const addGameToLeagueResolver = require("../resolvers/league/addGame");
-const addGambleResolver = require("../resolvers/league/addGamble");
+const addGambleResolver = require("../resolvers/user/addGamble");
 const userSearchResolver = require("../resolvers/user/search");
 const createUserResolver = require("../resolvers/user/create");
+const addRandomGambleResolver = require("../resolvers/user/addRandomGamble");
 const UserStore = require("../store/user");
 const LeagueStore = require("../store/league");
 const resolvers = {
@@ -34,6 +35,7 @@ const resolvers = {
     createLeague: createLeagueResolver,
     addGameToLeague: addGameToLeagueResolver,
     addGamble: addGambleResolver,
+    addRandomGamble: addRandomGambleResolver,
   },
   Group: {
     users: async (parent) => {

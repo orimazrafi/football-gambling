@@ -38,6 +38,7 @@ export const HomePage = ({ auth }: { auth: any }) => {
               variant="contained"
               color="primary"
               padding="0.75em 1.7em"
+              background="rgb(28, 184, 65)"
               onClick={auth.login}
             >
               login

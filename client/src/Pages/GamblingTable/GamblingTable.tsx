@@ -68,11 +68,10 @@ export const GamblingTable = () => {
     addGamble();
   };
 
-  const [tab, setTab] = React.useState(0);
+  const [tab, setTab] = React.useState(1);
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTab(newValue);
   };
-
   return (
     <>
       {loadingLeague || loadingForGamble ? (
@@ -81,11 +80,16 @@ export const GamblingTable = () => {
         <TabsWrapper value={tab} onTabChange={handleTabChange} />
       )}
       {!loadingLeague && !loadingForGamble && (
-        <>
-          <SuccessButton margin="1em auto" padding="0.5em" onClick={handleSave}>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <SuccessButton
+            margin="1em 0"
+            padding="0.5em"
+            onClick={handleSave}
+            background="rgb(28, 184, 65)"
+          >
             Save
           </SuccessButton>
-        </>
+        </div>
       )}
     </>
   );
