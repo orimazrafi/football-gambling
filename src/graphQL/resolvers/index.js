@@ -15,7 +15,7 @@ const userSearchResolver = require("../resolvers/user/search");
 const createUserResolver = require("../resolvers/user/create");
 const addRandomGambleResolver = require("../resolvers/user/addRandomGamble");
 const checkGroupNameExistResolver = require("../resolvers/group/checkGroupNameExist");
-
+const randomGambleForAllSeasonResolver = require("../resolvers/user/randomGambleForAllSeason");
 const UserStore = require("../store/user");
 const LeagueStore = require("../store/league");
 const resolvers = {
@@ -39,6 +39,7 @@ const resolvers = {
     addGameToLeague: addGameToLeagueResolver,
     addGamble: addGambleResolver,
     addRandomGamble: addRandomGambleResolver,
+    randomGambleForAllSeason: randomGambleForAllSeasonResolver,
   },
   Group: {
     users: async (parent) => {

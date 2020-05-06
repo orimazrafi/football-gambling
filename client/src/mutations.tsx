@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-export const ADD_GAMBLE = gql`
+export const ADD_GAMBLE: any = gql`
   mutation addGamble(
     $userId: ID!
     $leagueId: ID!
@@ -43,7 +43,51 @@ export const ADD_GAMBLE = gql`
     }
   }
 `;
-export const ADD_RANDOM_GAMBLE = `
+export const ADD_GAMBL: any = `
+  mutation addGamble(
+    $userId: ID!
+    $leagueId: ID!
+    $results: [GameInput]
+    $winningTeam: String
+    $bestScorer: String
+  ) {
+    addGamble(
+      gamble: {
+        userId: $userId
+        leagueId: $leagueId
+        results: $results
+        winningTeam: $winningTeam
+        bestScorer: $bestScorer
+      }
+    ) {
+      success
+      message
+      user {
+        results {
+          name
+          image
+          numberOfMathces
+          games {
+            eventDate
+            homeTeam {
+              name
+              score
+              image
+            }
+            awayTeam {
+              name
+              score
+              image
+            }
+          }
+        }
+        winningTeam
+        bestScorer
+      }
+    }
+  }
+`;
+export const ADD_RANDOM_GAMBLE: any = `
   mutation addRandomGamble(
     $userId: ID!
     $leagueId: ID!
@@ -51,6 +95,7 @@ export const ADD_RANDOM_GAMBLE = `
     $winningTeam: String
     $bestScorer: String
   ) {
+    
     addRandomGamble(
       randomGamble: {
         userId: $userId

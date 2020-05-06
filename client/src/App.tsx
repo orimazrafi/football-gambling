@@ -6,7 +6,6 @@ import { Callback } from "./Pages/Callback/Callback";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Global } from "../src/elements/Global";
 import { Navbar } from "./Components/Navbar/Navbar";
-import { GamblingTable } from "./Pages/GamblingTable/GamblingTable";
 import { ScoreTable } from "./Pages/ScoreTable/ScoreTable";
 import { Rules } from "./Pages/Rules/Rules";
 import { Opponents } from "./Pages/Opponents/Opponents";
@@ -22,6 +21,7 @@ import { BACKEND_URL } from "./helpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { WinningTeam } from "./Pages/WinningTeam/WinningTeam";
+import { MatchesGamble } from "./Pages/MatchesGamble/MatchesGamble";
 const client = new ApolloClient({
   uri: BACKEND_URL,
   cache: new InMemoryCache({
@@ -50,7 +50,7 @@ const App = ({
               <Switch>
                 <Route path="/" exact render={() => <HomePage auth={auth} />} />
                 {auth.isAuthenticated() && (
-                  <Route path="/gamble" component={GamblingTable} />
+                  <Route path="/gamble" component={MatchesGamble} />
                 )}
                 {auth.isAuthenticated() && (
                   <Route path="/best-scorer" component={BestScorer} />

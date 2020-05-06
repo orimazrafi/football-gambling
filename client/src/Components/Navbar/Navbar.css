@@ -10,6 +10,9 @@
 .pure-menu-link {
   margin: 10px 0;
 }
+.pure-menu-link:hover {
+  cursor: pointer;
+}
 
 .navbar__image__Link {
   margin: 10px 0 10px auto;

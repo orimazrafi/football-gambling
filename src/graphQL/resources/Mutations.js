@@ -11,6 +11,7 @@ const Mutations = gql`
     addGameToLeague(game: GameInput): Game!
     addGamble(gamble: GambleInput): UserResponse!
     addRandomGamble(randomGamble: RandomGambleInput): UserResponse!
+    randomGambleForAllSeason(userId: ID!, leagueId: ID!): UserResponse!
   }
 `;
 

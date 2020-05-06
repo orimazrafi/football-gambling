@@ -22,14 +22,13 @@ const addUserToGroupResolver = async (obj, args, req) => {
       );
   }
   await GroupStore.update(groupId, userId);
-  let league = await LeagueStore.findById(res.league._id);
 
   let userResult = await UserStore.findById(userId);
 
   if (userResult.results._id) {
     await UserStore.updateUserWithOutResult(userId, groupId);
   } else {
-    await UserStore.updateUser(userId, groupId, league);
+    await UserStore.updateUser(userId, groupId);
   }
 
   return await GroupStore.response(

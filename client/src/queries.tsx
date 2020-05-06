@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const FETCH_USER_RESULT = gql`
+export const FETCH_USER_RESULT: any = gql`
   query getUser($userId: ID!) {
     getUser(userId: $userId) {
       success

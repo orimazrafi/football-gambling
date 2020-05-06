@@ -30,7 +30,7 @@ const updateUserWithOutResult = async (userId, groupId) =>
       $push: { groups: { _id: groupId } },
     }
   );
-const updateUser = async (userId, groupId, league) =>
+const updateUser = async (userId, groupId) =>
   await Store.users().updateOne(
     { _id: ObjectId(userId) },
     {

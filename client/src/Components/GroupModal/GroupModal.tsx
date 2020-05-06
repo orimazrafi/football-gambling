@@ -32,6 +32,7 @@ export interface SimpleDialogProps {
   data: any;
   loadingCreateGroup: any;
 }
+// eslint-disable-next-line
 const log = console.log;
 export const GroupModal = (props: SimpleDialogProps) => {
   const {
@@ -61,6 +62,9 @@ export const GroupModal = (props: SimpleDialogProps) => {
   });
 
   const [image, setImage] = useState(imageIcon);
+  useEffect(() => {
+    setImage(imageIcon);
+  }, [open]);
   const [blur, setBlur] = useState<GroupBlur>({
     name: false,
     passwordConfirm: false,

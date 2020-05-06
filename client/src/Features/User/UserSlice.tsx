@@ -5,6 +5,10 @@ const user = createSlice({
   name: "user",
   initialState: {
     user: {
+      opponent: {
+        name: "",
+        image: "",
+      },
       _id: undefined,
       name: "",
       email: "",
@@ -30,6 +34,9 @@ const user = createSlice({
     setRandomGame: (state, action) => {
       state.user.results.games = action.payload;
     },
+    setOpponent: (state, action) => {
+      state.user.opponent = action.payload;
+    },
     setGames: (state, action) => {
       let gamesDuplicate: any = state.user.results.games;
       gamesDuplicate[action.payload.index][action.payload.name].score =
@@ -45,6 +52,7 @@ export const {
   setTeam,
   setPlayer,
   setRandomGame,
+  setOpponent,
 } = user.actions;
 export default user.reducer;
 
@@ -75,4 +83,11 @@ export const reduxSetUserGames = (
 ) => async (dispatch: AppDispatch) => {
   let payload = { index, name, value };
   await dispatch(setGames(payload));
+};
+export const reduxSetOpponent = (name: string, image: string) => async (
+  dispatch: AppDispatch
+) => {
+  let payload = { name, image };
+
+  await dispatch(setOpponent(payload));
 };

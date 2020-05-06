@@ -41,16 +41,17 @@ const createGroupResolver = async (obj, args, req) => {
     league
   );
   //push the monkey boot
-  await GroupStore.update(res.ops[0]._id, "5e9ab80b36d4382cd60e29db");
+  let monkeyId = "5e9ab80b36d4382cd60e29db";
+  await GroupStore.update(res.ops[0]._id, monkeyId);
 
   let leagueObject = await Store.findById("league", league);
 
-  await UserStore.update(res.ops[0].admin, res.ops[0]._id, leagueObject);
   await UserStore.update(
-    "5e9ab80b36d4382cd60e29db",
-    res.ops[0]._id,
+    res.ops[0].admin,
+    res.ops[0]._id.toString(),
     leagueObject
   );
+  await UserStore.update(monkeyId, res.ops[0]._id.toString(), leagueObject);
 
   groupArray = await GroupStore.getAllGroups();
   return GroupStore.response(true, "Group was created!", groupArray);
