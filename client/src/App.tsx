@@ -10,20 +10,27 @@ import { ScoreTable } from "./Pages/ScoreTable/ScoreTable";
 import { Rules } from "./Pages/Rules/Rules";
 import { Opponents } from "./Pages/Opponents/Opponents";
 
-import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { InMemoryCache } from "apollo-boost";
+import ApolloClient from "apollo-client";
 
 import { ApolloProvider } from "react-apollo";
 import { ToastContainer } from "react-toastify";
 import { StylesProvider } from "@material-ui/styles";
-
+import { WebSocketLink } from "apollo-link-ws";
 import { BestScorer } from "./Pages/BestScorer/BestScorer";
-import { BACKEND_URL } from "./helpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { WinningTeam } from "./Pages/WinningTeam/WinningTeam";
 import { MatchesGamble } from "./Pages/MatchesGamble/MatchesGamble";
+import { Chat } from "./Pages/Chat/Chat";
 const client = new ApolloClient({
-  uri: BACKEND_URL,
+  link: new WebSocketLink({
+    uri: "ws://localhost:8080/graphql",
+    options: {
+      reconnect: true,
+    },
+  }),
+
   cache: new InMemoryCache({
     addTypename: false,
   }),
@@ -66,6 +73,9 @@ const App = ({
                 )}
                 {auth.isAuthenticated() && (
                   <Route path="/opponents" component={Opponents} />
+                )}
+                {auth.isAuthenticated() && (
+                  <Route path="/chat" component={Chat} />
                 )}
 
                 <Route path="/callback" component={Callback} />

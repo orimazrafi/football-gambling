@@ -169,6 +169,11 @@ export const Navbar = ({
               </Grow>
             )}
           </Popper>
+          {/* <li className="pure-menu-item">
+            <Link to="/chat" className="pure-menu-link rules__item">
+              Chat
+            </Link>
+          </li> */}
           <li className="pure-menu-item">
             <Link to="/rules" className="pure-menu-link rules__item">
               Rules

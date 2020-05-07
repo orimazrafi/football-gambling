@@ -1,5 +1,4 @@
-const { gql } = require("apollo-server");
-
+import { gql } from "apollo-server";
 const RandomGambleInput = gql`
   input RandomGambleInput {
     userId: ID!

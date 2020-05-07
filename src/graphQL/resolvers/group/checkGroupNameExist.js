@@ -1,5 +1,4 @@
-const GroupStore = require("../../store/group");
-
+import GroupStore from "../../store/group";
 const checkGroupNameExistResolver = async (obj, args, req) => {
   const { name } = args;
 

@@ -1,5 +1,4 @@
-const { gql } = require("apollo-server");
-
+import { gql } from "apollo-server";
 const Group = gql`
   type Group {
     _id: ID!
@@ -11,6 +10,7 @@ const Group = gql`
     password: String
     users: [User!]!
     league: League
+    chat: [MessageInfo]
   }
 `;
 module.exports = Group;

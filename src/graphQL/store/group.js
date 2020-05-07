@@ -28,6 +28,7 @@ const add = async (
     admin,
     users: [{ _id: admin }],
     league: { _id: league },
+    chat: [],
   });
 
 const update = async (groupId, userId) =>
@@ -35,6 +36,13 @@ const update = async (groupId, userId) =>
     { _id: ObjectId(groupId) },
     {
       $push: { users: { _id: userId } },
+    }
+  );
+const addMessage = async (groupId, messageInfo) =>
+  await Store.groups().updateOne(
+    { _id: ObjectId(groupId) },
+    {
+      $push: { chat: messageInfo },
     }
   );
 const findByName = async (name) => await Store.groups().findOne({ name });
@@ -61,4 +69,5 @@ module.exports = {
   pullFromGroup,
   findSubDocument,
   findByName,
+  addMessage,
 };

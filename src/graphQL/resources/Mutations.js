@@ -1,5 +1,4 @@
-const { gql } = require("apollo-server");
-
+import { gql } from "apollo-server";
 const Mutations = gql`
   type Mutation {
     group(groupId: ID!): GroupResponse!
@@ -12,6 +11,11 @@ const Mutations = gql`
     addGamble(gamble: GambleInput): UserResponse!
     addRandomGamble(randomGamble: RandomGambleInput): UserResponse!
     randomGambleForAllSeason(userId: ID!, leagueId: ID!): UserResponse!
+    newMessage(
+      userId: ID!
+      message: String!
+      groupId: ID!
+    ): UserMessageResponse!
   }
 `;
 

@@ -1,5 +1,4 @@
-const { gql } = require("apollo-server");
-
+import { gql } from "apollo-server";
 const Queries = gql`
   type Query {
     groups: [Group]!
@@ -11,6 +10,11 @@ const Queries = gql`
     leagues: [League]
     league(leagueId: ID!): LeagueResponse!
     getUser(userId: ID!): UserResponse!
+    userTyping(
+      userId: ID!
+      groupId: ID!
+      isTyping: Boolean!
+    ): UserTypingResponse!
   }
 `;
 

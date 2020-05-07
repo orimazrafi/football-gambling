@@ -4,6 +4,7 @@ const League = require("../resources/League");
 const Team = require("../resources/Team");
 const User = require("../resources/User");
 const Player = require("../resources/Player");
+import { Subscription } from "./Subscription";
 const Mutations = require("../resources/Mutations");
 const Queries = require("../resources/Queries");
 const GambleInput = require("../resources/Input/GambleInput");
@@ -16,11 +17,13 @@ const UserToGroupInput = require("../resources/Input/UserToGroupInput");
 const GambleUpdateResponse = require("../resources/response/GambleUpdateResponse");
 const GroupResponse = require("../resources/response/GroupResponse");
 const UserResponse = require("../resources/response/UserResponse");
+import { UserTypingResponse } from "../resources/response/UserTypingResponse";
 const UserSearchResponse = require("../resources/response/UserSearchResponse");
 const LeagueResponse = require("../resources/response/LeagueResponse");
 const RandomGambleInput = require("../resources/Input/RandomGambleInput");
-const { gql } = require("apollo-server");
-
+import { UserMessageResponse } from "../resources/response/UserMessageResponse";
+import { MessageInfo } from "../resources/response/MessageInfo";
+import { gql } from "apollo-server";
 const typeDefs = gql`
     ${Game},
     ${Group},
@@ -28,6 +31,7 @@ const typeDefs = gql`
     ${Team},
     ${User},
     ${Player},
+    ${Subscription},
     ${Queries},
     ${Mutations},
     ${GambleInput},
@@ -41,6 +45,9 @@ const typeDefs = gql`
     ${GambleUpdateResponse},
     ${GroupResponse},
     ${UserResponse},
+    ${UserMessageResponse},
+    ${MessageInfo},
+    ${UserTypingResponse},
     ${UserSearchResponse},
     ${LeagueResponse}
 `;

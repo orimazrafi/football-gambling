@@ -126,6 +126,7 @@ export const FETCH_USER_GROUP_LEAGUE_RESULTS: any = gql`
     group(groupId: $groupId, userId: $userId) {
       name
       image
+      _id
       users {
         _id
         name
@@ -160,6 +161,12 @@ export const FETCH_USER_GROUP_LEAGUE_RESULTS: any = gql`
             score
           }
         }
+      }
+      chat {
+        sender
+        message
+        image
+        time
       }
     }
   }

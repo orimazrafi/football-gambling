@@ -1,9 +1,9 @@
-const mongoClient = require("mongodb").MongoClient;
+import mongoClient from "mongodb";
 const MONGO_URL = process.env.MONGO_URI || "mongodb://localhost:27017";
 let db;
 
 async function connect(callback) {
-  mongoClient.connect(
+  mongoClient.MongoClient.connect(
     MONGO_URL,
     {
       useNewUrlParser: true,

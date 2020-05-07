@@ -6,12 +6,7 @@ const groupResolver = async (obj, args, req) => {
   if (groupId) return group;
   let user = await UserStore.findById(userId);
   if (user.groups.length > 0) {
-    group = await GroupStore.findById(user.groups[0]._id);
-    return group;
-  }
-
-  return;
-  {
+    return await GroupStore.findById(user.groups[0]._id);
   }
 };
 

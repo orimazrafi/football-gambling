@@ -1,0 +1,6 @@
+.active-user {
+  justify-content: flex-end;
+}
+.active-background {
+  background-color: grey !important;
+}

@@ -16,8 +16,12 @@ const createUserResolver = require("../resolvers/user/create");
 const addRandomGambleResolver = require("../resolvers/user/addRandomGamble");
 const checkGroupNameExistResolver = require("../resolvers/group/checkGroupNameExist");
 const randomGambleForAllSeasonResolver = require("../resolvers/user/randomGambleForAllSeason");
+import { newMessageResolver } from "../resolvers/user/newMessage";
+import { userTypingResolver } from "../resolvers/user/userTyping";
 const UserStore = require("../store/user");
 const LeagueStore = require("../store/league");
+import { withFilter } from "apollo-server";
+
 const resolvers = {
   Query: {
     groups: groupsResolver,
@@ -29,6 +33,7 @@ const resolvers = {
     getUser: getUserResolver,
     getUserId: getUserIdResolver,
     search: userSearchResolver,
+    userTyping: userTypingResolver,
   },
   Mutation: {
     createGroup: createGroupResolver,
@@ -39,7 +44,29 @@ const resolvers = {
     addGameToLeague: addGameToLeagueResolver,
     addGamble: addGambleResolver,
     addRandomGamble: addRandomGambleResolver,
+    newMessage: newMessageResolver,
     randomGambleForAllSeason: randomGambleForAllSeasonResolver,
+  },
+  Subscription: {
+    newMessage: {
+      subscribe: withFilter(
+        (_, __, { pubsub }) => pubsub.asyncIterator(["NEW_MESSAGE"]),
+        (payload, args) => {
+          return payload.newMessage.groupId === args.groupId;
+        }
+      ),
+    },
+    userTyping: {
+      subscribe: withFilter(
+        (_, __, { pubsub }) => pubsub.asyncIterator(["USER_TYPING"]),
+        (payload, args) => {
+          return (
+            payload.userTyping.groupId === args.groupId &&
+            payload.userTyping.userId !== args.userId
+          );
+        }
+      ),
+    },
   },
   Group: {
     users: async (parent) => {

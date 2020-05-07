@@ -106,7 +106,7 @@ export const GroupsTableRow = (props: Props) => {
         <TableButton
           background="rgb(28, 184, 65)"
           backgroundhover="rgb(5, 236, 60)"
-          onClick={() => history.push("/score", group._id)}
+          onClick={() => history.push("/score", { groupId: group._id })}
         >
           View
         </TableButton>

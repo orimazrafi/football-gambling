@@ -1,5 +1,4 @@
-const { gql } = require("apollo-server");
-
+import { gql } from "apollo-server";
 const LeagueResponse = gql`
   type LeagueResponse {
     success: Boolean!
