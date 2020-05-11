@@ -32,10 +32,10 @@ export const Navbar = ({
       user: {
         user: {
           _id: string;
-          results: { name: ""; image: "" };
+          results: { name: string; image: string };
           opponent: {
-            name: "";
-            image: "";
+            name: string;
+            image: string;
           };
         };
       };
@@ -45,7 +45,7 @@ export const Navbar = ({
   const log = console.log;
   const { pathname } = useLocation();
   let pageLoaction = pathname.slice(1) ? pathname.slice(1) : "Home";
-  let m: moment.Moment = moment();
+  let momentFormat: moment.Moment = moment();
 
   const handleLogout = () => {
     auth.logout();
@@ -57,7 +57,7 @@ export const Navbar = ({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: React.MouseEvent<EventTarget>) => {
+  const handleCloseDropDown = (event: React.MouseEvent<EventTarget>) => {
     if (
       anchorRef.current &&
       anchorRef.current.contains(event.target as HTMLElement)
@@ -125,7 +125,7 @@ export const Navbar = ({
                 }}
               >
                 <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>
+                  <ClickAwayListener onClickAway={handleCloseDropDown}>
                     <MenuList
                       autoFocusItem={open}
                       id="menu-list-grow"
@@ -139,7 +139,7 @@ export const Navbar = ({
                           <Link
                             to="/gamble"
                             className="pure-menu-link"
-                            onClick={handleClose}
+                            onClick={handleCloseDropDown}
                           >
                             Matches
                           </Link>
@@ -148,7 +148,7 @@ export const Navbar = ({
                           <Link
                             to="/best-scorer"
                             className="pure-menu-link"
-                            onClick={handleClose}
+                            onClick={handleCloseDropDown}
                           >
                             Best Scorer
                           </Link>
@@ -157,7 +157,7 @@ export const Navbar = ({
                           <Link
                             to="/winning-team"
                             className="pure-menu-link"
-                            onClick={handleClose}
+                            onClick={handleCloseDropDown}
                           >
                             Winning Team
                           </Link>
@@ -169,11 +169,6 @@ export const Navbar = ({
               </Grow>
             )}
           </Popper>
-          {/* <li className="pure-menu-item">
-            <Link to="/chat" className="pure-menu-link rules__item">
-              Chat
-            </Link>
-          </li> */}
           <li className="pure-menu-item">
             <Link to="/rules" className="pure-menu-link rules__item">
               Rules
@@ -279,7 +274,9 @@ export const Navbar = ({
               pageLoaction !== "gamble" &&
               pageLoaction !== "best-scorer" &&
               pageLoaction !== "winning-team" && <h1>{pageLoaction}</h1>}
-            <pre className="header__watch">{m.format("ddd, hA")}</pre>
+            <pre className="header__watch">
+              {momentFormat.format("ddd, hA")}
+            </pre>
           </div>
           <hr />
         </>

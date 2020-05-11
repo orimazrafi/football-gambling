@@ -11,13 +11,15 @@ import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
 import "./ScoreTable.css";
 import * as R from "ramda";
 
-import { UseSortAndCaculateByPoints } from "../../Hooks/UseSortAndCaculateByPoints";
+import { UseSortAndCaculateByPointsAndBullseye } from "../../Hooks/UseSortAndCaculateByPoints";
 import { Group, UserScore, UserGames, UserResults } from "../../interfaces";
 import { UseCheckForGamble } from "../../Hooks/UseCheckForGamble";
 import { SuccessButton } from "../../elements/SuccessButton";
 // eslint-disable-next-line
 const log = console.log;
-
+const FIRST_INDEX = 0;
+const MAXIMUM_POINTS_PER_GAME = 3;
+const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
 export const ScoreTable = () => {
   const history: any = useHistory();
   // const { groupId } = history?.location?.state;
@@ -51,9 +53,10 @@ export const ScoreTable = () => {
   const [score, setScore] = useState<any>();
   const [order, setOrder] = useState<any>([]);
   useEffect(() => {
-    let [sortedUserId, reduceUserScoreById] = UseSortAndCaculateByPoints(
-      userScore
-    );
+    let [
+      sortedUserId,
+      reduceUserScoreById,
+    ] = UseSortAndCaculateByPointsAndBullseye(userScore);
     setOrder(sortedUserId);
     setScore(reduceUserScoreById);
     setLoadingScore(false);
@@ -87,20 +90,20 @@ export const ScoreTable = () => {
   ) => {
     history.push("/opponents", { gambler, group, score, bullseye });
   };
+  const lastIndex = (length: number) => length - 1;
   const handleClass = (index: number) => {
     let className = "0";
-    if (index === 0) className = "10px 10px 0 0";
-    if (data?.group?.users && index === data.group.users.length - 1)
+    if (index === FIRST_INDEX) className = "10px 10px 0 0";
+    if (data?.group?.users && index === lastIndex(data.group.users.length))
       className = "0 0 10px 10px";
     if (
-      index === 0 &&
+      index === FIRST_INDEX &&
       data?.group?.users &&
-      index === data.group.users.length - 1
+      index === lastIndex(data.group.users.length)
     )
       className = "10px";
     return className;
   };
-  log(data);
   const handleChat = () => {
     const { _id, chat, users } = data?.group;
     history.push("/chat", { groupId: _id, chat, users });
@@ -165,9 +168,11 @@ export const ScoreTable = () => {
                       <ScoreItem>
                         {" "}
                         {Number(
-                          score[gambler._id]?.score /
-                            (gambler?.results?.games?.slice(0, 3).length * 3)
-                        ).toFixed(2)}
+                          (score[gambler._id]?.score /
+                            (gambler?.results?.games?.slice(0, 3).length *
+                              MAXIMUM_POINTS_PER_GAME)) *
+                            NUMBER_TO_MAKE_WHOLE_PERCENTAGE
+                        ).toFixed(0)}
                         %
                       </ScoreItem>
                       <ScoreItem>

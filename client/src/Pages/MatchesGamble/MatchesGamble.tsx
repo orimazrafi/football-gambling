@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import moment from "moment";
 import { Image } from "../../elements/Image";
 import { Game, Team } from "../../interfaces";
@@ -23,6 +23,9 @@ import { UseAddRandomGamble } from "../../Hooks/UseAddRandomGamble";
 import "./MatchesGamble.css";
 // eslint-disable-next-line
 const log = console.log;
+const MINIMUM_GAMBLE_NUMBER = 0;
+const MAXIMUM_GAMBLE_NUMBER = 10;
+
 export const MatchesGamble = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(
@@ -48,7 +51,10 @@ export const MatchesGamble = () => {
     index: number
   ) => {
     const { name, value } = e.target;
-    if (parseInt(value) > 0 || parseInt(value) < 10) {
+    if (
+      parseInt(value) > MINIMUM_GAMBLE_NUMBER ||
+      parseInt(value) < MAXIMUM_GAMBLE_NUMBER
+    ) {
       await dispatch(reduxSetUserGames(index, name, value));
     }
   };
@@ -61,17 +67,19 @@ export const MatchesGamble = () => {
       userId: user._id || (localStorage.getItem("user_id") as string),
     },
   });
-
+  const isResultInitial = useCallback(() => user.results.games.length > 0, [
+    user.results.games.length,
+  ]);
   useEffect(() => {
     const setUser = async () => {
       await dispatch(reduxSetUser(data.getUser.user));
       toast.success(data.getUser.message);
     };
-    if (user.results.games.length > 0) return;
+    if (isResultInitial()) return;
     if (data?.getUser?.success) {
       setUser();
     }
-  }, [data, user.results.games.length, dispatch]);
+  }, [data, user.results.games.length, dispatch, isResultInitial]);
 
   const addRandom = async (index: number) => {
     const [data] = await UseAddRandomGamble(user, index);

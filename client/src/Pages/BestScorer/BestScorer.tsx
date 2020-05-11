@@ -9,6 +9,7 @@ import { SuccessButton } from "../../elements/SuccessButton";
 import { Game, Team } from "../../interfaces";
 import { UseGambleMutation } from "../../Hooks/UseGambleMutation";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
+import { userIdFromLocalStorage } from "../../helpers";
 // eslint-disable-next-line
 const log = console.log;
 export const BestScorer = () => {
@@ -18,12 +19,12 @@ export const BestScorer = () => {
     (state: {
       user: {
         user: {
-          _id: "";
-          winningTeam: "";
-          bestScorer: "";
+          _id: string;
+          winningTeam: string;
+          bestScorer: string;
           results: {
             games: Game[];
-            _id: "";
+            _id: string;
             players: [];
             teams: Team[];
           };
@@ -37,7 +38,7 @@ export const BestScorer = () => {
     Record<string, any>
   >(FETCH_USER_RESULT, {
     variables: {
-      userId: user._id || (localStorage.getItem("user_id") as string),
+      userId: user._id || userIdFromLocalStorage(),
     },
   });
   useEffect(() => {

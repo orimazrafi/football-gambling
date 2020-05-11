@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { IconsGrid } from "../../Components/IconsGrid/IconsGrid";
@@ -41,16 +41,19 @@ export const WinningTeam = () => {
       userId: user._id || (localStorage.getItem("user_id") as string),
     },
   });
+  const userHasWinningTeam = useCallback(() => user.winningTeam !== "", [
+    user.winningTeam,
+  ]);
   useEffect(() => {
     const setUser = async () => {
       await dispatch(reduxSetUser(data.getUser.user));
       toast.success(data.getUser.message);
     };
-    if (user.winningTeam !== "") return;
+    if (userHasWinningTeam()) return;
     if (data?.getUser?.success) {
       setUser();
     }
-  }, [data, dispatch, user.winningTeam]);
+  }, [data, dispatch, userHasWinningTeam]);
   const handleTeamChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     await dispatch(reduxSetTeam(value));

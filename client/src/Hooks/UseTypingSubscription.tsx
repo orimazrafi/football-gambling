@@ -17,7 +17,6 @@ export const UseTypingSubscription = (groupId: string) => {
       }
     );
   }, []);
-  console.log(typingData);
   return [typingData];
 };
 

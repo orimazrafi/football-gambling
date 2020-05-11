@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
 import { useQuery } from "@apollo/react-hooks";
 import { request } from "graphql-request";
 import { toast } from "react-toastify";
-import "./CreateGroup.css";
 import { reduxSetGroup } from "../../Features/Group/GroupSlice";
 import { useDispatch } from "react-redux";
 import { PrimaryButton } from "../../elements/PrimaryButton";
@@ -11,8 +9,9 @@ import { GroupModal } from "../GroupModal/GroupModal";
 import { imageIcon, defualtImage, BACKEND_URL } from "../../helpers";
 import { FETCH_LEAGUES } from "../../queries";
 import { CREATE_GROUP } from "../../mutations";
-Modal.setAppElement("#root");
+import "./CreateGroup.css";
 
+const NOT_IN_THE_ARRAY = -1;
 // eslint-disable-next-line
 const log = console.log;
 interface Data {
@@ -27,11 +26,15 @@ export const CreateGroup = () => {
   let { data, loading: loadingLeagues } = useQuery<Data, Record<string, any>>(
     FETCH_LEAGUES
   );
-  if (
-    data?.leagues.findIndex(
+  const haveSelectOption = () => {
+    let index = data?.leagues.findIndex(
       (league: League) => league.name === "Choose A League"
-    ) === -1
-  ) {
+    );
+    if (index === NOT_IN_THE_ARRAY) return false;
+    else return true;
+  };
+
+  if (!haveSelectOption()) {
     data?.leagues.unshift({ _id: "", name: "Choose A League" });
   }
 

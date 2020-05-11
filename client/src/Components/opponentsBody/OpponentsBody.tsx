@@ -20,15 +20,16 @@ interface Result {
   leagueHome: number | string;
   leagueAway: number | string;
 }
-
-const handleClass = (c: any) => {
+const LOSING_POINTS = 1;
+const DRAW_POINTS = 0;
+const colorPoints = (point: any) => {
   let className = "";
-  if (c === 1) return (className += "red");
-  if (c === 0) return (className += "blue");
+  if (point === LOSING_POINTS) return (className += "red");
+  if (point === DRAW_POINTS) return (className += "blue");
   return "green";
 };
 
-const checkForGamble = (leagueResult: Game, userResult: Game) => {
+const getPointsForGamble = (leagueResult: Game, userResult: Game) => {
   let userHome = parseInt(userResult.homeTeam.score);
   let userAway = parseInt(userResult.awayTeam.score);
   let leagueHome = parseInt(leagueResult.homeTeam.score);
@@ -90,11 +91,11 @@ export const OpponentsBody = (props: Props) => {
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
               {" "}
               <span
-                className={handleClass(
-                  checkForGamble(group.league.games[index], match)
+                className={colorPoints(
+                  getPointsForGamble(group.league.games[index], match)
                 )}
               >
-                {checkForGamble(group.league?.games[index], match)}
+                {getPointsForGamble(group.league?.games[index], match)}
               </span>
             </GroupCell>
           </TableRow>

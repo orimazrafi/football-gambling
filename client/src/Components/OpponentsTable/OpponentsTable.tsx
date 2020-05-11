@@ -5,14 +5,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import { GenericTableHead } from "../GenericTableHead/GenericTableHead";
 import { OpponentsBody } from "../opponentsBody/OpponentsBody";
 import { UserResults } from "../../interfaces";
-const columns = [
-  "status",
-  "home team",
-  "away team",
-  "final score",
-  "you'r gamble",
-  "points",
-];
+import { opponentsColumns } from "../../helpers";
 
 interface Props {
   gambler: UserResults;
@@ -25,7 +18,7 @@ export const OpponentsTable = (props: Props) => {
     <Paper>
       <TableContainer>
         <Table stickyHeader aria-label="sticky table">
-          <GenericTableHead columns={columns} />
+          <GenericTableHead columns={opponentsColumns} />
           <OpponentsBody gambler={gambler} group={group} />
         </Table>
       </TableContainer>

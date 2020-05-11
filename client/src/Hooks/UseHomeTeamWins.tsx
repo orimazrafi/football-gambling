@@ -1,3 +1,12 @@
+import {
+  bullseyeObject,
+  directionObject,
+  losingObject,
+  WINNING_SCORE,
+  DIRECTION_SCORE,
+  LOSING_SCORE,
+} from "../helpers";
+
 interface Result {
   userHome: number | string;
   userAway: number | string;
@@ -12,27 +21,10 @@ export const UseHomeTeamWins = (result: Result) => {
       result.leagueHome === result.userHome &&
       result.leagueAway === result.userAway
     ) {
-      return result.id ? { id: result.id, score: 3, name: "bullseye" } : 3;
+      return result.id ? bullseyeObject(result.id) : WINNING_SCORE;
     }
-    return result.id ? { id: result.id, score: 1, name: "direction" } : 1;
+    return result.id ? directionObject(result.id) : DIRECTION_SCORE;
   } else {
-    return result.id ? { id: result.id, score: 0, name: "none" } : 0;
+    return result.id ? losingObject(result.id) : LOSING_SCORE;
   }
 };
-
-// interface Result {
-//     userHome: number | string;
-//     userAway: number | string;
-//     leagueHome: number | string;
-//     leagueAway: number | string;
-//     id?: string;
-//   }
-
-//   export const UseTieGame = (result: Result) => {
-//     if (result.userHome === result.userAway) {
-//       if (result.userHome === result.leagueHome)
-//         return result.id ? { id: result.id, score: 3, name: "bullseye" } : 3;
-//       return result.id ? { id: result.id, score: 1, name: "direction" } : 1;
-//     }
-//     return result.id ? { id: result.id, score: 0, name: "none" } : 0;
-//   };

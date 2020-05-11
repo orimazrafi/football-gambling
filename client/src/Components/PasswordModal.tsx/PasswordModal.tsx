@@ -16,6 +16,8 @@ interface Props {
   onaddUser: (group: GroupInput) => void;
   resetModal: boolean;
 }
+const NUMBER_OF_ERROR_THAT_OK = 3;
+const NUMBER_OF_ERROR_THAT_NOT_OK = 3;
 export const PasswordModal = (props: Props) => {
   const {
     onClose,
@@ -34,7 +36,8 @@ export const PasswordModal = (props: Props) => {
 
   const handleError = () => {
     if (!error.message) return "";
-    if (error.message && error.num < 3) return "Incorrect password.";
+    if (error.message && error.num < NUMBER_OF_ERROR_THAT_OK)
+      return "Incorrect password.";
     return `your account would be blocked if you will continue to supply false password!`;
   };
 
@@ -45,8 +48,8 @@ export const PasswordModal = (props: Props) => {
   };
 
   const handleJoinGroup = () => {
-    if (error.num === 5) {
-      auth.imageut();
+    if (error.num === NUMBER_OF_ERROR_THAT_NOT_OK) {
+      auth.logout();
     }
     if (password === groupInput.password) onaddUser(groupInput);
     else
