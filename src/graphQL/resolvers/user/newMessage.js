@@ -1,4 +1,4 @@
-const UserStore = require("../../store/user");
+import UserStore from "../../store/user";
 import moment from "moment";
 import GroupStore from "../../store/group";
 export const newMessageResolver = async (_, args, { pubsub }) => {

@@ -6,4 +6,4 @@ const Player = gql`
     team: String!
   }
 `;
-module.exports = Player;
+export default Player;

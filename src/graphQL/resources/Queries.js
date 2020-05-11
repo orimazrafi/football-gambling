@@ -18,4 +18,4 @@ const Queries = gql`
   }
 `;
 
-module.exports = Queries;
+export default Queries;

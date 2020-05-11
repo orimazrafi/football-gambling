@@ -1,8 +1,8 @@
-const Store = require("../../store/index");
-const GroupStore = require("../../store/group");
+// const Store = require("../../store/index");
+import GroupStore from "../../store/group";
 const UserStore = require("../../store/user");
 
-const createGroupResolver = async (obj, args, req) => {
+export const createGroupResolver = async (obj, args, req) => {
   const {
     name,
     limitParticipate,
@@ -56,4 +56,3 @@ const createGroupResolver = async (obj, args, req) => {
   groupArray = await GroupStore.getAllGroups();
   return GroupStore.response(true, "Group was created!", groupArray);
 };
-module.exports = createGroupResolver;

@@ -1,5 +1,5 @@
 import { gql } from "apollo-server";
-export const MessageInfo = gql`
+const MessageInfo = gql`
   type MessageInfo {
     sender: String!
     message: String!
@@ -7,3 +7,4 @@ export const MessageInfo = gql`
     time: String!
   }
 `;
+export default MessageInfo;

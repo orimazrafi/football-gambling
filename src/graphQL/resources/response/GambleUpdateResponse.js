@@ -1,9 +1,8 @@
 import { gql } from "apollo-server";
-const GambleUpdateResponse = gql`
+export const GambleUpdateResponse = gql`
   type GambleUpdateResponse {
     success: Boolean!
     message: String!
     leagues: [League]!
   }
 `;
-module.exports = GambleUpdateResponse;

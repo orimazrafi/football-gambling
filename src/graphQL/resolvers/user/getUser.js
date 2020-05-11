@@ -1,6 +1,5 @@
-const UserStore = require("../../store/user");
-
-const getUserResolver = async (_, args, { pubsub }) => {
+import UserStore from "../../store/user";
+export const getUserResolver = async (_, args, { pubsub }) => {
   const { userId } = args;
   let res = await UserStore.findById(userId);
   pubsub.publish("NEW_MESSAGE", { newMessage: "user" });
@@ -9,5 +8,3 @@ const getUserResolver = async (_, args, { pubsub }) => {
   }
   return UserStore.response(true, "user gamble games were fetched.", res);
 };
-
-module.exports = getUserResolver;

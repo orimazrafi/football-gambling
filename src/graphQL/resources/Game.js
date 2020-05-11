@@ -6,4 +6,4 @@ const Game = gql`
     awayTeam: Team!
   }
 `;
-module.exports = Game;
+export default Game;

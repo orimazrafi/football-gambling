@@ -1,26 +1,26 @@
-const groupsResolver = require("../resolvers/group/groups");
-const groupResolver = require("../resolvers/group/group");
-const usersResolver = require("../resolvers/user/users");
-const leaguesResolver = require("../resolvers/league/leagues");
-const leagueResolver = require("../resolvers/league/league");
-const getUserResolver = require("../resolvers/user/getUser");
-const getUserIdResolver = require("../resolvers/user/getUserId");
-const createGroupResolver = require("../resolvers/group/create");
-const addUserToGroupResolver = require("./user/addUserToGroup");
-const deleteUserFromGroupResolver = require("./group/deleteUserFromGroup");
-const createLeagueResolver = require("../resolvers/league/create");
-const addGameToLeagueResolver = require("../resolvers/league/addGame");
-const addGambleResolver = require("../resolvers/user/addGamble");
-const userSearchResolver = require("../resolvers/user/search");
-const createUserResolver = require("../resolvers/user/create");
-const addRandomGambleResolver = require("../resolvers/user/addRandomGamble");
-const checkGroupNameExistResolver = require("../resolvers/group/checkGroupNameExist");
-const randomGambleForAllSeasonResolver = require("../resolvers/user/randomGambleForAllSeason");
+import { groupsResolver } from "../resolvers/group/groups";
+import { groupResolver } from "../resolvers/group/group";
+import { usersResolver } from "../resolvers/user/users";
+import { leaguesResolver } from "../resolvers/league/leagues";
+import { leagueResolver } from "../resolvers/league/league";
+import { getUserResolver } from "../resolvers/user/getUser";
+import { getUserIdResolver } from "../resolvers/user/getUserId";
+import { createGroupResolver } from "../resolvers/group/create";
+import { addUserToGroupResolver } from "./user/addUserToGroup";
+import { deleteUserFromGroupResolver } from "./group/deleteUserFromGroup";
+import { createLeagueResolver } from "../resolvers/league/create";
+import { addGameToLeagueResolver } from "../resolvers/league/addGame";
+import { addGambleResolver } from "../resolvers/user/addGamble";
+import { userSearchResolver } from "../resolvers/user/search";
+import { createUserResolver } from "../resolvers/user/create";
+import { addRandomGambleResolver } from "../resolvers/user/addRandomGamble";
+import { checkGroupNameExistResolver } from "../resolvers/group/checkGroupNameExist";
+import { randomGambleForAllSeasonResolver } from "../resolvers/user/randomGambleForAllSeason";
 import { newMessageResolver } from "../resolvers/user/newMessage";
 import { userTypingResolver } from "../resolvers/user/userTyping";
-const UserStore = require("../store/user");
-const LeagueStore = require("../store/league");
 import { withFilter } from "apollo-server";
+import UserStore from "../store/user";
+import LeagueStore from "../store/league";
 
 const resolvers = {
   Query: {

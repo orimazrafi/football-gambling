@@ -11,4 +11,4 @@ const User = gql`
     bestScorer: String
   }
 `;
-module.exports = User;
+export default User;

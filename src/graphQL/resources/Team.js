@@ -6,4 +6,4 @@ const Team = gql`
     image: String!
   }
 `;
-module.exports = Team;
+export default Team;

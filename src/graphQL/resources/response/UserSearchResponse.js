@@ -1,7 +1,6 @@
 import { gql } from "apollo-server";
-const UserSearchResponse = gql`
+export const UserSearchResponse = gql`
   type UserSearchResponse {
     success: Boolean!
   }
 `;
-module.exports = UserSearchResponse;

@@ -1,6 +1,5 @@
-const UserStore = require("../../store/user");
-const log = console.log;
-const randomGambleForAllSeasonResolver = async (obj, args, req) => {
+import UserStore from "../../store/user";
+export const randomGambleForAllSeasonResolver = async (obj, args, req) => {
   let { userId, leagueId } = args;
   let user = await UserStore.findById(userId);
   user.results.games.forEach((game) => {
@@ -26,4 +25,3 @@ const randomGambleForAllSeasonResolver = async (obj, args, req) => {
   let res = await UserStore.findById(userId);
   return UserStore.response(true, `random gamble was added!`, res);
 };
-module.exports = randomGambleForAllSeasonResolver;

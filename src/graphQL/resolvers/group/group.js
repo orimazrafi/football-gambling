@@ -1,6 +1,6 @@
-const GroupStore = require("../../store/group");
-const UserStore = require("../../store/user");
-const groupResolver = async (obj, args, req) => {
+import GroupStore from "../../store/group";
+import UserStore from "../../store/user";
+export const groupResolver = async (obj, args, req) => {
   const { groupId, userId } = args;
   let group = await GroupStore.findById(groupId);
   if (groupId) return group;
@@ -9,5 +9,3 @@ const groupResolver = async (obj, args, req) => {
     return await GroupStore.findById(user.groups[0]._id);
   }
 };
-
-module.exports = groupResolver;

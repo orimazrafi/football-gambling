@@ -1,5 +1,5 @@
 import { gql } from "apollo-server";
-const LeagueInput = gql`
+export const LeagueInput = gql`
   input LeagueInput {
     name: String!
     image: String!
@@ -7,4 +7,3 @@ const LeagueInput = gql`
     games: [GameInput]
   }
 `;
-module.exports = LeagueInput;

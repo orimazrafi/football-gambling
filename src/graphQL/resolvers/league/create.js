@@ -1,5 +1,6 @@
-const LeagueStore = require("../../store/league");
-const createLeagueResolver = async (obj, args, req) => {
+import LeagueStore from "../../store/league";
+
+export const createLeagueResolver = async (obj, args, req) => {
   try {
     const { name, image, numberOfMathces } = args.league;
     const res = await LeagueStore.add(name, image, numberOfMathces);
@@ -9,4 +10,3 @@ const createLeagueResolver = async (obj, args, req) => {
     LeagueStore.response(true, err.message, {});
   }
 };
-module.exports = createLeagueResolver;

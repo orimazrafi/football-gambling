@@ -10,4 +10,4 @@ const League = gql`
     players: [Player!]!
   }
 `;
-module.exports = League;
+export default League;

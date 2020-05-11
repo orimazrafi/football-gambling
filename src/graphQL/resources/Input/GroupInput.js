@@ -1,5 +1,5 @@
 import { gql } from "apollo-server";
-const GroupInput = gql`
+export const GroupInput = gql`
   input GroupInput {
     name: String!
     limitParticipate: String!
@@ -10,4 +10,3 @@ const GroupInput = gql`
     league: ID!
   }
 `;
-module.exports = GroupInput;

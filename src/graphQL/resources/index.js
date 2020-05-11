@@ -1,29 +1,31 @@
-const Game = require("../resources/Game");
-const Group = require("../resources/Group");
-const League = require("../resources/League");
-const Team = require("../resources/Team");
-const User = require("../resources/User");
-const Player = require("../resources/Player");
-import { Subscription } from "./Subscription";
-const Mutations = require("../resources/Mutations");
-const Queries = require("../resources/Queries");
-const GambleInput = require("../resources/Input/GambleInput");
-const GameInput = require("../resources/Input/GameInput");
-const GroupInput = require("../resources/Input/GroupInput");
-const LeagueInput = require("../resources/Input/LeagueInput");
-const TeamInput = require("../resources/Input/TeamInput");
-const UserInput = require("../resources/Input/UserInput");
-const UserToGroupInput = require("../resources/Input/UserToGroupInput");
-const GambleUpdateResponse = require("../resources/response/GambleUpdateResponse");
-const GroupResponse = require("../resources/response/GroupResponse");
-const UserResponse = require("../resources/response/UserResponse");
-import { UserTypingResponse } from "../resources/response/UserTypingResponse";
-const UserSearchResponse = require("../resources/response/UserSearchResponse");
-const LeagueResponse = require("../resources/response/LeagueResponse");
-const RandomGambleInput = require("../resources/Input/RandomGambleInput");
+import Game from "../resources/Game";
+import Group from "../resources/Group";
+import League from "../resources/League";
+import Team from "../resources/Team";
+import User from "../resources/User";
+import Player from "../resources/Player";
+import MessageInfo from "../resources/response/MessageInfo";
+
+import Mutations from "../resources/Mutations";
+import Queries from "../resources/Queries";
+import Subscription from "../resources/Subscription";
+import { GambleInput } from "../resources/Input/GambleInput";
+import { GameInput } from "../resources/Input/GameInput";
+import { GroupInput } from "../resources/Input/GroupInput";
+import { LeagueInput } from "../resources/Input/LeagueInput";
+import { TeamInput } from "../resources/Input/TeamInput";
+import { UserInput } from "../resources/Input/UserInput";
+import { UserToGroupInput } from "../resources/Input/UserToGroupInput";
+import { GambleUpdateResponse } from "../resources/response/GambleUpdateResponse";
+import { GroupResponse } from "../resources/response/GroupResponse";
+import { UserResponse } from "../resources/response/UserResponse";
+import { UserSearchResponse } from "../resources/response/UserSearchResponse";
+import { LeagueResponse } from "../resources/response/LeagueResponse";
+import { RandomGambleInput } from "../resources/Input/RandomGambleInput";
 import { UserMessageResponse } from "../resources/response/UserMessageResponse";
-import { MessageInfo } from "../resources/response/MessageInfo";
+import { UserTypingResponse } from "../resources/response/UserTypingResponse";
 import { gql } from "apollo-server";
+
 const typeDefs = gql`
     ${Game},
     ${Group},
@@ -31,8 +33,8 @@ const typeDefs = gql`
     ${Team},
     ${User},
     ${Player},
-    ${Subscription},
     ${Queries},
+    ${Subscription},
     ${Mutations},
     ${GambleInput},
     ${GameInput},
@@ -45,10 +47,10 @@ const typeDefs = gql`
     ${GambleUpdateResponse},
     ${GroupResponse},
     ${UserResponse},
-    ${UserMessageResponse},
-    ${MessageInfo},
-    ${UserTypingResponse},
     ${UserSearchResponse},
-    ${LeagueResponse}
+    ${LeagueResponse},
+    ${UserMessageResponse},
+    ${UserTypingResponse},
+    ${MessageInfo}
 `;
 module.exports = typeDefs;

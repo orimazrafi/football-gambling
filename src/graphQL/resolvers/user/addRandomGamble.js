@@ -1,5 +1,5 @@
-const UserStore = require("../../store/user");
-const addRandomGambleResolver = async (obj, args, req) => {
+import UserStore from "../../store/user";
+export const addRandomGambleResolver = async (obj, args, req) => {
   let {
     userId,
     leagueId,
@@ -38,4 +38,3 @@ const addRandomGambleResolver = async (obj, args, req) => {
   let res = await UserStore.findById(userId);
   return UserStore.response(true, `random gamble was added!`, res);
 };
-module.exports = addRandomGambleResolver;

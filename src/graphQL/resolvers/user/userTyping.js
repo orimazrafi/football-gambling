@@ -1,4 +1,5 @@
-const UserStore = require("../../store/user");
+import UserStore from "../../store/user";
+
 export const userTypingResolver = async (_, args, { pubsub }) => {
   const { userId, groupId, isTyping } = args;
   const user = await UserStore.findById(userId);

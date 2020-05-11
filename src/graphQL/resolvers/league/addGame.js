@@ -1,9 +1,8 @@
-const LeagueStore = require("../../store/league");
+import LeagueStore from "../../store/league";
 
-const addGameToLeagueResolver = async (obj, args, req) => {
+export const addGameToLeagueResolver = async (obj, args, req) => {
   const { eventDate, homeTeam, awayTeam } = args.game;
   const id = "5e9b0436ad4872327d1d4f51";
   await LeagueStore.updateGame(id, eventDate, homeTeam, awayTeam);
   return await LeagueStore.findById(id);
 };
-module.exports = addGameToLeagueResolver;

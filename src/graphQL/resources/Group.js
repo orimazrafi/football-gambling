@@ -13,4 +13,4 @@ const Group = gql`
     chat: [MessageInfo]
   }
 `;
-module.exports = Group;
+export default Group;

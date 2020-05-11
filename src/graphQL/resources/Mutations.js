@@ -18,5 +18,4 @@ const Mutations = gql`
     ): UserMessageResponse!
   }
 `;
-
-module.exports = Mutations;
+export default Mutations;

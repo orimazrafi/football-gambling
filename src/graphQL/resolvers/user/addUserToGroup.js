@@ -1,7 +1,6 @@
-const GroupStore = require("../../store/group");
-const UserStore = require("../../store/user");
-const LeagueStore = require("../../store/league");
-const addUserToGroupResolver = async (obj, args, req) => {
+import GroupStore from "../../store/group";
+import UserStore from "../../store/user";
+export const addUserToGroupResolver = async (obj, args, req) => {
   const { userId, groupId, groupPassword } = args.userToGroup;
   let group = await GroupStore.getAllGroups();
   let user = await GroupStore.findSubDocument(groupId, userId);

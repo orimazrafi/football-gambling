@@ -1,5 +1,5 @@
 import { gql } from "apollo-server";
-const RandomGambleInput = gql`
+export const RandomGambleInput = gql`
   input RandomGambleInput {
     userId: ID!
     leagueId: ID!
@@ -8,4 +8,3 @@ const RandomGambleInput = gql`
     bestScorer: String
   }
 `;
-module.exports = RandomGambleInput;

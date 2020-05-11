@@ -1,5 +1,5 @@
 import { gql } from "apollo-server";
-const GambleInput = gql`
+export const GambleInput = gql`
   input GambleInput {
     userId: ID!
     leagueId: ID!
@@ -8,4 +8,3 @@ const GambleInput = gql`
     bestScorer: String
   }
 `;
-module.exports = GambleInput;

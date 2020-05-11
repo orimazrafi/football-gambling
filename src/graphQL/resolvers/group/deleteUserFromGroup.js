@@ -1,6 +1,6 @@
-const GroupStore = require("../../store/group");
-const UserStore = require("../../store/user");
-const deleteUserFromGroupResolver = async (obj, args, req) => {
+import GroupStore from "../../store/group";
+import UserStore from "../../store/user";
+export const deleteUserFromGroupResolver = async (obj, args, req) => {
   try {
     const { groupId, userId } = args;
     await GroupStore.pullFromGroup(groupId, userId);
@@ -12,4 +12,3 @@ const deleteUserFromGroupResolver = async (obj, args, req) => {
     return UserStore.response(false, err.message, user);
   }
 };
-module.exports = deleteUserFromGroupResolver;

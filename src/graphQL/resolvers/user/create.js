@@ -1,5 +1,6 @@
-const UserStore = require("../../store/user");
-const createUserResolver = async (obj, args, req) => {
+import UserStore from "../../store/user";
+
+export const createUserResolver = async (obj, args, req) => {
   try {
     const { name, image, email } = args.user;
 
@@ -21,5 +22,3 @@ const createUserResolver = async (obj, args, req) => {
     return UserStore.response(false, err.message, user);
   }
 };
-
-module.exports = createUserResolver;

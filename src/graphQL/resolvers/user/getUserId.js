@@ -1,5 +1,5 @@
-const UserStore = require("../../store/user");
-const getUserIdResolver = async (obj, args, req) => {
+import UserStore from "../../store/user";
+export const getUserIdResolver = async (obj, args, req) => {
   try {
     const { email } = args.user;
 
@@ -23,5 +23,3 @@ const getUserIdResolver = async (obj, args, req) => {
     return UserStore.response(false, err.message, userResponse);
   }
 };
-
-module.exports = getUserIdResolver;
