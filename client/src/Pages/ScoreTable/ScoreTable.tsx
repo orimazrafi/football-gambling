@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Image } from "../../elements/Image";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
@@ -10,14 +10,13 @@ import { Container } from "@material-ui/core";
 import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
 import "./ScoreTable.css";
 import * as R from "ramda";
-
-import { UseSortAndCaculateByPointsAndBullseye } from "../../Hooks/UseSortAndCaculateByPoints";
-import { Group, UserScore, UserGames, UserResults } from "../../interfaces";
-import { UseCheckForGamble } from "../../Hooks/UseCheckForGamble";
+import { useSortAndCaculateByPointsAndBullseye } from "../../Hooks/useSortAndCaculateByPointsAndBullseye";
+import { Group, UserResults } from "../../interfaces";
 import { SuccessButton } from "../../elements/SuccessButton";
+import { useHandleStyle } from "../../Hooks/useHandleStyle";
+import { useMergeResultsForUpcomingCaculateAndRankingUsers } from "../../Hooks/useMergeResultsForUpcomingCaculateAndRankingUsers";
 // eslint-disable-next-line
 const log = console.log;
-const FIRST_INDEX = 0;
 const MAXIMUM_POINTS_PER_GAME = 3;
 const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
 export const ScoreTable = () => {
@@ -49,40 +48,18 @@ export const ScoreTable = () => {
       userId: localStorage.getItem("user_id"),
     },
   });
-  const [userScore, setUserScore] = useState<UserScore[]>([]);
-  const [score, setScore] = useState<any>();
-  const [order, setOrder] = useState<any>([]);
-  useEffect(() => {
-    let [
-      sortedUserId,
-      reduceUserScoreById,
-    ] = UseSortAndCaculateByPointsAndBullseye(userScore);
-    setOrder(sortedUserId);
-    setScore(reduceUserScoreById);
-    setLoadingScore(false);
-  }, [userScore]);
-
-  const mergeGamble = useCallback(
-    (users: UserGames[]) => {
-      users.forEach((user: UserGames) => {
-        const [userScore] = UseCheckForGamble(data, user, user.id);
-        setUserScore((pre: UserScore[]) => [...pre, ...userScore]);
-      });
-    },
-    [data]
+  const [loadingScore, setLoadingScore] = useState(true);
+  const { userScore } = useMergeResultsForUpcomingCaculateAndRankingUsers(
+    data,
+    setLoadingScore
   );
 
-  const [loadingScore, setLoadingScore] = useState(true);
-  useEffect(() => {
-    setLoadingScore(true);
-    let users: UserGames[] = [];
-    data?.group?.users.forEach((user: UserResults) => {
-      users.push({ games: user.results.games.slice(0, 3), id: user._id });
-    });
-    mergeGamble(users);
-  }, [data, mergeGamble]);
+  let { score, order } = useSortAndCaculateByPointsAndBullseye(
+    userScore,
+    setLoadingScore
+  );
 
-  const handleClick = (
+  const moveToOpponentsPage = (
     gambler: UserResults,
     group: Group,
     score: number,
@@ -90,20 +67,8 @@ export const ScoreTable = () => {
   ) => {
     history.push("/opponents", { gambler, group, score, bullseye });
   };
-  const lastIndex = (length: number) => length - 1;
-  const handleClass = (index: number) => {
-    let className = "0";
-    if (index === FIRST_INDEX) className = "10px 10px 0 0";
-    if (data?.group?.users && index === lastIndex(data.group.users.length))
-      className = "0 0 10px 10px";
-    if (
-      index === FIRST_INDEX &&
-      data?.group?.users &&
-      index === lastIndex(data.group.users.length)
-    )
-      className = "10px";
-    return className;
-  };
+  const { borderStylingBasedOnTheIndex } = useHandleStyle(data);
+
   const handleChat = () => {
     const { _id, chat, users } = data?.group;
     history.push("/chat", { groupId: _id, chat, users });
@@ -144,10 +109,10 @@ export const ScoreTable = () => {
                   return (
                     <ScoreRow
                       className="item"
-                      borderradius={handleClass(index)}
+                      borderradius={borderStylingBasedOnTheIndex(index)}
                       key={gambler._id}
                       onClick={() => {
-                        handleClick(
+                        moveToOpponentsPage(
                           gambler,
                           data.group,
                           score[gambler._id]?.score,

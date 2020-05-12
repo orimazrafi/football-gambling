@@ -45,8 +45,8 @@ const addMessage = async (groupId, messageInfo) =>
       $push: { chat: messageInfo },
     }
   );
-const findByName = async (name) => await Store.groups().findOne({ name });
-
+const findByName = async (name) =>
+  await Store.groups().findOne({ name: { $regex: name, $options: "i" } });
 const pullFromGroup = async (groupId, userId) =>
   await Store.groups().updateOne(
     { _id: ObjectId(groupId) },

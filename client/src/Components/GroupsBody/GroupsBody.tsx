@@ -32,7 +32,8 @@ export const GroupsBody: React.FC<{
   });
   const [resetModal, setResetModal] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const handleJoinGroupWithPasssword = (groupInput: GroupInput) => {
+
+  const OpenGroupPasswordModal = (groupInput: GroupInput) => {
     setGroupInput((prev: GroupInput) => ({
       ...prev,
       name: groupInput.name,
@@ -43,11 +44,13 @@ export const GroupsBody: React.FC<{
     setModalIsOpen(true);
     setResetModal(true);
   };
+
   const handleclose = () => {
     setModalIsOpen(false);
     setResetModal(false);
   };
-  const handleJoinGroupWithOutPasssword = (group: GroupInput) => {
+
+  const OpenAlertGroup = (group: GroupInput) => {
     confirmAlert({
       title: `Join the ${group.name}`,
       message: "Are you sure to do this?",
@@ -106,8 +109,8 @@ export const GroupsBody: React.FC<{
           <GroupsTableRow
             key={Math.random()}
             group={group}
-            onJoinGroupWithPasssword={handleJoinGroupWithPasssword}
-            onJoinGroupWithOutPasssword={handleJoinGroupWithOutPasssword}
+            onJoinGroupWithPasssword={OpenGroupPasswordModal}
+            onJoinGroupWithOutPasssword={OpenAlertGroup}
           />
         ))
       )}

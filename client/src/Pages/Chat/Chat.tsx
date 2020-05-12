@@ -7,15 +7,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 
-import { UseTyping } from "../../Hooks/UseTyping";
-import { UseStopTyping } from "../../Hooks/UseStopTyping";
-import { UseNewMessage } from "../../Hooks/UseNewMessage";
 import "./Chat.css";
 import { userIdFromLocalStorage } from "../../helpers";
+import { useTypingMessage } from "../../Hooks/useTypingMessage";
+import { useMessageSubmit } from "../../Hooks/useMessageSubmit";
 // eslint-disable-next-line
 const log = console.log;
 const USER_NOT_FOUND = -1;
-const EMPTY_MESSAGE = 0;
+const ONE_MESSAGE = 1;
 export const Chat = () => {
   const messagesContainer = useRef<any>(null);
   interface MessageInfo {
@@ -57,7 +56,6 @@ export const Chat = () => {
   const { data: newMessage } = useSubscription(NEW_MESSAGE, {
     variables: { groupId },
   });
-  const [chatMessage, setChatMessage] = useState<any>([]);
   const {
     data,
     loading: loadingUserData,
@@ -72,24 +70,26 @@ export const Chat = () => {
       userId: localStorage.getItem("user_id"),
     },
   });
-  const scrolEvent = () =>
+  const scrollEvent = () =>
     setTimeout(() => {
       messagesContainer.current.scrollTop =
         messagesContainer.current.scrollHeight;
     }, 500);
+  const [chatMessage, setChatMessage] = useState<any>([]);
 
-  const chatHasLoaded = () => chatMessage.length < 1 && !loadingUserData;
+  const chatHasLoaded = () =>
+    chatMessage.length < ONE_MESSAGE && !loadingUserData;
   useEffect(() => {
     if (chatHasLoaded()) {
       setChatMessage(data.group.chat);
-      scrolEvent();
+      scrollEvent();
     }
     if (newMessage) {
       setChatMessage((prev: any) => [
         ...prev,
         newMessage.newMessage.messageInfo,
       ]);
-      scrolEvent();
+      scrollEvent();
     }
     // eslint-disable-next-line
   }, [newMessage, data, loadingUserData]);
@@ -102,21 +102,13 @@ export const Chat = () => {
     else return true;
   };
   const [message, setMessage] = useState("");
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setMessage("");
-    await UseStopTyping(groupId);
-    await UseNewMessage(groupId, message);
-    scrolEvent();
-  };
-  const handleChange = async (e: any) => {
-    const { value } = e.target;
-    setMessage(value);
-    if (value.trim().length === EMPTY_MESSAGE) {
-      return await UseStopTyping(groupId);
-    }
-    await UseTyping(groupId);
-  };
+  const { handleSubmit } = useMessageSubmit(
+    scrollEvent,
+    setMessage,
+    groupId,
+    message
+  );
+  const { handleChange } = useTypingMessage(setMessage, groupId);
 
   return (
     <>

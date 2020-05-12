@@ -1,21 +1,18 @@
-import React, { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
+import React from "react";
+import { useSelector } from "react-redux";
 import { IconsGrid } from "../../Components/IconsGrid/IconsGrid";
-import { reduxSetTeam, reduxSetUser } from "../../Features/User/UserSlice";
 import { useQuery } from "react-apollo";
 import { FETCH_USER_RESULT } from "../../queries";
-import { toast } from "react-toastify";
 import { Game } from "../../interfaces";
 import { Team } from "../../interfaces";
 import { SuccessButton } from "../../elements/SuccessButton";
-import { UseGambleMutation } from "../../Hooks/UseGambleMutation";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
+import { useSaveWinningTeam } from "../../Hooks/useSaveWinningTeam";
+import { useChangeWinningTeam } from "../../Hooks/useChangeWinningTeam";
+import { useSetInitialUserWithTeamIfHave } from "../../Hooks/useSetInitialUserWithTeamIfHave";
 // eslint-disable-next-line
 const log = console.log;
 export const WinningTeam = () => {
-  const dispatch = useDispatch();
-
   const { user } = useSelector(
     (state: {
       user: {
@@ -41,31 +38,10 @@ export const WinningTeam = () => {
       userId: user._id || (localStorage.getItem("user_id") as string),
     },
   });
-  const userHasWinningTeam = useCallback(() => user.winningTeam !== "", [
-    user.winningTeam,
-  ]);
-  useEffect(() => {
-    const setUser = async () => {
-      await dispatch(reduxSetUser(data.getUser.user));
-      toast.success(data.getUser.message);
-    };
-    if (userHasWinningTeam()) return;
-    if (data?.getUser?.success) {
-      setUser();
-    }
-  }, [data, dispatch, userHasWinningTeam]);
-  const handleTeamChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    await dispatch(reduxSetTeam(value));
-  };
+  useSetInitialUserWithTeamIfHave(data, user);
+  const { handleChange } = useChangeWinningTeam();
+  const { handleSave } = useSaveWinningTeam(user);
 
-  const handleSave = async () => {
-    const [data] = await UseGambleMutation(user);
-    if (data.addGamble.success) {
-      return toast.success(data.addGamble.message);
-    }
-    return toast.error(data.addGamble.message);
-  };
   return (
     <>
       {loadingUserResults ? (
@@ -89,7 +65,7 @@ export const WinningTeam = () => {
                     teamName={""}
                     value={user.winningTeam}
                     key={Math.random()}
-                    onChange={handleTeamChange}
+                    onChange={handleChange}
                   />
                 ))}
               </div>

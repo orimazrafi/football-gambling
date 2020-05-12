@@ -11,6 +11,8 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuList from "@material-ui/core/MenuList";
 import "./Navbar.css";
+import { useNavbarGambleDropDown } from "../../Hooks/useNavbarGambleDropDown";
+import { usePageLocation } from "../../Hooks/usePageLocation";
 const theme = {
   marginRight: "auto",
 };
@@ -44,46 +46,21 @@ export const Navbar = ({
   // eslint-disable-next-line
   const log = console.log;
   const { pathname } = useLocation();
-  let pageLoaction = pathname.slice(1) ? pathname.slice(1) : "Home";
+  const { pageLoaction } = usePageLocation(pathname);
   let momentFormat: moment.Moment = moment();
 
   const handleLogout = () => {
     auth.logout();
   };
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<any>(null);
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+  const {
+    open,
+    anchorRef,
+    handleToggle,
+    handleCloseDropDown,
+    handleListKeyDown,
+  } = useNavbarGambleDropDown();
 
-  const handleCloseDropDown = (event: React.MouseEvent<EventTarget>) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
   return (
     <ThemeProvider theme={theme}>
       <div className="pure-menu pure-menu-horizontal">

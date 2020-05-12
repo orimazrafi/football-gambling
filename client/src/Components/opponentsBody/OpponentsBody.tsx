@@ -3,23 +3,16 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
 import { Game } from "../../interfaces";
-
 import { SmallImage } from "../../elements/SmallImage";
-import { UseHomeTeamWins } from "../../Hooks/UseHomeTeamWins";
-import { UseAwayTeamWins } from "../../Hooks/UseAwayTeamWins";
-import { UseTieGame } from "../../Hooks/UseTieGame";
+import { useGetPointsForGAmble } from "../../Hooks/useGetPointsForGAmble";
+
 // eslint-disable-next-line
 const log = console.log;
 interface Props {
   gambler: any;
   group: any;
 }
-interface Result {
-  userHome: number | string;
-  userAway: number | string;
-  leagueHome: number | string;
-  leagueAway: number | string;
-}
+
 const LOSING_POINTS = 1;
 const DRAW_POINTS = 0;
 const colorPoints = (point: any) => {
@@ -29,17 +22,9 @@ const colorPoints = (point: any) => {
   return "green";
 };
 
-const getPointsForGamble = (leagueResult: Game, userResult: Game) => {
-  let userHome = parseInt(userResult.homeTeam.score);
-  let userAway = parseInt(userResult.awayTeam.score);
-  let leagueHome = parseInt(leagueResult.homeTeam.score);
-  let leagueAway = parseInt(leagueResult.awayTeam.score);
-  let result: Result = { userHome, userAway, leagueHome, leagueAway };
-  if (leagueHome === leagueAway) return UseTieGame(result);
-  if (leagueHome > leagueAway) return UseHomeTeamWins(result);
-  if (leagueAway > leagueHome) return UseAwayTeamWins(result);
-};
 export const OpponentsBody = (props: Props) => {
+  const { getPointsForGamble } = useGetPointsForGAmble();
+
   const { gambler, group } = props;
   return (
     <TableBody>

@@ -1,33 +1,25 @@
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import moment from "moment";
 import { Image } from "../../elements/Image";
 import { Game, Team } from "../../interfaces";
-import { useSelector, useDispatch } from "react-redux";
-import { confirmAlert } from "react-confirm-alert";
-
+import { useSelector } from "react-redux";
 import { GambleWrapper } from "../../elements/GambleWrapper";
 import { GambleUnit } from "../../elements/GambleUnit";
-import {
-  reduxSetUserGames,
-  ResuxSetRandomGame,
-  reduxSetUser,
-} from "../../Features/User/UserSlice";
-import { toast } from "react-toastify";
 import { GambleButton } from "../../elements/GambleButton";
 import { FETCH_USER_RESULT } from "../../queries";
 import { useQuery } from "react-apollo";
 import { SuccessButton } from "../../elements/SuccessButton";
-import { UseGambleMutation } from "../../Hooks/UseGambleMutation";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
-import { UseAddRandomGamble } from "../../Hooks/UseAddRandomGamble";
+import { useSetMatchesGamble } from "../../Hooks/useSetMatchesGamble";
+import { useRandomGamble } from "../../Hooks/useRandomGamble";
+import { useSaveGamble } from "../../Hooks/useSaveGamble";
+import { useRandomGambleConfirmationBox } from "../../Hooks/useRandomGambleConfirmationBox";
+import { useSetIntialResultFromServer } from "../../Hooks/useSetIntialResultFromServer";
 import "./MatchesGamble.css";
 // eslint-disable-next-line
 const log = console.log;
-const MINIMUM_GAMBLE_NUMBER = 0;
-const MAXIMUM_GAMBLE_NUMBER = 10;
-
+const NUMBER_OF_PLAYED_GAMES = 3;
 export const MatchesGamble = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector(
     (state: {
       user: {
@@ -46,19 +38,6 @@ export const MatchesGamble = () => {
     }) => state.user
   );
 
-  const handleChange = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { name, value } = e.target;
-    if (
-      parseInt(value) > MINIMUM_GAMBLE_NUMBER ||
-      parseInt(value) < MAXIMUM_GAMBLE_NUMBER
-    ) {
-      await dispatch(reduxSetUserGames(index, name, value));
-    }
-  };
-
   const { data, loading: loadingUserResults } = useQuery<
     any,
     Record<string, any>
@@ -67,58 +46,12 @@ export const MatchesGamble = () => {
       userId: user._id || (localStorage.getItem("user_id") as string),
     },
   });
-  const isResultInitial = useCallback(() => user.results.games.length > 0, [
-    user.results.games.length,
-  ]);
-  useEffect(() => {
-    const setUser = async () => {
-      await dispatch(reduxSetUser(data.getUser.user));
-      toast.success(data.getUser.message);
-    };
-    if (isResultInitial()) return;
-    if (data?.getUser?.success) {
-      setUser();
-    }
-  }, [data, user.results.games.length, dispatch, isResultInitial]);
+  useSetIntialResultFromServer(user, data);
+  const { handleChange } = useSetMatchesGamble();
+  const { addRandom } = useRandomGamble(user);
+  const { handleRandomGamble } = useRandomGambleConfirmationBox(addRandom);
+  const { handleSave } = useSaveGamble(user);
 
-  const addRandom = async (index: number) => {
-    const [data] = await UseAddRandomGamble(user, index);
-    if (data.addRandomGamble.success) {
-      await dispatch(
-        ResuxSetRandomGame(data.addRandomGamble.user.results.games)
-      );
-      return toast.success(data.addRandomGamble.message);
-    }
-    return toast.error(data.addRandomGamble.message);
-  };
-
-  const handleRandomGamble = (index: number) => {
-    confirmAlert({
-      title: `Add random Gamble`,
-      message: "Are you sure to do this?",
-
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => {
-            addRandom(index);
-          },
-        },
-        {
-          label: "No",
-          onClick: () => {},
-        },
-      ],
-    });
-  };
-
-  const handleSave = async () => {
-    const [data] = await UseGambleMutation(user);
-    if (data.addGamble.success) {
-      return toast.success(data.addGamble.message);
-    }
-    return toast.error(data.addGamble.message);
-  };
   return (
     <>
       {loadingUserResults ? (
@@ -129,11 +62,11 @@ export const MatchesGamble = () => {
             {user.results.games.map((match: Game, index: number) => (
               <GambleWrapper key={Math.random()}>
                 <GambleUnit width="25%">
-                  {index < 3 ? (
+                  {index < NUMBER_OF_PLAYED_GAMES ? (
                     <span style={{ color: "#757575" }}>Played</span>
                   ) : (
                     <>
-                      {index === 3 ? (
+                      {index === NUMBER_OF_PLAYED_GAMES ? (
                         <span style={{ color: "red", fontWeight: "bold" }}>
                           Today{" "}
                         </span>

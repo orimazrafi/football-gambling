@@ -6,39 +6,18 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import "./ScoreList.css";
 import { UserResults, GroupUsersAndLeague } from "../../interfaces";
+import { useSetScoreTable } from "../../Hooks/useSetScoreTable";
 interface Props {
   group: GroupUsersAndLeague;
   gambler: UserResults;
   score: number;
   bullseye: number;
 }
-const NUMBERS_AFTER_DOT = 0;
-const MAXIMUM_POINTS_PER_GAME = 3;
-const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
 
 export const ScoreList = (props: Props) => {
   const { group, gambler, score, bullseye } = props;
-  const listItem = [
-    {
-      src: group.league.image,
-      alt: group.league.name,
-      primary: group.league.name,
-    },
-    { src: gambler.image, alt: gambler.name, primary: gambler.name },
-    { name: "Score", primary: score, fontSize: "0.8rem" },
-    {
-      name: "%",
-      primary:
-        Number(
-          (score /
-            (gambler.results.games.slice(0, 3).length *
-              MAXIMUM_POINTS_PER_GAME)) *
-            NUMBER_TO_MAKE_WHOLE_PERCENTAGE
-        ).toFixed(NUMBERS_AFTER_DOT) + "%",
-      fontSize: "0.8rem",
-    },
-    { name: "Bullesye", primary: bullseye, fontSize: "0.6rem" },
-  ];
+  const { listItem } = useSetScoreTable(group, gambler, score, bullseye);
+
   return (
     <List className="score-list">
       {listItem.map((list: any) =>

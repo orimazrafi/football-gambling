@@ -89,3 +89,9 @@ export interface UserGames {
   id: string;
   games: Game[];
 }
+export interface Result {
+  userHome: number | string;
+  userAway: number | string;
+  leagueHome: number | string;
+  leagueAway: number | string;
+}

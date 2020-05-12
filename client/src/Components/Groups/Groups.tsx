@@ -1,46 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { CreateGroup } from "../CreateGroup/CreateGroup";
-import { useSelector, useDispatch } from "react-redux";
-import { request } from "graphql-request";
-import { reduxGetGroups } from "../../Features/Group/GroupSlice";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
-import { FETCH_GROUPS } from "../../queries";
 import { LoadingText } from "../../elements/LoadingText";
 import { InputAndButtonWrapper } from "../../elements/InputAndButtonWrapper";
-import { columns, BACKEND_URL } from "../../helpers";
-import "./Groups.css";
+import { columns } from "../../helpers";
 import { GroupsTable } from "../GroupsTable/GroupsTable";
 import { UseFilter } from "../../Hooks/UseFilter";
+import { useInitailgroupsFetch } from "../../Hooks/useInitailgroupsFetch";
+import { useHandleChange } from "../../Hooks/useHandleChange";
+import "./Groups.css";
 // eslint-disable-next-line
 const log = console.log;
 export const Groups: React.FC<any> = ({ auth }) => {
   let { groups } = useSelector(
     (state: { group: { groups: any } }) => state.group
   );
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    request(BACKEND_URL, FETCH_GROUPS).then(async (data) => {
-      try {
-        await dispatch(reduxGetGroups(data.groups));
-        setLoading(false);
-        toast.success("Groups was fetched");
-      } catch (ex) {
-        setLoading(false);
-        toast.error(ex.message);
-      }
-    });
-  }, [dispatch]);
-
-  const [name, setName] = useState("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setName(value);
-  };
-
+  const { loading } = useInitailgroupsFetch();
+  const { handleChange, name } = useHandleChange();
   groups = UseFilter(groups, name);
 
   return (

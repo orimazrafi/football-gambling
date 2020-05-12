@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { ModalDialog } from "../../elements/ModalDialog";
 import { Input } from "../../elements/Input";
 import { SuccessButton } from "../../elements/SuccessButton";
 import Card from "@material-ui/core/Card";
 import { GroupInput } from "../../interfaces";
+import { useSetUserPasswordAndNumberOfWrongPasswords } from "../../Hooks/useSetUserPasswordAndNumberOfWrongPasswords";
 
 // eslint-disable-next-line
 const log = console.log;
@@ -16,7 +17,6 @@ interface Props {
   onaddUser: (group: GroupInput) => void;
   resetModal: boolean;
 }
-const NUMBER_OF_ERROR_THAT_OK = 3;
 const NUMBER_OF_ERROR_THAT_NOT_OK = 3;
 export const PasswordModal = (props: Props) => {
   const {
@@ -27,27 +27,16 @@ export const PasswordModal = (props: Props) => {
     onaddUser,
     resetModal,
   } = props;
-  useEffect(() => {
-    setError({ message: "", num: 0 });
-    setPassword("");
-  }, [resetModal]);
 
-  const [error, setError] = useState({ message: "", num: 0 });
+  const {
+    handleChange,
+    handleError,
+    password,
+    error,
+    setError,
+  } = useSetUserPasswordAndNumberOfWrongPasswords(resetModal);
 
-  const handleError = () => {
-    if (!error.message) return "";
-    if (error.message && error.num < NUMBER_OF_ERROR_THAT_OK)
-      return "Incorrect password.";
-    return `your account would be blocked if you will continue to supply false password!`;
-  };
-
-  const [password, setPassword] = useState("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword(value);
-  };
-
-  const handleJoinGroup = () => {
+  const handleAddUserOrIncrementErrors = () => {
     if (error.num === NUMBER_OF_ERROR_THAT_NOT_OK) {
       auth.logout();
     }
@@ -98,7 +87,7 @@ export const PasswordModal = (props: Props) => {
           color="primary"
           padding="0.75em 1.7em"
           background="rgb(28, 184, 65)"
-          onClick={handleJoinGroup}
+          onClick={handleAddUserOrIncrementErrors}
         >
           Join
         </SuccessButton>

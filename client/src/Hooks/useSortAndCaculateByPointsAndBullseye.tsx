@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 const addBullseye = (acc: any, key: any) => (acc[key].bullseye += 1);
 const firstBullseye = (acc: any, key: any) => (acc[key].bullseye = 1);
 const startCounting = (cur: any) => ({ score: cur.score, bullseye: 0 });
@@ -39,15 +41,26 @@ const scoredUsersArrayNotSortedFunction = (reduceUserScoreById: any) =>
   Object.keys(reduceUserScoreById).map((sortedKey) => {
     return { id: sortedKey, ...reduceUserScoreById[sortedKey] };
   });
-export const UseSortAndCaculateByPointsAndBullseye = (userScore: any) => {
-  const reduceUserScoreById = reduceUserScoreByIdfunction(userScore);
-  const scoredUsersArrayNotSorted = scoredUsersArrayNotSortedFunction(
-    reduceUserScoreById
-  );
-  const sortedArray = sortArrayByScoreAndThenByBullseye(
-    scoredUsersArrayNotSorted
-  );
+export const useSortAndCaculateByPointsAndBullseye = (
+  userScore: any,
+  setLoadingScore: any
+) => {
+  const [score, setScore] = useState<any>();
+  const [order, setOrder] = useState<any>([]);
+  useEffect(() => {
+    const reduceUserScoreById = reduceUserScoreByIdfunction(userScore);
+    const scoredUsersArrayNotSorted = scoredUsersArrayNotSortedFunction(
+      reduceUserScoreById
+    );
+    const sortedArray = sortArrayByScoreAndThenByBullseye(
+      scoredUsersArrayNotSorted
+    );
 
-  let sortedUserId = sortScoreArrayOnlyById(sortedArray);
-  return [sortedUserId, reduceUserScoreById];
+    let sortedUserId = sortScoreArrayOnlyById(sortedArray);
+    setOrder(sortedUserId);
+    setScore(reduceUserScoreById);
+    setLoadingScore(false);
+  }, [userScore, setLoadingScore]);
+
+  return { score, order };
 };

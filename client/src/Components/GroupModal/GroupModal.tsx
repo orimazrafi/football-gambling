@@ -8,15 +8,13 @@ import { UseFormData } from "../../Hooks/UseFormData";
 import { UseCloudinaryUpload } from "../../Hooks/UseCloudinaryUpload";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
-import { CHECK_GROUP_NAME_EXIST } from "../../queries";
-import { GroupBlur } from "../../interfaces";
-import { imageIcon, BACKEND_URL } from "../../helpers";
+import { imageIcon } from "../../helpers";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
 import { RadioButton } from "../../elements/RadioButton";
 import { Radio, RadioGroup, MenuItem } from "@material-ui/core";
 import { SuccessButton } from "../../elements/SuccessButton";
-import request from "graphql-request";
-
+import { useCheckForDuplicateGroupName } from "../../Hooks/useCheckForDuplicateGroupName";
+import { useBlur } from "../../Hooks/useBlur";
 interface League {
   _id: string;
   name: string;
@@ -44,9 +42,6 @@ export const GroupModal = (props: SimpleDialogProps) => {
     data,
     loadingCreateGroup,
   } = props;
-  useEffect(() => {
-    setBlur({ name: false, passwordConfirm: false, league: false });
-  }, []);
   const validateSchema = yup.object({
     name: yup.string().required().min(3).max(25),
     password: yup.string(),
@@ -61,18 +56,19 @@ export const GroupModal = (props: SimpleDialogProps) => {
     league: yup.string().min(2).required(),
   });
 
+  const {
+    handelNameBlur,
+    handlePasswordConfirmBlur,
+    handleLeagueBlur,
+    blur,
+  } = useBlur();
+
+  const [loadingImage, setLoadingImage] = useState(false);
+
   const [image, setImage] = useState(imageIcon);
   useEffect(() => {
     setImage(imageIcon);
   }, [open]);
-  const [blur, setBlur] = useState<GroupBlur>({
-    name: false,
-    passwordConfirm: false,
-    league: false,
-  });
-
-  const [loadingImage, setLoadingImage] = useState(false);
-
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setLoadingImage(true);
     const formData = UseFormData(acceptedFiles[0]);
@@ -80,27 +76,12 @@ export const GroupModal = (props: SimpleDialogProps) => {
     setImage(() => data.public_id);
     setLoadingImage(false);
   }, []);
-  const [groupName, setGroupName] = useState({
-    duplicate: false,
-    message: "",
-  });
-  useEffect(() => {
-    setGroupName({ duplicate: false, message: "" });
-  }, [open]);
+
+  const [name, setName] = useState("");
   const handleGroupName = (name: string) => {
-    setGroupName({ duplicate: false, message: "" });
-    const variables = { name };
-    request(BACKEND_URL, CHECK_GROUP_NAME_EXIST, variables).then(
-      async (groupResponse) => {
-        if (!groupResponse.checkGroupNameExist.success) {
-          setGroupName({
-            duplicate: true,
-            message: groupResponse.checkGroupNameExist.messsage,
-          });
-        }
-      }
-    );
+    setName(name);
   };
+  const { groupName } = useCheckForDuplicateGroupName(name, open);
 
   return (
     <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
@@ -142,7 +123,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
               autoFocus={true}
               onBlur={(e: any) => {
                 handleGroupName(values["name"]);
-                setBlur((prev: GroupBlur) => ({ ...prev, name: true }));
+                handelNameBlur();
               }}
               error={
                 (blur.name && errors["name"]) || groupName.duplicate
@@ -166,7 +147,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
                 "If you will not provide password you'r group would be public."
               }
               onBlur={(e: any) => {
-                setBlur((prev: GroupBlur) => ({ ...prev, name: true }));
+                handlePasswordConfirmBlur();
               }}
               InputLabelProps={{
                 shrink: true,
@@ -194,10 +175,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
                   : false
               }
               onBlur={(e: any) => {
-                setBlur((prev: GroupBlur) => ({
-                  ...prev,
-                  passwordConfirm: true,
-                }));
+                handleLeagueBlur();
               }}
               InputLabelProps={{
                 shrink: true,
@@ -267,10 +245,11 @@ export const GroupModal = (props: SimpleDialogProps) => {
                 helperText={blur.league && errors["league"]}
                 error={blur.league && errors["league"] ? true : false}
                 onBlur={(e: any) => {
-                  setBlur((prev: GroupBlur) => ({
-                    ...prev,
-                    league: true,
-                  }));
+                  handleLeagueBlur();
+                  // setBlur((prev: GroupBlur) => ({
+                  //   ...prev,
+                  //   league: true,
+                  // }));
                 }}
                 InputLabelProps={{
                   shrink: true,

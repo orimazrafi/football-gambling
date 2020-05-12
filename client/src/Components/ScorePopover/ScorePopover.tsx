@@ -3,6 +3,7 @@ import { ScoreList } from "../../Components/ScoreList/ScoreList";
 import Popover from "@material-ui/core/Popover";
 import { PrimaryButton } from "../../elements/PrimaryButton";
 import { GroupUsersAndLeague, UserResults } from "../../interfaces";
+import { usePopover } from "../../Hooks/usePopover";
 interface Props {
   group: GroupUsersAndLeague;
   gambler: UserResults;
@@ -12,19 +13,7 @@ interface Props {
 export const ScorePopover = (props: Props) => {
   const { group, gambler, score, bullseye } = props;
 
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
+  const { open, anchorEl, handleClose, handleClick } = usePopover();
   const id = open ? "simple-popover" : undefined;
   return (
     <>

@@ -1,20 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IconsGrid } from "../../Components/IconsGrid/IconsGrid";
-import { useSelector, useDispatch } from "react-redux";
-import { reduxSetPlayer, reduxSetUser } from "../../Features/User/UserSlice";
+import { useSelector } from "react-redux";
 import { useQuery } from "react-apollo";
 import { FETCH_USER_RESULT } from "../../queries";
-import { toast } from "react-toastify";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { Game, Team } from "../../interfaces";
-import { UseGambleMutation } from "../../Hooks/UseGambleMutation";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 import { userIdFromLocalStorage } from "../../helpers";
+import { useInitialSetUserGamblesAndPotentialGambles } from "../../Hooks/useInitialSetUserGamblesAndPotentialGambles";
+import { useSetWinningTeamGamble } from "../../Hooks/useSetWinningTeamGamble";
 // eslint-disable-next-line
 const log = console.log;
 export const BestScorer = () => {
-  const dispatch = useDispatch();
-
   const { user } = useSelector(
     (state: {
       user: {
@@ -41,28 +38,11 @@ export const BestScorer = () => {
       userId: user._id || userIdFromLocalStorage(),
     },
   });
-  useEffect(() => {
-    const setUser = async () => {
-      await dispatch(reduxSetUser(data.getUser.user));
-      toast.success(data.getUser.message);
-    };
-    if (user.bestScorer !== "") return;
-    if (data?.getUser?.success) {
-      setUser();
-    }
-  }, [data, dispatch, user.bestScorer]);
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    await dispatch(reduxSetPlayer(value));
-  };
 
-  const handleSave = async () => {
-    const [data] = await UseGambleMutation(user);
-    if (data.addGamble.success) {
-      return toast.success(data.addGamble.message);
-    }
-    return toast.error(data.addGamble.message);
-  };
+  useInitialSetUserGamblesAndPotentialGambles(data, user);
+
+  const { handleChange, handleSave } = useSetWinningTeamGamble(user);
+
   return (
     <>
       {loadingUserResults ? (
