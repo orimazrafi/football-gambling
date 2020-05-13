@@ -6,8 +6,8 @@ import { reduxSetUser } from "../Features/User/UserSlice";
 
 export const useSetIntialResultFromServer = (user: any, data: any) => {
   const dispatch = useDispatch();
-  const isResultInitial = useCallback(() => user.results.games.length > 0, [
-    user.results.games.length,
+  const isResultInitial = useCallback(() => user?.results?.games?.length > 0, [
+    user,
   ]);
   useEffect(() => {
     const setUser = async () => {

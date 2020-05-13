@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { IconsGrid } from "../../Components/IconsGrid/IconsGrid";
 import { useQuery } from "react-apollo";
 import { FETCH_USER_RESULT } from "../../queries";
-import { Game } from "../../interfaces";
-import { Team } from "../../interfaces";
+import { UserGambels, Team } from "../../interfaces";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 import { useSaveWinningTeam } from "../../Hooks/useSaveWinningTeam";
@@ -12,24 +11,9 @@ import { useChangeWinningTeam } from "../../Hooks/useChangeWinningTeam";
 import { useSetInitialUserWithTeamIfHave } from "../../Hooks/useSetInitialUserWithTeamIfHave";
 // eslint-disable-next-line
 const log = console.log;
+
 export const WinningTeam = () => {
-  const { user } = useSelector(
-    (state: {
-      user: {
-        user: {
-          bestScorer: "";
-          _id: "";
-          winningTeam: "";
-          results: {
-            games: Game[];
-            teams: Team[];
-            _id: "";
-            players: [];
-          };
-        };
-      };
-    }) => state.user
-  );
+  const { user } = useSelector((state: { user: UserGambels }) => state.user);
   const { data, loading: loadingUserResults } = useQuery<
     any,
     Record<string, any>
@@ -58,7 +42,7 @@ export const WinningTeam = () => {
                   gridGap: "6rem 0 ",
                 }}
               >
-                {user.results.teams.map((team: any) => (
+                {user.results.teams.map((team: Team) => (
                   <IconsGrid
                     image={team.image}
                     name={team.name}

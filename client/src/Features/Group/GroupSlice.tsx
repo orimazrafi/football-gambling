@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "../../redux/store";
+import { Group } from "../../interfaces";
 
 const group = createSlice({
   name: "group",
@@ -16,11 +17,13 @@ const group = createSlice({
 export const { setGroups } = group.actions;
 export default group.reducer;
 
-export const reduxSetGroup = (groups: any) => async (dispatch: AppDispatch) => {
+export const reduxSetGroup = (groups: Group[]) => async (
+  dispatch: AppDispatch
+) => {
   await dispatch(setGroups(groups));
 };
 
-export const reduxGetGroups = (groups: any) => async (
+export const reduxGetGroups = (groups: Group[]) => async (
   dispatch: AppDispatch
 ) => {
   await dispatch(setGroups(groups));

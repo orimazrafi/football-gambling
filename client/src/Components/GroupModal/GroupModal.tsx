@@ -15,20 +15,24 @@ import { Radio, RadioGroup, MenuItem } from "@material-ui/core";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { useCheckForDuplicateGroupName } from "../../Hooks/useCheckForDuplicateGroupName";
 import { useBlur } from "../../Hooks/useBlur";
+import { Group } from "../../interfaces";
+interface Data {
+  leagues: League[];
+}
 interface League {
   _id: string;
   name: string;
-  label?: any;
+  label?: string;
 }
 
 export interface SimpleDialogProps {
   open: boolean;
   onClose: () => void;
-  errors: any;
-  onSubmit: any;
-  loadingLeagues: any;
-  data: any;
-  loadingCreateGroup: any;
+  errors: string;
+  onSubmit: (groupInput: Group, image: string) => void;
+  loadingLeagues: boolean;
+  data: Data | undefined;
+  loadingCreateGroup: boolean;
 }
 // eslint-disable-next-line
 const log = console.log;
@@ -82,7 +86,6 @@ export const GroupModal = (props: SimpleDialogProps) => {
     setName(name);
   };
   const { groupName } = useCheckForDuplicateGroupName(name, open);
-
   return (
     <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
       <H2>Create new Group</H2>
@@ -121,7 +124,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
                 (groupName.duplicate && "Group name is already taken.")
               }
               autoFocus={true}
-              onBlur={(e: any) => {
+              onBlur={() => {
                 handleGroupName(values["name"]);
                 handelNameBlur();
               }}
@@ -146,7 +149,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
               helperText={
                 "If you will not provide password you'r group would be public."
               }
-              onBlur={(e: any) => {
+              onBlur={() => {
                 handlePasswordConfirmBlur();
               }}
               InputLabelProps={{
@@ -174,7 +177,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
                   ? true
                   : false
               }
-              onBlur={(e: any) => {
+              onBlur={() => {
                 handleLeagueBlur();
               }}
               InputLabelProps={{
@@ -244,12 +247,8 @@ export const GroupModal = (props: SimpleDialogProps) => {
                 as={Input}
                 helperText={blur.league && errors["league"]}
                 error={blur.league && errors["league"] ? true : false}
-                onBlur={(e: any) => {
+                onBlur={() => {
                   handleLeagueBlur();
-                  // setBlur((prev: GroupBlur) => ({
-                  //   ...prev,
-                  //   league: true,
-                  // }));
                 }}
                 InputLabelProps={{
                   shrink: true,

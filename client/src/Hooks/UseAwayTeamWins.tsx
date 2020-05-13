@@ -13,12 +13,7 @@ interface Result {
   leagueAway: number | string;
   id?: string;
 }
-// const bullseyeObject = (id: string) => ({ id, score: 3, name: "bullseye" });
-// const directionObject = (id: string) => ({ id, score: 1, name: "direction" });
-// const losingObject = (id: string) => ({ id, score: 0, name: "none" });
-// const WINNING_SCORE = 3;
-// const DIRECTION_SCORE = 1;
-// const LOSING_SCORE = 0;
+
 export const UseAwayTeamWins = (result: Result) => {
   if (result.userAway > result.userHome) {
     if (

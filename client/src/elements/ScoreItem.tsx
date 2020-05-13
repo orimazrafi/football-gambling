@@ -11,6 +11,4 @@ export const ScoreItem = div`
         display: inline-block;
         font-size:16px;
       }
-      
-    
 `;

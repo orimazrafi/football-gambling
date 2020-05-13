@@ -9,20 +9,20 @@ import { Navbar } from "./Components/Navbar/Navbar";
 import { ScoreTable } from "./Pages/ScoreTable/ScoreTable";
 import { Rules } from "./Pages/Rules/Rules";
 import { Opponents } from "./Pages/Opponents/Opponents";
-
 import { InMemoryCache } from "apollo-boost";
 import ApolloClient from "apollo-client";
-
 import { ApolloProvider } from "react-apollo";
 import { ToastContainer } from "react-toastify";
 import { StylesProvider } from "@material-ui/styles";
 import { WebSocketLink } from "apollo-link-ws";
 import { BestScorer } from "./Pages/BestScorer/BestScorer";
-import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
 import { WinningTeam } from "./Pages/WinningTeam/WinningTeam";
 import { MatchesGamble } from "./Pages/MatchesGamble/MatchesGamble";
 import { Chat } from "./Pages/Chat/Chat";
+import { AuthAuthenticate } from "./interfaces";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+
 const client = new ApolloClient({
   link: new WebSocketLink({
     uri: "ws://localhost:8080/graphql",
@@ -43,7 +43,7 @@ const App = ({
   name,
   auth,
   image,
-}: { name: string; auth: any; image: string } | any) => {
+}: { name: string; auth: AuthAuthenticate; image: string } | any) => {
   return (
     <ApolloProvider client={client}>
       <Router>

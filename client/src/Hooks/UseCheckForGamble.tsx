@@ -1,9 +1,13 @@
 import { UseTieGame } from "./UseTieGame";
 import { UseHomeTeamWins } from "./UseHomeTeamWins";
 import { UseAwayTeamWins } from "./UseAwayTeamWins";
-import { UserScore } from "../interfaces";
+import { UserScore, Game } from "../interfaces";
 
-export const UseCheckForGamble = (data: any, user: any, id: string) => {
+export const UseCheckForGamble = (
+  data: { group: { league: { games: Game[] } } },
+  user: { games: Game[] },
+  id: string
+) => {
   let userScore: UserScore[] | any = [];
   user.games.forEach((u: any, index: number) => {
     let userHome = parseInt(u.homeTeam.score);

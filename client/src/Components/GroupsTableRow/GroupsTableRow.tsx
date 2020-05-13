@@ -1,7 +1,7 @@
 import React from "react";
 import { Group } from "../../interfaces";
 import { Image } from "../../elements/Image";
-import { User } from "../../interfaces";
+import { User, JoinGroupDetails } from "../../interfaces";
 import { useHistory } from "react-router-dom";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
@@ -10,8 +10,8 @@ import { cloudinaryImageUrl } from "../../helpers";
 
 interface Props {
   group: Group;
-  onJoinGroupWithPasssword: (groupInput: any) => void;
-  onJoinGroupWithOutPasssword: (groupInput: any) => void;
+  onJoinGroupWithPasssword: (groupInput: JoinGroupDetails) => void;
+  onJoinGroupWithOutPasssword: (groupInput: JoinGroupDetails) => void;
 }
 export const GroupsTableRow = (props: Props) => {
   const history = useHistory();

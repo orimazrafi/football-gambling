@@ -1,10 +1,12 @@
+import { GroupUsersAndLeague, UserResults } from "../interfaces";
+
 const NUMBERS_AFTER_DOT = 0;
 const MAXIMUM_POINTS_PER_GAME = 3;
 const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
 
 export const useSetScoreTable = (
-  group: any,
-  gambler: any,
+  group: GroupUsersAndLeague,
+  gambler: UserResults,
   score: number,
   bullseye: number
 ) => {

@@ -13,6 +13,7 @@ import MenuList from "@material-ui/core/MenuList";
 import "./Navbar.css";
 import { useNavbarGambleDropDown } from "../../Hooks/useNavbarGambleDropDown";
 import { usePageLocation } from "../../Hooks/usePageLocation";
+import { AuthType } from "../../interfaces";
 const theme = {
   marginRight: "auto",
 };
@@ -25,7 +26,7 @@ export const Navbar = ({
   | {
       name: string;
       location: string;
-      auth: any;
+      auth: AuthType;
       image: string;
     }
   | any) => {

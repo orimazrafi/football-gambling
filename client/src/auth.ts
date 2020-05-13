@@ -1,9 +1,12 @@
 /* eslint no-restricted-globals: 0 */
 import auth0 from "auth0-js";
 import jwtDecode from "jwt-decode";
+import { Component } from "react";
 const LOGIN_SUCCESS_PAGE = "/secret";
 const LOGIN_FAILURE_PAGE = "/";
-export default class Auth {
+
+// type AuthType :any
+export default class Auth extends Component {
   auth0 = new auth0.WebAuth({
     domain: "orimazrafi.auth0.com",
     clientID: "KKVlmwcf5wKIdJy2OMIeO7PwoyESrDO5",
@@ -14,6 +17,7 @@ export default class Auth {
   });
 
   constructor() {
+    super(auth0);
     this.login = this.login.bind(this);
   }
   login() {

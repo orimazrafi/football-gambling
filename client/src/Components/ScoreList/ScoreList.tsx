@@ -17,7 +17,6 @@ interface Props {
 export const ScoreList = (props: Props) => {
   const { group, gambler, score, bullseye } = props;
   const { listItem } = useSetScoreTable(group, gambler, score, bullseye);
-
   return (
     <List className="score-list">
       {listItem.map((list: any) =>

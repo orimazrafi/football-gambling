@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Group } from "../../interfaces";
+import { Group, JoinGroupDetails } from "../../interfaces";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { request } from "graphql-request";
@@ -12,7 +12,7 @@ import { GroupsTableRow } from "../GroupsTableRow/GroupsTableRow";
 import { BACKEND_URL } from "../../helpers";
 import { TableBody } from "@material-ui/core";
 import { ADD_USER_TO_GROUP } from "../../mutations";
-import { GroupInput } from "../../interfaces";
+import { AuthLogout } from "../../interfaces";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./GroupsBody.css";
 
@@ -20,7 +20,7 @@ import "./GroupsBody.css";
 const log = console.log;
 
 export const GroupsBody: React.FC<{
-  auth: any;
+  auth: AuthLogout;
   groups: Group[];
 }> = ({ auth, groups }) => {
   const [groupInput, setGroupInput] = useState({
@@ -33,8 +33,8 @@ export const GroupsBody: React.FC<{
   const [resetModal, setResetModal] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const OpenGroupPasswordModal = (groupInput: GroupInput) => {
-    setGroupInput((prev: GroupInput) => ({
+  const OpenGroupPasswordModal = (groupInput: JoinGroupDetails) => {
+    setGroupInput((prev: any) => ({
       ...prev,
       name: groupInput.name,
       groupId: groupInput.groupId,
@@ -50,7 +50,7 @@ export const GroupsBody: React.FC<{
     setResetModal(false);
   };
 
-  const OpenAlertGroup = (group: GroupInput) => {
+  const OpenAlertGroup = (group: JoinGroupDetails) => {
     confirmAlert({
       title: `Join the ${group.name}`,
       message: "Are you sure to do this?",
@@ -72,7 +72,7 @@ export const GroupsBody: React.FC<{
 
   const dispatch = useDispatch();
   const [loadingAddUserToGroup, setLoadingAddUserToGroup] = useState(false);
-  const addUserToGroup = (group: GroupInput) => {
+  const addUserToGroup = (group: JoinGroupDetails) => {
     setLoadingAddUserToGroup(true);
     const variables = {
       userId: localStorage.getItem("user_id") as string,

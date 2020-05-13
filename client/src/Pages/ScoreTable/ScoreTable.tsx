@@ -11,41 +11,34 @@ import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
 import "./ScoreTable.css";
 import * as R from "ramda";
 import { useSortAndCaculateByPointsAndBullseye } from "../../Hooks/useSortAndCaculateByPointsAndBullseye";
-import { Group, UserResults } from "../../interfaces";
+import {
+  Group,
+  UserResults,
+  GroupFullObject,
+  HistoryGroupId,
+} from "../../interfaces";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { useHandleStyle } from "../../Hooks/useHandleStyle";
 import { useMergeResultsForUpcomingCaculateAndRankingUsers } from "../../Hooks/useMergeResultsForUpcomingCaculateAndRankingUsers";
+import { userIdFromLocalStorage } from "../../helpers";
 // eslint-disable-next-line
 const log = console.log;
 const MAXIMUM_POINTS_PER_GAME = 3;
 const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
+
 export const ScoreTable = () => {
-  const history: any = useHistory();
-  // const { groupId } = history?.location?.state;
+  const history: HistoryGroupId | any = useHistory();
+  const { groupId } = history.location.state;
   const {
     data,
     loading: loadingTable,
   }: {
-    data: {
-      group: {
-        _id: string;
-        name: string;
-        image: string;
-        users: any;
-        chat: any;
-        results: any;
-        league: any;
-
-        password: any;
-        limitParticipate: any;
-        maxParticipate: any;
-      };
-    };
+    data: GroupFullObject;
     loading: boolean;
   } = useQuery<any, Record<string, any>>(FETCH_USER_GROUP_LEAGUE_RESULTS, {
     variables: {
-      groupId: history?.location?.state?.groupId,
-      userId: localStorage.getItem("user_id"),
+      groupId,
+      userId: userIdFromLocalStorage(),
     },
   });
   const [loadingScore, setLoadingScore] = useState(true);

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { CreateGroup } from "../CreateGroup/CreateGroup";
 import { useSelector } from "react-redux";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
@@ -10,12 +9,14 @@ import { GroupsTable } from "../GroupsTable/GroupsTable";
 import { UseFilter } from "../../Hooks/UseFilter";
 import { useInitailgroupsFetch } from "../../Hooks/useInitailgroupsFetch";
 import { useHandleChange } from "../../Hooks/useHandleChange";
+import { AuthType, Group } from "../../interfaces";
 import "./Groups.css";
+
 // eslint-disable-next-line
 const log = console.log;
-export const Groups: React.FC<any> = ({ auth }) => {
+export const Groups: React.FC<AuthType> = ({ auth }) => {
   let { groups } = useSelector(
-    (state: { group: { groups: any } }) => state.group
+    (state: { group: { groups: Group[] } }) => state.group
   );
   const { loading } = useInitailgroupsFetch();
   const { handleChange, name } = useHandleChange();

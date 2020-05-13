@@ -1,5 +1,4 @@
 import React from "react";
-// import { ThemeProvider } from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { request } from "graphql-request";
@@ -10,12 +9,7 @@ import { FETCH_USER, SEARCH_USER } from "../../queries";
 import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../helpers";
 import { CREATE_USER } from "../../mutations";
-// const theme = {
-//   primary: "red",
-//   secondary: "green",
-//   font: "sans-serif",
-//   hoverBackground: "#FFA500",
-// };
+
 export const Secret = ({ email, name, image }: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -29,6 +23,7 @@ export const Secret = ({ email, name, image }: any) => {
     if (data.search.success) fetchUser();
     createUser();
   });
+
   const fetchUser = () => {
     request(BACKEND_URL, FETCH_USER, variables).then(async (data) => {
       if (data.getUserId.success) {

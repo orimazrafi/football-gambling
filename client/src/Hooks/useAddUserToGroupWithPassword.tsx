@@ -2,13 +2,10 @@ import { toast } from "react-toastify";
 import { request } from "graphql-request";
 import { useDispatch } from "react-redux";
 import { reduxSetGroup } from "../Features/Group/GroupSlice";
-import TableRow from "@material-ui/core/TableRow";
-import { GroupCell } from "../elements/GroupCell";
 import { BACKEND_URL } from "../helpers";
-import { TableBody } from "@material-ui/core";
 import { ADD_USER_TO_GROUP } from "../mutations";
 import { GroupInput } from "../interfaces";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 export const useAddUserToGroupWithPassword = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(true);
@@ -29,7 +26,6 @@ export const useAddUserToGroupWithPassword = () => {
           return toast.error(data.addUserToGroup.message);
         }
         await dispatch(reduxSetGroup(data.addUserToGroup.group));
-        // setModalIsOpen(false);
         setModal(false);
 
         toast.success("You were added to the group!");

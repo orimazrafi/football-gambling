@@ -2,20 +2,22 @@ import React from "react";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
-import { Game } from "../../interfaces";
+import { LeagueOfGroup, Game, UserResults } from "../../interfaces";
 import { SmallImage } from "../../elements/SmallImage";
 import { useGetPointsForGAmble } from "../../Hooks/useGetPointsForGAmble";
 
 // eslint-disable-next-line
 const log = console.log;
 interface Props {
-  gambler: any;
-  group: any;
+  gambler: UserResults;
+  group: LeagueOfGroup;
 }
 
 const LOSING_POINTS = 1;
 const DRAW_POINTS = 0;
-const colorPoints = (point: any) => {
+const colorPoints = (
+  point: { id: string; score: number; name: string } | number | undefined
+) => {
   let className = "";
   if (point === LOSING_POINTS) return (className += "red");
   if (point === DRAW_POINTS) return (className += "blue");

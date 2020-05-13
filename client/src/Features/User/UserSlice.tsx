@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "../../redux/store";
+import { UserResults, Game } from "../../interfaces";
 
 const user = createSlice({
   name: "user",
@@ -38,7 +39,8 @@ const user = createSlice({
       state.user.opponent = action.payload;
     },
     setGames: (state, action) => {
-      let gamesDuplicate: any = state.user.results.games;
+      const gamesDuplicate: any = state.user.results.games;
+      console.log(gamesDuplicate);
       gamesDuplicate[action.payload.index][action.payload.name].score =
         action.payload.value;
       state.user.results.games = gamesDuplicate;
@@ -56,7 +58,9 @@ export const {
 } = user.actions;
 export default user.reducer;
 
-export const reduxSetUser = (user: any) => async (dispatch: AppDispatch) => {
+export const reduxSetUser = (user: UserResults) => async (
+  dispatch: AppDispatch
+) => {
   localStorage.setItem("user_id", user._id);
   await dispatch(setUser(user));
 };
@@ -71,7 +75,7 @@ export const reduxSetPlayer = (bestScorer: string) => async (
   await dispatch(setPlayer(bestScorer));
 };
 
-export const ResuxSetRandomGame = (games: any) => async (
+export const ResuxSetRandomGame = (games: Game[]) => async (
   dispatch: AppDispatch
 ) => {
   await dispatch(setRandomGame(games));

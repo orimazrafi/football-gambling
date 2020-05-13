@@ -3,7 +3,7 @@ import { ModalDialog } from "../../elements/ModalDialog";
 import { Input } from "../../elements/Input";
 import { SuccessButton } from "../../elements/SuccessButton";
 import Card from "@material-ui/core/Card";
-import { GroupInput } from "../../interfaces";
+import { GroupInput, AuthLogout } from "../../interfaces";
 import { useSetUserPasswordAndNumberOfWrongPasswords } from "../../Hooks/useSetUserPasswordAndNumberOfWrongPasswords";
 
 // eslint-disable-next-line
@@ -13,7 +13,7 @@ interface Props {
   onClose: () => void;
   modalIsOpen: boolean;
   groupInput: GroupInput;
-  auth: any;
+  auth: AuthLogout;
   onaddUser: (group: GroupInput) => void;
   resetModal: boolean;
 }

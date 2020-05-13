@@ -1,8 +1,9 @@
 import request from "graphql-request";
 import { BACKEND_URL } from "../helpers";
 import { ADD_GAMBL } from "../mutations";
+import { UserWithResultsAndWinningAndScorer } from "../interfaces";
 
-export const UseGambleMutation = (user: any) => {
+export const UseGambleMutation = (user: UserWithResultsAndWinningAndScorer) => {
   const variables = {
     userId: localStorage.getItem("user_id") as string,
     leagueId: user.results._id,
