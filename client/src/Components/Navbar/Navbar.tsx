@@ -92,7 +92,7 @@ export const Navbar = ({
             role={undefined}
             transition
             disablePortal
-            style={{ zIndex: 1 }}
+            className="navbar--popper"
           >
             {({ TransitionProps, placement }) => (
               <Grow
@@ -109,10 +109,7 @@ export const Navbar = ({
                       id="menu-list-grow"
                       onKeyDown={handleListKeyDown}
                     >
-                      <ul
-                        className="pure-menu-list"
-                        style={{ flexDirection: "column" }}
-                      >
+                      <ul className="pure-menu-list dropdown--wrapper ">
                         <li className="pure-menu-item">
                           <Link
                             to="/gamble"
@@ -184,32 +181,22 @@ export const Navbar = ({
               (!user?.results?.image && !user?.results?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    margin: "2em auto",
-                  }}
-                >
+                <div className="header__gamble__wrapper">
                   <div>
                     <img
                       src={user?.results?.image}
                       alt={user?.results?.name}
-                      height="100"
-                      width="100"
-                      style={{ borderRadius: "50%", margin: "0 15px 0 0" }}
+                      className="header__gamble__wrapper__left__image"
                     />
                   </div>
                   <div>
-                    <h1 style={{ fontSize: "2.5em" }}>{pageLoaction}</h1>
+                    <h1>{pageLoaction}</h1>
                   </div>
                   <div>
                     <img
                       src={user?.results?.image}
                       alt={user?.results?.name}
-                      height="100"
-                      width="100"
-                      style={{ borderRadius: "50%", margin: "0 0 0 15px" }}
+                      className="header__gamble__wrapper__right__image"
                     />
                   </div>
                 </div>
@@ -218,32 +205,22 @@ export const Navbar = ({
               (!user?.opponent?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    margin: "2em auto",
-                  }}
-                >
+                <div className="opponents--header--wrapper">
                   <div>
                     <img
                       src={user?.opponent?.image}
                       alt={user?.opponent?.name}
-                      height="100"
-                      width="100"
-                      style={{ borderRadius: "50%", margin: "0 15px 0 0" }}
+                      className="opponents--header--wrapper__left__image"
                     />
                   </div>
                   <div>
-                    <h1 style={{ fontSize: "2.5em" }}>{pageLoaction}</h1>
+                    <h1>{pageLoaction}</h1>
                   </div>
                   <div>
                     <img
                       src={user?.opponent?.image}
                       alt={user?.opponent?.name}
-                      height="100"
-                      width="100"
-                      style={{ borderRadius: "50%", margin: "0 0 0 15px" }}
+                      className="opponents--header--wrapper__right__image"
                     />
                   </div>
                 </div>

@@ -44,8 +44,8 @@ export const Secret = ({ email, name, image }: any) => {
   };
 
   return (
-    <div style={{ height: "80vh", display: "flex" }}>
-      <div style={{ margin: "auto" }}>
+    <div className="secret--page">
+      <div className="secret--page__inner__wrapper">
         <h1>Fetching user...</h1>
         <LoadingGif loading={true} size={150} />
       </div>

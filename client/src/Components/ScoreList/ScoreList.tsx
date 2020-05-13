@@ -34,19 +34,20 @@ export const ScoreList = (props: Props) => {
           <ListItem key={Math.random()}>
             <ListItemAvatar>
               <Avatar
-                style={{ fontSize: list.fontSize, background: "blueviolet" }}
+                className="score--list--avatar--label"
+                style={{ fontSize: list.fontSize }}
               >
                 {list.name}
               </Avatar>
             </ListItemAvatar>
-            <ListItemAvatar style={{ margin: "auto" }}>
+            <ListItemAvatar
+              className="score--list--avatar--text"
+              style={{ margin: "auto" }}
+            >
               <Avatar
+                className="score--list--avatar--text__avatar"
                 style={{
                   fontSize: list.fontSize,
-                  background: "#5d5757",
-                  color: "red",
-                  fontWeight: "bold",
-                  border: "1px solid black",
                 }}
               >
                 {list.primary}

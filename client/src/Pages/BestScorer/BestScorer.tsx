@@ -9,6 +9,7 @@ import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 import { userIdFromLocalStorage } from "../../helpers";
 import { useInitialSetUserGamblesAndPotentialGambles } from "../../Hooks/useInitialSetUserGamblesAndPotentialGambles";
 import { useSetWinningTeamGamble } from "../../Hooks/useSetWinningTeamGamble";
+import "./BestScorer.css";
 // eslint-disable-next-line
 const log = console.log;
 export const BestScorer = () => {
@@ -51,14 +52,7 @@ export const BestScorer = () => {
         <>
           <div className="gambling-table">
             {user.results.players && (
-              <div
-                style={{
-                  margin: "4em auto",
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                  gridGap: "6rem 0 ",
-                }}
-              >
+              <div className="gambling-table__icon__wrapper">
                 {user.results.players.map((player: any) => (
                   <IconsGrid
                     image={player.image}

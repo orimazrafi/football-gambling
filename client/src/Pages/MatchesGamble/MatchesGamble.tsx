@@ -58,16 +58,18 @@ export const MatchesGamble = () => {
         <LoadingGif loading={loadingUserResults} size={150} />
       ) : (
         <>
-          <div className="gambling-table ">
+          <div className="gambling-table">
             {user.results.games.map((match: Game, index: number) => (
               <GambleWrapper key={Math.random()}>
                 <GambleUnit width="25%">
                   {index < NUMBER_OF_PLAYED_GAMES ? (
-                    <span style={{ color: "#757575" }}>Played</span>
+                    <span className="gambling-table__game__played__text">
+                      Played
+                    </span>
                   ) : (
                     <>
                       {index === NUMBER_OF_PLAYED_GAMES ? (
-                        <span style={{ color: "red", fontWeight: "bold" }}>
+                        <span className="gambling-table__game__playing__today__text">
                           Today{" "}
                         </span>
                       ) : (
@@ -91,7 +93,7 @@ export const MatchesGamble = () => {
                   <input
                     type="text"
                     name="homeTeam"
-                    style={{ width: "2vmax" }}
+                    className="gambling-table__score__input"
                     value={user.results.games[index].homeTeam.score}
                     disabled={index < 3}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -102,7 +104,7 @@ export const MatchesGamble = () => {
                   <input
                     type="text"
                     name="awayTeam"
-                    style={{ width: "2vmax" }}
+                    className="gambling-table__score__input"
                     disabled={index < 3}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       handleChange(e, index)

@@ -3,14 +3,12 @@ import { useSubscription } from "react-apollo";
 import gql from "graphql-tag";
 import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
 import { useQuery } from "@apollo/react-hooks";
-
 import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
-
-import "./Chat.css";
 import { userIdFromLocalStorage } from "../../helpers";
 import { useTypingMessage } from "../../Hooks/useTypingMessage";
 import { useMessageSubmit } from "../../Hooks/useMessageSubmit";
+import "./Chat.css";
 // eslint-disable-next-line
 const log = console.log;
 const USER_NOT_FOUND = -1;
@@ -112,72 +110,31 @@ export const Chat = () => {
 
   return (
     <>
-      <div
-        style={{
-          width: "40%",
-          margin: "auto",
-          height: "60vh",
-          overflow: "auto",
-        }}
-        ref={messagesContainer}
-      >
+      <div className="chat--page" ref={messagesContainer}>
         {chatMessage.map((chat: any) => (
           <div
             className={
-              isActiveUser(chat.sender) ? "active-user" : "no-active-user"
+              isActiveUser(chat.sender)
+                ? "active-user chat--page__outer__wrapper"
+                : "no-active-user chat--page__outer__wrapper"
             }
             key={Math.random()}
-            style={{
-              margin: "1em",
-              display: "flex",
-            }}
           >
             <div
               className={
                 isActiveUser(chat.sender)
-                  ? "active-background"
-                  : "no-active-background"
+                  ? "active-background chat--page__inner__wrapper"
+                  : "no-active-background chat--page__inner__wrapper"
               }
-              style={{
-                background: "#c79ae8",
-                padding: "0.7em",
-                borderRadius: "25px",
-                display: "inline-block",
-                maxWidth: "60%",
-              }}
             >
-              <div
-                style={{
-                  textAlign: "start",
-                  fontWeight: 100,
-                  fontSize: "10px",
-                  margin: "-5px 0 5px 0",
-                }}
-              >
+              <div className="chat--page__inner__wrapper__sender">
                 {chat.sender}
               </div>
-              <div style={{ display: "flex" }}>
-                <img
-                  src={chat.image}
-                  alt={chat.sender}
-                  height="20"
-                  width="20"
-                  style={{ borderRadius: "50%" }}
-                />{" "}
-                <div
-                  style={{
-                    margin: "0 0 0 2em",
-                    fontWeight: "bold",
-                    maxWidth: "80%",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  {chat.message}
-                </div>
+              <div className="chat--page__inner__wrapper__img__message__wrapper">
+                <img src={chat.image} alt={chat.sender} />{" "}
+                <div>{chat.message}</div>
               </div>
-              <div
-                style={{ textAlign: "end", fontWeight: 100, fontSize: "10px" }}
-              >
+              <div className="chat--page__inner__wrapper__time">
                 {" "}
                 {chat.time}
               </div>
@@ -188,7 +145,7 @@ export const Chat = () => {
       {!loadingData && typingData?.userTyping?.isTyping && (
         <div>{typingData?.userTyping?.name} is typing...</div>
       )}
-      <div style={{ width: "50%", margin: "auto" }}>
+      <div className="chat--page__type__message__wrapper">
         <form onSubmit={handleSubmit}>
           <TextField
             label="Message"
@@ -207,15 +164,6 @@ export const Chat = () => {
     </>
   );
 };
-// const USER_TYPING: any = gql`
-//   subscription userTyping($groupId: ID!, $userId: ID!) {
-//     userTyping(groupId: $groupId, userId: $userId) {
-//       success
-//       isTyping
-//       name
-//     }
-//   }
-// `;
 
 const NEW_MESSAGE = gql`
   subscription newMessage($groupId: ID!) {

@@ -15,3 +15,13 @@
 .MuiTabs-flexContainer {
   justify-content: space-around;
 }
+.gambling-table__game__played__text {
+  color: #757575;
+}
+.gambling-table__game__playing__today__text {
+  color: red;
+  font-weight: bold;
+}
+.gambling-table__score__input {
+  width: 2vmax;
+}

@@ -35,3 +35,49 @@
     display: none;
   }
 }
+.navbar--popper {
+  z-index: 1;
+}
+.dropdown--wrapper {
+  flex-direction: column;
+}
+.header__gamble__wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2em auto;
+}
+.header__gamble__wrapper h1 {
+  font-size: 2.5em;
+}
+.header__gamble__wrapper__left__image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 0 15px 0 0;
+}
+.header__gamble__wrapper__right__image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 0 0 15px 0;
+}
+.opponents--header--wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2em auto;
+}
+.opponents--header--wrapper h1 {
+  font-size: 2.5em;
+}
+.opponents--header--wrapper__left__image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 0 0 15px 0;
+}
+.opponents--header--wrapper__right__image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 0 0 0 15px;
+}

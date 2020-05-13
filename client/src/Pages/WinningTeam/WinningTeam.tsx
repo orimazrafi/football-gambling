@@ -34,14 +34,7 @@ export const WinningTeam = () => {
         <>
           <div className="gambling-table">
             {user.results.teams && (
-              <div
-                style={{
-                  margin: "4em auto",
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                  gridGap: "6rem 0 ",
-                }}
-              >
+              <div className="gambling-table__icon__wrapper ">
                 {user.results.teams.map((team: Team) => (
                   <IconsGrid
                     image={team.image}

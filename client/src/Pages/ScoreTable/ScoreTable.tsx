@@ -28,7 +28,6 @@ const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
 
 export const ScoreTable = () => {
   const history: HistoryGroupId | any = useHistory();
-  const { groupId } = history.location.state;
   const {
     data,
     loading: loadingTable,
@@ -37,7 +36,7 @@ export const ScoreTable = () => {
     loading: boolean;
   } = useQuery<any, Record<string, any>>(FETCH_USER_GROUP_LEAGUE_RESULTS, {
     variables: {
-      groupId,
+      groupId: history?.location?.state?.groupId,
       userId: userIdFromLocalStorage(),
     },
   });

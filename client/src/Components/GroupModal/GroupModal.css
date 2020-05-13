@@ -1,0 +1,10 @@
+.group--modal__error__title {
+  text-align: center;
+  color: red;
+}
+.group--modal__max__participate__outer__wrapper {
+  padding: "12px 20px";
+}
+.group--modal__max__participate__inner__wrapper {
+  margin: "10px 0";
+}

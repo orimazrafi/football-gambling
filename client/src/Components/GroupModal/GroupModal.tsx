@@ -16,6 +16,7 @@ import { SuccessButton } from "../../elements/SuccessButton";
 import { useCheckForDuplicateGroupName } from "../../Hooks/useCheckForDuplicateGroupName";
 import { useBlur } from "../../Hooks/useBlur";
 import { Group } from "../../interfaces";
+import "./GroupModal.css";
 interface Data {
   leagues: League[];
 }
@@ -87,10 +88,15 @@ export const GroupModal = (props: SimpleDialogProps) => {
   };
   const { groupName } = useCheckForDuplicateGroupName(name, open);
   return (
-    <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
+    <Dialog
+      className="group--modal"
+      onClose={onClose}
+      aria-labelledby="simple-dialog-title"
+      open={open}
+    >
       <H2>Create new Group</H2>
       {errors && (
-        <div style={{ textAlign: "center", color: "red" }}>
+        <div className="group--modal__error__title">
           {errors.includes("name") ? errors.slice(14) : errors}
         </div>
       )}
@@ -184,9 +190,9 @@ export const GroupModal = (props: SimpleDialogProps) => {
                 shrink: true,
               }}
             />
-            <div style={{ padding: "12px 20px" }}>
+            <div className="group--modal__max__participate__outer__wrapper">
               Max Participate
-              <div style={{ margin: "10px 0" }}>
+              <div className="group--modal__max__participate__inner__wrapper">
                 <SmallText>
                   Do you want to limit the number of participates that allow in
                   this group?
