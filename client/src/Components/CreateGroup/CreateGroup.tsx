@@ -1,28 +1,24 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import React from "react";
 
 import { PrimaryButton } from "../../elements/PrimaryButton";
 import { GroupModal } from "../GroupModal/GroupModal";
-import { FETCH_LEAGUES } from "../../queries";
-import "./CreateGroup.css";
 import { useCreateGroup } from "../../Hooks/useCreateGroup";
+import { useFetchLeaguesForSelectBox } from "../../Hooks/useFetchLeaguesForSelectBox";
+import "./CreateGroup.css";
+import { useCreateGroupModalOpenAndClose } from "../../Hooks/useCreateGroupModalOpenAndClose";
 
 const NOT_IN_THE_ARRAY = -1;
 // eslint-disable-next-line
 const log = console.log;
-interface Data {
-  leagues: League[];
-}
+
 interface League {
   _id: string;
   name: string;
   label?: string;
 }
 export const CreateGroup = () => {
-  let { data, loading: loadingLeagues } = useQuery<
-    Data,
-    Record<string, boolean>
-  >(FETCH_LEAGUES);
+  let { data, loadingLeagues } = useFetchLeaguesForSelectBox();
+
   const haveSelectOption = () => {
     let index = data?.leagues.findIndex(
       (league: League) => league.name === "Choose A League"
@@ -34,14 +30,13 @@ export const CreateGroup = () => {
   if (!haveSelectOption()) {
     data?.leagues.unshift({ _id: "", name: "Choose A League" });
   }
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  let {
+    open,
+    handleClickOpen,
+    handleClose,
+    setOpen,
+  } = useCreateGroupModalOpenAndClose();
   const { handleSubmit, loadingCreateGroup, errors } = useCreateGroup(setOpen);
 
   return (

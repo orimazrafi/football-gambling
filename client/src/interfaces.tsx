@@ -181,3 +181,36 @@ export interface Team {
   score: string;
   image: string;
 }
+
+export interface MessageInfo {
+  sender: string;
+  message: string;
+  image: string;
+  time: string;
+}
+export interface GroupWithChat {
+  _id: string;
+  name: string;
+  image: string;
+  users: any;
+  chat: any;
+  results: any;
+  league: any;
+  password: string;
+  limitParticipate: string;
+  maxParticipate: string;
+}
+export interface NewMessage {
+  newMessage: {
+    messageInfo: MessageInfo;
+  };
+}
+export interface GroupHistory {
+  location: {
+    state: {
+      groupId: string;
+      chat: MessageInfo[];
+      users: any;
+    };
+  };
+}

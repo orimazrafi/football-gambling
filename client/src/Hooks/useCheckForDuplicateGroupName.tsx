@@ -3,7 +3,11 @@ import { CHECK_GROUP_NAME_EXIST } from "../queries";
 import { BACKEND_URL } from "../helpers";
 import request from "graphql-request";
 
-export const useCheckForDuplicateGroupName = (name: string, open: boolean) => {
+export const useCheckForDuplicateGroupName = (open: boolean) => {
+  const [name, setName] = useState("");
+  const handleGroupName = (name: string) => {
+    setName(name);
+  };
   const [groupName, setGroupName] = useState({
     duplicate: false,
     message: "",
@@ -25,5 +29,5 @@ export const useCheckForDuplicateGroupName = (name: string, open: boolean) => {
     );
   }, [name]);
 
-  return { groupName };
+  return { groupName, handleGroupName };
 };

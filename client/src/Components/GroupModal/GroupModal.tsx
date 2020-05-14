@@ -47,6 +47,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
     data,
     loadingCreateGroup,
   } = props;
+
   const validateSchema = yup.object({
     name: yup.string().required().min(3).max(25),
     password: yup.string(),
@@ -69,7 +70,6 @@ export const GroupModal = (props: SimpleDialogProps) => {
   } = useBlur();
 
   const [loadingImage, setLoadingImage] = useState(false);
-
   const [image, setImage] = useState(imageIcon);
   useEffect(() => {
     setImage(imageIcon);
@@ -82,11 +82,7 @@ export const GroupModal = (props: SimpleDialogProps) => {
     setLoadingImage(false);
   }, []);
 
-  const [name, setName] = useState("");
-  const handleGroupName = (name: string) => {
-    setName(name);
-  };
-  const { groupName } = useCheckForDuplicateGroupName(name, open);
+  const { groupName, handleGroupName } = useCheckForDuplicateGroupName(open);
   return (
     <Dialog
       className="group--modal"

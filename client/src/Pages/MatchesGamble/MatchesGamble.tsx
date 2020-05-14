@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 import { GambleWrapper } from "../../elements/GambleWrapper";
 import { GambleUnit } from "../../elements/GambleUnit";
 import { GambleButton } from "../../elements/GambleButton";
-import { FETCH_USER_RESULT } from "../../queries";
-import { useQuery } from "react-apollo";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 import { useSetMatchesGamble } from "../../Hooks/useSetMatchesGamble";
@@ -15,6 +13,7 @@ import { useRandomGamble } from "../../Hooks/useRandomGamble";
 import { useSaveGamble } from "../../Hooks/useSaveGamble";
 import { useRandomGambleConfirmationBox } from "../../Hooks/useRandomGambleConfirmationBox";
 import { useSetIntialResultFromServer } from "../../Hooks/useSetIntialResultFromServer";
+import { useFetchUserResults } from "../../Hooks/useFetchUserResults";
 import "./MatchesGamble.css";
 // eslint-disable-next-line
 const log = console.log;
@@ -38,14 +37,7 @@ export const MatchesGamble = () => {
     }) => state.user
   );
 
-  const { data, loading: loadingUserResults } = useQuery<
-    any,
-    Record<string, any>
-  >(FETCH_USER_RESULT, {
-    variables: {
-      userId: user._id || (localStorage.getItem("user_id") as string),
-    },
-  });
+  const { data, loadingUserResults } = useFetchUserResults(user._id);
   useSetIntialResultFromServer(user, data);
   const { handleChange } = useSetMatchesGamble();
   const { addRandom } = useRandomGamble(user);

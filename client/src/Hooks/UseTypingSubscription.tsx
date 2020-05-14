@@ -1,5 +1,5 @@
 import request from "graphql-request";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import gql from "graphql-tag";
 import { print } from "graphql/language/printer";
 

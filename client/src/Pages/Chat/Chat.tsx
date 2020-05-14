@@ -1,96 +1,40 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSubscription } from "react-apollo";
-import gql from "graphql-tag";
-import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../../queries";
-import { useQuery } from "@apollo/react-hooks";
+import React, { useState, useRef } from "react";
+import { GroupHistory } from "../../interfaces";
 import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { userIdFromLocalStorage } from "../../helpers";
 import { useTypingMessage } from "../../Hooks/useTypingMessage";
 import { useMessageSubmit } from "../../Hooks/useMessageSubmit";
+import { useCreateTypingFirstSubscription } from "../../Hooks/useCreateTypingFirstSubscription";
+import { useMessageSubscription } from "../../Hooks/useMessageSubscription";
+import { useFetchUserGroupResults } from "../../Hooks/useFetchUserGroupResults";
+import { useHandleFirstChatFetchAndNewMessage } from "../../Hooks/useHandleFirstChatFetchAndNewMessage";
 import "./Chat.css";
 // eslint-disable-next-line
 const log = console.log;
 const USER_NOT_FOUND = -1;
-const ONE_MESSAGE = 1;
 export const Chat = () => {
   const messagesContainer = useRef<any>(null);
-  interface MessageInfo {
-    sender: string;
-    message: string;
-    image: string;
-    time: string;
-  }
-  interface GroupHistory {
-    location: {
-      state: {
-        groupId: string;
-        chat: MessageInfo[];
-        users: any;
-      };
-    };
-  }
-  interface Group {
-    _id: string;
-    name: string;
-    image: string;
-    users: any;
-    chat: any;
-    results: any;
-    league: any;
-    password: string;
-    limitParticipate: string;
-    maxParticipate: string;
-  }
+
   const history: GroupHistory = useHistory();
   const { groupId, users } = history?.location?.state;
 
-  const { data: typingData, loading: loadingData } = useSubscription(
-    USER_TYPING,
-    {
-      variables: { groupId, userId: localStorage.getItem("user_id") as string },
-    }
-  );
-  const { data: newMessage } = useSubscription(NEW_MESSAGE, {
-    variables: { groupId },
-  });
-  const {
-    data,
-    loading: loadingUserData,
-  }: {
-    data: {
-      group: Group;
-    };
-    loading: boolean;
-  } = useQuery<any, Record<string, any>>(FETCH_USER_GROUP_LEAGUE_RESULTS, {
-    variables: {
-      groupId,
-      userId: localStorage.getItem("user_id"),
-    },
-  });
+  const { typingData, loadingData } = useCreateTypingFirstSubscription(groupId);
+  const newMessage = useMessageSubscription(groupId);
+  const { data, loadingUserData } = useFetchUserGroupResults(groupId);
+
   const scrollEvent = () =>
     setTimeout(() => {
       messagesContainer.current.scrollTop =
         messagesContainer.current.scrollHeight;
     }, 500);
-  const [chatMessage, setChatMessage] = useState<any>([]);
 
-  const chatHasLoaded = () =>
-    chatMessage.length < ONE_MESSAGE && !loadingUserData;
-  useEffect(() => {
-    if (chatHasLoaded()) {
-      setChatMessage(data.group.chat);
-      scrollEvent();
-    }
-    if (newMessage) {
-      setChatMessage((prev: any) => [
-        ...prev,
-        newMessage.newMessage.messageInfo,
-      ]);
-      scrollEvent();
-    }
-    // eslint-disable-next-line
-  }, [newMessage, data, loadingUserData]);
+  const { chatMessage } = useHandleFirstChatFetchAndNewMessage(
+    newMessage,
+    data,
+    loadingUserData,
+    scrollEvent
+  );
 
   const isActiveUser = (name: string) => {
     const index = users.findIndex(
@@ -164,27 +108,3 @@ export const Chat = () => {
     </>
   );
 };
-
-const NEW_MESSAGE = gql`
-  subscription newMessage($groupId: ID!) {
-    newMessage(groupId: $groupId) {
-      success
-      name
-      messageInfo {
-        sender
-        message
-        image
-        time
-      }
-    }
-  }
-`;
-const USER_TYPING: any = gql`
-  subscription userTyping($groupId: ID!, $userId: ID!) {
-    userTyping(groupId: $groupId, userId: $userId) {
-      success
-      isTyping
-      name
-    }
-  }
-`;

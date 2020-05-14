@@ -14,10 +14,13 @@ import "./Groups.css";
 
 // eslint-disable-next-line
 const log = console.log;
+export interface Groups {
+  group: {
+    groups: Group[];
+  };
+}
 export const Groups: React.FC<AuthType> = ({ auth }) => {
-  let { groups } = useSelector(
-    (state: { group: { groups: Group[] } }) => state.group
-  );
+  let { groups } = useSelector((state: Groups) => state.group);
   const { loading } = useInitailgroupsFetch();
   const { handleChange, name } = useHandleChange();
   groups = UseFilter(groups, name);
