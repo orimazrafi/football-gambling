@@ -6,6 +6,7 @@ import "purecss/build/pure.css";
 
 import "./HomePage.css";
 import { SuccessButton } from "../../elements/SuccessButton";
+import { WelcomeLoginTextwrapper } from "../../Components/WelcomeLoginTextwrapper/WelcomeLoginTextwrapper";
 
 // eslint-disable-next-line
 const log = console.log;
@@ -23,16 +24,7 @@ export const HomePage = ({ auth }: { auth: any }) => {
       <div>
         {!auth.isAuthenticated() ? (
           <div>
-            <hr />
-            <div className="header">
-              <h1>welcome to football gambling!</h1>
-              <pre className="header__watch__home__page">
-                Please login first
-              </pre>
-            </div>
-
-            <hr className="home--page" />
-
+            <WelcomeLoginTextwrapper />
             <SuccessButton
               margin="auto"
               variant="contained"

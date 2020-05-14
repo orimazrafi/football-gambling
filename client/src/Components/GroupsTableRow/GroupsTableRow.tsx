@@ -1,12 +1,11 @@
 import React from "react";
 import { Group } from "../../interfaces";
 import { Image } from "../../elements/Image";
-import { User, JoinGroupDetails } from "../../interfaces";
-import { useHistory } from "react-router-dom";
+import { JoinGroupDetails } from "../../interfaces";
 import TableRow from "@material-ui/core/TableRow";
 import { GroupCell } from "../../elements/GroupCell";
-import { TableButton } from "../../elements/TableButton";
 import { cloudinaryImageUrl } from "../../helpers";
+import { GroupsViewAndJoinButtons } from "../GroupsViewAndJoinButtons/GroupsViewAndJoinButtons";
 
 interface Props {
   group: Group;
@@ -14,8 +13,6 @@ interface Props {
   onJoinGroupWithOutPasssword: (groupInput: JoinGroupDetails) => void;
 }
 export const GroupsTableRow = (props: Props) => {
-  const history = useHistory();
-
   const {
     group,
     onJoinGroupWithPasssword,
@@ -48,69 +45,11 @@ export const GroupsTableRow = (props: Props) => {
       <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
         {group.users && ` ${group.users.length}/${group.maxParticipate}`}
       </GroupCell>
-      <GroupCell fontSize="12px" fontWeight="normal" textoverflow="ellipsis">
-        {group.users &&
-        group.maxParticipate &&
-        group.users.findIndex(
-          (user: User) =>
-            user._id === (localStorage.getItem("user_id") as string)
-        ) === -1 &&
-        group.users.length < group.maxParticipate ? (
-          group.password ? (
-            <TableButton
-              variant="contained"
-              color="primary"
-              background="#0000ff"
-              backgroundhover="#3f51b5"
-              onClick={() => {
-                let groupInput = {
-                  name: group.name,
-                  groupId: group._id,
-                  password: group.password,
-                  image: group.image,
-                };
-                onJoinGroupWithPasssword(groupInput);
-              }}
-            >
-              Join
-            </TableButton>
-          ) : (
-            <TableButton
-              variant="contained"
-              color="primary"
-              background="blue"
-              backgroundhover="rgba(0, 0, 0, 0.12)"
-              onClick={() => {
-                let groupInput = {
-                  name: group.name,
-                  groupId: group._id,
-                  password: group.password,
-                  image: group.image,
-                };
-                onJoinGroupWithOutPasssword(groupInput);
-              }}
-            >
-              Join
-            </TableButton>
-          )
-        ) : (
-          <TableButton
-            variant="contained"
-            background="rgba(0, 0, 0, 0.12)"
-            backgroundhover="rgba(0, 0, 0, 0.12)"
-            disabled
-          >
-            Join
-          </TableButton>
-        )}
-        <TableButton
-          background="rgb(28, 184, 65)"
-          backgroundhover="rgb(5, 236, 60)"
-          onClick={() => history.push("/score", { groupId: group._id })}
-        >
-          View
-        </TableButton>
-      </GroupCell>
+      <GroupsViewAndJoinButtons
+        group={group}
+        onJoinGroupWithPasssword={onJoinGroupWithPasssword}
+        onJoinGroupWithOutPasssword={onJoinGroupWithOutPasssword}
+      />
     </TableRow>
   );
 };

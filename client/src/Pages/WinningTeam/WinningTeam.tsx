@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IconsGrid } from "../../Components/IconsGrid/IconsGrid";
-import { UserGambels, Team } from "../../interfaces";
+import { UserGambels } from "../../interfaces";
 import { SuccessButton } from "../../elements/SuccessButton";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 import { useSaveWinningTeam } from "../../Hooks/useSaveWinningTeam";
 import { useChangeWinningTeam } from "../../Hooks/useChangeWinningTeam";
 import { useSetInitialUserWithTeamIfHave } from "../../Hooks/useSetInitialUserWithTeamIfHave";
 import { useFetchUserResults } from "../../Hooks/useFetchUserResults";
+import { ScorerAndTeamWrapper } from "../../Components/ScorerAndTeamWrapper/ScorerAndTeamWrapper";
 // eslint-disable-next-line
 const log = console.log;
 
@@ -24,22 +24,12 @@ export const WinningTeam = () => {
         <LoadingGif loading={loadingUserResults} size={150} />
       ) : (
         <>
-          <div className="gambling-table">
-            {user.results.teams && (
-              <div className="gambling-table__icon__wrapper ">
-                {user.results.teams.map((team: Team) => (
-                  <IconsGrid
-                    image={team.image}
-                    name={team.name}
-                    teamName={""}
-                    value={user.winningTeam}
-                    key={Math.random()}
-                    onChange={handleChange}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          <ScorerAndTeamWrapper
+            array={user.results.teams}
+            handleChange={handleChange}
+            user={user}
+            name={"winningTeam"}
+          />
           <SuccessButton
             margin="1em auto"
             padding="0.5em"

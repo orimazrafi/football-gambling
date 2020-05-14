@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import { Image } from "../../elements/Image";
 import { Game, Team } from "../../interfaces";
 import { useSelector } from "react-redux";
@@ -14,25 +13,28 @@ import { useSaveGamble } from "../../Hooks/useSaveGamble";
 import { useRandomGambleConfirmationBox } from "../../Hooks/useRandomGambleConfirmationBox";
 import { useSetIntialResultFromServer } from "../../Hooks/useSetIntialResultFromServer";
 import { useFetchUserResults } from "../../Hooks/useFetchUserResults";
+import { MatchDateColumn } from "../../Components/MatchDateColumn/MatchDateColumn";
+import { MatchGambleInputsWrapper } from "../../Components/MatchGambleInputsWrapper/MatchGambleInputsWrapper";
 import "./MatchesGamble.css";
 // eslint-disable-next-line
 const log = console.log;
-const NUMBER_OF_PLAYED_GAMES = 3;
+// const NUMBER_OF_PLAYED_GAMES = 3;
+interface User {
+  _id: string;
+  winningTeam: string;
+  bestScorer: string;
+  results: {
+    games: Game[];
+    _id: string;
+    players: [];
+    teams: Team[];
+  };
+}
 export const MatchesGamble = () => {
   const { user } = useSelector(
     (state: {
       user: {
-        user: {
-          _id: "";
-          winningTeam: "";
-          bestScorer: "";
-          results: {
-            games: Game[];
-            _id: "";
-            players: [];
-            teams: Team[];
-          };
-        };
+        user: User;
       };
     }) => state.user
   );
@@ -53,24 +55,7 @@ export const MatchesGamble = () => {
           <div className="gambling-table">
             {user.results.games.map((match: Game, index: number) => (
               <GambleWrapper key={Math.random()}>
-                <GambleUnit width="25%">
-                  {index < NUMBER_OF_PLAYED_GAMES ? (
-                    <span className="gambling-table__game__played__text">
-                      Played
-                    </span>
-                  ) : (
-                    <>
-                      {index === NUMBER_OF_PLAYED_GAMES ? (
-                        <span className="gambling-table__game__playing__today__text">
-                          Today{" "}
-                        </span>
-                      ) : (
-                        <>{moment(match.eventDate).format("l")}</>
-                      )}
-                      ({moment(match.eventDate).format("LT")})
-                    </>
-                  )}
-                </GambleUnit>
+                <MatchDateColumn index={index} match={match} />
                 <GambleUnit width="15%">{match.homeTeam.name}</GambleUnit>
                 <Image
                   noboard="unset"
@@ -80,30 +65,11 @@ export const MatchesGamble = () => {
                   width="30px"
                   src={match.homeTeam.image}
                 />
-
-                <GambleUnit width="10%">
-                  <input
-                    type="text"
-                    name="homeTeam"
-                    className="gambling-table__score__input"
-                    value={user.results.games[index].homeTeam.score}
-                    disabled={index < 3}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange(e, index)
-                    }
-                  />
-                  --
-                  <input
-                    type="text"
-                    name="awayTeam"
-                    className="gambling-table__score__input"
-                    disabled={index < 3}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange(e, index)
-                    }
-                    value={user.results.games[index].awayTeam.score}
-                  />
-                </GambleUnit>
+                <MatchGambleInputsWrapper
+                  user={user}
+                  index={index}
+                  handleChange={handleChange}
+                />
                 <Image
                   noboard="unset"
                   margin="10px 0 10px 0"

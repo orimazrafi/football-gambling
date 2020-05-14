@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Image } from "../../elements/Image";
 import { useHistory } from "react-router-dom";
 import { ScoreRow } from "../../elements/ScoreRow";
-import { ScoreItem } from "../../elements/ScoreItem";
 import { LoadingText } from "../../elements/LoadingText";
 import { Container } from "@material-ui/core";
 import * as R from "ramda";
@@ -13,10 +12,9 @@ import { useHandleStyle } from "../../Hooks/useHandleStyle";
 import { useMergeResultsForUpcomingCaculateAndRankingUsers } from "../../Hooks/useMergeResultsForUpcomingCaculateAndRankingUsers";
 import { useFetchUserGroupResults } from "../../Hooks/useFetchUserGroupResults";
 import "./ScoreTable.css";
+import { ScoreTableRowInformation } from "../../Components/ScoreTableRowInformation/ScoreTableRowInformation";
 // eslint-disable-next-line
 const log = console.log;
-const MAXIMUM_POINTS_PER_GAME = 3;
-const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
 
 export const ScoreTable = () => {
   const history: HistoryGroupId | any = useHistory();
@@ -95,30 +93,11 @@ export const ScoreTable = () => {
                         );
                       }}
                     >
-                      <div>{index + 1}.</div>
-                      <Image
-                        noboard="1px solid black"
-                        margin="0"
-                        verticalalign="unset"
-                        height="30px"
-                        width="30px"
-                        src={gambler.image}
+                      <ScoreTableRowInformation
+                        index={index}
+                        gambler={gambler}
+                        score={score}
                       />
-                      <ScoreItem>{gambler.name}</ScoreItem>
-                      <ScoreItem>
-                        {" "}
-                        {Number(
-                          (score[gambler._id]?.score /
-                            (gambler?.results?.games?.slice(0, 3).length *
-                              MAXIMUM_POINTS_PER_GAME)) *
-                            NUMBER_TO_MAKE_WHOLE_PERCENTAGE
-                        ).toFixed(0)}
-                        %
-                      </ScoreItem>
-                      <ScoreItem>
-                        Bullseye {score[gambler._id]?.bullseye}
-                      </ScoreItem>
-                      <ScoreItem>{score[gambler._id]?.score}</ScoreItem>
                     </ScoreRow>
                   );
                 })}
