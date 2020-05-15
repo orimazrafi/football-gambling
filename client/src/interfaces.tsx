@@ -106,6 +106,30 @@ export interface UserGambels {
     };
   };
 }
+export interface UserWithOpponents {
+  user: {
+    user: {
+      _id: string;
+      results: { name: string; image: string };
+      opponent: {
+        name: string;
+        image: string;
+      };
+    };
+  };
+}
+export interface UserWithOpponents {
+  user: {
+    user: {
+      _id: string;
+      results: { name: string; image: string };
+      opponent: {
+        name: string;
+        image: string;
+      };
+    };
+  };
+}
 export interface User {
   _id?: string;
   name: string;
@@ -140,6 +164,18 @@ export interface UserResults {
     games: Game[];
   };
 }
+export interface UserWithFullResults {
+  _id: string;
+  winningTeam: string;
+  bestScorer: string;
+  results: {
+    games: Game[];
+    _id: string;
+    players: [];
+    teams: Team[];
+  };
+}
+
 export interface UserWithWinningAndScorerResult {
   results: {
     _id: string;
@@ -211,6 +247,16 @@ export interface GroupHistory {
       groupId: string;
       chat: MessageInfo[];
       users: any;
+    };
+  };
+}
+export interface OpponentsHistory {
+  location: {
+    state: {
+      group: any;
+      gambler: any;
+      score: number;
+      bullseye: number;
     };
   };
 }

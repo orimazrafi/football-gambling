@@ -5,12 +5,13 @@ import { ScorePopover } from "../../Components/ScorePopover/ScorePopover";
 import { OpponentsTable } from "../../Components/OpponentsTable/OpponentsTable";
 import { Container } from "../../elements/Container";
 import { useSetInitialOpponent } from "../../Hooks/useSetInitialOpponent";
+import { OpponentsHistory } from "../../interfaces";
 import "./Opponents.css";
 // eslint-disable-next-line
 const log = console.log;
 
 export const Opponents = () => {
-  const history: any = useHistory();
+  const history: OpponentsHistory = useHistory();
   const { group, gambler, score, bullseye } = history.location.state;
   useSetInitialOpponent(gambler, history);
 

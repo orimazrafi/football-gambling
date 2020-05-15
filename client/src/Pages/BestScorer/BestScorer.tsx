@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { SuccessButton } from "../../elements/SuccessButton";
-import { Game, Team } from "../../interfaces";
+import { UserWithFullResults } from "../../interfaces";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
 import { useInitialSetUserGamblesAndPotentialGambles } from "../../Hooks/useInitialSetUserGamblesAndPotentialGambles";
 import { useSetWinningTeamGamble } from "../../Hooks/useSetWinningTeamGamble";
@@ -10,37 +10,9 @@ import { ScorerAndTeamWrapper } from "../../Components/ScorerAndTeamWrapper/Scor
 import "./BestScorer.css";
 // eslint-disable-next-line
 const log = console.log;
-interface User {
-  _id: string;
-  winningTeam: string;
-  bestScorer: string;
-  results: {
-    games: Game[];
-    _id: string;
-    players: [];
-    teams: Team[];
-  };
-}
 export const BestScorer = () => {
   const { user } = useSelector(
-    (
-      state: { user: { user: User } }
-      //   {
-      //   user: {
-      //     user: {
-      //       _id: string;
-      //       winningTeam: string;
-      //       bestScorer: string;
-      //       results: {
-      //         games: Game[];
-      //         _id: string;
-      //         players: [];
-      //         teams: Team[];
-      //       };
-      //     };
-      //   };
-      // }
-    ) => state.user
+    (state: { user: { user: UserWithFullResults } }) => state.user
   );
 
   const { data, loadingUserResults } = useFetchUserResults(user._id);

@@ -18,5 +18,5 @@ export const useSetIntialResultFromServer = (user: any, data: any) => {
     if (data?.getUser?.success) {
       setUser();
     }
-  }, [data, user?.results?.games?.length, dispatch, isResultInitial]);
+  }, [data, user, dispatch, isResultInitial]);
 };

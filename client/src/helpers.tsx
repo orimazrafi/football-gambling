@@ -30,3 +30,10 @@ export const DIRECTION_SCORE = 1;
 export const LOSING_SCORE = 0;
 export const userIdFromLocalStorage = () =>
   localStorage.getItem("user_id") as string;
+export const theme = {
+  primary: "teal",
+  secondary: "green",
+  font: "sans-serif",
+  fontSize: "2rem",
+  hoverBackground: "blue",
+};

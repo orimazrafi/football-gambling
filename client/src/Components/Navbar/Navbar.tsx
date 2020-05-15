@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useNavbarGambleDropDown } from "../../Hooks/useNavbarGambleDropDown";
-import { AuthType } from "../../interfaces";
+import { AuthLogout } from "../../interfaces";
 import { GambleNavbarDropDown } from "../GambleNavbarDropDown/GambleNavbarDropDown";
 import { OpponentsAndGamblesHeader } from "../OpponentsAndGamblesHeader/OpponentsAndGamblesHeader";
 import { NavbarLink } from "../NavbarLink/NavbarLink";
@@ -13,18 +13,13 @@ const theme = {
   marginRight: "auto",
 };
 
-export const Navbar = ({
-  name,
-  auth,
-  image,
-}:
-  | {
-      name: string;
-      location: string;
-      auth: AuthType;
-      image: string;
-    }
-  | any) => {
+interface Props {
+  name: string;
+  auth: AuthLogout;
+  image: string;
+}
+export const Navbar = (props: Props) => {
+  const { name, auth, image } = props;
   // eslint-disable-next-line
   const log = console.log;
 

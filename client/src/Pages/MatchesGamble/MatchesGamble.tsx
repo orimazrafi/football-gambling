@@ -1,6 +1,6 @@
 import React from "react";
 import { Image } from "../../elements/Image";
-import { Game, Team } from "../../interfaces";
+import { Game, UserWithFullResults } from "../../interfaces";
 import { useSelector } from "react-redux";
 import { GambleWrapper } from "../../elements/GambleWrapper";
 import { GambleUnit } from "../../elements/GambleUnit";
@@ -18,23 +18,12 @@ import { MatchGambleInputsWrapper } from "../../Components/MatchGambleInputsWrap
 import "./MatchesGamble.css";
 // eslint-disable-next-line
 const log = console.log;
-// const NUMBER_OF_PLAYED_GAMES = 3;
-interface User {
-  _id: string;
-  winningTeam: string;
-  bestScorer: string;
-  results: {
-    games: Game[];
-    _id: string;
-    players: [];
-    teams: Team[];
-  };
-}
+
 export const MatchesGamble = () => {
   const { user } = useSelector(
     (state: {
       user: {
-        user: User;
+        user: UserWithFullResults;
       };
     }) => state.user
   );
@@ -53,7 +42,7 @@ export const MatchesGamble = () => {
       ) : (
         <>
           <div className="gambling-table">
-            {user.results.games.map((match: Game, index: number) => (
+            {user?.results?.games?.map((match: Game, index: number) => (
               <GambleWrapper key={Math.random()}>
                 <MatchDateColumn index={index} match={match} />
                 <GambleUnit width="15%">{match.homeTeam.name}</GambleUnit>

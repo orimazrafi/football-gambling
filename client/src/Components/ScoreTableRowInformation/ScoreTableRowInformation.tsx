@@ -2,14 +2,14 @@ import React from "react";
 import { UserResults } from "../../interfaces";
 import { Image } from "../../elements/Image";
 import { ScoreItem } from "../../elements/ScoreItem";
-interface Props1 {
+interface Props {
   index: number;
   gambler: UserResults;
   score: any;
 }
 const MAXIMUM_POINTS_PER_GAME = 3;
 const NUMBER_TO_MAKE_WHOLE_PERCENTAGE = 100;
-export const ScoreTableRowInformation = (props: Props1) => {
+export const ScoreTableRowInformation = (props: Props) => {
   const { index, gambler, score } = props;
   return (
     <>

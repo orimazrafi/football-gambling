@@ -4,8 +4,8 @@ import { PrimaryButton } from "../../elements/PrimaryButton";
 import { GroupModal } from "../GroupModal/GroupModal";
 import { useCreateGroup } from "../../Hooks/useCreateGroup";
 import { useFetchLeaguesForSelectBox } from "../../Hooks/useFetchLeaguesForSelectBox";
-import "./CreateGroup.css";
 import { useCreateGroupModalOpenAndClose } from "../../Hooks/useCreateGroupModalOpenAndClose";
+import "./CreateGroup.css";
 
 const NOT_IN_THE_ARRAY = -1;
 // eslint-disable-next-line

@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { Groups } from "../../Components/Groups/Groups";
-import { defualtImage, cloudinaryFetchUrl } from "../../helpers";
+import { defualtImage, cloudinaryFetchUrl, theme } from "../../helpers";
 import "purecss/build/pure.css";
 
 import "./HomePage.css";
@@ -10,15 +10,11 @@ import { WelcomeLoginTextwrapper } from "../../Components/WelcomeLoginTextwrappe
 
 // eslint-disable-next-line
 const log = console.log;
-const theme = {
-  primary: "teal",
-  secondary: "green",
-  font: "sans-serif",
-  fontSize: "2rem",
-  hoverBackground: "blue",
-};
-
-export const HomePage = ({ auth }: { auth: any }) => {
+interface Props {
+  auth: any;
+}
+export const HomePage = (props: Props) => {
+  const { auth } = props;
   return (
     <ThemeProvider theme={theme}>
       <div>

@@ -14,11 +14,12 @@ import "./GroupsBody.css";
 
 // eslint-disable-next-line
 const log = console.log;
-
-export const GroupsBody: React.FC<{
+interface Props {
   auth: AuthLogout;
   groups: Group[];
-}> = ({ auth, groups }) => {
+}
+export const GroupsBody = (props: Props) => {
+  const { auth, groups } = props;
   const {
     OpenGroupPasswordModal,
     groupInput,

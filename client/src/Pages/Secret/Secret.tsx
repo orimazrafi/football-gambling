@@ -10,7 +10,13 @@ import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../helpers";
 import { CREATE_USER } from "../../mutations";
 
-export const Secret = ({ email, name, image }: any) => {
+interface Props {
+  email: string;
+  name: string;
+  image: string;
+}
+export const Secret = (props: Props) => {
+  const { email, name, image } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const variables = {

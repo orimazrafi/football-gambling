@@ -1,19 +1,9 @@
 import React from "react";
 import { GambleUnit } from "../../elements/GambleUnit";
-import { Game, Team } from "../../interfaces";
-interface User {
-  _id: string;
-  winningTeam: string;
-  bestScorer: string;
-  results: {
-    games: Game[];
-    _id: string;
-    players: [];
-    teams: Team[];
-  };
-}
+import { UserWithFullResults } from "../../interfaces";
+
 interface Props {
-  user: User;
+  user: UserWithFullResults;
   index: number;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement>,

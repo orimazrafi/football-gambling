@@ -4,21 +4,9 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
 import { usePageLocation } from "../../Hooks/usePageLocation";
+import { UserWithOpponents } from "../../interfaces";
 export const OpponentsAndGamblesHeader = () => {
-  const { user } = useSelector(
-    (state: {
-      user: {
-        user: {
-          _id: string;
-          results: { name: string; image: string };
-          opponent: {
-            name: string;
-            image: string;
-          };
-        };
-      };
-    }) => state.user
-  );
+  const { user } = useSelector((state: UserWithOpponents) => state.user);
   const { pathname } = useLocation();
 
   const { pageLoaction } = usePageLocation(pathname);
