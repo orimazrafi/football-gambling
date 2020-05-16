@@ -171,12 +171,13 @@ export const FETCH_USER_GROUP_LEAGUE_RESULTS: any = gql`
     }
   }
 `;
-export const SEARCH_USER = `query search( $email: String!) {
-  search( email: $email ) {
+export const SEARCH_USER = `
+  query search($email: String!) {
+    search(email: $email) {
       success
-
+    }
   }
-}`;
+`;
 export const FETCH_USER = `query getUserId($name: String!, $email: String!, $image: String!) {
   getUserId(user: { name: $name, email: $email, image: $image }) {
       success

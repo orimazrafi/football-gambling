@@ -1,14 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 
 import { request } from "graphql-request";
-import { reduxSetUser } from "../../Features/User/UserSlice";
-import { useHistory } from "react-router-dom";
 import { LoadingGif } from "../../Components/LoadingGif/LoadingGif";
-import { FETCH_USER, SEARCH_USER } from "../../queries";
-import { toast } from "react-toastify";
+import { SEARCH_USER } from "../../queries";
 import { BACKEND_URL } from "../../helpers";
-import { CREATE_USER } from "../../mutations";
+import { useFetchUser } from "../../Hooks/useFetchUser";
+import { useCreateUser } from "../../Hooks/useCreateUser";
 
 interface Props {
   email: string;
@@ -17,8 +14,6 @@ interface Props {
 }
 export const Secret = (props: Props) => {
   const { email, name, image } = props;
-  const dispatch = useDispatch();
-  const history = useHistory();
   const variables = {
     name,
     email,
@@ -26,28 +21,14 @@ export const Secret = (props: Props) => {
   };
 
   request(BACKEND_URL, SEARCH_USER, { email: email }).then(async (data) => {
-    if (data.search.success) fetchUser();
+    if (data.search.success) {
+      fetchUser();
+    }
     createUser();
   });
+  const fetchUser = useFetchUser(variables);
 
-  const fetchUser = () => {
-    request(BACKEND_URL, FETCH_USER, variables).then(async (data) => {
-      if (data.getUserId.success) {
-        toast.success(data.getUserId.message);
-        await dispatch(reduxSetUser(data.getUserId.user));
-        return history.push("/");
-      }
-    });
-  };
-  const createUser = () => {
-    request(BACKEND_URL, CREATE_USER, variables).then(async (data) => {
-      if (data.createUser.success) {
-        toast.success(data.createUser.message);
-        await dispatch(reduxSetUser(data.createUser.user));
-        return history.push("/");
-      } else toast.error(data.createUser.message);
-    });
-  };
+  const createUser = useCreateUser(variables);
 
   return (
     <div className="secret--page">
