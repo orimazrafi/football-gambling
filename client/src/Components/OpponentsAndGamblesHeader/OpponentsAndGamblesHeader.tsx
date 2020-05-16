@@ -11,14 +11,24 @@ export const OpponentsAndGamblesHeader = () => {
 
   const { pageLoaction } = usePageLocation(pathname);
   let momentFormat: moment.Moment = moment();
+  const oneOfTheGamblePages = (pageLoaction: string) => {
+    if (
+      pageLoaction === "gamble" ||
+      pageLoaction === "best-scorer" ||
+      pageLoaction === "winning-team"
+    )
+      return true;
+    else return false;
+  };
+  const opponentPage = (pageLoaction: string) =>
+    pageLoaction === "opponents" ? true : false;
+
   return (
     <>
       {pageLoaction !== "secret" && (
         <>
           <div className="header">
-            {(pageLoaction === "gamble" ||
-              pageLoaction === "best-scorer" ||
-              pageLoaction === "winning-team") &&
+            {oneOfTheGamblePages(pageLoaction) &&
               (!user?.results?.image && !user?.results?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
@@ -42,7 +52,7 @@ export const OpponentsAndGamblesHeader = () => {
                   </div>
                 </div>
               ))}
-            {pageLoaction === "opponents" &&
+            {opponentPage("opponents") &&
               (!user?.opponent?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
@@ -66,10 +76,8 @@ export const OpponentsAndGamblesHeader = () => {
                   </div>
                 </div>
               ))}
-            {pageLoaction !== "opponents" &&
-              pageLoaction !== "gamble" &&
-              pageLoaction !== "best-scorer" &&
-              pageLoaction !== "winning-team" && <h1>{pageLoaction}</h1>}
+            {!opponentPage("opponents") &&
+              !oneOfTheGamblePages(pageLoaction) && <h1>{pageLoaction}</h1>}
             <pre className="header__watch">
               {momentFormat.format("ddd, hA")}
             </pre>
