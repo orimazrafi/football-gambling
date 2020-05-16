@@ -20,5 +20,5 @@ export const useRandomGambleConfirmationBox = (addRandom: any) => {
       ],
     });
   };
-  return { handleRandomGamble };
+  return handleRandomGamble;
 };

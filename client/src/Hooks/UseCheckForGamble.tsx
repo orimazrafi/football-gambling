@@ -20,5 +20,5 @@ export const UseCheckForGamble = (
     if (leagueAway > leagueHome) userScore.push(UseAwayTeamWins(result));
   });
 
-  return [userScore];
+  return userScore;
 };

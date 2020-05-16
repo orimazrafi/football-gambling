@@ -31,5 +31,5 @@ export const useSetScoreTable = (
     },
     { name: "Bullesye", primary: bullseye, fontSize: "0.6rem" },
   ];
-  return { listItem };
+  return listItem;
 };

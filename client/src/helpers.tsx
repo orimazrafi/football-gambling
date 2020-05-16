@@ -37,3 +37,4 @@ export const theme = {
   fontSize: "2rem",
   hoverBackground: "blue",
 };
+export const WEB_SOCKET_URI = "ws://localhost:8080/graphql";

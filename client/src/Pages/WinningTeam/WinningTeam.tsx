@@ -15,7 +15,7 @@ export const WinningTeam = () => {
   const { user } = useSelector((state: { user: UserGambels }) => state.user);
   const { data, loadingUserResults } = useFetchUserResults(user._id);
   useSetInitialUserWithTeamIfHave(data, user);
-  const { handleChange } = useChangeWinningTeam();
+  const handleChange = useChangeWinningTeam();
   const { handleSave } = useSaveWinningTeam(user);
 
   return (

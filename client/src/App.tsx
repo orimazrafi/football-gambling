@@ -22,10 +22,10 @@ import { Chat } from "./Pages/Chat/Chat";
 import { AuthAuthenticate } from "./interfaces";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-
+import { WEB_SOCKET_URI } from "./helpers";
 const client = new ApolloClient({
   link: new WebSocketLink({
-    uri: "ws://localhost:8080/graphql",
+    uri: WEB_SOCKET_URI,
     options: {
       reconnect: true,
     },

@@ -8,5 +8,5 @@ export const useChangeWinningTeam = () => {
     const { value } = e.target;
     await dispatch(reduxSetTeam(value));
   };
-  return { handleChange };
+  return handleChange;
 };
