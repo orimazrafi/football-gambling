@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { GroupHistory } from "../../interfaces";
 import { useHistory } from "react-router-dom";
 import { useTypingMessage } from "../../Hooks/useTypingMessage";
@@ -16,12 +16,19 @@ const log = console.log;
 export const Chat = () => {
   const messagesContainer = useRef<any>(null);
 
-  const history: GroupHistory = useHistory();
-  const { groupId, users } = history?.location?.state;
+  const history: GroupHistory | any = useHistory();
+  useEffect(() => {
+    const userNotInGroup = () => !history?.location?.state?.groupId;
 
-  const { typingData, loadingData } = useCreateTypingFirstSubscription(groupId);
-  const newMessage = useMessageSubscription(groupId);
-  const { data, loadingUserData } = useFetchUserGroupResults(groupId);
+    userNotInGroup() && history.push("not-found");
+  }, [history]);
+  const { typingData, loadingData } = useCreateTypingFirstSubscription(
+    history?.location?.state?.groupId
+  );
+  const newMessage = useMessageSubscription(history?.location?.state?.groupId);
+  const { data, loadingUserData } = useFetchUserGroupResults(
+    history?.location?.state?.groupId
+  );
 
   const scrollEvent = () =>
     setTimeout(() => {
@@ -40,17 +47,20 @@ export const Chat = () => {
   const { handleSubmit } = useMessageSubmit(
     scrollEvent,
     setMessage,
-    groupId,
+    history?.location?.state?.groupId,
     message
   );
-  const { handleChange } = useTypingMessage(setMessage, groupId);
+  const { handleChange } = useTypingMessage(
+    setMessage,
+    history?.location?.state?.groupId
+  );
 
   return (
     <>
       <MessagesWrapper
         messagesContainer={messagesContainer}
         chatMessage={chatMessage}
-        users={users}
+        users={history?.location?.state?.users}
       />
       <IsTypingWrapper loadingData={loadingData} typingData={typingData} />
       <MessageWrapper

@@ -52,7 +52,7 @@ export const OpponentsAndGamblesHeader = () => {
                   </div>
                 </div>
               ))}
-            {opponentPage("opponents") &&
+            {opponentPage(pageLoaction) &&
               (!user?.opponent?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
@@ -76,7 +76,7 @@ export const OpponentsAndGamblesHeader = () => {
                   </div>
                 </div>
               ))}
-            {!opponentPage("opponents") &&
+            {pageLoaction !== "opponents" &&
               !oneOfTheGamblePages(pageLoaction) && <h1>{pageLoaction}</h1>}
             <pre className="header__watch">
               {momentFormat.format("ddd, hA")}

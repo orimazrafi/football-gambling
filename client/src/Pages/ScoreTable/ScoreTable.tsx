@@ -13,14 +13,24 @@ import { useMergeResultsForUpcomingCaculateAndRankingUsers } from "../../Hooks/u
 import { useFetchUserGroupResults } from "../../Hooks/useFetchUserGroupResults";
 import "./ScoreTable.css";
 import { ScoreTableRowInformation } from "../../Components/ScoreTableRowInformation/ScoreTableRowInformation";
+import { userIdFromLocalStorage } from "../../helpers";
 // eslint-disable-next-line
 const log = console.log;
-
+const NOT_IN_THE_GROUP = 0;
 export const ScoreTable = () => {
   const history: HistoryGroupId | any = useHistory();
   const { data, loadingUserData } = useFetchUserGroupResults(
     history?.location?.state?.groupId
   );
+  log(data);
+
+  const isUserPartOfTheGroup = () => {
+    let index = data?.group?.users.findIndex(
+      (user: any) => user._id === userIdFromLocalStorage()
+    );
+    if (index >= NOT_IN_THE_GROUP) return true;
+    else return false;
+  };
   const [loadingScore, setLoadingScore] = useState(true);
   const { userScore } = useMergeResultsForUpcomingCaculateAndRankingUsers(
     data,
@@ -49,14 +59,17 @@ export const ScoreTable = () => {
 
   return (
     <>
-      <SuccessButton
-        margin="auto"
-        padding="1em"
-        background="green"
-        onClick={handleChat}
-      >
-        Group Chat
-      </SuccessButton>
+      {isUserPartOfTheGroup() && (
+        <SuccessButton
+          margin="auto"
+          padding="1em"
+          background="green"
+          onClick={handleChat}
+        >
+          Group Chat
+        </SuccessButton>
+      )}
+
       <h2>{data?.group?.name}</h2>
       {data?.group?.image && (
         <Image

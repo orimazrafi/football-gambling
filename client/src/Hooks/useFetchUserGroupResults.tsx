@@ -1,5 +1,6 @@
 import { useQuery } from "react-apollo";
 import { FETCH_USER_GROUP_LEAGUE_RESULTS } from "../queries";
+import { userIdFromLocalStorage } from "../helpers";
 
 export const useFetchUserGroupResults = (groupId: string) => {
   const {
@@ -13,7 +14,7 @@ export const useFetchUserGroupResults = (groupId: string) => {
   } = useQuery<any, Record<string, any>>(FETCH_USER_GROUP_LEAGUE_RESULTS, {
     variables: {
       groupId,
-      userId: localStorage.getItem("user_id"),
+      userId: userIdFromLocalStorage(),
     },
   });
   return { data, loadingUserData };
