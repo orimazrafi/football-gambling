@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { LoadingGif } from "../LoadingGif/LoadingGif";
 import { usePageLocation } from "../../Hooks/usePageLocation";
 import { UserWithOpponents } from "../../interfaces";
+import { OpponentsHeader } from "../OpponentsHeader/OpponentsHeader";
+import { GambleHeader } from "../GambleHeader/GambleHeader";
 export const OpponentsAndGamblesHeader = () => {
   const { user } = useSelector((state: UserWithOpponents) => state.user);
   const { pathname } = useLocation();
@@ -32,49 +34,13 @@ export const OpponentsAndGamblesHeader = () => {
               (!user?.results?.image && !user?.results?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
-                <div className="header__gamble__wrapper">
-                  <div>
-                    <img
-                      src={user?.results?.image}
-                      alt={user?.results?.name}
-                      className="header__gamble__wrapper__left__image"
-                    />
-                  </div>
-                  <div>
-                    <h1>{pageLoaction}</h1>
-                  </div>
-                  <div>
-                    <img
-                      src={user?.results?.image}
-                      alt={user?.results?.name}
-                      className="header__gamble__wrapper__right__image"
-                    />
-                  </div>
-                </div>
+                <GambleHeader user={user} pageLoaction={pageLoaction} />
               ))}
             {opponentPage(pageLoaction) &&
               (!user?.opponent?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
-                <div className="opponents--header--wrapper">
-                  <div>
-                    <img
-                      src={user?.opponent?.image}
-                      alt={user?.opponent?.name}
-                      className="opponents--header--wrapper__left__image"
-                    />
-                  </div>
-                  <div>
-                    <h1>{pageLoaction}</h1>
-                  </div>
-                  <div>
-                    <img
-                      src={user?.opponent?.image}
-                      alt={user?.opponent?.name}
-                      className="opponents--header--wrapper__right__image"
-                    />
-                  </div>
-                </div>
+                <OpponentsHeader user={user} pageLoaction={pageLoaction} />
               ))}
             {pageLoaction !== "opponents" &&
               !oneOfTheGamblePages(pageLoaction) && <h1>{pageLoaction}</h1>}

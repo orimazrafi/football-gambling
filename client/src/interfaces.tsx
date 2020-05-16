@@ -118,18 +118,15 @@ export interface UserWithOpponents {
     };
   };
 }
-export interface UserWithOpponents {
-  user: {
-    user: {
-      _id: string;
-      results: { name: string; image: string };
-      opponent: {
-        name: string;
-        image: string;
-      };
-    };
+export interface UserWithOpponentsNoRedux {
+  _id: string;
+  results: { name: string; image: string };
+  opponent: {
+    name: string;
+    image: string;
   };
 }
+
 export interface User {
   _id?: string;
   name: string;
