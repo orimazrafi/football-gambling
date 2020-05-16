@@ -16,5 +16,5 @@ export const useRandomGamble = (user: any) => {
     }
     return toast.error(data.addRandomGamble.message);
   };
-  return { addRandom };
+  return addRandom;
 };

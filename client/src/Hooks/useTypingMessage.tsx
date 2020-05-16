@@ -12,5 +12,5 @@ export const useTypingMessage = (setMessage: any, groupId: any) => {
     await UseTyping(groupId);
   };
 
-  return { handleChange };
+  return handleChange;
 };

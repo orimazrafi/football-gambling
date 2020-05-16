@@ -31,9 +31,9 @@ export const MatchesGamble = () => {
   const { data, loadingUserResults } = useFetchUserResults(user._id);
   useSetIntialResultFromServer(user, data);
   const { handleChange, autoFocus } = useSetMatchesGamble();
-  const { addRandom } = useRandomGamble(user);
-  const { handleRandomGamble } = useRandomGambleConfirmationBox(addRandom);
-  const { handleSave } = useSaveGamble(user);
+  const addRandom = useRandomGamble(user);
+  const handleRandomGamble = useRandomGambleConfirmationBox(addRandom);
+  const handleSave = useSaveGamble(user);
   return (
     <>
       {loadingUserResults ? (

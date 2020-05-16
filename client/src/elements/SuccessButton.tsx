@@ -11,7 +11,7 @@ export const SuccessButton = styled(Button)<Props>`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   background: ${(props) => props.background};
-  color: #fff;
+  color: black;
   &:hover {
     background: ${(props) => props.background};
     opacity: 0.5;

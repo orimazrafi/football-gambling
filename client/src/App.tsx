@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HomePage } from "./Pages/HomePage/HomePage";
 import { Secret } from "./Pages/Secret/Secret";
 import { NotFound } from "./Pages/NotFound/NotFound";
@@ -20,12 +20,14 @@ import { WinningTeam } from "./Pages/WinningTeam/WinningTeam";
 import { MatchesGamble } from "./Pages/MatchesGamble/MatchesGamble";
 import { Chat } from "./Pages/Chat/Chat";
 import { AuthAuthenticate } from "./interfaces";
+import { WEB_SOCKET_URI } from "./helpers";
+import "purecss/build/pure.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const client = new ApolloClient({
   link: new WebSocketLink({
-    uri: "ws://localhost:8080/graphql",
+    uri: WEB_SOCKET_URI,
     options: {
       reconnect: true,
     },
@@ -35,7 +37,6 @@ const client = new ApolloClient({
     addTypename: false,
   }),
 });
-
 // eslint-disable-next-line
 const log = console.log;
 const App = ({

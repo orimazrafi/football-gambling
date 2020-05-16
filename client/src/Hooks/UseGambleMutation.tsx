@@ -12,6 +12,6 @@ export const UseGambleMutation = (user: UserWithResultsAndWinningAndScorer) => {
     bestScorer: user.bestScorer,
   };
   return request(BACKEND_URL, ADD_GAMBL, variables).then(async (data: any) => {
-    return [data];
+    return data;
   });
 };

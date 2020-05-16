@@ -1,6 +1,14 @@
-import axios from "axios";
 import { cloudinaryUrl } from "../helpers";
 
 export const UseCloudinaryUpload = async (formData: FormData) => {
-  return await axios.post(cloudinaryUrl, formData);
+  const rawResponse = await fetch(cloudinaryUrl, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+  const content = await rawResponse.json();
+  return content;
 };

@@ -10,7 +10,7 @@ export const useMergeResultsForUpcomingCaculateAndRankingUsers = (
   const mergeGamble = useCallback(
     (users: UserGames[]) => {
       users.forEach((user: UserGames) => {
-        const [userScore] = UseCheckForGamble(data, user, user.id);
+        const userScore = UseCheckForGamble(data, user, user.id);
         setUserScore((pre: UserScore[]) => [...pre, ...userScore]);
       });
     },

@@ -25,6 +25,7 @@ export const Chat = () => {
   const { typingData, loadingData } = useCreateTypingFirstSubscription(
     history?.location?.state?.groupId
   );
+
   const newMessage = useMessageSubscription(history?.location?.state?.groupId);
   const { data, loadingUserData } = useFetchUserGroupResults(
     history?.location?.state?.groupId
@@ -50,7 +51,7 @@ export const Chat = () => {
     history?.location?.state?.groupId,
     message
   );
-  const { handleChange } = useTypingMessage(
+  const handleChange = useTypingMessage(
     setMessage,
     history?.location?.state?.groupId
   );

@@ -2,7 +2,9 @@
   width: 60% !important;
   padding: 1em 3em 3em 3em;
 }
-
+.MuiCard-root {
+  overflow: scroll;
+}
 .dialog-password-group h1 {
   text-align: center;
 }

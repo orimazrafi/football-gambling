@@ -2,18 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- PWA related assets-->
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -24,7 +27,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
     <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
@@ -47,31 +50,173 @@
       rel="apple-touch-icon"
       sizes="152x152"
       href="/apple-icon-152x152.png"
-    />
+    /> -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/apple-icon-180x180.png"
+      href="images/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <!-- <link rel="mask-icon" href="images/pwa/safari-pinned-tab.svg" color="#ff7700"> -->
+    <meta name="msapplication-TileColor" content="#ffffff" />
+
+    <!-- <meta name="msapplication-TileColor" content="#2d89ef"> -->
+    <!-- <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-icon-180x180.png"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-icon-180x180.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="/android-icon-192x192.png"
-    />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      href="images/android-icon-192x192.png"
+    /> -->
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> -->
     <link rel="manifest" href="/manifest.json" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffffff" />
+    <!-- <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" /> -->
 
     <title>Football Gambling</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-functions.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
+        authDomain: "fir-cloud-messaging-1d789.firebaseapp.com",
+        databaseURL: "https://fir-cloud-messaging-1d789.firebaseio.com",
+        projectId: "fir-cloud-messaging-1d789",
+        storageBucket: "fir-cloud-messaging-1d789.appspot.com",
+        messagingSenderId: "979848836582",
+        appId: "1:979848836582:web:01b052ee0d088fdc159227",
+      };
+      firebase.initializeApp(config);
+
+      const messaging = firebase.messaging();
+      messaging
+        .requestPermission()
+        .then(function () {
+          // MsgElem.innerHTML = "Notification permission granted."
+          console.log("Notification permission granted.");
+
+          // get the token in the form of promise
+          return messaging.getToken();
+        })
+        .then(function (token) {
+          console.log(token);
+          //   //   // TokenElem.innerHTML = "token is : " + token
+        })
+        .catch(function (err) {
+          // ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
+          console.log("Unable to get permission to notify.", err);
+        });
+
+      messaging.onMessage(function (payload) {
+        console.log("payload", payload);
+      });
+    </script>
+    <!-- <script src="/client/src/firebase-messaging-sw.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script>
+      // MsgElem = document.getElementById("msg")
+      // TokenElem = document.getElementById("token")
+      // NotisElem = document.getElementById("notis")
+      // ErrElem = document.getElementById("err")
+      // Initialize Firebase
+      // TODO: Replace with your project's customized code snippet
+      var config = {
+        apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
+        authDomain: "fir-cloud-messaging-1d789.firebaseapp.com",
+        databaseURL: "https://fir-cloud-messaging-1d789.firebaseio.com",
+        projectId: "fir-cloud-messaging-1d789",
+        storageBucket: "fir-cloud-messaging-1d789.appspot.com",
+        messagingSenderId: "979848836582",
+        appId: "1:979848836582:web:01b052ee0d088fdc159227",
+      };
+      firebase.initializeApp(config);
+
+      const messaging = firebase.messaging();
+      messaging
+        .requestPermission()
+        .then(function () {
+          // MsgElem.innerHTML = "Notification permission granted."
+          console.log("Notification permission granted.");
+
+          // get the token in the form of promise
+          return messaging.getToken();
+        })
+        .then(function (token) {
+          // TokenElem.innerHTML = "token is : " + token
+        })
+        .catch(function (err) {
+          // ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
+          console.log("Unable to get permission to notify.", err);
+        });
+
+      messaging.onMessage(function (payload) {
+        console.log("Message received. ", payload);
+        // NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)
+      });
+    </script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+
+    <script>
+      var config = {
+        apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
+        authDomain: "fir-cloud-messaging-1d789.firebaseapp.com",
+        databaseURL: "https://fir-cloud-messaging-1d789.firebaseio.com",
+        projectId: "fir-cloud-messaging-1d789",
+        storageBucket: "fir-cloud-messaging-1d789.appspot.com",
+        messagingSenderId: "979848836582",
+        appId: "1:979848836582:web:01b052ee0d088fdc159227",
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script>
+      const messaging = firebase.messaging();
+      function requestTokenPermission() {
+        console.log("messging");
+        messaging
+          .requestPermission()
+          .then(function () {
+            console.log("Token", fetchToken());
+
+            //Fetch the FCM token details and store it in your database
+          })
+          .catch(function (err) {
+            if (err.code == "messaging/permission-blocked") {
+              userPermissionBlocked(); //Update the status at the backend accordingly
+            }
+          });
+      }
+      requestTokenPermission(); //Get the permission from the user
+    </script> -->
     <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
