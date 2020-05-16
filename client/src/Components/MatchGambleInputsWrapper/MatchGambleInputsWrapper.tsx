@@ -9,9 +9,11 @@ interface Props {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => Promise<void>;
+  autoFocus: { index: number; name: string };
 }
 export const MatchGambleInputsWrapper = (props: Props) => {
-  const { user, index, handleChange } = props;
+  const { user, index, handleChange, autoFocus } = props;
+
   return (
     <GambleUnit width="10%">
       <input
@@ -23,6 +25,7 @@ export const MatchGambleInputsWrapper = (props: Props) => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleChange(e, index)
         }
+        autoFocus={autoFocus.index === index && "homeTeam" === autoFocus.name}
       />
       --
       <input
@@ -34,6 +37,7 @@ export const MatchGambleInputsWrapper = (props: Props) => {
           handleChange(e, index)
         }
         value={user.results.games[index].awayTeam.score}
+        autoFocus={autoFocus.index === index && "awayTeam" === autoFocus.name}
       />
     </GambleUnit>
   );

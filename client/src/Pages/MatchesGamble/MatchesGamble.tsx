@@ -30,11 +30,10 @@ export const MatchesGamble = () => {
 
   const { data, loadingUserResults } = useFetchUserResults(user._id);
   useSetIntialResultFromServer(user, data);
-  const { handleChange } = useSetMatchesGamble();
+  const { handleChange, autoFocus } = useSetMatchesGamble();
   const { addRandom } = useRandomGamble(user);
   const { handleRandomGamble } = useRandomGambleConfirmationBox(addRandom);
   const { handleSave } = useSaveGamble(user);
-
   return (
     <>
       {loadingUserResults ? (
@@ -58,6 +57,7 @@ export const MatchesGamble = () => {
                   user={user}
                   index={index}
                   handleChange={handleChange}
+                  autoFocus={autoFocus}
                 />
                 <Image
                   noboard="unset"

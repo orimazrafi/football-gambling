@@ -40,7 +40,6 @@ const user = createSlice({
     },
     setGames: (state, action) => {
       const gamesDuplicate: any = state.user.results.games;
-      console.log(gamesDuplicate);
       gamesDuplicate[action.payload.index][action.payload.name].score =
         action.payload.value;
       state.user.results.games = gamesDuplicate;
