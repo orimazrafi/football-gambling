@@ -8,17 +8,6 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./index.css";
 
-// if ("serviceWorker" in navigator) {
-//   navigator.serviceWorker
-//     .register("./firebase-messaging-sw.js")
-//     .then(function (registration) {
-//       console.log("Registration successful, scope is:", registration.scope);
-//     })
-//     .catch(function (err) {
-//       console.log("Service worker registration failed, error:", err);
-//     });
-// }
-
 const auth = new Auth();
 declare global {
   interface Window {
@@ -41,7 +30,6 @@ window.setState = (changes) => {
 let name = auth.getProfile().name;
 let image = auth.getProfile().picture;
 let email = auth.getProfile().email;
-
 let initialState = {
   email,
   name,

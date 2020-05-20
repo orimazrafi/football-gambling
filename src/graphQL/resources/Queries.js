@@ -15,6 +15,10 @@ const Queries = gql`
       groupId: ID!
       isTyping: Boolean!
     ): UserTypingResponse!
+    sendFirebaseMessagesToAllUser(
+      title: String
+      body: String
+    ): UserFirebaseResponse!
   }
 `;
 

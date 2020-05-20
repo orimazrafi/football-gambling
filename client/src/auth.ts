@@ -10,7 +10,7 @@ export default class Auth extends Component {
   auth0 = new auth0.WebAuth({
     domain: "orimazrafi.auth0.com",
     clientID: "KKVlmwcf5wKIdJy2OMIeO7PwoyESrDO5",
-    redirectUri: "https://football-gambling.surge.sh/callback",
+    redirectUri: "http://localhost:3000/callback",
     audience: "https://orimazrafi.auth0.com/userinfo",
     responseType: "token id_token",
     scope: "openid profile email",

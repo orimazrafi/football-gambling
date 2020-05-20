@@ -15,7 +15,7 @@
 }
 
 .navbar__image__Link {
-  margin: 10px 0 10px auto;
+  margin: 10px 0 10px auto !important;
 }
 
 .imageut__link__item:hover {

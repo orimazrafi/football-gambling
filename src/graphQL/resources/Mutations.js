@@ -16,6 +16,7 @@ const Mutations = gql`
       message: String!
       groupId: ID!
     ): UserMessageResponse!
+    addFirebaseMessageToken(token: String!, userId: ID!): UserFirebaseResponse!
   }
 `;
 export default Mutations;

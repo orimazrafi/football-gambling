@@ -1,6 +1,5 @@
 importScripts("https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/6.0.1/firebase-messaging.js");
-
 var config = {
   apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
   authDomain: "fir-cloud-messaging-1d789.firebaseapp.com",
@@ -11,12 +10,4 @@ var config = {
   appId: "1:979848836582:web:01b052ee0d088fdc159227",
 };
 firebase.initializeApp(config);
-
 const messaging = firebase.messaging();
-messaging.setBackgroundMessageHandler(function (payload) {
-  const title = "Hello Worls";
-  const options = {
-    body: payload.data.status,
-  };
-  return self.registration.showNotification(title, options);
-});

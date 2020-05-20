@@ -1,4 +1,8 @@
 const Store = require("./index");
+const TITLE = "Notification Title";
+const BODY = "This is an example notification";
+const ICON =
+  "https://res.cloudinary.com/dyloyoawh/image/upload/v1587922124/images_dbvkd0.png";
 let ObjectId = require("mongodb").ObjectID;
 
 const findById = (id) => Store.findById("users", id);
@@ -37,6 +41,13 @@ const updateUser = async (userId, groupId) =>
       $push: { groups: { _id: groupId } },
     }
   );
+const updateUserMessageToken = async (userId, messageToken) =>
+  await Store.users().updateOne(
+    { _id: ObjectId(userId) },
+    {
+      $set: { messageToken },
+    }
+  );
 const pullFromUser = async (userId, groupId) =>
   await Store.groups().updateOne(
     { _id: ObjectId(userId) },
@@ -59,6 +70,17 @@ const addGamble = async (userId, leagueId, results, winningTeam, bestScorer) =>
       },
     }
   );
+const getAllUsersToken = async () =>
+  await Store.users().distinct("messageToken");
+const setNotificationPayload = async (title, body) =>
+  (payload = {
+    notification: {
+      title: title || TITLE,
+      body: body || BODY,
+      icon: ICON,
+    },
+  });
+
 const getRandomIndex = (arrayLeangth) =>
   Math.floor(Math.random() * arrayLeangth);
 module.exports = {
@@ -72,5 +94,8 @@ module.exports = {
   updateUserWithOutResult,
   findByEmail,
   getRandomIndex,
+  updateUserMessageToken,
+  getAllUsersToken,
+  setNotificationPayload,
   addGamble,
 };

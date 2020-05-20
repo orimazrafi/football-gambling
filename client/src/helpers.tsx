@@ -1,9 +1,10 @@
+import firebase from "firebase";
 export const cloudinaryFetchUrl = `https://res.cloudinary.com/dyloyoawh/image/upload`;
 export const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dyloyoawh/image/upload`;
 export const imageIcon = `iconfinder_image_103588_ig40fo`;
 export const defualtImage = `Football-Free-Download-PNG_gvtfqq.png`;
 export const columns = ["", "Name", "Admin", "Password", "Participante", ""];
-export const BACKEND_URL = "http://localhost:8080";
+export const BACKEND_URL = "https://football-gambling-backend.herokuapp.com/";
 export const cloudinaryImageUrl =
   "https://res.cloudinary.com/dyloyoawh/image/upload/v1585922209/";
 export const opponentsColumns = [
@@ -37,4 +38,19 @@ export const theme = {
   fontSize: "2rem",
   hoverBackground: "blue",
 };
-export const WEB_SOCKET_URI = "ws://localhost:8080/graphql";
+export const WEB_SOCKET_URI =
+  "ws://lhttps://football-gambling-backend.herokuapp.com/graphql";
+export const firebaseConfiguration = () => {
+  var config = {
+    apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
+    authDomain: "fir-cloud-messaging-1d789.firebaseapp.com",
+    databaseURL: "https://fir-cloud-messaging-1d789.firebaseio.com",
+    projectId: "fir-cloud-messaging-1d789",
+    storageBucket: "fir-cloud-messaging-1d789.appspot.com",
+    messagingSenderId: "979848836582",
+    appId: "1:979848836582:web:01b052ee0d088fdc159227",
+  };
+  firebase.initializeApp(config);
+  const messaging = firebase.messaging();
+  return messaging;
+};

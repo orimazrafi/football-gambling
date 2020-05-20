@@ -91,6 +91,7 @@ export const FETCH_GROUP = gql`
     }
   }
 `;
+
 export const CHECK_GROUP_NAME_EXIST = `
   query checkGroupNameExist($name: String!) {
     checkGroupNameExist(name: $name) {
@@ -99,7 +100,6 @@ export const CHECK_GROUP_NAME_EXIST = `
     }
   }
 `;
-
 export const FETCH_LEAGUE_TEAMS_AND_PLAYERS = gql`
   query league($leagueId: ID) {
     league(leagueId: $leagueId) {

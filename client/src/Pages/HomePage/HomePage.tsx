@@ -14,6 +14,7 @@ const log = console.log;
 interface Props {
   auth: any;
 }
+
 export const HomePage = (props: Props) => {
   const { auth } = props;
   return (

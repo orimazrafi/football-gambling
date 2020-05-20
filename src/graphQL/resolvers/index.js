@@ -18,6 +18,8 @@ import { checkGroupNameExistResolver } from "../resolvers/group/checkGroupNameEx
 import { randomGambleForAllSeasonResolver } from "../resolvers/user/randomGambleForAllSeason";
 import { newMessageResolver } from "../resolvers/user/newMessage";
 import { userTypingResolver } from "../resolvers/user/userTyping";
+import { addFirebaseMessageTokenResolver } from "./user/addFirebaseMessageToken";
+import { sendFirebaseMessagesToAllUserResolver } from "../resolvers/user/sendFirebaseMessagesToAllUser";
 import { withFilter } from "apollo-server";
 import UserStore from "../store/user";
 import LeagueStore from "../store/league";
@@ -34,6 +36,7 @@ const resolvers = {
     getUserId: getUserIdResolver,
     search: userSearchResolver,
     userTyping: userTypingResolver,
+    sendFirebaseMessagesToAllUser: sendFirebaseMessagesToAllUserResolver,
   },
   Mutation: {
     createGroup: createGroupResolver,
@@ -46,6 +49,7 @@ const resolvers = {
     addRandomGamble: addRandomGambleResolver,
     newMessage: newMessageResolver,
     randomGambleForAllSeason: randomGambleForAllSeasonResolver,
+    addFirebaseMessageToken: addFirebaseMessageTokenResolver,
   },
   Subscription: {
     newMessage: {
