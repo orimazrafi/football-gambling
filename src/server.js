@@ -8,6 +8,7 @@ import * as firebaseMessageInit from "./firebase";
 const resolvers = require("./graphQL/resolvers/index");
 const typeDefs = require("./graphQL/resources/index");
 const pubsub = new PubSub();
+
 const startServer = async () => {
   const server = new ApolloServer({
     typeDefs,

@@ -1,16 +1,16 @@
 import mongoClient from "mongodb";
-const MONGO_URL = process.env.MONGO_URI || "mongodb://localhost:27017";
+const MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost:27017";
 let db;
 
 async function connect(callback) {
   mongoClient.MongoClient.connect(
-    MONGO_URL,
+    MONGODB_URL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
     (err, client) => {
-      db = client.db("football-gambling");
+      db = client.db(process.env.DATABASE_NAME || "football-gambling");
       callback();
     }
   );

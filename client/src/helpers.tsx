@@ -39,7 +39,7 @@ export const theme = {
   hoverBackground: "blue",
 };
 export const WEB_SOCKET_URI =
-  "ws://lhttps://football-gambling-backend.herokuapp.com/graphql";
+  "wss://football-gambling-backend.herokuapp.com/graphql";
 export const firebaseConfiguration = () => {
   var config = {
     apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
