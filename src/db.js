@@ -11,6 +11,7 @@ async function connect(callback) {
     },
     (err, client) => {
       db = client.db(process.env.DATABASE_NAME || "football-gambling");
+
       callback();
     }
   );
