@@ -11,11 +11,10 @@ import { SuccessButton } from "../../elements/SuccessButton";
 import { useHandleStyle } from "../../Hooks/useHandleStyle";
 import { useMergeResultsForUpcomingCaculateAndRankingUsers } from "../../Hooks/useMergeResultsForUpcomingCaculateAndRankingUsers";
 import { useFetchUserGroupResults } from "../../Hooks/useFetchUserGroupResults";
-import "./ScoreTable.css";
 import { ScoreTableRowInformation } from "../../Components/ScoreTableRowInformation/ScoreTableRowInformation";
 import { userIdFromLocalStorage } from "../../helpers";
-// eslint-disable-next-line
-const log = console.log;
+import "./ScoreTable.css";
+
 const NOT_IN_THE_GROUP = 0;
 export const ScoreTable = () => {
   const history: HistoryGroupId | any = useHistory();
@@ -35,7 +34,6 @@ export const ScoreTable = () => {
     data,
     setLoadingScore
   );
-
   const { score, order } = useSortAndCaculateByPointsAndBullseye(
     userScore,
     setLoadingScore
@@ -55,7 +53,15 @@ export const ScoreTable = () => {
     const { _id, chat, users } = data?.group;
     history.push("/chat", { groupId: _id, chat, users });
   };
-
+  const userHasNoGroups = () => {
+    if (!loadingUserData && data.group === null)
+      return (
+        <h1 className="user--has--no--groups">
+          You need To join At Least one Group!
+        </h1>
+      );
+    return null;
+  };
   return (
     <>
       {isUserPartOfTheGroup() && (
@@ -87,7 +93,7 @@ export const ScoreTable = () => {
         !loadingScore && (
           <>
             <Container className="container">
-              {order.length > 0 &&
+              {order &&
                 R.sortBy(R.pipe(R.prop("_id"), R.indexOf(R.__, order) as any))(
                   data?.group?.users
                 ).map((gambler: any, index: number) => {
@@ -100,8 +106,8 @@ export const ScoreTable = () => {
                         moveToOpponentsPage(
                           gambler,
                           data.group,
-                          score[gambler._id]?.score,
-                          score[gambler._id]?.bullseye
+                          score[gambler._id]?.score || 0,
+                          score[gambler._id]?.bullseye || 0
                         );
                       }}
                     >
@@ -117,6 +123,7 @@ export const ScoreTable = () => {
           </>
         )
       )}
+      {userHasNoGroups()}
     </>
   );
 };

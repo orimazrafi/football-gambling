@@ -27,8 +27,6 @@ export interface SimpleDialogProps {
   data: Data | undefined;
   loadingCreateGroup: boolean;
 }
-// eslint-disable-next-line
-const log = console.log;
 export const GroupModal = (props: SimpleDialogProps) => {
   const {
     onClose,

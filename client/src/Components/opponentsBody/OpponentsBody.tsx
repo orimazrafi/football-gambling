@@ -7,9 +7,8 @@ import { SmallImage } from "../../elements/SmallImage";
 import { PointsPerGame } from "../PointsPerGame/PointsPerGame/PointsPerGame";
 import { FinalScoreCell } from "../FinalScoreCell/FinalScoreCell";
 import { YourGambleCell } from "../YourGambleCell/YourGambleCell";
+import "./OpponentsBody.css";
 
-// eslint-disable-next-line
-const log = console.log;
 interface Props {
   gambler: UserResults;
   group: LeagueOfGroup;
@@ -30,17 +29,21 @@ export const OpponentsBody = (props: Props) => {
                 src={match.homeTeam.image}
                 alt={match.homeTeam.name}
               ></SmallImage>
-              <p style={{ display: "inline-block" }}>{match.homeTeam.name}</p>
+              <p className="opponnets--page--team--with--image">
+                {match.homeTeam.name}
+              </p>
             </GroupCell>
             <GroupCell fontSize="1rem" fontWeight="normal" textoverflow="unset">
-              {match.awayTeam.name}
+              <p className="opponnets--page--team--with--image">
+                {match.awayTeam.name}
+              </p>
               <SmallImage
                 src={match.awayTeam.image}
                 alt={match.awayTeam.name}
               ></SmallImage>
             </GroupCell>
-            <FinalScoreCell match={match} group={group} index={index} />
             <YourGambleCell match={match} />
+            <FinalScoreCell match={match} group={group} index={index} />
             <PointsPerGame group={group} index={index} match={match} />
           </TableRow>
         );

@@ -1,0 +1,18 @@
+.score-list {
+  padding: 2em;
+}
+.score__item__text {
+  text-align: center;
+}
+.score--list--avatar--label {
+  background: "blueviolet";
+}
+.score--list--avatar--text--wrapper {
+  margin: auto;
+}
+.score--list--avatar--text__avatar {
+  background: #5d5757;
+  color: red;
+  font-weight: bold;
+  border: 1px solid black;
+}

@@ -7,8 +7,6 @@ import { Container } from "../../elements/Container";
 import { useSetInitialOpponent } from "../../Hooks/useSetInitialOpponent";
 import { OpponentsHistory } from "../../interfaces";
 import "./Opponents.css";
-// eslint-disable-next-line
-const log = console.log;
 
 export const Opponents = () => {
   const history: OpponentsHistory = useHistory();

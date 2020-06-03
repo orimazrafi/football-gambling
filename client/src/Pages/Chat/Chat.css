@@ -5,7 +5,7 @@
   background-color: grey !important;
 }
 .chat--page {
-  width: 40%;
+  width: 100%;
   margin: auto;
   height: 60vh;
   overflow: auto;
@@ -49,4 +49,9 @@
 .chat--page__type__message__wrapper {
   width: 50%;
   margin: auto;
+}
+@media screen and (min-width: 700px) {
+  .chat--page {
+    width: 40%;
+  }
 }

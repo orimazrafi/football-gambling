@@ -25,7 +25,6 @@ import { ServiceMessage } from "./Components/ServiceMessage/ServiceMessage";
 import "purecss/build/pure.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import { WEB_SOCKET_URI } from "./helpers";
 const client = new ApolloClient({
   link: new WebSocketLink({
     uri: WEB_SOCKET_URI,
@@ -39,8 +38,6 @@ const client = new ApolloClient({
   }),
 });
 
-// eslint-disable-next-line
-const log = console.log;
 const App = ({
   email,
   name,

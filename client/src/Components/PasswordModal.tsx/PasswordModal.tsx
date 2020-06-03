@@ -6,9 +6,6 @@ import Card from "@material-ui/core/Card";
 import { GroupInput, AuthLogout } from "../../interfaces";
 import { useSetUserPasswordAndNumberOfWrongPasswords } from "../../Hooks/useSetUserPasswordAndNumberOfWrongPasswords";
 
-// eslint-disable-next-line
-const log = console.log;
-
 interface Props {
   onClose: () => void;
   modalIsOpen: boolean;

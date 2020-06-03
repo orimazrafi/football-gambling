@@ -1,5 +1,8 @@
 import GroupStore from "../../store/group";
 import UserStore from "../../store/user";
+// import LeagueStore from "../../store/league";
+const MONKEY_ID = "5e9ab80b36d4382cd60e29db";
+
 export const addUserToGroupResolver = async (obj, args, req) => {
   const { userId, groupId, groupPassword } = args.userToGroup;
   let group = await GroupStore.getAllGroups();
@@ -22,12 +25,11 @@ export const addUserToGroupResolver = async (obj, args, req) => {
   }
   await GroupStore.update(groupId, userId);
 
-  let userResult = await UserStore.findById(userId);
-
-  if (userResult.results._id) {
+  if (res.results) {
     await UserStore.updateUserWithOutResult(userId, groupId);
   } else {
-    await UserStore.updateUser(userId, groupId);
+    let monkey = await UserStore.findById(MONKEY_ID);
+    await UserStore.updateUser(userId, groupId, monkey);
   }
 
   return await GroupStore.response(

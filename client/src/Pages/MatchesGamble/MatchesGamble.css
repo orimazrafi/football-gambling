@@ -1,14 +1,19 @@
-.gambling-table {
+.matches--gambling--table {
   height: 40vh;
   overflow: auto;
 }
 @media screen and (min-height: 550px) {
-  .gambling-table {
+  .matches--gambling--table {
     height: 55vh;
   }
 }
 @media screen and (min-height: 650px) {
-  .gambling-table {
+  .matches--gambling--table {
+    height: 55vh;
+  }
+}
+@media screen and (max-height: 650px) {
+  .matches--gambling--table {
     height: 55vh;
   }
 }

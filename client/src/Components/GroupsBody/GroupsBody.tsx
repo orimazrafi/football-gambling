@@ -12,8 +12,6 @@ import { useAddUserToGroupWithOrWithoutPassword } from "../../Hooks/useAddUserTo
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./GroupsBody.css";
 
-// eslint-disable-next-line
-const log = console.log;
 interface Props {
   auth: AuthLogout;
   groups: Group[];
@@ -28,7 +26,6 @@ export const GroupsBody = (props: Props) => {
     setModalIsOpen,
     resetModal,
   } = useHandleGroupModalWithPassword();
-
   const OpenAlertGroup = (group: JoinGroupDetails) => {
     confirmAlert({
       title: `Join the ${group.name}`,

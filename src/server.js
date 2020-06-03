@@ -1,4 +1,3 @@
-// const { ApolloServer } = require("apollo-server-lambda");
 import { ApolloServer, PubSub } from "apollo-server";
 const log = console.log;
 const PORT = process.env.PORT || 8080;
@@ -20,7 +19,7 @@ const startServer = async () => {
     log("app is connected to mongoDB");
   });
   server.listen({ port: PORT }).then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
+    console.log(`🚀 Server ready at right ${url}`);
   });
 };
 function get() {

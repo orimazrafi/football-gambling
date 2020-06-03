@@ -7,7 +7,7 @@ interface Props {
 }
 export const GroupCell = styled(TableCell)<Props>`
   padding: 0.2em;
-  max-width: 70px;
+  max-width: 50px;
   overflow: scroll;
   white-space: nowrap;
   text-overflow: ${(props) => props.textoverflow};

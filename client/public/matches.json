@@ -1,0 +1,892 @@
+[
+  {
+    "eventDate": "2018-06-14T15:00:00+00:00",
+    "homeTeam": {
+      "score": "",
+      "name": "Russia",
+      "image": "https://media.api-sports.io/teams/4.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Saudi Arabia",
+      "image": "https://media.api-sports.io/teams/23.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-15T12:00:00+00:00",
+    "homeTeam": {
+      "score": "",
+      "name": "Egypt",
+      "image": "https://media.api-sports.io/teams/32.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Uruguay",
+      "image": "https://media.api-sports.io/teams/7.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-15T15:00:00+00:00",
+    "homeTeam": {
+      "score": "",
+      "name": "Morocco",
+      "image": "https://media.api-sports.io/teams/31.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Iran",
+      "image": "https://media.api-sports.io/teams/22.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-15T18:00:00+00:00",
+    "homeTeam": {
+      "score": "",
+      "name": "Portugal",
+      "image": "https://media.api-sports.io/teams/27.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Spain",
+      "image": "https://media.api-sports.io/teams/9.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-16T10:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Australia",
+      "image": "https://media.api-sports.io/teams/20.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-16T13:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Argentina",
+      "image": "https://media.api-sports.io/teams/26.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Iceland",
+      "image": "https://media.api-sports.io/teams/18.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-16T16:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Peru",
+      "image": "https://media.api-sports.io/teams/30.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Denmark",
+      "image": "https://media.api-sports.io/teams/21.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-16T19:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Nigeria",
+      "image": "https://media.api-sports.io/teams/19.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-17T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Costa Rica",
+      "image": "https://media.api-sports.io/teams/29.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Serbia",
+      "image": "https://media.api-sports.io/teams/14.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-17T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Germany",
+      "image": "https://media.api-sports.io/teams/25.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Mexico",
+      "image": "https://media.api-sports.io/teams/16.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-17T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Brazil",
+      "image": "https://media.api-sports.io/teams/6.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Switzerland",
+      "image": "https://media.api-sports.io/teams/15.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-18T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Sweden",
+      "image": "https://media.api-sports.io/teams/5.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "South Korea",
+      "image": "https://media.api-sports.io/teams/17.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-18T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Panama",
+      "image": "https://media.api-sports.io/teams/11.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-18T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Tunisia",
+      "image": "https://media.api-sports.io/teams/28.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-19T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Colombia",
+      "image": "https://media.api-sports.io/teams/8.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Japan",
+      "image": "https://media.api-sports.io/teams/12.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-19T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Poland",
+      "image": "https://media.api-sports.io/teams/24.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Senegal",
+      "image": "https://media.api-sports.io/teams/13.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-19T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Russia",
+      "image": "https://media.api-sports.io/teams/4.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Egypt",
+      "image": "https://media.api-sports.io/teams/32.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-20T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Portugal",
+      "image": "https://media.api-sports.io/teams/27.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Morocco",
+      "image": "https://media.api-sports.io/teams/31.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-20T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Uruguay",
+      "image": "https://media.api-sports.io/teams/7.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Saudi Arabia",
+      "image": "https://media.api-sports.io/teams/23.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-20T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Iran",
+      "image": "https://media.api-sports.io/teams/22.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Spain",
+      "image": "https://media.api-sports.io/teams/9.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-21T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Denmark",
+      "image": "https://media.api-sports.io/teams/21.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Australia",
+      "image": "https://media.api-sports.io/teams/20.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-21T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Peru",
+      "image": "https://media.api-sports.io/teams/30.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-21T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Argentina",
+      "image": "https://media.api-sports.io/teams/26.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-22T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Brazil",
+      "image": "https://media.api-sports.io/teams/6.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Costa Rica",
+      "image": "https://media.api-sports.io/teams/29.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-22T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Nigeria",
+      "image": "https://media.api-sports.io/teams/19.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Iceland",
+      "image": "https://media.api-sports.io/teams/18.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-22T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Serbia",
+      "image": "https://media.api-sports.io/teams/14.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Switzerland",
+      "image": "https://media.api-sports.io/teams/15.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-23T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Tunisia",
+      "image": "https://media.api-sports.io/teams/28.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-23T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "South Korea",
+      "image": "https://media.api-sports.io/teams/17.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Mexico",
+      "image": "https://media.api-sports.io/teams/16.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-23T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Germany",
+      "image": "https://media.api-sports.io/teams/25.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Sweden",
+      "image": "https://media.api-sports.io/teams/5.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-24T12:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Panama",
+      "image": "https://media.api-sports.io/teams/11.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-24T15:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Japan",
+      "image": "https://media.api-sports.io/teams/12.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Senegal",
+      "image": "https://media.api-sports.io/teams/13.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-24T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Poland",
+      "image": "https://media.api-sports.io/teams/24.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Colombia",
+      "image": "https://media.api-sports.io/teams/8.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-25T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Uruguay",
+      "image": "https://media.api-sports.io/teams/7.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Russia",
+      "image": "https://media.api-sports.io/teams/4.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-25T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Saudi Arabia",
+      "image": "https://media.api-sports.io/teams/23.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Egypt",
+      "image": "https://media.api-sports.io/teams/32.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-25T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Iran",
+      "image": "https://media.api-sports.io/teams/22.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Portugal",
+      "image": "https://media.api-sports.io/teams/27.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-25T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Spain",
+      "image": "https://media.api-sports.io/teams/9.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Morocco",
+      "image": "https://media.api-sports.io/teams/31.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-26T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Denmark",
+      "image": "https://media.api-sports.io/teams/21.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-26T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Australia",
+      "image": "https://media.api-sports.io/teams/20.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Peru",
+      "image": "https://media.api-sports.io/teams/30.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-26T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Nigeria",
+      "image": "https://media.api-sports.io/teams/19.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Argentina",
+      "image": "https://media.api-sports.io/teams/26.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-26T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Iceland",
+      "image": "https://media.api-sports.io/teams/18.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-27T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "South Korea",
+      "image": "https://media.api-sports.io/teams/17.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Germany",
+      "image": "https://media.api-sports.io/teams/25.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-27T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Mexico",
+      "image": "https://media.api-sports.io/teams/16.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Sweden",
+      "image": "https://media.api-sports.io/teams/5.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-27T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Serbia",
+      "image": "https://media.api-sports.io/teams/14.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Brazil",
+      "image": "https://media.api-sports.io/teams/6.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-27T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Switzerland",
+      "image": "https://media.api-sports.io/teams/15.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Costa Rica",
+      "image": "https://media.api-sports.io/teams/29.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-28T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Japan",
+      "image": "https://media.api-sports.io/teams/12.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Poland",
+      "image": "https://media.api-sports.io/teams/24.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-28T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Senegal",
+      "image": "https://media.api-sports.io/teams/13.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Colombia",
+      "image": "https://media.api-sports.io/teams/8.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-28T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-28T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Panama",
+      "image": "https://media.api-sports.io/teams/11.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Tunisia",
+      "image": "https://media.api-sports.io/teams/28.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-30T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Argentina",
+      "image": "https://media.api-sports.io/teams/26.png"
+    }
+  },
+  {
+    "eventDate": "2018-06-30T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Uruguay",
+      "image": "https://media.api-sports.io/teams/7.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Portugal",
+      "image": "https://media.api-sports.io/teams/27.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-01T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Spain",
+      "image": "https://media.api-sports.io/teams/9.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Russia",
+      "image": "https://media.api-sports.io/teams/4.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-01T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Denmark",
+      "image": "https://media.api-sports.io/teams/21.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-02T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Brazil",
+      "image": "https://media.api-sports.io/teams/6.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Mexico",
+      "image": "https://media.api-sports.io/teams/16.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-02T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Japan",
+      "image": "https://media.api-sports.io/teams/12.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-03T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Sweden",
+      "image": "https://media.api-sports.io/teams/5.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Switzerland",
+      "image": "https://media.api-sports.io/teams/15.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-03T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Colombia",
+      "image": "https://media.api-sports.io/teams/8.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-06T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Uruguay",
+      "image": "https://media.api-sports.io/teams/7.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-06T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Brazil",
+      "image": "https://media.api-sports.io/teams/6.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-07T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Sweden",
+      "image": "https://media.api-sports.io/teams/5.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-07T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Russia",
+      "image": "https://media.api-sports.io/teams/4.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-10T18:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-11T18:00:00+00:00",
+    "homeTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-14T14:00:00+00:00",
+
+    "homeTeam": {
+      "score": "",
+      "name": "Belgium",
+      "image": "https://media.api-sports.io/teams/1.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "England",
+      "image": "https://media.api-sports.io/teams/10.png"
+    }
+  },
+  {
+    "eventDate": "2018-07-15T15:00:00+00:00",
+    "homeTeam": {
+      "score": "",
+      "name": "France",
+      "image": "https://media.api-sports.io/teams/2.png"
+    },
+    "awayTeam": {
+      "score": "",
+      "name": "Croatia",
+      "image": "https://media.api-sports.io/teams/3.png"
+    }
+  }
+]

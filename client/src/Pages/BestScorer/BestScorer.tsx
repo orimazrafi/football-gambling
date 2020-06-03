@@ -8,8 +8,7 @@ import { useSetWinningTeamGamble } from "../../Hooks/useSetWinningTeamGamble";
 import { useFetchUserResults } from "../../Hooks/useFetchUserResults";
 import { ScorerAndTeamWrapper } from "../../Components/ScorerAndTeamWrapper/ScorerAndTeamWrapper";
 import "./BestScorer.css";
-// eslint-disable-next-line
-const log = console.log;
+
 export const BestScorer = () => {
   const { user } = useSelector(
     (state: { user: { user: UserWithFullResults } }) => state.user
@@ -20,27 +19,39 @@ export const BestScorer = () => {
   useInitialSetUserGamblesAndPotentialGambles(data, user);
 
   const { handleChange, handleSave } = useSetWinningTeamGamble(user);
-
+  const userHasNoGroups = () => {
+    return (
+      <h1 className="user--has--no--groups">
+        You need To join At Least one Group!
+      </h1>
+    );
+  };
   return (
     <>
       {loadingUserResults ? (
         <LoadingGif loading={loadingUserResults} size={150} />
       ) : (
         <>
-          <ScorerAndTeamWrapper
-            array={user.results.players}
-            handleChange={handleChange}
-            user={user}
-            name={"bestScorer"}
-          />
-          <SuccessButton
-            margin="1em auto"
-            padding="0.5em"
-            onClick={handleSave}
-            background="rgb(28, 184, 65)"
-          >
-            Save
-          </SuccessButton>
+          {data.getUser.user.results !== null ? (
+            <>
+              <ScorerAndTeamWrapper
+                array={user.results.players}
+                handleChange={handleChange}
+                user={user}
+                name={"bestScorer"}
+              />
+              <SuccessButton
+                margin="1em auto"
+                padding="0.5em"
+                onClick={handleSave}
+                background="rgb(28, 184, 65)"
+              >
+                Save
+              </SuccessButton>
+            </>
+          ) : (
+            userHasNoGroups()
+          )}
         </>
       )}
     </>

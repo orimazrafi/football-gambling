@@ -34,11 +34,16 @@ const updateUserWithOutResult = async (userId, groupId) =>
       $push: { groups: { _id: groupId } },
     }
   );
-const updateUser = async (userId, groupId) =>
+const updateUser = async (userId, groupId, monkey) =>
   await Store.users().updateOne(
     { _id: ObjectId(userId) },
     {
       $push: { groups: { _id: groupId } },
+      $set: {
+        results: monkey.results,
+        bestScorer: monkey.bestScorer,
+        winningTeam: monkey.winningTeam,
+      },
     }
   );
 const updateUserMessageToken = async (userId, messageToken) =>

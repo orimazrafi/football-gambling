@@ -20,8 +20,6 @@ interface Props {
 }
 export const Navbar = (props: Props) => {
   const { name, auth, image } = props;
-  // eslint-disable-next-line
-  const log = console.log;
 
   const handleLogout = () => {
     auth.logout();

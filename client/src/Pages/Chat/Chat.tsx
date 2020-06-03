@@ -11,8 +11,7 @@ import { MessagesWrapper } from "../../Components/MessagesWrapper/MessagesWrappe
 import { IsTypingWrapper } from "../../Components/IsTypingWrapper/IsTypingWrapper";
 import { MessageWrapper } from "../../Components/MessageWrapper/MessageWrapper";
 import "./Chat.css";
-// eslint-disable-next-line
-const log = console.log;
+
 export const Chat = () => {
   const messagesContainer = useRef<any>(null);
 

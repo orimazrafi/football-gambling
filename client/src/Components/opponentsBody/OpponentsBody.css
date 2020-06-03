@@ -1,0 +1,8 @@
+.opponnets--page--team--with--image {
+  display: inline-block;
+}
+@media screen and (max-width: 600px) {
+  .opponnets--page--team--with--image {
+    display: none;
+  }
+}

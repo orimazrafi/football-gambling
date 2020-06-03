@@ -8,8 +8,6 @@ import { useCreateGroupModalOpenAndClose } from "../../Hooks/useCreateGroupModal
 import "./CreateGroup.css";
 
 const NOT_IN_THE_ARRAY = -1;
-// eslint-disable-next-line
-const log = console.log;
 
 interface League {
   _id: string;

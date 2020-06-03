@@ -4,15 +4,17 @@ export const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dyloyoawh/image/up
 export const imageIcon = `iconfinder_image_103588_ig40fo`;
 export const defualtImage = `Football-Free-Download-PNG_gvtfqq.png`;
 export const columns = ["", "Name", "Admin", "Password", "Participante", ""];
+// export const BACKEND_URL = "http://localhost:8080/";
 export const BACKEND_URL = "https://football-gambling-backend.herokuapp.com/";
 export const cloudinaryImageUrl =
   "https://res.cloudinary.com/dyloyoawh/image/upload/v1585922209/";
+
 export const opponentsColumns = [
   "status",
-  "home team",
-  "away team",
-  "final score",
-  "you'r gamble",
+  "home ",
+  "away ",
+  "gamble",
+  "score",
   "points",
 ];
 export const bullseyeObject = (id: string) => ({
@@ -38,11 +40,9 @@ export const theme = {
   fontSize: "2rem",
   hoverBackground: "blue",
 };
-<<<<<<< HEAD
-export const WEB_SOCKET_URI = "ws://localhost:8080/graphql";
-=======
 export const WEB_SOCKET_URI =
   "wss://football-gambling-backend.herokuapp.com/graphql";
+// export const WEB_SOCKET_URI = "ws://localhost:8080/graphql";
 export const firebaseConfiguration = () => {
   var config = {
     apiKey: "AIzaSyAb0gp2kEcjjJsFQi7_mzHzWrhNs0CJnwM",
@@ -57,4 +57,3 @@ export const firebaseConfiguration = () => {
   const messaging = firebase.messaging();
   return messaging;
 };
->>>>>>> 95490eb9269a3def5498e68fa2d7e3536d6a8172

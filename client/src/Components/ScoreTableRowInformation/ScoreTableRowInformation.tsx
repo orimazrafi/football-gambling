@@ -25,16 +25,18 @@ export const ScoreTableRowInformation = (props: Props) => {
       <ScoreItem>{gambler.name}</ScoreItem>
       <ScoreItem>
         {" "}
-        {Number(
-          (score[gambler._id]?.score /
-            (gambler?.results?.games?.slice(0, 3).length *
-              MAXIMUM_POINTS_PER_GAME)) *
-            NUMBER_TO_MAKE_WHOLE_PERCENTAGE
-        ).toFixed(0)}
+        {score[gambler._id]?.score
+          ? Number(
+              (score[gambler._id]?.score /
+                (gambler?.results?.games?.slice(0, 3).length *
+                  MAXIMUM_POINTS_PER_GAME)) *
+                NUMBER_TO_MAKE_WHOLE_PERCENTAGE
+            ).toFixed(0)
+          : 0}
         %
       </ScoreItem>
-      <ScoreItem>Bullseye {score[gambler._id]?.bullseye}</ScoreItem>
-      <ScoreItem>{score[gambler._id]?.score}</ScoreItem>
+      <ScoreItem>Bullseye {score[gambler._id]?.bullseye || 0}</ScoreItem>
+      <ScoreItem>{score[gambler._id]?.score || 0}</ScoreItem>
     </>
   );
 };

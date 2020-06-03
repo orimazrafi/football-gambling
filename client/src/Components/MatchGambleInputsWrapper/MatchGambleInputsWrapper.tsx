@@ -15,7 +15,7 @@ export const MatchGambleInputsWrapper = (props: Props) => {
   const { user, index, handleChange, autoFocus } = props;
 
   return (
-    <GambleUnit width="10%">
+    <GambleUnit width="15%" textOverflow="unset" display="block">
       <input
         type="text"
         name="homeTeam"

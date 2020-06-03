@@ -17,7 +17,6 @@ export const useCreateUser = (variables: {
   const createUser = () => {
     request(BACKEND_URL, CREATE_USER, variables).then(async (data) => {
       if (data.createUser.success) {
-        toast.success(data.createUser.message);
         await dispatch(reduxSetUser(data.createUser.user));
         return history.push("/");
       } else toast.error(data.createUser.message);

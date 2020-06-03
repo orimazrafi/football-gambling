@@ -9,8 +9,7 @@ import { WelcomeLoginTextwrapper } from "../../Components/WelcomeLoginTextwrappe
 
 const el = document.createElement("pwa-update");
 document.body.appendChild(el);
-// eslint-disable-next-line
-const log = console.log;
+
 interface Props {
   auth: any;
 }
@@ -23,7 +22,7 @@ export const HomePage = (props: Props) => {
         {!auth.isAuthenticated() ? (
           <div>
             <WelcomeLoginTextwrapper />
-            {/* <SuccessButton
+            <SuccessButton
               margin="auto"
               variant="contained"
               color="primary"
@@ -33,15 +32,14 @@ export const HomePage = (props: Props) => {
               autoFocus
             >
               login
-            </SuccessButton> */}
-            <button onClick={auth.login}>login</button>
+            </SuccessButton>
 
-            {/* <img
+            <img
               className="home__page__img"
               src={`
               ${cloudinaryFetchUrl}/${defualtImage}`}
               alt={"home_page"}
-            /> */}
+            />
           </div>
         ) : (
           <Groups auth={auth} />

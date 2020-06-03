@@ -15,3 +15,9 @@
   width: 150px;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 550px) {
+  .MuiDialog-paperWidthSm {
+    width: 90% !important;
+  }
+}

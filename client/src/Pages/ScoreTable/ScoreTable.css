@@ -16,3 +16,6 @@
   border-radius: 10px;
   background-color: rgb(255, 127, 80);
 }
+.user--has--no--groups {
+  margin-top: 3.5em;
+}

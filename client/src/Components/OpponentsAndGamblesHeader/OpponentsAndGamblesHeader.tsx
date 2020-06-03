@@ -30,12 +30,15 @@ export const OpponentsAndGamblesHeader = () => {
       {pageLoaction !== "secret" && (
         <>
           <div className="header">
-            {oneOfTheGamblePages(pageLoaction) &&
-              (!user?.results?.image && !user?.results?.image ? (
+            {oneOfTheGamblePages(pageLoaction) && user?.results !== null ? (
+              !user?.results?.image && !user?.results?.image ? (
                 <LoadingGif loading={true} size={100} />
               ) : (
                 <GambleHeader user={user} pageLoaction={pageLoaction} />
-              ))}
+              )
+            ) : (
+              <div style={{ height: 100 }}></div>
+            )}
             {opponentPage(pageLoaction) &&
               (!user?.opponent?.image ? (
                 <LoadingGif loading={true} size={100} />

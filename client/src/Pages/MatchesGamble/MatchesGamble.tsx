@@ -16,8 +16,6 @@ import { useFetchUserResults } from "../../Hooks/useFetchUserResults";
 import { MatchDateColumn } from "../../Components/MatchDateColumn/MatchDateColumn";
 import { MatchGambleInputsWrapper } from "../../Components/MatchGambleInputsWrapper/MatchGambleInputsWrapper";
 import "./MatchesGamble.css";
-// eslint-disable-next-line
-const log = console.log;
 
 export const MatchesGamble = () => {
   const { user } = useSelector(
@@ -34,66 +32,89 @@ export const MatchesGamble = () => {
   const addRandom = useRandomGamble(user);
   const handleRandomGamble = useRandomGambleConfirmationBox(addRandom);
   const handleSave = useSaveGamble(user);
+  const userHasNoGroups = () => {
+    return (
+      <h1 className="user--has--no--groups">
+        You need To join At Least one Group!
+      </h1>
+    );
+  };
   return (
     <>
       {loadingUserResults ? (
         <LoadingGif loading={loadingUserResults} size={150} />
       ) : (
         <>
-          <div className="gambling-table">
-            {user?.results?.games?.map((match: Game, index: number) => (
-              <GambleWrapper key={Math.random()}>
-                <MatchDateColumn index={index} match={match} />
-                <GambleUnit width="15%">{match.homeTeam.name}</GambleUnit>
-                <Image
-                  noboard="unset"
-                  margin="10px 0 10px 0"
-                  verticalalign="middle"
-                  height="30px"
-                  width="30px"
-                  src={match.homeTeam.image}
-                />
-                <MatchGambleInputsWrapper
-                  user={user}
-                  index={index}
-                  handleChange={handleChange}
-                  autoFocus={autoFocus}
-                />
-                <Image
-                  noboard="unset"
-                  margin="10px 0 10px 0"
-                  verticalalign="middle"
-                  height="30px"
-                  width="30px"
-                  src={match.awayTeam.image}
-                />
+          {data.getUser.user.results !== null ? (
+            <>
+              <div className="matches--gambling--table">
+                {user?.results?.games?.map((match: Game, index: number) => (
+                  <GambleWrapper key={Math.random()}>
+                    <MatchDateColumn index={index} match={match} />
+                    <GambleUnit
+                      width="10%"
+                      textOverflow="hidden"
+                      display="noneOnSmallScreen"
+                    >
+                      {match.homeTeam.name}
+                    </GambleUnit>
+                    <Image
+                      noboard="unset"
+                      margin="10px 0 10px 0"
+                      verticalalign="middle"
+                      height="30px"
+                      width="30px"
+                      src={match.homeTeam.image}
+                    />
+                    <MatchGambleInputsWrapper
+                      user={user}
+                      index={index}
+                      handleChange={handleChange}
+                      autoFocus={autoFocus}
+                    />
+                    <Image
+                      noboard="unset"
+                      margin="10px 0 10px 0"
+                      verticalalign="middle"
+                      height="30px"
+                      width="30px"
+                      src={match.awayTeam.image}
+                    />
 
-                <GambleUnit width="30%">
-                  {" " + match.awayTeam.name}{" "}
-                </GambleUnit>
-                <GambleButton
-                  variant="contained"
-                  color="primary"
-                  background="blue"
-                  backgroundhover="rgba(0, 0, 0, 0.12)"
-                  disabled={index < 3}
-                  onClick={() => {
-                    handleRandomGamble(index);
-                  }}
-                >
-                  Luck Gamble
-                </GambleButton>
-              </GambleWrapper>
-            ))}
-          </div>
-          <SuccessButton
-            margin="1em auto"
-            padding="0.5em"
-            onClick={handleSave}
-            background="rgb(28, 184, 65)"
-          >
-            Save
-          </SuccessButton>
+                    <GambleUnit
+                      width="10%"
+                      textOverflow="hidden"
+                      display="noneOnSmallScreen"
+                    >
+                      {" " + match.awayTeam.name}{" "}
+                    </GambleUnit>
+                    <GambleButton
+                      variant="contained"
+                      color="primary"
+                      background="blue"
+                      backgroundhover="rgba(0, 0, 0, 0.12)"
+                      disabled={index < 3}
+                      onClick={() => {
+                        handleRandomGamble(index);
+                      }}
+                    >
+                      Luck Gamble
+                    </GambleButton>
+                  </GambleWrapper>
+                ))}
+              </div>
+              <SuccessButton
+                margin="1em auto"
+                padding="0.5em"
+                onClick={handleSave}
+                background="rgb(28, 184, 65)"
+              >
+                Save
+              </SuccessButton>
+            </>
+          ) : (
+            userHasNoGroups()
+          )}
         </>
       )}
     </>

@@ -4,7 +4,6 @@ import { request } from "graphql-request";
 import { reduxSetUser } from "../Features/User/UserSlice";
 import { useHistory } from "react-router-dom";
 import { FETCH_USER } from "../queries";
-import { toast } from "react-toastify";
 import { BACKEND_URL } from "../helpers";
 export const useFetchUser = (variables: {
   email: string;
@@ -16,7 +15,6 @@ export const useFetchUser = (variables: {
   const fetchUser = () => {
     request(BACKEND_URL, FETCH_USER, variables).then(async (data) => {
       if (data.getUserId.success) {
-        toast.success(data.getUserId.message);
         await dispatch(reduxSetUser(data.getUserId.user));
         return history.push("/");
       }

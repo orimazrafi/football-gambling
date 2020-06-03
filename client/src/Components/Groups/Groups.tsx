@@ -12,8 +12,6 @@ import { useHandleChange } from "../../Hooks/useHandleChange";
 import { AuthType, Group } from "../../interfaces";
 import "./Groups.css";
 
-// eslint-disable-next-line
-const log = console.log;
 export interface Groups {
   group: {
     groups: Group[];
