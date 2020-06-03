@@ -22,7 +22,6 @@ export const ScoreTable = () => {
   const { data, loadingUserData } = useFetchUserGroupResults(
     history?.location?.state?.groupId
   );
-  log(data);
 
   const isUserPartOfTheGroup = () => {
     let index = data?.group?.users.findIndex(

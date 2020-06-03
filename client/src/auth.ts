@@ -10,7 +10,7 @@ export default class Auth extends Component {
   auth0 = new auth0.WebAuth({
     domain: "orimazrafi.auth0.com",
     clientID: "KKVlmwcf5wKIdJy2OMIeO7PwoyESrDO5",
-    redirectUri: "http://localhost:3000/callback",
+    redirectUri: "https://football-gambling.surge.sh/callback",
     audience: "https://orimazrafi.auth0.com/userinfo",
     responseType: "token id_token",
     scope: "openid profile email",
@@ -38,7 +38,6 @@ export default class Auth extends Component {
           location.pathname = LOGIN_SUCCESS_PAGE;
         } else if (err) {
           location.pathname = LOGIN_FAILURE_PAGE;
-          console.log(err);
         }
       }
     );

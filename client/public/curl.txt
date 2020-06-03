@@ -1,0 +1,9 @@
+curl -X POST --header "Authorization: key=AAAA5COKteY:APA91bFvRpuRWxJHVr-PYB260vkFrQe5s-HncycfHtXsXgt16w3yjOMAAMtw6DDYyLsFIw7i9ZIGBKFbpft41zXk1H3lK9mMUSLEVZHDk55uHQLuwohWlUlSnBWb4nZzhy57Crutn_IT" \
+    --Header "Content-Type: application/json" \
+    https://fcm.googleapis.com/fcm/send \
+    -d "{\"to\":\"cYcNglvHxeU:APA91bErhl9y7o178081XZKUU5cDQ9tMja0n0eI_4MIJYY8xLpRs6gLKP-1GBSiCUp3tHPuavUdoTkVF54fjGu5mQQAbahw51b2y9zCK1MV5ib7Kpkq9xPeOQ1sqpDy8-BD1jnUORsla\",\"notification\":{\"body\":\"Hello wor\"},\"priority\":10}"
+
+
+
+
+

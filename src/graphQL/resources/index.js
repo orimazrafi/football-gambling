@@ -24,6 +24,7 @@ import { LeagueResponse } from "../resources/response/LeagueResponse";
 import { RandomGambleInput } from "../resources/Input/RandomGambleInput";
 import { UserMessageResponse } from "../resources/response/UserMessageResponse";
 import { UserTypingResponse } from "../resources/response/UserTypingResponse";
+import { UserFirebaseResponse } from "../resources/response/UserFirebaseResponse";
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
@@ -51,6 +52,7 @@ const typeDefs = gql`
     ${LeagueResponse},
     ${UserMessageResponse},
     ${UserTypingResponse},
-    ${MessageInfo}
+    ${MessageInfo},
+    ${UserFirebaseResponse}
 `;
 module.exports = typeDefs;

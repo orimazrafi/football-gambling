@@ -4,6 +4,7 @@ import App from "./App";
 import Auth from "./auth";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import * as serviceWorker from "./serviceWorker";
 
 import "./index.css";
 
@@ -13,6 +14,7 @@ declare global {
     setState: (changes: { email: string; name: string; auth: any }) => void;
   }
 }
+
 let state = {};
 window.setState = (changes) => {
   state = Object.assign({}, state, changes);
@@ -28,7 +30,6 @@ window.setState = (changes) => {
 let name = auth.getProfile().name;
 let image = auth.getProfile().picture;
 let email = auth.getProfile().email;
-
 let initialState = {
   email,
   name,
@@ -37,3 +38,4 @@ let initialState = {
 };
 
 window.setState(initialState);
+serviceWorker.register();

@@ -20,6 +20,9 @@ import { WinningTeam } from "./Pages/WinningTeam/WinningTeam";
 import { MatchesGamble } from "./Pages/MatchesGamble/MatchesGamble";
 import { Chat } from "./Pages/Chat/Chat";
 import { AuthAuthenticate } from "./interfaces";
+import { WEB_SOCKET_URI, userIdFromLocalStorage } from "./helpers";
+import { ServiceMessage } from "./Components/ServiceMessage/ServiceMessage";
+import "purecss/build/pure.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { WEB_SOCKET_URI } from "./helpers";
@@ -53,6 +56,7 @@ const App = ({
               {auth.isAuthenticated() && (
                 <Navbar name={name} auth={auth} image={image} />
               )}
+              {userIdFromLocalStorage() !== null && <ServiceMessage />}
               <ToastContainer />
               <Switch>
                 <Route path="/" exact render={() => <HomePage auth={auth} />} />

@@ -16,5 +16,11 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["src"]
+  "include": [
+    "firebase-messaging-sw.js",
+    "src",
+    "public/service-worker-init.js",
+    "public/sw.js",
+    "public/pwabuilder-sw.js"
+  ]
 }

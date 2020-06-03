@@ -14,6 +14,7 @@ interface Props {
 }
 export const Secret = (props: Props) => {
   const { email, name, image } = props;
+
   const variables = {
     name,
     email,

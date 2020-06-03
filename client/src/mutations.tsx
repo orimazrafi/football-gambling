@@ -43,6 +43,13 @@ export const ADD_GAMBLE: any = gql`
     }
   }
 `;
+export const ADD_FIREBASE_MESSAGE_TOKEN: any = `
+  mutation addFirebaseMessageToken($token: String!,$userId:ID!) {
+    addFirebaseMessageToken(token: $token,userId:$userId) {
+      success
+    }
+  }
+`;
 export const ADD_GAMBL: any = `
   mutation addGamble(
     $userId: ID!
