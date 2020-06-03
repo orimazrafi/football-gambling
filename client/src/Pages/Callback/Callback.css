@@ -1,9 +1,0 @@
-.callback--page,
-.secret--page {
-  height: 80vh;
-  display: flex;
-}
-.callback--page__inner__wrapper,
-.secret--page__inner__wrapper {
-  margin: auto;
-}
