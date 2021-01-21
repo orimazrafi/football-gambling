@@ -26,6 +26,6 @@
     "firebase-admin": "^8.12.1",
     "moment": "^2.25.3",
     "mongodb": "^3.5.5",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   }
 }
